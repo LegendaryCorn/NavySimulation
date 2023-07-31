@@ -62,12 +62,14 @@ public class ConnectManager : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.SetPanel("host");
         Debug.LogWarningFormat("Failed to create room.");
+        PhotonNetwork.Disconnect();
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         MenuManager.Instance.SetPanel("join");
         Debug.LogWarningFormat("Failed to join room.");
+        PhotonNetwork.Disconnect();
     }
 
     public override void OnJoinedRoom()

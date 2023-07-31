@@ -40,8 +40,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.LogFormat("Player {0} has left the room.", other.NickName);
 
-        if (PhotonNetwork.IsMasterClient)
+        if (other.IsMasterClient)
         {
+            Debug.LogFormat("Player {0} was the host. Leaving the room.", other.NickName);
             LeaveRoom();
         }
     }

@@ -81,6 +81,12 @@ public class ConnectManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
+        if(MenuManager.Instance.hostNameInputField.text.Equals("") || MenuManager.Instance.hostRoomInputField.text.Equals(""))
+        {
+            return;
+        }
+
+        PhotonNetwork.NickName = MenuManager.Instance.hostNameInputField.text;
         roomName = MenuManager.Instance.hostRoomInputField.text;
         MenuManager.Instance.SetPanel("connect");
         isHost = true;
@@ -91,6 +97,12 @@ public class ConnectManager : MonoBehaviourPunCallbacks
 
     public void ConnectToRoom()
     {
+        if (MenuManager.Instance.joinNameInputField.text.Equals("") || MenuManager.Instance.joinRoomInputField.text.Equals(""))
+        {
+            return;
+        }
+
+        PhotonNetwork.NickName = MenuManager.Instance.joinNameInputField.text;
         roomName = MenuManager.Instance.joinRoomInputField.text;
         MenuManager.Instance.SetPanel("connect");
         isHost = false;

@@ -649,6 +649,14 @@ MonoBehaviour:
   movableEntitiesRoot: {fileID: 382953079}
   entityPrefabs:
   - {fileID: 2020023502598012821, guid: b78f27dab5b63ed4e9f3d0f8a196d835, type: 3}
+  - {fileID: 4175921536809093428, guid: 8581713e96cbc024d9bf6f621da52ce4, type: 3}
+  - {fileID: 8269003061167357734, guid: febdefafe5e7dad4987b0a534846addc, type: 3}
+  - {fileID: 8516214366006661342, guid: 089ee698d74e66c4e8f18c68419e3100, type: 3}
+  - {fileID: 4205535018835155151, guid: f0532d96f5e229e45ac3777ede063861, type: 3}
+  - {fileID: 857272126595392923, guid: a8fcfe256130b3141a9cf4afe8a71da6, type: 3}
+  - {fileID: 138629261546720789, guid: 378aa19e820f38047b6c8c23e30df7c7, type: 3}
+  - {fileID: 1321054300686026328, guid: 46d9d2c2a3c660f4fbb83e47ce984332, type: 3}
+  - {fileID: 8941482605437012095, guid: 2812530c79a4b564bb653f8a0352142a, type: 3}
   entitiesRoot: {fileID: 1142393662}
   entities: []
 --- !u!1 &501805634
@@ -1727,6 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f307a68b0cd5d24da3eb78422925657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numShipsOnJoin: 5
   position: {x: -500, y: 0, z: 0}
   spread: 50
   colNum: 10
@@ -2276,7 +2285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345303798}
   m_LocalRotation: {x: 0.31049126, y: 0.40486673, z: 0.1483891, w: -0.84714746}
-  m_LocalPosition: {x: 1888.7711, y: -1793.1056, z: -1084.9117}
+  m_LocalPosition: {x: 1948.2853, y: -1857.8716, z: -1132.9543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1517180312}

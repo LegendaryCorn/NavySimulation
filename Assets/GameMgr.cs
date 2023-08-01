@@ -7,6 +7,9 @@ using Photon.Pun;
 public class GameMgr : MonoBehaviour
 {
     public static GameMgr inst;
+
+    [SerializeField] private int numShipsOnJoin = 4;
+
     private void Awake()
     {
         inst = this;
@@ -21,10 +24,25 @@ public class GameMgr : MonoBehaviour
             foreach (GameObject go in EntityMgr.inst.entityPrefabs)
             {
                 Entity381 ent = EntityMgr.inst.CreateEntity(go.GetComponent<Entity381>().entityType, position, Vector3.zero);
-                ent.AssignOwner();
                 position.x += 200;
             }
         }
+
+        int j = numShipsOnJoin;
+        foreach (Entity381 e in EntityMgr.inst.entities)
+        {
+            if(j == 0)
+            {
+                break;
+            }
+            if (!e.hasOwner)
+            {
+                e.AssignOwner();
+                j--;
+            }
+        }
+
+
     }
 
     public Vector3 position;

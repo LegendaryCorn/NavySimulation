@@ -41,12 +41,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.LogFormat("Player {0} has left the room.", other.NickName);
     }
 
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        Debug.LogFormat("The host left. Leaving the room.");
-        LeaveRoom();
-    }
-
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene("ConnectScene");

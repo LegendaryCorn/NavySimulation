@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityMgr : MonoBehaviour
+using Photon.Pun;
+
+public class EntityMgr : MonoBehaviourPunCallbacks
 {
     public static EntityMgr inst;
     private void Awake()
@@ -26,7 +28,7 @@ public class EntityMgr : MonoBehaviour
         Entity381 entity = null;
         GameObject entityPrefab = entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
         if (entityPrefab != null) {
-            GameObject entityGo = Instantiate(entityPrefab, position, Quaternion.Euler(eulerAngles), entitiesRoot.transform);
+            GameObject entityGo = PhotonNetwork.Instantiate(entityPrefab.name, position, Quaternion.Euler(eulerAngles), 0);
             if (entityGo != null) {
                 entity = entityGo.GetComponent<Entity381>();
                 entityGo.name = et.ToString() + entityId++;

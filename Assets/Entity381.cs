@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+using Photon.Realtime;
+
 [System.Serializable]
 public enum EntityType
 {
@@ -17,11 +20,12 @@ public enum EntityType
 }
 
 
-public class Entity381 : MonoBehaviour
+public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershipCallbacks
 {
     //------------------------------
     // values that change while running
     //------------------------------
+    public bool hasOwner = false;
     public bool isSelected = false;
     public Vector3 position = Vector3.zero;
     public Vector3 velocity = Vector3.zero;
@@ -43,6 +47,19 @@ public class Entity381 : MonoBehaviour
 
     public GameObject cameraRig;
     public GameObject selectionCircle;
+    public GameObject ownerCircle;
+
+    public void AssignOwner()
+    {
+        hasOwner = true;
+        photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+    }
+
+    public void RemoveOwner()
+    {
+        hasOwner = false;
+        photonView.TransferOwnership(PhotonNetwork.MasterClient);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,5 +71,36 @@ public class Entity381 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
+    }
+
+    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+    {
+        targetView.TransferOwnership(requestingPlayer);
+    }
+
+    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+    {
+        if (photonView.AmOwner && hasOwner)
+        {
+            ownerCircle.SetActive(true);
+        }
+        else
+        {
+            ownerCircle.SetActive(false);
+            if (SelectionMgr.inst.selectedEntities.Contains(this))
+            {
+                SelectionMgr.inst.selectedEntities.Remove(this);
+            }
+        }
+    }
+
+    public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+    {
+
     }
 }

@@ -648,15 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movableEntitiesRoot: {fileID: 382953079}
   entityPrefabs:
-  - {fileID: 2020023502598012821, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
-  - {fileID: 4175921536809093428, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
-  - {fileID: 8269003061167357734, guid: f946d7fa0cf80f741b8c5a0cce39d24f, type: 3}
-  - {fileID: 8516214366006661342, guid: 8b6d19bb645cb934fa859c6b2ba600ff, type: 3}
-  - {fileID: 4205535018835155151, guid: 70aafd5fa95ebb743a2cf93ed1442278, type: 3}
-  - {fileID: 857272126595392923, guid: 2c4513be36911cf43af492fcdb5d3351, type: 3}
-  - {fileID: 138629261546720789, guid: 56b421d73a8488646b28c822866b075c, type: 3}
-  - {fileID: 1321054300686026328, guid: c7061d8cebd1b584880025216a586789, type: 3}
-  - {fileID: 8941482605437012095, guid: 5d3b351739a98e34da31ae8acedeb828, type: 3}
+  - {fileID: 2020023502598012821, guid: b78f27dab5b63ed4e9f3d0f8a196d835, type: 3}
   entitiesRoot: {fileID: 1142393662}
   entities: []
 --- !u!1 &501805634
@@ -1749,6 +1741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water4Advanced
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_TagString
+      value: Ocean
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: b544816461f324e56a39767fdeb5b114, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1811,6 +1807,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+--- !u!1 &1142000934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114,
+    type: 3}
+  m_PrefabInstance: {fileID: 1142000933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1142000935
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142000934}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 1, z: 100}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &1142393662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,8 +2275,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345303798}
-  m_LocalRotation: {x: -0, y: 0.015271054, z: -0, w: 0.9998834}
-  m_LocalPosition: {x: 175.47589, y: -299.86, z: -805.7346}
+  m_LocalRotation: {x: 0.31049126, y: 0.40486673, z: 0.1483891, w: -0.84714746}
+  m_LocalPosition: {x: 1888.7711, y: -1793.1056, z: -1084.9117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1517180312}

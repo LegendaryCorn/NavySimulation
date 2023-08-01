@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Photon.Pun;
+using Photon.Realtime;
 
 public class UIManager : MonoBehaviourPunCallbacks
 {
@@ -35,6 +36,18 @@ public class UIManager : MonoBehaviourPunCallbacks
             string hostString = PhotonNetwork.IsMasterClient ? " (Host)" : "";
             nameText.text = "Name: " + PhotonNetwork.NickName + hostString;
             roomText.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
+        }
+    }
+
+    #endregion
+
+    #region Pun Methods
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            nameText.text = "Name: " + PhotonNetwork.NickName + " (Host)";
         }
     }
 

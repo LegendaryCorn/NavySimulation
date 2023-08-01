@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Photon.Pun;
+
 public class SelectionMgr : MonoBehaviour
 {
     public static SelectionMgr inst;
@@ -101,7 +103,7 @@ public class SelectionMgr : MonoBehaviour
         Bounds bounds = new Bounds();
         bounds.SetMinMax(min, max);
         foreach(Entity381 ent in EntityMgr.inst.entities) 
-            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition))) 
+            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition)) && ent.hasOwner && ent.photonView.AmOwner) 
                 SelectEntity(ent, shouldClearSelection: false);
 
     }

@@ -56,7 +56,7 @@ public class EntityMgr : MonoBehaviourPunCallbacks
     {
         foreach (Entity381 e in entities)
         {
-            if(e.photonView.Owner.UserId == other.UserId)
+            if (e.photonView.Owner == other)
             {
                 e.RemoveOwner();
             }

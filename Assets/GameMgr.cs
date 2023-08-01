@@ -41,8 +41,6 @@ public class GameMgr : MonoBehaviour
                 j--;
             }
         }
-
-
     }
 
     public Vector3 position;

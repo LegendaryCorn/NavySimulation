@@ -78,7 +78,14 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-
+        if (stream.IsWriting)
+        {
+            stream.SendNext(hasOwner);
+        }
+        else
+        {
+            this.hasOwner = (bool)stream.ReceiveNext();
+        }
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)

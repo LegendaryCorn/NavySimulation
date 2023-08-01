@@ -29,7 +29,7 @@ public class EntityMgr : MonoBehaviourPunCallbacks
         Entity381 entity = null;
         GameObject entityPrefab = entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
         if (entityPrefab != null) {
-            GameObject entityGo = PhotonNetwork.Instantiate(entityPrefab.name, position, Quaternion.Euler(eulerAngles), 0);
+            GameObject entityGo = PhotonNetwork.InstantiateRoomObject(entityPrefab.name, position, Quaternion.Euler(eulerAngles), 0);
             if (entityGo != null) {
                 entity = entityGo.GetComponent<Entity381>();
                 entityGo.name = et.ToString() + entityId++;

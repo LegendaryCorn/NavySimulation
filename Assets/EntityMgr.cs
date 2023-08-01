@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
+using Photon.Realtime;
 
 public class EntityMgr : MonoBehaviourPunCallbacks
 {
@@ -51,5 +52,15 @@ public class EntityMgr : MonoBehaviourPunCallbacks
         
     }
 
+    public override void OnPlayerLeftRoom(Player other)
+    {
+        foreach (Entity381 e in entities)
+        {
+            if(e.photonView.Owner.UserId == other.UserId)
+            {
+                e.RemoveOwner();
+            }
+        }
+    }
 
 }

@@ -66,6 +66,9 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
     {
         cameraRig = transform.Find("CameraRig").gameObject;
         selectionCircle = transform.Find("Decorations").Find("SelectionCylinder").gameObject;
+
+        selectionCircle.SetActive(false);
+        ownerCircle.SetActive(false);
     }
 
     // Update is called once per frame

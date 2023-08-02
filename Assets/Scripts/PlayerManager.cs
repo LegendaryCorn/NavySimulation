@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public static PlayerManager Instance;
 
     public List<PlayerCommand> pcList;
-    public int commandResponses;
+    public string commandResponses;
 
     void Awake()
     {
@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            this.commandResponses = (int)stream.ReceiveNext();
+            this.commandResponses = (string)stream.ReceiveNext();
         }
     }
 }

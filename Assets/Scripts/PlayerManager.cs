@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public static PlayerManager Instance;
 
     public List<PlayerCommand> pcList;
-    public string commandResponses;
+    public int commandResponses;
 
     void Awake()
     {
@@ -26,14 +26,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if(Random.Range(0,1) > 0.5f)
-        {
-            commandResponses = "1234";
-        }
-        else
-        {
-            commandResponses = "12345";
-        }
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -44,8 +37,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            this.commandResponses = (string)stream.ReceiveNext();
-            Debug.Log(this.commandResponses);
+            this.commandResponses = (int)stream.ReceiveNext();
         }
     }
 }

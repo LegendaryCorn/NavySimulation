@@ -174,7 +174,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 2
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
   - {fileID: 2020023502598012843}
   sceneViewId: 0
@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 3034060244875282372, guid: bb136f5ff0976324793b006fd0f06d67,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3034060244875282372, guid: bb136f5ff0976324793b006fd0f06d67,
         type: 3}

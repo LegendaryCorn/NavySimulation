@@ -12,12 +12,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Public Variables
 
     public static NetworkManager Instance;
+    public GameObject playerRoot;
 
     #endregion
 
     #region Private Variables
 
-    [SerializeField] private GameObject playerRoot;
     [SerializeField] private PlayerManager playerManagerPrefab;
     [SerializeField] private PlayerCommand playerCommandPrefab;
 
@@ -33,13 +33,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient) // and no playermanager exists
         {
             GameObject pM = PhotonNetwork.InstantiateRoomObject(playerManagerPrefab.name, Vector3.zero, Quaternion.identity, 0);
-            pM.transform.SetParent(playerRoot.transform);
         }
 
         if(true) // if I don't have an object already
         {
             GameObject pC = PhotonNetwork.Instantiate(playerCommandPrefab.name, Vector3.zero, Quaternion.identity, 0);
-            pC.transform.SetParent(playerRoot.transform);
         }
 
     }

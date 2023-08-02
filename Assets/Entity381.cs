@@ -69,6 +69,8 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
 
         selectionCircle.SetActive(false);
         ownerCircle.SetActive(false);
+
+        transform.parent = EntityMgr.inst.entitiesRoot.transform;
     }
 
     // Update is called once per frame

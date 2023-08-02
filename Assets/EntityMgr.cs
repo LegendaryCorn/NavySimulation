@@ -32,7 +32,6 @@ public class EntityMgr : MonoBehaviourPunCallbacks
             if (entityGo != null) {
                 entity = entityGo.GetComponent<Entity381>();
                 entityGo.name = et.ToString() + entityId++;
-                entityGo.transform.SetParent(entitiesRoot.transform);
                 entities.Add(entity);
             }
         }

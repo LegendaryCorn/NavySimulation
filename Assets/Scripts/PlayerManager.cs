@@ -33,9 +33,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         foreach(PlayerCommand pc in pcList)
         {
-            if (pc != null && pc.photonView.Owner.UserId != null)
+            if (pc != null)
             {
-                string id = pc.photonView.Owner.UserId;
+                string id = pc.photonView.ViewID.ToString();
                 if (!commandIDResolved.ContainsKey(id))
                 {
                     commandIDResolved[id] = "NaN";

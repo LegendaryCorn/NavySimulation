@@ -33,9 +33,9 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if(photonView.IsMine && commList.Count > 0 && PlayerManager.Instance && PlayerManager.Instance.commandIDResolved.ContainsKey(PhotonNetwork.LocalPlayer.UserId))
+        if(photonView.IsMine && commList.Count > 0 && PlayerManager.Instance && PlayerManager.Instance.commandIDResolved.ContainsKey(photonView.ViewID.ToString()))
         {
-            string lastComm = PlayerManager.Instance.commandIDResolved[PhotonNetwork.LocalPlayer.UserId];
+            string lastComm = PlayerManager.Instance.commandIDResolved[photonView.ViewID.ToString()];
             if (commList[0].id.Equals(lastComm))
             {
                 Debug.Log("Command " + lastComm + " resolved.");

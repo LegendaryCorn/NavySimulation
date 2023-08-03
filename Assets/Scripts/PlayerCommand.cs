@@ -7,7 +7,8 @@ using Photon.Realtime;
 
 public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public NetCommand comm;
+    public List<NetCommand> commList;
+    public NetCommand currCommand;
 
     public string commString;
 
@@ -25,20 +26,34 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        comm = new NetCommand(GenerateID());
+        currCommand = null;
+        commList = new List<NetCommand>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(photonView.IsMine && commList.Count > 0 && PlayerManager.Instance)
+        {
+            string lastComm = PlayerManager.Instance.commandIDResolved[PhotonNetwork.LocalPlayer.UserId];
+            if (commList[0].id.Equals(lastComm))
+            {
+                Debug.Log("Command " + lastComm + " resolved.");
+                commList.RemoveAt(0);
+                currCommand = commList.Count > 0 ? commList[0] : null;
+            }
+        }
     }
 
     void FixedUpdate()
     {
         if(photonView.IsMine && Random.Range(0f,10f) < 0.02f)
         {
-            comm = new NetCommand(GenerateID());
+            for(int i = 0; i < Random.Range(1,4); i++)
+            {
+                commList.Add(new NetCommand(GenerateID()));
+                currCommand = commList[0];
+            }
         }
     }
 
@@ -46,7 +61,14 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            commString = comm.ConvToString();
+            if (commList.Count > 0)
+            {
+                commString = commList[0].ConvToString();
+            }
+            else
+            {
+                commString = "";
+            }
 
             stream.SendNext(commString);
         }
@@ -54,7 +76,7 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
         {
             this.commString = (string)stream.ReceiveNext();
 
-            comm = NetCommand.ConvToCommand(commString);
+            currCommand = NetCommand.ConvToCommand(commString);
         }
     }
 

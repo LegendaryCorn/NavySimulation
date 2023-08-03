@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -33,7 +34,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         foreach(PlayerCommand pc in pcList)
         {
             string id = pc.photonView.Owner.UserId;
-            if (!commandIDResolved.ContainsKey(id))
+            if (id != null && !commandIDResolved.ContainsKey(id))
             {
                 commandIDResolved[id] = "NaN";
             }
@@ -43,6 +44,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                 ExecuteCommand(pc.currCommand);
                 commandIDResolved[id] = pc.currCommand.id;
             }
+        }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        foreach (PlayerCommand pc in pcList)
+        {
+            if(pc == null) { pcList.Remove(pc); }
         }
     }
 

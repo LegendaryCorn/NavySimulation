@@ -33,16 +33,19 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         foreach(PlayerCommand pc in pcList)
         {
-            string id = pc.photonView.Owner.UserId;
-            if (id != null && !commandIDResolved.ContainsKey(id))
+            if (pc != null)
             {
-                commandIDResolved[id] = "NaN";
-            }
+                string id = pc.photonView.Owner.UserId;
+                if (id != null && !commandIDResolved.ContainsKey(id))
+                {
+                    commandIDResolved[id] = "NaN";
+                }
 
-            if(pc.currCommand != null && pc.currCommand.id != commandIDResolved[id])
-            {
-                ExecuteCommand(pc.currCommand);
-                commandIDResolved[id] = pc.currCommand.id;
+                if (pc.currCommand != null && pc.currCommand.id != commandIDResolved[id])
+                {
+                    ExecuteCommand(pc.currCommand);
+                    commandIDResolved[id] = pc.currCommand.id;
+                }
             }
         }
     }

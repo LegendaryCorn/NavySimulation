@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient) // and no playermanager exists
         {
-            GameObject pM = PhotonNetwork.InstantiateRoomObject(playerManagerPrefab.name, Vector3.zero, Quaternion.identity, 0);
+            GameObject pM = PhotonNetwork.Instantiate(playerManagerPrefab.name, Vector3.zero, Quaternion.identity, 0);
         }
 
         if(true) // if I don't have an object already

@@ -47,14 +47,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                     commandIDResolved[id] = pc.currCommand.id;
                 }
             }
-        }
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        foreach (PlayerCommand pc in pcList)
-        {
-            if(pc == null) { pcList.Remove(pc); }
+            else
+            {
+                pcList.Remove(pc);
+            }
         }
     }
 

@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f882a8c2f8a34192c445321691f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pcList: []
+  commandResponses: 
 --- !u!114 &114886941130652368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +63,9 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 114387880459679060}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

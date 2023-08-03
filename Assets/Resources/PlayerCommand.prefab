@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c71ee498974f04a9e1bb8babd23b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commList: []
+  currCommand:
+    id: 
+  commString: 
 --- !u!114 &114182533859613400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +66,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8902981684047665954}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

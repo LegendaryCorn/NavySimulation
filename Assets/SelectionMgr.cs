@@ -103,7 +103,7 @@ public class SelectionMgr : MonoBehaviour
         Bounds bounds = new Bounds();
         bounds.SetMinMax(min, max);
         foreach(Entity381 ent in EntityMgr.inst.entities) 
-            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition)) && ent.hasOwner && ent.photonView.AmOwner) 
+            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition))) // ADDITION: Ownership update
                 SelectEntity(ent, shouldClearSelection: false);
 
     }
@@ -126,6 +126,7 @@ public class SelectionMgr : MonoBehaviour
         foreach (Entity381 ent in EntityMgr.inst.entities)
             ent.isSelected = false;
         selectedEntities.Clear();
+        selectedEntity = null;
     }
 
     public void SelectEntity(Entity381 ent, bool shouldClearSelection = true)

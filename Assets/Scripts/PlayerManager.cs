@@ -119,6 +119,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             DistanceMgr.inst.Initialize();
         }
 
+        if(c.GetType() == typeof(WaypointCommand))
+        {
+            WaypointCommand cc = (WaypointCommand)c;
+            List<Entity381> entities = new List<Entity381>();
+            foreach(Entity381 ent in EntityMgr.inst.entities)
+            {
+                if (cc.entityIDs.Contains(ent.photonView.ViewID))
+                {
+                    entities.Add(ent);
+                }
+            }
+
+            AIMgr.inst.HandleMove(entities, cc.pos, cc.clear);
+        }
+
         Debug.Log("Command " + c.id + " executed.");
     }
 }

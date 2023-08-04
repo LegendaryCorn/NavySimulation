@@ -29,6 +29,7 @@ public class AIMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(1)) {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, float.MaxValue, layerMask)) {
                 //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.yellow, 2); //for debugging
@@ -47,20 +48,28 @@ public class AIMgr : MonoBehaviour
                 //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * 1000, Color.white, 2);
             }
         }
+        */
     }
 
-    public void HandleMove(List<Entity381> entities, Vector3 point)
+    public void HandleMove(List<Entity381> entities, Vector3 point, bool clear)
     {
         foreach (Entity381 entity in entities) {
-            Move m = new Move(entity, hit.point);
+            Move m = new Move(entity, point);
             UnitAI uai = entity.GetComponent<UnitAI>();
-            AddOrSet(m, uai);
+            if (point.y < 500f)
+            {
+                AddOrSet(m, uai, clear);
+            }
+            else if (clear)
+            {
+                uai.StopAndRemoveAllCommands();
+            }
         }
     }
 
-    void AddOrSet(Command c, UnitAI uai)
+    void AddOrSet(Command c, UnitAI uai, bool clear)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (!clear)
             uai.AddCommand(c);
         else
             uai.SetCommand(c);
@@ -73,7 +82,7 @@ public class AIMgr : MonoBehaviour
         foreach (Entity381 entity in SelectionMgr.inst.selectedEntities) {
             Follow f = new Follow(entity, ent, new Vector3(100, 0, 0));
             UnitAI uai = entity.GetComponent<UnitAI>();
-            AddOrSet(f, uai);
+            AddOrSet(f, uai, true);
         }
     }
 
@@ -82,7 +91,7 @@ public class AIMgr : MonoBehaviour
         foreach (Entity381 entity in SelectionMgr.inst.selectedEntities) {
             Intercept intercept = new Intercept(entity, ent);
             UnitAI uai = entity.GetComponent<UnitAI>();
-            AddOrSet(intercept, uai);
+            AddOrSet(intercept, uai, true);
         }
 
     }

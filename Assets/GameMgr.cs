@@ -33,17 +33,5 @@ public class GameMgr : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetMouseButtonDown(1) && SelectionMgr.inst.selectedEntities.Count == 0) {
-            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(r, out RaycastHit hit))
-            {
-                SpawnCommand sp = new SpawnCommand(PlayerCommand.GenerateID(), EntityType.DDG51, hit.point, 0f);
-                PlayerCommand.Instance.AddToCommList(sp);
-                //GameObject go = EntityMgr.inst.entityPrefabs[0];
-                //Entity381 ent = EntityMgr.inst.CreateEntity(go.GetComponent<Entity381>().entityType, hit.point, Vector3.zero);
-                //ent.AssignOwner();
-                //DistanceMgr.inst.Initialize();
-            }
-        }
     }
 }

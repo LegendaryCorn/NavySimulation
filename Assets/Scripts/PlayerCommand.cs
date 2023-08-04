@@ -66,7 +66,7 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (commList.Count > 0)
             {
-                commString = commList[0].ConvToString();
+                commString = (currCommand).ConvToString();
             }
             else
             {

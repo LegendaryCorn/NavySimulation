@@ -13,7 +13,7 @@ public class NetCommand
         this.id = i;
     }
 
-    public string ConvToString()
+    public virtual string ConvToString()
     {
         string s = "$NC";
         s += "&" + id;
@@ -80,7 +80,7 @@ public class SpawnCommand : NetCommand
         this.heading = h;
     }
 
-    public new string ConvToString()
+    public override string ConvToString()
     {
         string s = "$SP";
         s += "&" + id;
@@ -105,7 +105,7 @@ public class WaypointCommand : NetCommand
         this.entityIDs = e;
     }
 
-    public new string ConvToString()
+    public override string ConvToString()
     {
         string s = "$WP";
         s += "&" + id;
@@ -133,7 +133,7 @@ public class DesiredHeadingCommand : NetCommand
         this.entityID = e;
     }
 
-    public new string ConvToString()
+    public override string ConvToString()
     {
         string s = "$DH";
         s += "&" + id;
@@ -155,7 +155,7 @@ public class DesiredSpeedCommand : NetCommand
         this.entityID = e;
     }
 
-    public new string ConvToString()
+    public override string ConvToString()
     {
         string s = "$DH";
         s += "&" + id;

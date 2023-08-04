@@ -49,18 +49,6 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
     public GameObject selectionCircle;
     public GameObject ownerCircle;
 
-    public void AssignOwner()
-    {
-        hasOwner = true;
-        photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-    }
-
-    public void RemoveOwner()
-    {
-        hasOwner = false;
-        photonView.TransferOwnership(PhotonNetwork.MasterClient);
-    }
-
     // Start is called before the first frame update
     void Start()
     {

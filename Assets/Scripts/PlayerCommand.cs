@@ -12,6 +12,8 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
 
     public string commString;
 
+    public static PlayerCommand Instance;
+
     void Awake()
     {
         transform.parent = NetworkManager.Instance.playerRoot.transform;
@@ -19,6 +21,10 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsMasterClient)
         {
             PlayerManager.Instance.pcList.Add(this);
+        }
+        if (photonView.IsMine)
+        {
+            Instance = this;
         }
 
     }
@@ -45,15 +51,12 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void FixedUpdate()
+    public void AddToCommList(NetCommand c)
     {
-        if(photonView.IsMine && Random.Range(0f,10f) < 0.02f)
+        commList.Add(c);
+        if(commList.Count == 1)
         {
-            for(int i = 0; i < Random.Range(1,4); i++)
-            {
-                commList.Add(new NetCommand(GenerateID()));
-                currCommand = commList[0];
-            }
+            currCommand = commList[0];
         }
     }
 
@@ -80,7 +83,7 @@ public class PlayerCommand : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private string GenerateID()
+    public static string GenerateID()
     {
         string new_id = "";
         for(int i = 0; i < 6; i++)

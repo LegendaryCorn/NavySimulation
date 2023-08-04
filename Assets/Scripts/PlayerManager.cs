@@ -31,20 +31,23 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        foreach(PlayerCommand pc in pcList)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (pc != null)
+            foreach (PlayerCommand pc in pcList)
             {
-                string id = pc.photonView.ViewID.ToString();
-                if (!commandIDResolved.ContainsKey(id))
+                if (pc != null)
                 {
-                    commandIDResolved[id] = "NaN";
-                }
+                    string id = pc.photonView.ViewID.ToString();
+                    if (!commandIDResolved.ContainsKey(id))
+                    {
+                        commandIDResolved[id] = "NaN";
+                    }
 
-                if (pc.currCommand != null && pc.currCommand.id != commandIDResolved[id])
-                {
-                    ExecuteCommand(pc.currCommand);
-                    commandIDResolved[id] = pc.currCommand.id;
+                    if (pc.currCommand != null && pc.currCommand.id != commandIDResolved[id])
+                    {
+                        ExecuteCommand(pc.currCommand);
+                        commandIDResolved[id] = pc.currCommand.id;
+                    }
                 }
             }
         }
@@ -109,6 +112,13 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ExecuteCommand(NetCommand c)
     {
+        if(c.GetType() == typeof(SpawnCommand))
+        {
+            SpawnCommand cc = (SpawnCommand)c;
+            Entity381 ent = EntityMgr.inst.CreateEntity(cc.type, cc.pos, Vector3.up * cc.heading);
+            DistanceMgr.inst.Initialize();
+        }
+
         Debug.Log("Command " + c.id + " executed.");
     }
 }

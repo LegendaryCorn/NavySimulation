@@ -44,9 +44,9 @@ public class ControlMgr : MonoBehaviour
             }
             List<int> ids = new List<int>();
 
-            foreach(Entity381 ent in SelectionMgr.inst.selectedEntities)
+            foreach(Entity381 entity in SelectionMgr.inst.selectedEntities)
             {
-                ids.Add(ent.photonView.ViewID);
+                ids.Add(entity.photonView.ViewID);
             }
             WaypointCommand wp = new WaypointCommand(PlayerCommand.GenerateID(), pnt, !Input.GetKey(KeyCode.LeftShift), ids);
             PlayerCommand.Instance.AddToCommList(wp);
@@ -54,19 +54,35 @@ public class ControlMgr : MonoBehaviour
 
 
         // Controls to Change Speed/Heading
-        if (SelectionMgr.inst.selectedEntity != null) {
-            if (Input.GetKeyUp(KeyCode.UpArrow))
-                SelectionMgr.inst.selectedEntity.desiredSpeed += deltaSpeed;
-            if (Input.GetKeyUp(KeyCode.DownArrow))
-                SelectionMgr.inst.selectedEntity.desiredSpeed -= deltaSpeed;
-            SelectionMgr.inst.selectedEntity.desiredSpeed =
-                Utils.Clamp(SelectionMgr.inst.selectedEntity.desiredSpeed, SelectionMgr.inst.selectedEntity.minSpeed, SelectionMgr.inst.selectedEntity.maxSpeed);
+        Entity381 ent = SelectionMgr.inst.selectedEntity;
+        if (ent != null) {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                float desSpeed = Utils.Clamp(ent.desiredSpeed + deltaSpeed, ent.minSpeed, ent.maxSpeed);
+                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), desSpeed, ent.photonView.ViewID);
+                PlayerCommand.Instance.AddToCommList(ds);
+            }
 
-            if (Input.GetKeyUp(KeyCode.LeftArrow))
-                SelectionMgr.inst.selectedEntity.desiredHeading -= deltaHeading;
-            if (Input.GetKeyUp(KeyCode.RightArrow))
-                SelectionMgr.inst.selectedEntity.desiredHeading += deltaHeading;
-            SelectionMgr.inst.selectedEntity.desiredHeading = Utils.Degrees360(SelectionMgr.inst.selectedEntity.desiredHeading);
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                float desSpeed = Utils.Clamp(ent.desiredSpeed - deltaSpeed, ent.minSpeed, ent.maxSpeed);
+                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), desSpeed, ent.photonView.ViewID);
+                PlayerCommand.Instance.AddToCommList(ds);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                float desHeading = Utils.Degrees360(ent.desiredHeading - deltaHeading);
+                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), desHeading, ent.photonView.ViewID);
+                PlayerCommand.Instance.AddToCommList(dh);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                float desHeading = Utils.Degrees360(ent.desiredHeading + deltaHeading);
+                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), desHeading, ent.photonView.ViewID);
+                PlayerCommand.Instance.AddToCommList(dh);
+            }
         }
     }
 

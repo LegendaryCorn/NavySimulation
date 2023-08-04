@@ -134,6 +134,30 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             AIMgr.inst.HandleMove(entities, cc.pos, cc.clear);
         }
 
+        if (c.GetType() == typeof(DesiredSpeedCommand))
+        {
+            DesiredSpeedCommand cc = (DesiredSpeedCommand)c;
+            foreach (Entity381 ent in EntityMgr.inst.entities)
+            {
+                if (cc.entityID.Equals(ent.photonView.ViewID))
+                {
+                    ent.desiredSpeed = cc.speed;
+                }
+            }
+        }
+
+        if (c.GetType() == typeof(DesiredHeadingCommand))
+        {
+            DesiredHeadingCommand cc = (DesiredHeadingCommand)c;
+            foreach (Entity381 ent in EntityMgr.inst.entities)
+            {
+                if (cc.entityID.Equals(ent.photonView.ViewID))
+                {
+                    ent.desiredHeading = cc.heading;
+                }
+            }
+        }
+
         Debug.Log("Command " + c.id + " executed.");
     }
 }

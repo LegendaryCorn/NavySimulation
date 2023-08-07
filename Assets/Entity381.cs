@@ -68,6 +68,7 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable
         if (!EntityMgr.inst.entities.Contains(this))
         {
             EntityMgr.inst.entities.Add(this);
+            DistanceMgr.inst.Initialize();
         }
     }
 

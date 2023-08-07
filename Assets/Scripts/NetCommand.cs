@@ -157,7 +157,7 @@ public class DesiredSpeedCommand : NetCommand
 
     public override string ConvToString()
     {
-        string s = "$DH";
+        string s = "$DS";
         s += "&" + id;
         s += "&" + speed.ToString();
         s += "&" + entityID.ToString();

@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (cc.entityID.Equals(ent.photonView.ViewID))
                 {
-                    ent.desiredSpeed = cc.speed;
+                    ent.desiredSpeed = Utils.Clamp(ent.desiredSpeed + cc.speed, ent.minSpeed, ent.maxSpeed); ;
                 }
             }
         }
@@ -153,7 +153,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (cc.entityID.Equals(ent.photonView.ViewID))
                 {
-                    ent.desiredHeading = cc.heading;
+                    ent.desiredHeading = Utils.Degrees360(ent.desiredHeading + cc.heading);
                 }
             }
         }

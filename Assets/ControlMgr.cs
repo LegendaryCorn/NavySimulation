@@ -58,29 +58,25 @@ public class ControlMgr : MonoBehaviour
         if (ent != null) {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                float desSpeed = Utils.Clamp(ent.desiredSpeed + deltaSpeed, ent.minSpeed, ent.maxSpeed);
-                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), desSpeed, ent.photonView.ViewID);
+                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), deltaSpeed, ent.photonView.ViewID);
                 PlayerCommand.Instance.AddToCommList(ds);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                float desSpeed = Utils.Clamp(ent.desiredSpeed - deltaSpeed, ent.minSpeed, ent.maxSpeed);
-                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), desSpeed, ent.photonView.ViewID);
+                DesiredSpeedCommand ds = new DesiredSpeedCommand(PlayerCommand.GenerateID(), -deltaSpeed, ent.photonView.ViewID);
                 PlayerCommand.Instance.AddToCommList(ds);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                float desHeading = Utils.Degrees360(ent.desiredHeading - deltaHeading);
-                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), desHeading, ent.photonView.ViewID);
+                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), -deltaHeading, ent.photonView.ViewID);
                 PlayerCommand.Instance.AddToCommList(dh);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                float desHeading = Utils.Degrees360(ent.desiredHeading + deltaHeading);
-                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), desHeading, ent.photonView.ViewID);
+                DesiredHeadingCommand dh = new DesiredHeadingCommand(PlayerCommand.GenerateID(), deltaHeading, ent.photonView.ViewID);
                 PlayerCommand.Instance.AddToCommList(dh);
             }
         }

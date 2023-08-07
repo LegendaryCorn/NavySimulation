@@ -153,7 +153,7 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     public void DecorateWaypoints()
     {
         int wMax = waypoints.Count;
-        waypointsMoveLine.positionCount = wMax;
+        waypointsMoveLine.positionCount = wMax + 1;
         waypointsMoveLine.SetPosition(0, entity.position);
         for(int i = 0; i < wMax; i++)
         {

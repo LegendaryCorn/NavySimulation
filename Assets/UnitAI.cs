@@ -15,12 +15,22 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
         commands = new List<Command>();
         intercepts = new List<Intercept>();
         moves = new List<Move>();
+        waypoints = new List<Vector3>();
+
+        waypointsMoveLine = LineMgr.inst.CreateMoveLine(Vector3.zero, Vector3.zero);
+        waypointsPotentialLine = LineMgr.inst.CreatePotentialLine(Vector3.zero);
+        waypointsMoveLine.gameObject.SetActive(false);
+        waypointsPotentialLine.gameObject.SetActive(false);
+
     }
 
     public List<Move> moves;
     public List<Command> commands;
     public List<Intercept> intercepts;
     public List<Vector3> waypoints;
+
+    public LineRenderer waypointsMoveLine;
+    public LineRenderer waypointsPotentialLine;
 
     // Update is called once per frame
     void Update()
@@ -41,7 +51,7 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                DecorateAll();
+                DecorateWaypoints();
             }
         }
     }
@@ -50,6 +60,7 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     {
         commands[index].Stop();
         commands.RemoveAt(index);
+        waypoints.RemoveAt(index);
     }
     
     public void StopAndRemoveAllCommands()
@@ -69,7 +80,10 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
         else if (c is Follow)
             ;
         else
+        {
             moves.Add(c as Move);
+            waypoints.Add(moves[moves.Count - 1].movePosition);
+        }
     }
 
     public void SetCommand(Command c)
@@ -82,6 +96,7 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
         AddCommand(c);
 
     }
+
     //---------------------------------
 
     public void DecorateAll()
@@ -134,6 +149,28 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
         }
 
 
+    }
+
+    public void DecorateWaypoints()
+    {
+        int wMax = waypoints.Count;
+        waypointsMoveLine.positionCount = wMax;
+        waypointsMoveLine.SetPosition(0, entity.position);
+        for(int i = 0; i < wMax; i++)
+        {
+            waypointsMoveLine.SetPosition(i + 1, waypoints[i]);
+        }
+
+        waypointsPotentialLine.SetPosition(0, entity.position);
+        Vector3 newpos = Vector3.zero;
+        newpos.x = Mathf.Sin(entity.desiredHeading * Mathf.Deg2Rad) * entity.desiredSpeed;
+        newpos.z = Mathf.Cos(entity.desiredHeading * Mathf.Deg2Rad) * entity.desiredSpeed;
+        newpos *= 20;
+        newpos.y = 1;
+        waypointsPotentialLine.SetPosition(1, entity.position + newpos);
+
+        waypointsMoveLine.gameObject.SetActive(entity.isSelected && commands.Count != 0);
+        waypointsPotentialLine.gameObject.SetActive(entity.isSelected && commands.Count != 0);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

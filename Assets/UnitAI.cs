@@ -20,6 +20,7 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     public List<Move> moves;
     public List<Command> commands;
     public List<Intercept> intercepts;
+    public List<Vector3> waypoints;
 
     // Update is called once per frame
     void Update()
@@ -139,23 +140,16 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            string moveJson = JsonUtility.ToJson(moves);
-            string commandJson = JsonUtility.ToJson(commands);
-            string interceptJson = JsonUtility.ToJson(intercepts);
+            string waypointsJson = JsonUtility.ToJson(waypoints);
 
-            stream.SendNext(moveJson);
-            stream.SendNext(commandJson);
-            stream.SendNext(interceptJson);
+            stream.SendNext(waypointsJson);
         }
         else
         {
-            string moveJson = (string)stream.ReceiveNext();
-            string commandJson = (string)stream.ReceiveNext();
-            string interceptJson = (string)stream.ReceiveNext();
+            string waypointsJson = (string)stream.ReceiveNext();
 
-            moves = JsonUtility.FromJson<List<Move>>(moveJson);
-            commands = JsonUtility.FromJson<List<Command>>(commandJson);
-            intercepts = JsonUtility.FromJson<List<Intercept>>(interceptJson);
+            waypoints = JsonUtility.FromJson<List<Vector3>>(waypointsJson);
+
         }
     }
 

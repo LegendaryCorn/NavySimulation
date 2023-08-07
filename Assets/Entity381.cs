@@ -82,14 +82,26 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(idOwner);
+            stream.SendNext(position);
+            stream.SendNext(velocity);
+            stream.SendNext(speed);
+            stream.SendNext(heading);
+            stream.SendNext(desiredSpeed);
+            stream.SendNext(desiredHeading);
         }
         else
         {
             string prevOwner = this.idOwner;
 
             this.idOwner = (string)stream.ReceiveNext();
+            this.position = (Vector3)stream.ReceiveNext();
+            this.velocity = (Vector3)stream.ReceiveNext();
+            this.speed = (float)stream.ReceiveNext();
+            this.heading = (float)stream.ReceiveNext();
+            this.desiredSpeed = (float)stream.ReceiveNext();
+            this.desiredHeading = (float)stream.ReceiveNext();
 
-            if(!prevOwner.Equals(this.idOwner))
+            if (!prevOwner.Equals(this.idOwner))
             {
                 ownerCircle.SetActive(this.OwnsThisEntity());
             }

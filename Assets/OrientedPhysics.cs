@@ -60,6 +60,12 @@ public class OrientedPhysics : MonoBehaviour
             eulerRotation.y = entity.heading;
             transform.localEulerAngles = eulerRotation;
         }
+        else
+        {
+            transform.localPosition = entity.position;
+            eulerRotation.y = entity.heading;
+            transform.localEulerAngles = eulerRotation;
+        }
     }
 
     public Vector3 eulerRotation = Vector3.zero;

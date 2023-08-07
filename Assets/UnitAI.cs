@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAI : MonoBehaviour
+using Photon.Pun;
+
+public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Entity381 entity; //public only for ease of debugging
     // Start is called before the first frame update
@@ -22,11 +24,21 @@ public class UnitAI : MonoBehaviour
     void Update()
     {
         if (commands.Count > 0) {
-            if (commands[0].IsDone()) {
-                StopAndRemoveCommand(0);
-            } else {
-                commands[0].Tick();
-                commands[0].isRunning = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (commands[0].IsDone())
+                {
+                    StopAndRemoveCommand(0);
+                }
+                else
+                {
+                    commands[0].Tick();
+                    commands[0].isRunning = true;
+                    DecorateAll();
+                }
+            }
+            else
+            {
                 DecorateAll();
             }
         }
@@ -120,6 +132,20 @@ public class UnitAI : MonoBehaviour
         }
 
 
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            Command[] commandArr = commands.ToArray();
+            stream.SendNext(commandArr);
+        }
+        else
+        {
+            Command[] commandArr = (Command [])stream.ReceiveNext();
+            commands = new List<Command>(commandArr);
+        }
     }
 
 }

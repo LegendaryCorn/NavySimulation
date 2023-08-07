@@ -31,6 +31,7 @@ public class EntityMgr : MonoBehaviourPunCallbacks
             GameObject entityGo = PhotonNetwork.InstantiateRoomObject(entityPrefab.name, position, Quaternion.Euler(eulerAngles), 0);
             if (entityGo != null) {
                 entity = entityGo.GetComponent<Entity381>();
+                entity.heading = eulerAngles.y;
                 entity.SetOwner(ownerID);
                 entityGo.name = et.ToString() + entityId++;
                 entities.Add(entity);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 using Photon.Pun;
@@ -138,13 +139,23 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            Command[] commandArr = commands.ToArray();
-            stream.SendNext(commandArr);
+            string moveJson = JsonUtility.ToJson(moves);
+            string commandJson = JsonUtility.ToJson(commands);
+            string interceptJson = JsonUtility.ToJson(intercepts);
+
+            stream.SendNext(moveJson);
+            stream.SendNext(commandJson);
+            stream.SendNext(interceptJson);
         }
         else
         {
-            Command[] commandArr = (Command [])stream.ReceiveNext();
-            commands = new List<Command>(commandArr);
+            string moveJson = (string)stream.ReceiveNext();
+            string commandJson = (string)stream.ReceiveNext();
+            string interceptJson = (string)stream.ReceiveNext();
+
+            moves = JsonUtility.FromJson<List<Move>>(moveJson);
+            commands = JsonUtility.FromJson<List<Command>>(commandJson);
+            intercepts = JsonUtility.FromJson<List<Intercept>>(interceptJson);
         }
     }
 

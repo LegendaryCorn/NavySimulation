@@ -168,8 +168,8 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
         newpos.y = 1;
         waypointsPotentialLine.SetPosition(1, entity.position + newpos);
 
-        waypointsMoveLine.gameObject.SetActive(entity.isSelected && commands.Count != 0);
-        waypointsPotentialLine.gameObject.SetActive(entity.isSelected && commands.Count != 0);
+        waypointsMoveLine.gameObject.SetActive(entity.isSelected);
+        waypointsPotentialLine.gameObject.SetActive(entity.isSelected);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

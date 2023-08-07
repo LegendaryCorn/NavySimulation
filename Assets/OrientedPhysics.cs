@@ -62,6 +62,7 @@ public class OrientedPhysics : MonoBehaviour
         }
         else
         {
+            entity.position = entity.position + entity.velocity * Time.deltaTime;
             transform.localPosition = entity.position;
             eulerRotation.y = entity.heading;
             transform.localEulerAngles = eulerRotation;

@@ -36,23 +36,22 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         if (commands.Count > 0) {
-            if (PhotonNetwork.IsMasterClient)
+
+            if (commands[0].IsDone())
             {
-                if (commands[0].IsDone())
-                {
-                    StopAndRemoveCommand(0);
-                }
-                else
-                {
-                    commands[0].Tick();
-                    commands[0].isRunning = true;
-                    DecorateAll();
-                }
+                StopAndRemoveCommand(0);
             }
             else
             {
-                DecorateWaypoints();
+                commands[0].Tick();
+                commands[0].isRunning = true;
+                DecorateAll();
             }
+        }
+
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            DecorateWaypoints();
         }
     }
 

@@ -64,6 +64,11 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         transform.parent = EntityMgr.inst.entitiesRoot.transform;
+
+        if (!EntityMgr.inst.entities.Contains(this))
+        {
+            EntityMgr.inst.entities.Add(this);
+        }
     }
 
     // Update is called once per frame

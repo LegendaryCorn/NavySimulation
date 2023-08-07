@@ -22,17 +22,6 @@ public class ControlMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Controls to Spawn
-        if (Input.GetMouseButtonDown(1) && SelectionMgr.inst.selectedEntity == null)
-        {
-            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(r, out RaycastHit hit))
-            {
-                SpawnCommand sp = new SpawnCommand(PlayerCommand.GenerateID(), EntityType.DDG51, hit.point, 0f);
-                PlayerCommand.Instance.AddToCommList(sp);
-            }
-        }
-
         // Controls to add waypoint
         if(Input.GetMouseButtonDown(1) && SelectionMgr.inst.selectedEntity != null)
         {

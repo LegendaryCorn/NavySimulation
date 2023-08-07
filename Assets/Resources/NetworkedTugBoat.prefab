@@ -155,6 +155,9 @@ MonoBehaviour:
   moves: []
   commands: []
   intercepts: []
+  waypoints: []
+  waypointsMoveLine: {fileID: 0}
+  waypointsPotentialLine: {fileID: 0}
 --- !u!114 &7261078135051017682
 MonoBehaviour:
   m_ObjectHideFlags: 0

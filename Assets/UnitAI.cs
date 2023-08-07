@@ -140,15 +140,28 @@ public class UnitAI : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            string waypointsJson = JsonUtility.ToJson(waypoints);
+            List<float> waypointsList = new List<float>();
+
+            foreach(Vector3 waypoint in waypoints)
+            {
+                waypointsList.Add(waypoint.x);
+                waypointsList.Add(waypoint.y);
+                waypointsList.Add(waypoint.z);
+            }
+
+            string waypointsJson = JsonUtility.ToJson(waypointsList);
 
             stream.SendNext(waypointsJson);
         }
         else
         {
             string waypointsJson = (string)stream.ReceiveNext();
-
-            waypoints = JsonUtility.FromJson<List<Vector3>>(waypointsJson);
+            waypoints = new List<Vector3>();
+            List<float> waypointsList = JsonUtility.FromJson<List<float>>(waypointsJson);
+            for(int i = 0; i < waypointsList.Count; i += 3)
+            {
+                waypoints.Add(new Vector3(waypointsList[i], waypointsList[i+1], waypointsList[i+2]));
+            }
 
         }
     }

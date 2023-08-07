@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
                     if (pc.currCommand != null && pc.currCommand.id != commandIDResolved[id])
                     {
-                        ExecuteCommand(pc.currCommand);
+                        ExecuteCommand(pc.currCommand, pc.photonView.Owner);
                         commandIDResolved[id] = pc.currCommand.id;
                     }
                 }
@@ -110,12 +110,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         return new_dict;
     }
 
-    private void ExecuteCommand(NetCommand c)
+    private void ExecuteCommand(NetCommand c, Player p)
     {
         if(c.GetType() == typeof(SpawnCommand))
         {
             SpawnCommand cc = (SpawnCommand)c;
-            Entity381 ent = EntityMgr.inst.CreateEntity(cc.type, cc.pos, Vector3.up * cc.heading);
+            Entity381 ent = EntityMgr.inst.CreateEntity(cc.type, cc.pos, Vector3.up * cc.heading, p.UserId);
             DistanceMgr.inst.Initialize();
         }
 

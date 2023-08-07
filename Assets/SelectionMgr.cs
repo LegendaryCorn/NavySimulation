@@ -27,8 +27,8 @@ public class SelectionMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Tab))
-            SelectNextEntity();
+        //if (Input.GetKeyUp(KeyCode.Tab))
+        //   SelectNextEntity();
 
         if (Input.GetMouseButtonDown(0)) { //start box selecting
             isSelecting = true;
@@ -103,7 +103,7 @@ public class SelectionMgr : MonoBehaviour
         Bounds bounds = new Bounds();
         bounds.SetMinMax(min, max);
         foreach(Entity381 ent in EntityMgr.inst.entities) 
-            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition))) // ADDITION: Ownership update
+            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition)))
                 SelectEntity(ent, shouldClearSelection: false);
 
     }
@@ -131,7 +131,7 @@ public class SelectionMgr : MonoBehaviour
 
     public void SelectEntity(Entity381 ent, bool shouldClearSelection = true)
     {
-        if (ent != null && (selectedEntityIndex = EntityMgr.inst.entities.FindIndex(x => (x == ent))) >= 0) {
+        if (ent != null && (selectedEntityIndex = EntityMgr.inst.entities.FindIndex(x => (x == ent))) >= 0 && ent.OwnsThisEntity()) {
             if (shouldClearSelection) 
                 ClearSelection();
 

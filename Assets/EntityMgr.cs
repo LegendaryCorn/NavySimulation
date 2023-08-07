@@ -23,7 +23,7 @@ public class EntityMgr : MonoBehaviourPunCallbacks
 
     public static int entityId = 0;
 
-    public Entity381 CreateEntity(EntityType et, Vector3 position, Vector3 eulerAngles)
+    public Entity381 CreateEntity(EntityType et, Vector3 position, Vector3 eulerAngles, string ownerID)
     {
         Entity381 entity = null;
         GameObject entityPrefab = entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
@@ -31,6 +31,7 @@ public class EntityMgr : MonoBehaviourPunCallbacks
             GameObject entityGo = PhotonNetwork.InstantiateRoomObject(entityPrefab.name, position, Quaternion.Euler(eulerAngles), 0);
             if (entityGo != null) {
                 entity = entityGo.GetComponent<Entity381>();
+                entity.SetOwner(ownerID);
                 entityGo.name = et.ToString() + entityId++;
                 entities.Add(entity);
             }

@@ -42,7 +42,7 @@ public class ConnectManager : MonoBehaviourPunCallbacks
         {
             if (isHost)
             {
-                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+                PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom, PublishUserId = true });
             }
             else
             {

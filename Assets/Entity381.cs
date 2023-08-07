@@ -20,12 +20,13 @@ public enum EntityType
 }
 
 
-public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershipCallbacks
+public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable
 {
     //------------------------------
     // values that change while running
     //------------------------------
-    public bool hasOwner = false;
+    public string idOwner = ""; // "" means no owner.
+
     public bool isSelected = false;
     public Vector3 position = Vector3.zero;
     public Vector3 velocity = Vector3.zero;
@@ -49,8 +50,7 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
     public GameObject selectionCircle;
     public GameObject ownerCircle;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         cameraRig = transform.Find("CameraRig").gameObject;
         selectionCircle = transform.Find("Decorations").Find("SelectionCylinder").gameObject;
@@ -58,42 +58,50 @@ public class Entity381 : MonoBehaviourPunCallbacks, IPunObservable, IPunOwnershi
         selectionCircle.SetActive(false);
         ownerCircle.SetActive(false);
 
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         transform.parent = EntityMgr.inst.entitiesRoot.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
-    }
-
-    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
-    {
-        targetView.TransferOwnership(requestingPlayer);
-    }
-
-    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
-    {
-        if (photonView.AmOwner && hasOwner)
+        if (stream.IsWriting)
         {
-            ownerCircle.SetActive(true);
+            stream.SendNext(idOwner);
         }
         else
         {
-            ownerCircle.SetActive(false);
-            if (SelectionMgr.inst.selectedEntities.Contains(this))
+            string prevOwner = this.idOwner;
+
+            this.idOwner = (string)stream.ReceiveNext();
+
+            if(!prevOwner.Equals(this.idOwner))
             {
-                SelectionMgr.inst.selectedEntities.Remove(this);
+                ownerCircle.SetActive(this.OwnsThisEntity());
             }
         }
     }
 
-    public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+    public void SetOwner(string id)
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            this.idOwner = id;
+            ownerCircle.SetActive(this.OwnsThisEntity());
+        }
+    }
 
+    public bool OwnsThisEntity()
+    {
+        return !this.idOwner.Equals("") && this.idOwner.Equals(PhotonNetwork.LocalPlayer.UserId);
     }
 }

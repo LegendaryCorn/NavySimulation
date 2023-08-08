@@ -23,6 +23,7 @@ public class Entity381 : MonoBehaviour
     // values that change while running
     //------------------------------
     public bool isSelected = false;
+    public bool isRealtime = false;
     public Vector3 position = Vector3.zero;
     public Vector3 velocity = Vector3.zero;
 
@@ -43,6 +44,15 @@ public class Entity381 : MonoBehaviour
 
     public GameObject cameraRig;
     public GameObject selectionCircle;
+
+    public UnitAI ai;
+    public OrientedPhysics physics;
+
+    private void Awake()
+    {
+        ai = transform.GetComponent<UnitAI>();
+        physics = transform.GetComponent<OrientedPhysics>();
+    }
 
     // Start is called before the first frame update
     void Start()

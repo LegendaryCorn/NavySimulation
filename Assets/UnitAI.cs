@@ -6,7 +6,7 @@ public class UnitAI : MonoBehaviour
 {
     public Entity381 entity; //public only for ease of debugging
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         entity = GetComponentInParent<Entity381>();
         commands = new List<Command>();
@@ -21,10 +21,22 @@ public class UnitAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (commands.Count > 0) {
-            if (commands[0].IsDone()) {
+        if (entity.isRealtime)
+        {
+            OnUpdate(Time.deltaTime);
+        }
+    }
+
+    public void OnUpdate(float dt)
+    {
+        if (commands.Count > 0)
+        {
+            if (commands[0].IsDone())
+            {
                 StopAndRemoveCommand(0);
-            } else {
+            }
+            else
+            {
                 commands[0].Tick();
                 commands[0].isRunning = true;
                 DecorateAll();

@@ -135,6 +135,11 @@ public class DistanceMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OnUpdate(Time.deltaTime);
+    }
+
+    public void OnUpdate(float dt)
+    {
         if (isInitialized)
             UpdatePotentials();
         else

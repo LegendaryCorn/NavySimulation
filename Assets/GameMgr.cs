@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMgr : MonoBehaviour
+public class GameMgr
 {
+
     public EntityMgr entityMgr;
     public DistanceMgr distanceMgr;
     public AIMgr aiMgr;
 
-    private void Awake()
+    public GameMgr()
     {
-        entityMgr = this.gameObject.AddComponent<EntityMgr>();
-        distanceMgr = this.gameObject.AddComponent<DistanceMgr>();
-        aiMgr = this.gameObject.AddComponent<AIMgr>();
+        //entityMgr = this.gameObject.AddComponent<EntityMgr>();
+        //distanceMgr = this.gameObject.AddComponent<DistanceMgr>();
+        //aiMgr = this.gameObject.AddComponent<AIMgr>();
 
-        entityMgr.gameMgr = this;
-        distanceMgr.gameMgr = this;
-        aiMgr.gameMgr = this;
+        //entityMgr.gameMgr = this;
+        //distanceMgr.gameMgr = this;
+        //aiMgr.gameMgr = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void RunGame()
     {
-        LoadScenario();
-
-        float timeStart = Time.realtimeSinceStartup;
-        RunGame(1f / 60f, 60f);
-        float timeEnd = Time.realtimeSinceStartup;
-        Debug.Log(timeEnd - timeStart);
+        System.Threading.Thread.Sleep(500);
+        //LoadScenario();
+        //RunGame(1f / 60f, 60f);
     }
 
     public Vector3 position;

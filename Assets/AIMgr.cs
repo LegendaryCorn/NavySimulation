@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class AIMgr : MonoBehaviour
 {
-    public static AIMgr inst;
     private void Awake()
     {
-        inst = this;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -15,20 +14,23 @@ public class AIMgr : MonoBehaviour
         layerMask = 1 << 9;// LayerMask.GetMask("Water");
     }
 
-    public bool isPotentialFieldsMovement = false;
+    public bool isPotentialFieldsMovement = true;
     public float potentialDistanceThreshold = 1000;
-    public float attractionCoefficient = 500;
+    public float attractionCoefficient = 20000;
     public float attractiveExponent = -1;
-    public float repulsiveCoefficient = 60000;
+    public float repulsiveCoefficient = 1000;
     public float repulsiveExponent = -2.0f;
 
 
     public RaycastHit hit;
     public int layerMask;
 
+    public GameMgr gameMgr;
+
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(1)) {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, float.MaxValue, layerMask)) {
                 //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.yellow, 2); //for debugging
@@ -47,6 +49,7 @@ public class AIMgr : MonoBehaviour
                 //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * 1000, Color.white, 2);
             }
         }
+        */
     }
 
     public void HandleMove(List<Entity381> entities, Vector3 point)
@@ -70,7 +73,7 @@ public class AIMgr : MonoBehaviour
 
     public void HandleFollow(List<Entity381> entities, Entity381 ent)
     {
-        foreach (Entity381 entity in SelectionMgr.inst.selectedEntities) {
+        foreach (Entity381 entity in entities) {
             Follow f = new Follow(entity, ent, new Vector3(100, 0, 0));
             UnitAI uai = entity.GetComponent<UnitAI>();
             AddOrSet(f, uai);
@@ -79,7 +82,7 @@ public class AIMgr : MonoBehaviour
 
     void HandleIntercept(List<Entity381> entities, Entity381 ent)
     {
-        foreach (Entity381 entity in SelectionMgr.inst.selectedEntities) {
+        foreach (Entity381 entity in entities) {
             Intercept intercept = new Intercept(entity, ent);
             UnitAI uai = entity.GetComponent<UnitAI>();
             AddOrSet(intercept, uai);
@@ -92,7 +95,7 @@ public class AIMgr : MonoBehaviour
     {
         Entity381 minEnt = null;
         float min = float.MaxValue;
-        foreach (Entity381 ent in EntityMgr.inst.entities) {
+        foreach (Entity381 ent in gameMgr.entityMgr.entities) {
             float distanceSq = (ent.transform.position - point).sqrMagnitude;
             if (distanceSq < rsq) {
                 if (distanceSq < min) {

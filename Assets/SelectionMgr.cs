@@ -11,6 +11,7 @@ public class SelectionMgr : MonoBehaviour
         inst = this;
     }
 
+    /*
     // Start is called before the first frame update
     void Start()
     {
@@ -137,5 +138,5 @@ public class SelectionMgr : MonoBehaviour
             selectedEntities.Add(ent);
         }
     }
-
+    */
 }

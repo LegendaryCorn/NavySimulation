@@ -21,7 +21,7 @@ public class Selector : MonoBehaviour
     private void OnMouseDown()
     {
         //if (Input.GetMouseButtonDown(0)) {
-            SelectionMgr.inst.SelectEntity(entity);
+            //SelectionMgr.inst.SelectEntity(entity);
         //}
     }
 

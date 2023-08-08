@@ -84,15 +84,16 @@ public class CPAInfo
 
 public class DistanceMgr : MonoBehaviour
 {
-    public static DistanceMgr inst;
     private void Awake()
     {
-        inst = this;
+
     }
 
     public Potential[,] potentials2D;
     public Dictionary<Entity381, Dictionary<Entity381, Potential>> potentialsDictionary;
     public List<List<Potential>> potentialsList;
+
+    public GameMgr gameMgr;
 
     // Start is called before the first frame update
     void Start()
@@ -108,16 +109,16 @@ public class DistanceMgr : MonoBehaviour
         isInitialized = true;
         potentialsDictionary = new Dictionary<Entity381, Dictionary<Entity381, Potential>>();
         potentialsList = new List<List<Potential>>();
-        int n = EntityMgr.inst.entities.Count;
+        int n = gameMgr.entityMgr.entities.Count;
         potentials2D = new Potential[n, n];
         i = 0;
-        foreach (Entity381 ent1 in EntityMgr.inst.entities) {
+        foreach (Entity381 ent1 in gameMgr.entityMgr.entities) {
             Dictionary<Entity381, Potential> ent1PotDictionary = new Dictionary<Entity381, Potential>();
             List<Potential> ent1PotList = new List<Potential>();
             potentialsDictionary.Add(ent1, ent1PotDictionary);
             potentialsList.Add(ent1PotList);
             j = 0;
-            foreach (Entity381 ent2 in EntityMgr.inst.entities) {
+            foreach (Entity381 ent2 in gameMgr.entityMgr.entities) {
                 Potential pot = new Potential(ent1, ent2);
                 ent1PotDictionary.Add(ent2, pot);
                 ent1PotList.Add(pot);
@@ -151,13 +152,15 @@ public class DistanceMgr : MonoBehaviour
     {
         Potential p1, p2;
         Entity381 ent1, ent2;
-        for(int i = 0; i < EntityMgr.inst.entities.Count - 1; i++) {
-            ent1 = EntityMgr.inst.entities[i];
+        for(int i = 0; i < gameMgr.entityMgr.entities.Count - 1; i++) {
+            ent1 = gameMgr.entityMgr.entities[i];
+            /*
             if (ent1 == SelectionMgr.inst.selectedEntity)
                 selectedEntityPotentials = potentialsList[i];
+            */
             //don't do diagonal
-            for(int j = i+1; j < EntityMgr.inst.entities.Count; j++) {
-                ent2 = EntityMgr.inst.entities[j];
+            for(int j = i+1; j < gameMgr.entityMgr.entities.Count; j++) {
+                ent2 = gameMgr.entityMgr.entities[j];
 
                 p1 = potentials2D[i, j];
                 p2 = potentials2D[j, i];

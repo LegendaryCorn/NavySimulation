@@ -20,7 +20,7 @@ public class DHDS {
 public class Command 
 {
     public Entity381 entity;
-    public LineRenderer line;
+    //public LineRenderer line;
     public bool isRunning = false;
     public Command(Entity381 ent)
     {

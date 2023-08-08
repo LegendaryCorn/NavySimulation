@@ -11,27 +11,27 @@ public class Move : Command
         movePosition = pos;
     }
 
-    public LineRenderer potentialLine;
+    //public LineRenderer potentialLine;
     public override void Init()
     {
         //Debug.Log("MoveInit:\tMoving to: " + movePosition);
-        line = LineMgr.inst.CreateMoveLine(entity.position, movePosition);
-        line.gameObject.SetActive(false);
-        potentialLine = LineMgr.inst.CreatePotentialLine(entity.position);
-        line.gameObject.SetActive(true);
+        //line = LineMgr.inst.CreateMoveLine(entity.position, movePosition);
+        //line.gameObject.SetActive(false);
+        //potentialLine = LineMgr.inst.CreatePotentialLine(entity.position);
+        //line.gameObject.SetActive(true);
     }
 
     public override void Tick()
     {
         DHDS dhds;
-        if (AIMgr.inst.isPotentialFieldsMovement)
+        if (entity.gameMgr.aiMgr.isPotentialFieldsMovement)
             dhds = ComputePotentialDHDS();
         else
             dhds = ComputeDHDS();
 
         entity.desiredHeading = dhds.dh;
         entity.desiredSpeed = dhds.ds;
-        line.SetPosition(1, movePosition);
+        //line.SetPosition(1, movePosition);
     }
 
     public Vector3 diff = Vector3.positiveInfinity;
@@ -50,20 +50,20 @@ public class Move : Command
     {
         Potential p;
         repulsivePotential = Vector3.one; repulsivePotential.y = 0;
-        foreach (Entity381 ent in EntityMgr.inst.entities) {
+        foreach (Entity381 ent in entity.gameMgr.entityMgr.entities) {
             if (ent == entity) continue;
-            p = DistanceMgr.inst.GetPotential(entity, ent);
-            if (p.distance < AIMgr.inst.potentialDistanceThreshold) {
+            p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);
+            if (p.distance < entity.gameMgr.aiMgr.potentialDistanceThreshold) {
                 repulsivePotential += p.direction * entity.mass *
-                    AIMgr.inst.repulsiveCoefficient * Mathf.Pow(p.diff.magnitude, AIMgr.inst.repulsiveExponent);
+                   entity.gameMgr.aiMgr.repulsiveCoefficient * Mathf.Pow(p.diff.magnitude, entity.gameMgr.aiMgr.repulsiveExponent);
                 //repulsivePotential += p.diff;
             }
         }
         //repulsivePotential *= repulsiveCoefficient * Mathf.Pow(repulsivePotential.magnitude, repulsiveExponent);
         attractivePotential = movePosition - entity.position;
         Vector3 tmp = attractivePotential.normalized;
-        attractivePotential = tmp * 
-            AIMgr.inst.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, AIMgr.inst.attractiveExponent);
+        attractivePotential = tmp *
+            entity.gameMgr.aiMgr.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, entity.gameMgr.aiMgr.attractiveExponent);
         potentialSum = attractivePotential - repulsivePotential;
 
         dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));
@@ -94,7 +94,7 @@ public class Move : Command
     public override void Stop()
     {
         entity.desiredSpeed = 0;
-        LineMgr.inst.DestroyLR(line);
-        LineMgr.inst.DestroyLR(potentialLine);
+        //LineMgr.inst.DestroyLR(line);
+        //LineMgr.inst.DestroyLR(potentialLine);
     }
 }

@@ -94,6 +94,7 @@ public class UnitAI : MonoBehaviour
     //decoration logic (UI logic) in general is always convoluted. Ugh
     public void Decorate(Command prior, Command current)
     {
+        /*
         if (current.line != null) {
             current.line.gameObject.SetActive(entity.isSelected);
             if (prior == null)
@@ -119,7 +120,7 @@ public class UnitAI : MonoBehaviour
         }
 
         //potential fields lines
-        if(!(current is Follow) && !(current is Intercept) && AIMgr.inst.isPotentialFieldsMovement){ 
+        if(!(current is Follow) && !(current is Intercept) && entity.gameMgr.aiMgr.isPotentialFieldsMovement){ 
             Move m = current as Move;
             m.potentialLine.SetPosition(0, entity.position);
             Vector3 newpos = Vector3.zero;
@@ -131,7 +132,7 @@ public class UnitAI : MonoBehaviour
             m.potentialLine.gameObject.SetActive(entity.isSelected);
         }
 
-
+        */
     }
 
 }

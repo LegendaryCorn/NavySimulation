@@ -54,7 +54,7 @@ public class CameraMgr : MonoBehaviour
         if (Input.GetKey(KeyCode.X))
             currentPitchEulerAngles.x += cameraTurnRate * Time.deltaTime;
         PitchNode.transform.localEulerAngles = currentPitchEulerAngles;
-
+        /*
         if (Input.GetKeyUp(KeyCode.C)) {
             if (isRTSMode) {
                 YawNode.transform.SetParent(SelectionMgr.inst.selectedEntity.cameraRig.transform);
@@ -67,6 +67,7 @@ public class CameraMgr : MonoBehaviour
             }
             isRTSMode = !isRTSMode;
         }
+        */
 
 
 

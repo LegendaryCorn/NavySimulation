@@ -45,6 +45,8 @@ public class Entity381 : MonoBehaviour
     public GameObject cameraRig;
     public GameObject selectionCircle;
 
+    public GameMgr gameMgr;
+
     public UnitAI ai;
     public OrientedPhysics physics;
 

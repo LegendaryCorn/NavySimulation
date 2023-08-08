@@ -13,8 +13,8 @@ public class Intercept : Follow
     public override void Init()
     {
         //Debug.Log("Intercept:\t ing: " + targetEntity.gameObject.name);
-        line = LineMgr.inst.CreateInterceptLine(entity.position, targetEntity.position, targetEntity.position);
-        line.gameObject.SetActive(false);
+        //line = LineMgr.inst.CreateInterceptLine(entity.position, targetEntity.position, targetEntity.position);
+        //line.gameObject.SetActive(false);
     }
 
     public override void Tick()
@@ -39,7 +39,7 @@ public class Intercept : Follow
         Vector3 deadRot = targetEntity.transform.localEulerAngles;
         deadRot.x = 90;
         targetEntity.transform.localEulerAngles = deadRot;
-        LineMgr.inst.DestroyLR(line);
+        //LineMgr.inst.DestroyLR(line);
     }
 
 }

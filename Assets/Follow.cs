@@ -18,8 +18,8 @@ public class Follow : Move
     {
         //Debug.Log("Follow:\t Following: " + targetEntity.gameObject.name);
         offset = targetEntity.transform.TransformVector(relativeOffset);
-        line = LineMgr.inst.CreateFollowLine(entity.position, targetEntity.position + offset, targetEntity.position);
-        line.gameObject.SetActive(false);
+        //line = LineMgr.inst.CreateFollowLine(entity.position, targetEntity.position + offset, targetEntity.position);
+        //line.gameObject.SetActive(false);
     }
 
     public float followThreshold = 2000;
@@ -51,7 +51,7 @@ public class Follow : Move
     {
         base.Stop();
         entity.desiredSpeed = 0;
-        LineMgr.inst.DestroyLR(line);
+        //LineMgr.inst.DestroyLR(line);
     }
 
     Vector3 relativeVelocity;

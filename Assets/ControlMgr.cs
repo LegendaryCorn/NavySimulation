@@ -22,6 +22,7 @@ public class ControlMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (SelectionMgr.inst.selectedEntity != null) {
             if (Input.GetKeyUp(KeyCode.UpArrow))
                 SelectionMgr.inst.selectedEntity.desiredSpeed += deltaSpeed;
@@ -36,6 +37,7 @@ public class ControlMgr : MonoBehaviour
                 SelectionMgr.inst.selectedEntity.desiredHeading += deltaHeading;
             SelectionMgr.inst.selectedEntity.desiredHeading = Utils.Degrees360(SelectionMgr.inst.selectedEntity.desiredHeading);
         }
+        */
     }
 
     

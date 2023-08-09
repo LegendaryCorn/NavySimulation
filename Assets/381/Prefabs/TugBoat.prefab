@@ -39,11 +39,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8941482605437012094}
-  - component: {fileID: 8941482605437012089}
-  - component: {fileID: 8941482605437012088}
   - component: {fileID: 8941482605437012091}
   - component: {fileID: 8941482605437012090}
-  - component: {fileID: 8941482605437012069}
   m_Layer: 0
   m_Name: TugBoat
   m_TagString: Untagged
@@ -69,47 +66,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8941482605437012089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8941482605437012095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2fd9069db7d894d8e8458779069765, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
-  position: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  speed: 0
-  desiredSpeed: 0
-  heading: 0
-  desiredHeading: 0
-  acceleration: 3
-  turnRate: 30
-  maxSpeed: 20
-  minSpeed: 0
-  mass: 50
-  entityType: 8
-  cameraRig: {fileID: 8941482605391829314}
-  selectionCircle: {fileID: 245186843759904673}
---- !u!114 &8941482605437012088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8941482605437012095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 631e1fd1f93140947903130ae087aab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 8941482605437012089}
-  eulerRotation: {x: 0, y: 0, z: 0}
 --- !u!114 &8941482605437012091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb27efdfcc15e1f49865dfb0f7e173ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
 --- !u!65 &8941482605437012090
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,22 +91,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 20, z: 40}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8941482605437012069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8941482605437012095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed703c4d3295ef488846994cd0fa3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 0}
-  moves: []
-  commands: []
-  intercepts: []
 --- !u!1 &8941482605658520152
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,12 +367,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4743175373984126764, guid: b1b64573597ecf94e812fd9d518ac68f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1b64573597ecf94e812fd9d518ac68f, type: 3}
---- !u!1 &245186843759904673 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9183282935489160824, guid: b1b64573597ecf94e812fd9d518ac68f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8941482604865282521}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6200791180343076381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3034060244875282372, guid: b1b64573597ecf94e812fd9d518ac68f,

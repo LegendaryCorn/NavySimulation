@@ -11,20 +11,16 @@ public class GameMgr
 
     public GameMgr()
     {
-        //entityMgr = this.gameObject.AddComponent<EntityMgr>();
-        //distanceMgr = this.gameObject.AddComponent<DistanceMgr>();
-        //aiMgr = this.gameObject.AddComponent<AIMgr>();
-
-        //entityMgr.gameMgr = this;
-        //distanceMgr.gameMgr = this;
-        //aiMgr.gameMgr = this;
+        entityMgr = new EntityMgr(this);
+        distanceMgr = new DistanceMgr(this);
+        aiMgr = new AIMgr(this);
     }
 
     public void RunGame()
     {
         System.Threading.Thread.Sleep(500);
-        //LoadScenario();
-        //RunGame(1f / 60f, 60f);
+        LoadScenario();
+        RunGame(1f / 60f, 60f);
     }
 
     public Vector3 position;
@@ -36,7 +32,7 @@ public class GameMgr
         Vector3 position = Vector3.zero;
         foreach (GameObject go in MasterMgr.inst.entityPrefabs)
         {
-            Entity381 ent = entityMgr.CreateEntity(go.GetComponent<Entity381>().entityType, position, Vector3.zero);
+            Entity381 ent = entityMgr.CreateEntity(EntityType.DDG51, position, Vector3.zero);
             ent.ai.AddCommand(new Move(ent, position + Vector3.forward * 1000));
             //ent.isRealtime = true;
             position.x += 200;

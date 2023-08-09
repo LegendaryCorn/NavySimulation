@@ -7,7 +7,7 @@ public class Follow : Move
 {
     public Entity381 targetEntity;
     public Vector3 relativeOffset;
-    public Follow(Entity381 ent, Entity381 target, Vector3 delta): base(ent, target.transform.position)
+    public Follow(Entity381 ent, Entity381 target, Vector3 delta): base(ent, target.position)
     {
         targetEntity = target;
         relativeOffset = delta;
@@ -17,7 +17,7 @@ public class Follow : Move
     public override void Init()
     {
         //Debug.Log("Follow:\t Following: " + targetEntity.gameObject.name);
-        offset = targetEntity.transform.TransformVector(relativeOffset);
+        offset = Vector3.zero;//targetEntity.transform.TransformVector(relativeOffset);
         //line = LineMgr.inst.CreateFollowLine(entity.position, targetEntity.position + offset, targetEntity.position);
         //line.gameObject.SetActive(false);
     }
@@ -27,8 +27,8 @@ public class Follow : Move
     // Update is called once per frame
     public override void Tick()
     {
-        offset = targetEntity.transform.TransformVector(relativeOffset);
-        movePosition = targetEntity.transform.position + offset;
+        //offset = targetEntity.transform.TransformVector(relativeOffset);
+        movePosition = targetEntity.position + offset;
         //entity.desiredHeading = ComputePredictiveDH(relativeOffset);
         entity.desiredHeading = ComputeDHDS().dh;
         if (diff.sqrMagnitude < followThreshold) {
@@ -62,7 +62,7 @@ public class Follow : Move
     public float ComputePredictiveDH(Vector3 relativeOffset)
     {
         float dh;
-        movePosition = targetEntity.position + targetEntity.transform.TransformVector(relativeOffset);
+        movePosition = targetEntity.position;// + targetEntity.transform.TransformVector(relativeOffset);
         diff = movePosition - entity.position; 
         relativeVelocity = entity.velocity - targetEntity.velocity;
         predictedInterceptTime = diff.magnitude / relativeVelocity.magnitude;

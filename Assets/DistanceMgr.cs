@@ -82,12 +82,8 @@ public class CPAInfo
     }
 };
 
-public class DistanceMgr : MonoBehaviour
+public class DistanceMgr
 {
-    private void Awake()
-    {
-
-    }
 
     public Potential[,] potentials2D;
     public Dictionary<Entity381, Dictionary<Entity381, Potential>> potentialsDictionary;
@@ -96,9 +92,9 @@ public class DistanceMgr : MonoBehaviour
     public GameMgr gameMgr;
 
     // Start is called before the first frame update
-    void Start()
+    public DistanceMgr(GameMgr mgr)
     {
-
+        gameMgr = mgr;
     }
 
     public bool isInitialized = false;

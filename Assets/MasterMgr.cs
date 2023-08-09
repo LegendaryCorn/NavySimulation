@@ -40,17 +40,25 @@ public class MasterMgr : MonoBehaviour
     {
         timeStart = Time.realtimeSinceStartup;
         List<JobHandle> jobHandles = new List<JobHandle>();
+        List<GameJob> jobs = new List<GameJob>();
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 15; i++)
         {
             var job = new GameJob(new GameMgr());
 
+            jobs.Add(job);
             jobHandles.Add(job.Schedule<GameJob>());
         }
 
-        foreach (JobHandle jobHandle in jobHandles)
+        for (int i = 0; i < jobHandles.Count; i++)
         {
+            JobHandle jobHandle = jobHandles[i];
             jobHandle.Complete();
+            
+            foreach(Entity381 ent in jobs[i].gameMgr.entityMgr.entities)
+            {
+                Debug.Log(ent.position);
+            }
         }
 
         timeEnd = Time.realtimeSinceStartup;

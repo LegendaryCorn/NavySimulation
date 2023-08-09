@@ -17,7 +17,7 @@ public enum EntityType
 }
 
 
-public class Entity381 : MonoBehaviour
+public class Entity381
 {
     //------------------------------
     // values that change while running
@@ -31,6 +31,7 @@ public class Entity381 : MonoBehaviour
     public float desiredSpeed;
     public float heading; //degrees
     public float desiredHeading; //degrees
+
     //------------------------------
     // values that do not change
     //------------------------------
@@ -50,21 +51,13 @@ public class Entity381 : MonoBehaviour
     public UnitAI ai;
     public OrientedPhysics physics;
 
-    private void Awake()
+    public Entity381(GameMgr mgr, Vector3 position, Vector3 eulerAngles)
     {
-        ai = transform.GetComponent<UnitAI>();
-        physics = transform.GetComponent<OrientedPhysics>();
-    }
+        gameMgr = mgr;
+        this.position = position;
+        this.heading = eulerAngles.y;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cameraRig = transform.Find("CameraRig").gameObject;
-        selectionCircle = transform.Find("Decorations").Find("SelectionCylinder").gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        ai = new UnitAI(this);
+        physics = new OrientedPhysics(this);
     }
 }

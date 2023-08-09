@@ -2,26 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrientedPhysics : MonoBehaviour
+public class OrientedPhysics
 {
     // Start is called before the first frame update
-    void Awake()
+    public OrientedPhysics(Entity381 ent)
     {
-        entity = GetComponentInParent<Entity381>();
-        entity.position = transform.localPosition;
+        entity = ent;
     }
 
     public Entity381 entity;
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (entity.isRealtime)
-        {
-            OnUpdate(Time.deltaTime);
-        }
-    }
 
     public void OnUpdate(float dt)
     {
@@ -59,10 +48,6 @@ public class OrientedPhysics : MonoBehaviour
         entity.velocity.z = Mathf.Cos(entity.heading * Mathf.Deg2Rad) * entity.speed;
 
         entity.position = entity.position + entity.velocity * dt;
-        transform.localPosition = entity.position;
-
-        eulerRotation.y = entity.heading;
-        transform.localEulerAngles = eulerRotation;
     }
 
     public Vector3 eulerRotation = Vector3.zero;

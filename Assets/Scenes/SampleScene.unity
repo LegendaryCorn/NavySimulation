@@ -1108,16 +1108,151 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676dadf905fb5c4e8c20010db2ac2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityPrefabs:
-  - {fileID: 2020023502598012821, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
-  - {fileID: 4175921536809093428, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
-  - {fileID: 8269003061167357734, guid: f946d7fa0cf80f741b8c5a0cce39d24f, type: 3}
-  - {fileID: 8516214366006661342, guid: 8b6d19bb645cb934fa859c6b2ba600ff, type: 3}
-  - {fileID: 4205535018835155151, guid: 70aafd5fa95ebb743a2cf93ed1442278, type: 3}
-  - {fileID: 857272126595392923, guid: 2c4513be36911cf43af492fcdb5d3351, type: 3}
-  - {fileID: 138629261546720789, guid: 56b421d73a8488646b28c822866b075c, type: 3}
-  - {fileID: 1321054300686026328, guid: c7061d8cebd1b584880025216a586789, type: 3}
-  - {fileID: 8941482605437012095, guid: 5d3b351739a98e34da31ae8acedeb828, type: 3}
+  entityData:
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 5
+    turnRate: 7
+    maxSpeed: 30
+    minSpeed: 0
+    mass: 1000
+    entityType: 0
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 2
+    turnRate: 2
+    maxSpeed: 20
+    minSpeed: 0
+    mass: 4000
+    entityType: 1
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 2
+    turnRate: 4
+    maxSpeed: 18
+    minSpeed: 0
+    mass: 800
+    entityType: 2
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 5
+    turnRate: 10
+    maxSpeed: 19
+    minSpeed: 0
+    mass: 200
+    entityType: 3
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 4
+    turnRate: 4
+    maxSpeed: 20
+    minSpeed: 0
+    mass: 1200
+    entityType: 4
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 10
+    turnRate: 20
+    maxSpeed: 30
+    minSpeed: 0
+    mass: 40
+    entityType: 5
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 7
+    turnRate: 20
+    maxSpeed: 20
+    minSpeed: 0
+    mass: 500
+    entityType: 6
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 3
+    turnRate: 2
+    maxSpeed: 15
+    minSpeed: 0
+    mass: 1500
+    entityType: 7
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
+  - isSelected: 0
+    isRealtime: 0
+    position: {x: 0, y: 0, z: 0}
+    velocity: {x: 0, y: 0, z: 0}
+    speed: 0
+    desiredSpeed: 0
+    heading: 0
+    desiredHeading: 0
+    acceleration: 3
+    turnRate: 30
+    maxSpeed: 20
+    minSpeed: 0
+    mass: 50
+    entityType: 8
+    cameraRig: {fileID: 0}
+    selectionCircle: {fileID: 0}
   entitiesRoot: {fileID: 1142393662}
 --- !u!1001 &1124869740
 PrefabInstance:

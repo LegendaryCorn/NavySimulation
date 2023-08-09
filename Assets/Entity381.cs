@@ -17,6 +17,7 @@ public enum EntityType
 }
 
 
+[System.Serializable]
 public class Entity381
 {
     //------------------------------
@@ -51,11 +52,18 @@ public class Entity381
     public UnitAI ai;
     public OrientedPhysics physics;
 
-    public Entity381(GameMgr mgr, Vector3 position, Vector3 eulerAngles)
+    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, Vector3 eulerAngles)
     {
         gameMgr = mgr;
         this.position = position;
         this.heading = eulerAngles.y;
+
+        this.acceleration = entData.acceleration;
+        this.turnRate = entData.turnRate;
+        this.maxSpeed = entData.maxSpeed;
+        this.minSpeed = entData.minSpeed;
+        this.mass = entData.mass;
+        this.entityType = entData.entityType;
 
         ai = new UnitAI(this);
         physics = new OrientedPhysics(this);

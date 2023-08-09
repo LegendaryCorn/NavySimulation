@@ -20,7 +20,7 @@ public class GameMgr
     {
         System.Threading.Thread.Sleep(500);
         LoadScenario();
-        RunGame(1f / 60f, 60f);
+        RunGame(1f / 60f, 600f);
     }
 
     public Vector3 position;
@@ -30,9 +30,9 @@ public class GameMgr
     void LoadScenario()
     {
         Vector3 position = Vector3.zero;
-        foreach (GameObject go in MasterMgr.inst.entityPrefabs)
+        foreach (Entity381 eD in MasterMgr.inst.entityData)
         {
-            Entity381 ent = entityMgr.CreateEntity(EntityType.DDG51, position, Vector3.zero);
+            Entity381 ent = entityMgr.CreateEntity(eD, position, Vector3.zero);
             ent.ai.AddCommand(new Move(ent, position + Vector3.forward * 1000));
             //ent.isRealtime = true;
             position.x += 200;

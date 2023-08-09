@@ -24,7 +24,7 @@ public class MasterMgr : MonoBehaviour
 
     public static MasterMgr inst;
 
-    public List<GameObject> entityPrefabs;
+    public List<Entity381> entityData;
     public GameObject entitiesRoot;
 
     float timeStart;

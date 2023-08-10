@@ -18,7 +18,7 @@ public class GameMgr
 
     public void ExecuteGame()
     {
-        LoadScenario();
+        LoadScenario(0);
         RunGame(1f / 60f, 600f);
     }
 
@@ -26,15 +26,19 @@ public class GameMgr
     public float spread = 20;
     public float colNum = 10;
 
-    public void LoadScenario()
+    public void LoadScenario(int scenarioID)
     {
-        Vector3 position = Vector3.zero;
-        foreach (Entity381 eD in ScenarioMgr.inst.entityData)
+        Scenario s = ScenarioMgr.inst.scenarios[scenarioID];
+
+        foreach (ScenarioEntity scEnt in s.scenarioEntities)
         {
-            Entity381 ent = entityMgr.CreateEntity(eD, position, Vector3.zero);
-            ent.ai.AddCommand(new Move(ent, position + Vector3.forward * 1000));
-            //ent.isRealtime = true;
-            position.x += 200;
+            Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
+            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint.center, Vector3.zero);
+
+            foreach(RandomPointBox waypoint in scEnt.wayPoints)
+            {
+                ent.ai.AddCommand(new Move(ent, waypoint.center));
+            }
         }
     }
 

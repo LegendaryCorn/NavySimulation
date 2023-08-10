@@ -18,7 +18,7 @@ public class SimulationMgr : MonoBehaviour
     void Start()
     {
         gameMgr = new GameMgr();
-        gameMgr.LoadScenario(); // Based on Scenario ID
+        gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
 
         // Load Scenario Entities
         foreach (Entity381 ent in gameMgr.entityMgr.entities)

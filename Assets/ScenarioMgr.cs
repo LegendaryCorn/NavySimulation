@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public struct RandomPointBox
 {
+    public Vector3 center;
     public float length;
     public float width;
     public float angle;
@@ -36,4 +37,16 @@ public class ScenarioMgr : MonoBehaviour
 
     public List<Entity381> entityData;
     public List<Scenario> scenarios;
+
+    public Entity381 GetEntityData(EntityType e)
+    {
+        foreach (Entity381 ent in entityData)
+        {
+            if(ent.entityType == e)
+            {
+                return ent;
+            }
+        }
+        return null;
+    }
 }

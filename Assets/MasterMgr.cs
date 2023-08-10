@@ -18,13 +18,12 @@ public class MasterMgr : MonoBehaviour
 
         public void Execute()
         {
-            gameMgr.RunGame();
+            gameMgr.ExecuteGame();
         }
     }
 
     public static MasterMgr inst;
 
-    public List<Entity381> entityData;
     public GameObject entitiesRoot;
 
     float timeStart;

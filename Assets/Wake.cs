@@ -17,11 +17,11 @@ public class Wake : MonoBehaviour {
     public ParticleSystem.MinMaxGradient nightMMGradient;
     public ParticleSystem.MinMaxGradient duskMMGradient;
 
-    public Entity381 entity;
+    public SimulatedEntity entity;
     // Use this for initialization
     void Start () {
         wakeParticleSystem.Stop();
-        entity = GetComponentInParent<Entity381>();
+        entity = GetComponentInParent<SimulatedEntity>();
 
         dayMMGradient = new ParticleSystem.MinMaxGradient(dayGradient);
         nightMMGradient = new ParticleSystem.MinMaxGradient(nightGradient);

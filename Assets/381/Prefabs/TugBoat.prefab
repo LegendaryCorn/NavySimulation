@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 8941482605437012094}
   - component: {fileID: 8941482605437012091}
   - component: {fileID: 8941482605437012090}
+  - component: {fileID: 7196857703808369969}
   m_Layer: 0
   m_Name: TugBoat
   m_TagString: Untagged
@@ -78,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb27efdfcc15e1f49865dfb0f7e173ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity: {fileID: 0}
 --- !u!65 &8941482605437012090
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91,6 +93,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 20, z: 40}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7196857703808369969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8941482605437012095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522bcc8abe6bdb84586909e440edad98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 8
+  speed: 0
+  selectionCircle: {fileID: 245186843759904673}
 --- !u!1 &8941482605658520152
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +384,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4743175373984126764, guid: b1b64573597ecf94e812fd9d518ac68f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1b64573597ecf94e812fd9d518ac68f, type: 3}
+--- !u!1 &245186843759904673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9183282935489160824, guid: b1b64573597ecf94e812fd9d518ac68f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8941482604865282521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6200791180343076381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3034060244875282372, guid: b1b64573597ecf94e812fd9d518ac68f,

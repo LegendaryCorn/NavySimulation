@@ -16,9 +16,8 @@ public class GameMgr
         aiMgr = new AIMgr(this);
     }
 
-    public void RunGame()
+    public void ExecuteGame()
     {
-        System.Threading.Thread.Sleep(500);
         LoadScenario();
         RunGame(1f / 60f, 600f);
     }
@@ -27,10 +26,10 @@ public class GameMgr
     public float spread = 20;
     public float colNum = 10;
 
-    void LoadScenario()
+    public void LoadScenario()
     {
         Vector3 position = Vector3.zero;
-        foreach (Entity381 eD in MasterMgr.inst.entityData)
+        foreach (Entity381 eD in ScenarioMgr.inst.entityData)
         {
             Entity381 ent = entityMgr.CreateEntity(eD, position, Vector3.zero);
             ent.ai.AddCommand(new Move(ent, position + Vector3.forward * 1000));
@@ -39,9 +38,9 @@ public class GameMgr
         }
     }
 
-    void RunGame(float dt, float t0) // t0 is in Seconds
+    public void RunGame(float dt, float t0) // t0 is in Seconds
     {
-        for (float t = 0; t <= t0; t += dt)
+        for (float t = 0; t < t0; t += dt)
         {
             distanceMgr.OnUpdate(dt);
             foreach(Entity381 ent in entityMgr.entities)

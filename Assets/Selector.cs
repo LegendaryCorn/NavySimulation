@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Selector : MonoBehaviour
 {
-    public Entity381 entity;
+    public SimulatedEntity entity;
     // Start is called before the first frame update
     void Start()
     {
-        entity = GetComponentInParent<Entity381>();
+        entity = GetComponentInParent<SimulatedEntity>();
+        entity.selectionCircle.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(entity != null)
-            entity.selectionCircle.SetActive(entity.isSelected);
+
     }
 
     private void OnMouseDown()

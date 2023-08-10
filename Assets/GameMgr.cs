@@ -33,11 +33,11 @@ public class GameMgr
         foreach (ScenarioEntity scEnt in s.scenarioEntities)
         {
             Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
-            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint.center, Vector3.zero);
+            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint.GenerateRandomPoint(), scEnt.heading);
 
             foreach(RandomPointBox waypoint in scEnt.wayPoints)
             {
-                ent.ai.AddCommand(new Move(ent, waypoint.center));
+                ent.ai.AddCommand(new Move(ent, waypoint.GenerateRandomPoint()));
             }
         }
     }

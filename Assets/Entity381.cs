@@ -52,11 +52,12 @@ public class Entity381
     public UnitAI ai;
     public OrientedPhysics physics;
 
-    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, Vector3 eulerAngles)
+    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading)
     {
         gameMgr = mgr;
         this.position = position;
-        this.heading = eulerAngles.y;
+        this.heading = heading;
+        this.desiredHeading = heading;
 
         this.acceleration = entData.acceleration;
         this.turnRate = entData.turnRate;

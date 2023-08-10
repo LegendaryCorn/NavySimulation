@@ -16,11 +16,11 @@ public class EntityMgr
 
     public GameMgr gameMgr;
 
-    public Entity381 CreateEntity(Entity381 entityData, Vector3 position, Vector3 eulerAngles)
+    public Entity381 CreateEntity(Entity381 entityData, Vector3 position, float heading)
     {
         Entity381 entity = null;
         //GameObject entityPrefab = MasterMgr.inst.entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
-        entity = new Entity381(gameMgr, entityData, position, eulerAngles);
+        entity = new Entity381(gameMgr, entityData, position, heading);
         entities.Add(entity);
         return entity;
     }

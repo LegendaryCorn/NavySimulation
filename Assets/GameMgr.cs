@@ -40,6 +40,12 @@ public class GameMgr
                 ent.ai.AddCommand(new Move(ent, waypoint.GenerateRandomPoint()));
             }
         }
+
+        foreach (ScenarioBoundary scBound in s.scenarioBoundaries)
+        {
+            Boundary381 bound = new Boundary381(this, scBound.points);
+            entityMgr.boundaries.Add(bound);
+        }
     }
 
     public void RunGame(float dt, float t0) // t0 is in Seconds

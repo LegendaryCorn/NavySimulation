@@ -7,10 +7,16 @@ public class SimulationMgr : MonoBehaviour
     public int scenarioID;
 
     GameMgr gameMgr;
+
     public List<SimulatedEntity> simulatedEntityPrefabs;
-    public List<SimulatedEntity> simulatedEntities;
-    public float simSpeed;
     public GameObject entitiesRoot;
+    public List<SimulatedEntity> simulatedEntities;
+
+    public LineRenderer simulatedBoundaryPrefab;
+    public GameObject boundariesRoot;
+    public List<LineRenderer> simulatedBoundaries;
+
+    public float simSpeed;
 
     float dt = 1f / 120f;
 
@@ -26,6 +32,18 @@ public class SimulationMgr : MonoBehaviour
             SimulatedEntity simEnt = Instantiate<SimulatedEntity>(FindSimulatedEntityPrefab(ent.entityType));
             simEnt.transform.parent = entitiesRoot.transform;
             simulatedEntities.Add(simEnt);
+        }
+
+        // Load Lines
+        foreach (Boundary381 bound in gameMgr.entityMgr.boundaries)
+        {
+            LineRenderer line = Instantiate<LineRenderer>(simulatedBoundaryPrefab);
+            line.positionCount = bound.points.Count;
+            for (int i = 0; i < bound.points.Count; i++)
+            {
+                Vector3 point = bound.points[i];
+                line.SetPosition(i, point);
+            }
         }
     }
 

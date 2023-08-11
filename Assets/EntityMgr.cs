@@ -7,10 +7,12 @@ public class EntityMgr
     public EntityMgr(GameMgr mgr)
     {
         entities = new List<Entity381>();
+        boundaries = new List<Boundary381>();
         gameMgr = mgr;
     }
 
     public List<Entity381> entities;
+    public List<Boundary381> boundaries;
 
     public int entityId = 0;
 

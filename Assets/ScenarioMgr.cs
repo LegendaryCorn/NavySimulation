@@ -37,9 +37,16 @@ public struct ScenarioEntity
 }
 
 [System.Serializable]
+public struct ScenarioBoundary
+{
+    public List<Vector3> points;
+}
+
+[System.Serializable]
 public struct Scenario
 {
     public List<ScenarioEntity> scenarioEntities;
+    public List<ScenarioBoundary> scenarioBoundaries;
 }
 
 public class ScenarioMgr : MonoBehaviour

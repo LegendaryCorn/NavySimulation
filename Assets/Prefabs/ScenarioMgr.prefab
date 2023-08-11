@@ -192,24 +192,100 @@ MonoBehaviour:
   - scenarioEntities:
     - type: 0
       spawnPoint:
-        center: {x: 400, y: 0, z: 0}
+        center: {x: 1500, y: 0, z: -200}
         length: 0
         width: 0
         angle: 0
       wayPoints:
-      - center: {x: 400, y: 0, z: 10000}
+      - center: {x: 1500, y: 0, z: 10000}
         length: 0
         width: 0
         angle: 0
       heading: 0
-    - type: 0
+    - type: 6
       spawnPoint:
-        center: {x: 1200, y: 0, z: 800}
+        center: {x: 600, y: 0, z: 400}
         length: 0
         width: 0
         angle: 0
       wayPoints:
-      - center: {x: -10000, y: 0, z: 400}
+      - center: {x: 600, y: 0, z: 10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 0
+    - type: 4
+      spawnPoint:
+        center: {x: 1400, y: 0, z: 1100}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: 1400, y: 0, z: 10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 0
+    - type: 2
+      spawnPoint:
+        center: {x: 500, y: 0, z: 1300}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: 500, y: 0, z: 10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 0
+    - type: 6
+      spawnPoint:
+        center: {x: -1000, y: 0, z: 3400}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: -1000, y: 0, z: -10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 180
+    - type: 1
+      spawnPoint:
+        center: {x: -1700, y: 0, z: 3000}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: -1700, y: 0, z: -10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 180
+    - type: 7
+      spawnPoint:
+        center: {x: -700, y: 0, z: 2900}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: -700, y: 0, z: -10000}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 180
+    - type: 0
+      spawnPoint:
+        center: {x: 3000, y: 0, z: 2000}
+        length: 0
+        width: 0
+        angle: 0
+      wayPoints:
+      - center: {x: -600, y: 0, z: 2000}
+        length: 0
+        width: 0
+        angle: 0
+      - center: {x: -600, y: 0, z: -10000}
         length: 0
         width: 0
         angle: 0

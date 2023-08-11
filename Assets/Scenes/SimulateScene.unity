@@ -610,7 +610,7 @@ MonoBehaviour:
     type: 3}
   boundariesRoot: {fileID: 1029608188}
   simulatedBoundaries: []
-  simSpeed: 1
+  simSpeed: 10
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

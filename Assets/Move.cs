@@ -49,7 +49,7 @@ public class Move : Command
     public DHDS ComputePotentialDHDS()
     {
         Potential p;
-        repulsivePotential = Vector3.one; repulsivePotential.y = 0;
+        repulsivePotential = Vector3.zero; repulsivePotential.y = 0;
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities) {
             if (ent == entity) continue;
             p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);

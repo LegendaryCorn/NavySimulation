@@ -192,131 +192,35 @@ MonoBehaviour:
   - scenarioEntities:
     - type: 0
       spawnPoint:
-        center: {x: 0, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 0, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 1
-      spawnPoint:
-        center: {x: 200, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 200, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 2
-      spawnPoint:
         center: {x: 400, y: 0, z: 0}
         length: 0
         width: 0
         angle: 0
       wayPoints:
-      - center: {x: 400, y: 0, z: 1000}
+      - center: {x: 400, y: 0, z: 10000}
         length: 0
         width: 0
         angle: 0
       heading: 0
-    - type: 3
-      spawnPoint:
-        center: {x: 600, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 600, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 4
-      spawnPoint:
-        center: {x: 800, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 800, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 5
-      spawnPoint:
-        center: {x: 1000, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 1000, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 6
-      spawnPoint:
-        center: {x: 1200, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 1200, y: 0, z: 100}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 7
-      spawnPoint:
-        center: {x: 1400, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 1400, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    - type: 8
-      spawnPoint:
-        center: {x: 1600, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
-      wayPoints:
-      - center: {x: 1600, y: 0, z: 1000}
-        length: 0
-        width: 0
-        angle: 0
-      heading: 0
-    scenarioBoundaries: []
-  - scenarioEntities:
     - type: 0
       spawnPoint:
-        center: {x: 0, y: 0, z: 0}
-        length: 100
-        width: 200
-        angle: 0
-      wayPoints:
-      - center: {x: 0, y: 0, z: 2000}
+        center: {x: 1200, y: 0, z: 800}
         length: 0
         width: 0
         angle: 0
-      heading: 0
+      wayPoints:
+      - center: {x: -10000, y: 0, z: 400}
+        length: 0
+        width: 0
+        angle: 0
+      heading: 270
     scenarioBoundaries:
     - points:
-      - {x: 500, y: 0, z: 300}
-      - {x: 700, y: 0, z: 500}
+      - {x: -2000, y: 0, z: -10000}
+      - {x: -2000, y: 0, z: 10000}
     - points:
-      - {x: -100, y: 0, z: 0}
-      - {x: 100, y: 0, z: 0}
-      - {x: 100, y: 0, z: 400}
+      - {x: 0, y: 0, z: -10000}
+      - {x: 0, y: 0, z: 10000}
+    - points:
+      - {x: 2000, y: 0, z: -10000}
+      - {x: 2000, y: 0, z: 10000}

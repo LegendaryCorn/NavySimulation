@@ -611,6 +611,12 @@ MonoBehaviour:
   boundariesRoot: {fileID: 1029608188}
   simulatedBoundaries: []
   simSpeed: 10
+  potentialParameters:
+    potentialDistanceThreshold: 1000
+    attractionCoefficient: 20000
+    attractiveExponent: -1
+    repulsiveCoefficient: 1000
+    repulsiveExponent: -2
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

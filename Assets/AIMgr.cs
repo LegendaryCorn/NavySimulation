@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct PotentialParameters
+{
+    public float potentialDistanceThreshold;// = 1000;
+    public float attractionCoefficient;// = 20000;
+    public float attractiveExponent;// = -1;
+    public float repulsiveCoefficient;// = 1000;
+    public float repulsiveExponent;// = -2.0f;
+}
+
 public class AIMgr
 {
 
     // Start is called before the first frame update
-    public AIMgr(GameMgr mgr)
+    public AIMgr(GameMgr mgr, PotentialParameters parameters)
     {
         layerMask = 1 << 9;// LayerMask.GetMask("Water");
         gameMgr = mgr;
+        potentialParameters = parameters;
     }
 
     public bool isPotentialFieldsMovement = true;
-    public float potentialDistanceThreshold = 1000;
-    public float attractionCoefficient = 20000;
-    public float attractiveExponent = -1;
-    public float repulsiveCoefficient = 1000;
-    public float repulsiveExponent = -2.0f;
 
+    public PotentialParameters potentialParameters;
 
     public RaycastHit hit;
     public int layerMask;

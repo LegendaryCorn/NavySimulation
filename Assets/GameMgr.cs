@@ -10,11 +10,11 @@ public class GameMgr
     public AIMgr aiMgr;
     public FitnessMgr fitnessMgr;
 
-    public GameMgr()
+    public GameMgr(PotentialParameters p)
     {
         entityMgr = new EntityMgr(this);
         distanceMgr = new DistanceMgr(this);
-        aiMgr = new AIMgr(this);
+        aiMgr = new AIMgr(this, p);
         fitnessMgr = new FitnessMgr(this);
     }
 

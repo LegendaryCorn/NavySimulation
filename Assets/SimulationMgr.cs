@@ -17,13 +17,14 @@ public class SimulationMgr : MonoBehaviour
     public List<LineRenderer> simulatedBoundaries;
 
     public float simSpeed;
+    public PotentialParameters potentialParameters;
 
     float dt = 1f / 120f;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameMgr = new GameMgr();
+        gameMgr = new GameMgr(potentialParameters);
         gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
 
         // Load Scenario Entities

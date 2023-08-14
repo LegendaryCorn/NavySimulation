@@ -53,9 +53,9 @@ public class Move : Command
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities) {
             if (ent == entity) continue;
             p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);
-            if (p.distance < entity.gameMgr.aiMgr.potentialDistanceThreshold) {
+            if (p.distance < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold) {
                 repulsivePotential += p.direction * entity.mass *
-                   entity.gameMgr.aiMgr.repulsiveCoefficient * Mathf.Pow(p.diff.magnitude, entity.gameMgr.aiMgr.repulsiveExponent);
+                   entity.gameMgr.aiMgr.potentialParameters.repulsiveCoefficient * Mathf.Pow(p.diff.magnitude, entity.gameMgr.aiMgr.potentialParameters.repulsiveExponent);
                 //repulsivePotential += p.diff;
             }
         }
@@ -63,7 +63,7 @@ public class Move : Command
         attractivePotential = movePosition - entity.position;
         Vector3 tmp = attractivePotential.normalized;
         attractivePotential = tmp *
-            entity.gameMgr.aiMgr.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, entity.gameMgr.aiMgr.attractiveExponent);
+            entity.gameMgr.aiMgr.potentialParameters.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, entity.gameMgr.aiMgr.potentialParameters.attractiveExponent);
         potentialSum = attractivePotential - repulsivePotential;
 
         dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));

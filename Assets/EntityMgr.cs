@@ -22,7 +22,8 @@ public class EntityMgr
     {
         Entity381 entity = null;
         //GameObject entityPrefab = MasterMgr.inst.entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
-        entity = new Entity381(gameMgr, entityData, position, heading);
+        entity = new Entity381(gameMgr, entityData, position, heading, entityId);
+        entityId++;
         entities.Add(entity);
         return entity;
     }

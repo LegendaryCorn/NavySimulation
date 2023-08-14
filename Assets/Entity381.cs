@@ -53,7 +53,7 @@ public class Entity381
     public UnitAI ai;
     public OrientedPhysics physics;
 
-    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading)
+    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading, int id)
     {
         gameMgr = mgr;
         this.position = position;
@@ -65,7 +65,9 @@ public class Entity381
         this.maxSpeed = entData.maxSpeed;
         this.minSpeed = entData.minSpeed;
         this.mass = entData.mass;
+
         this.entityType = entData.entityType;
+        this.id = id;
 
         ai = new UnitAI(this);
         physics = new OrientedPhysics(this);

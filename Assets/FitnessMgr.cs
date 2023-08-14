@@ -45,7 +45,7 @@ public class FitnessMgr
                 if (ent1 == ent2) { continue; }
 
                 Vector3 p = ent2.position - ent1.position;
-                float b = Utils.Degrees360(Mathf.Atan2(p.z, p.x) * Mathf.Rad2Deg - ent1.heading);
+                float b = Utils.Degrees360(Mathf.Atan2(p.x, p.z) * Mathf.Rad2Deg - ent1.heading);
                 Vector3 v = ent2.velocity - ent1.velocity;
                 float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
 

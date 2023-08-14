@@ -38,6 +38,7 @@ public class SimulationMgr : MonoBehaviour
         foreach (Boundary381 bound in gameMgr.entityMgr.boundaries)
         {
             LineRenderer line = Instantiate<LineRenderer>(simulatedBoundaryPrefab);
+            line.transform.parent = boundariesRoot.transform;
             line.positionCount = bound.points.Count;
             for (int i = 0; i < bound.points.Count; i++)
             {

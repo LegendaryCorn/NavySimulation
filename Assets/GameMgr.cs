@@ -8,12 +8,14 @@ public class GameMgr
     public EntityMgr entityMgr;
     public DistanceMgr distanceMgr;
     public AIMgr aiMgr;
+    public FitnessMgr fitnessMgr;
 
     public GameMgr()
     {
         entityMgr = new EntityMgr(this);
         distanceMgr = new DistanceMgr(this);
         aiMgr = new AIMgr(this);
+        fitnessMgr = new FitnessMgr(this);
     }
 
     public void ExecuteGame()
@@ -61,6 +63,7 @@ public class GameMgr
             {
                 ent.physics.OnUpdate(dt);
             }
+            fitnessMgr.OnUpdate(dt);
         }
     }
 }

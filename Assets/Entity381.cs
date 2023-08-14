@@ -43,6 +43,7 @@ public class Entity381
     public float mass;
 
     public EntityType entityType;
+    public int id;
 
     public GameObject cameraRig;
     public GameObject selectionCircle;

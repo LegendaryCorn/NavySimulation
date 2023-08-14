@@ -13,8 +13,8 @@ public struct RandomPointBox
 
     public Vector3 GenerateRandomPoint()
     {
-        float randomL = Random.Range(-length / 2f, length / 2f);
-        float randomW = Random.Range(-width / 2f, width / 2f);
+        float randomL = 0;//Random.Range(-length / 2f, length / 2f);
+        float randomW = 0;//Random.Range(-width / 2f, width / 2f);
         float angleRad = angle * Mathf.Deg2Rad;
 
         Vector3 new_point = new Vector3(

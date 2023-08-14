@@ -24,10 +24,8 @@ public class MasterMgr : MonoBehaviour
 
     public static MasterMgr inst;
 
-    public GameObject entitiesRoot;
-
     float timeStart;
-    float timeEnd = -1f;
+    float timeEnd;
 
     private void Awake()
     {

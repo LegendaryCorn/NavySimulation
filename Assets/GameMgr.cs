@@ -48,6 +48,8 @@ public class GameMgr
             Boundary381 bound = new Boundary381(this, scBound.points);
             entityMgr.boundaries.Add(bound);
         }
+
+        fitnessMgr.LoadParameters();
     }
 
     public void RunGame(float dt, float t0) // t0 is in Seconds

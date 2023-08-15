@@ -13,6 +13,7 @@ public class SimulationMgr : MonoBehaviour
     public List<SimulatedEntity> simulatedEntityPrefabs;
     public GameObject entitiesRoot;
     public List<SimulatedEntity> simulatedEntities;
+    public LineRenderer waypointLinePrefab;
 
     public LineRenderer simulatedBoundaryPrefab;
     public GameObject boundariesRoot;
@@ -39,6 +40,7 @@ public class SimulationMgr : MonoBehaviour
         {
             SimulatedEntity simEnt = Instantiate<SimulatedEntity>(FindSimulatedEntityPrefab(ent.entityType));
             simEnt.id = ent.id;
+            simEnt.ent = ent;
             simEnt.transform.parent = entitiesRoot.transform;
             simulatedEntities.Add(simEnt);
         }
@@ -62,21 +64,6 @@ public class SimulationMgr : MonoBehaviour
     {
         // Update Sim
         gameMgr.RunGame(dt, dt * 2f * simSpeed);
-
-        // Update Ships
-        for(int i = 0; i < simulatedEntities.Count; i++)
-        {
-            SimulatedEntity simEnt = simulatedEntities[i];
-            Entity381 ent = gameMgr.entityMgr.entities[i];
-
-            simEnt.transform.position = ent.position;
-            simEnt.transform.eulerAngles = new Vector3(0, ent.heading, 0);
-
-            simEnt.speed = ent.speed;
-            simEnt.desiredSpeed = ent.desiredSpeed;
-            simEnt.heading = ent.heading;
-            simEnt.desiredHeading = ent.desiredHeading;
-        }
     }
 
     SimulatedEntity FindSimulatedEntityPrefab(EntityType e)

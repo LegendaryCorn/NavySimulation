@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b7f93d66c508a41b6ad85d388af393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenarioID: 8
+  scenarioID: 1
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -606,6 +606,8 @@ MonoBehaviour:
   - {fileID: 7196857703808369969, guid: 5d3b351739a98e34da31ae8acedeb828, type: 3}
   entitiesRoot: {fileID: 1142393662}
   simulatedEntities: []
+  waypointLinePrefab: {fileID: 7731747306308124120, guid: 2669a7519e0f20249817ff6be6af9ed7,
+    type: 3}
   simulatedBoundaryPrefab: {fileID: 5059621673346235011, guid: f9aaef1a9500b854baaa627aea80ae51,
     type: 3}
   boundariesRoot: {fileID: 1029608188}

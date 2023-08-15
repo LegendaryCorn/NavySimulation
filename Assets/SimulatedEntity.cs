@@ -13,10 +13,42 @@ public class SimulatedEntity : MonoBehaviour
 
     public bool isSelected;
     public GameObject selectionCircle;
+    public LineRenderer waypointLine;
+
+    public Entity381 ent = null;
+
+    private void Awake()
+    {
+        waypointLine = Instantiate<LineRenderer>(SimulationMgr.inst.waypointLinePrefab);
+        waypointLine.transform.parent = transform;
+        waypointLine.enabled = false;
+    }
+
+    private void Update()
+    {
+        transform.position = ent.position;
+        transform.eulerAngles = new Vector3(0, ent.heading, 0);
+
+        speed = ent.speed;
+        desiredSpeed = ent.desiredSpeed;
+        heading = ent.heading;
+        desiredHeading = ent.desiredHeading;
+
+        waypointLine.transform.position = Vector3.zero;
+        waypointLine.transform.rotation = Quaternion.identity;
+        waypointLine.positionCount = ent.ai.moves.Count + 1;
+        waypointLine.SetPosition(0, ent.position);
+        for(int i = 0; i < ent.ai.moves.Count; i++)
+        {
+            Move m = ent.ai.moves[i];
+            waypointLine.SetPosition(i+1, m.movePosition);
+        }
+    }
 
     public void Select(bool selected)
     {
         isSelected = selected;
         selectionCircle.SetActive(selected);
+        waypointLine.enabled = selected;
     }
 }

@@ -1,10 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Jobs;
+
+
+[System.Serializable]
+public struct GAParameters
+{
+    public int populationSize;
+    public int chromosomeLength;
+    public int numberOfGenerations;
+    public float pCross;
+    public float pMut;
+    public int seed;
+}
+
 
 public class MasterMgr : MonoBehaviour
 {
+    /*
     struct GameJob : IJob
     {
         public readonly GameMgr gameMgr;
@@ -21,8 +34,11 @@ public class MasterMgr : MonoBehaviour
             gameMgr.ExecuteGame();
         }
     }
+    */
 
     public static MasterMgr inst;
+
+    public GAParameters gaParameters;
 
     float timeStart;
     float timeEnd;
@@ -30,11 +46,13 @@ public class MasterMgr : MonoBehaviour
     private void Awake()
     {
         inst = this;
+        gaParameters = new GAParameters();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
         timeStart = Time.realtimeSinceStartup;
         List<JobHandle> jobHandles = new List<JobHandle>();
         List<GameJob> jobs = new List<GameJob>();
@@ -63,8 +81,8 @@ public class MasterMgr : MonoBehaviour
 
             Debug.Log(jobs[i].gameMgr.fitnessMgr.totalFitness);
         }
-
         timeEnd = Time.realtimeSinceStartup;
         Debug.Log(timeEnd - timeStart);
+        */
     }
 }

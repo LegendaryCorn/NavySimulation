@@ -11,7 +11,6 @@ public class SelectionMgr : MonoBehaviour
         inst = this;
     }
 
-    /*
     // Start is called before the first frame update
     void Start()
     {
@@ -101,42 +100,41 @@ public class SelectionMgr : MonoBehaviour
         max.z = Camera.main.farClipPlane;
         Bounds bounds = new Bounds();
         bounds.SetMinMax(min, max);
-        foreach(Entity381 ent in EntityMgr.inst.entities) 
-            if (bounds.Contains(Camera.main.WorldToViewportPoint(ent.transform.localPosition))) 
-                SelectEntity(ent, shouldClearSelection: false);
+        foreach(SimulatedEntity scEnt in SimulationMgr.inst.simulatedEntities) 
+            if (bounds.Contains(Camera.main.WorldToViewportPoint(scEnt.transform.localPosition))) 
+                SelectEntity(scEnt, shouldClearSelection: false);
 
     }
     //----------------------------------------------------------------------------------------------------
 
     public int selectedEntityIndex = -1;
-    public Entity381 selectedEntity = null;
-    public List<Entity381> selectedEntities = new List<Entity381>();
+    public SimulatedEntity selectedEntity = null;
+    public List<SimulatedEntity> selectedEntities = new List<SimulatedEntity>();
 
     public void SelectNextEntity()
     {
         selectedEntityIndex = 
-            (selectedEntityIndex >= EntityMgr.inst.entities.Count - 1 ? 0 : selectedEntityIndex + 1);
-        SelectEntity(EntityMgr.inst.entities[selectedEntityIndex], 
+            (selectedEntityIndex >= SimulationMgr.inst.simulatedEntities.Count - 1 ? 0 : selectedEntityIndex + 1);
+        SelectEntity(SimulationMgr.inst.simulatedEntities[selectedEntityIndex], 
             shouldClearSelection: !Input.GetKey(KeyCode.LeftShift));
     }
 
     public void ClearSelection()
     {
-        foreach (Entity381 ent in EntityMgr.inst.entities)
-            ent.isSelected = false;
+        foreach (SimulatedEntity scEnt in SimulationMgr.inst.simulatedEntities)
+            scEnt.Select(false);
         selectedEntities.Clear();
     }
 
-    public void SelectEntity(Entity381 ent, bool shouldClearSelection = true)
+    public void SelectEntity(SimulatedEntity scEnt, bool shouldClearSelection = true)
     {
-        if (ent != null && (selectedEntityIndex = EntityMgr.inst.entities.FindIndex(x => (x == ent))) >= 0) {
+        if (scEnt != null && (selectedEntityIndex = SimulationMgr.inst.simulatedEntities.FindIndex(x => (x == scEnt))) >= 0) {
             if (shouldClearSelection) 
                 ClearSelection();
 
-            selectedEntity = ent;
-            selectedEntity.isSelected = true;
-            selectedEntities.Add(ent);
+            selectedEntity = scEnt;
+            selectedEntity.Select(true);
+            selectedEntities.Add(scEnt);
         }
     }
-    */
 }

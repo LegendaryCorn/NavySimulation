@@ -24,16 +24,14 @@ public class UIMgr : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        /*
+    { 
         if(SelectionMgr.inst.selectedEntity != null) {
-            Entity381 ent = SelectionMgr.inst.selectedEntity;
-            entityName.text = ent.gameObject.name;
+            SimulatedEntity ent = SelectionMgr.inst.selectedEntity;
+            entityName.text = ent.type.ToString();
             speed.text = ent.speed.ToString("F2") + " m/s";
             desiredSpeed.text = ent.desiredSpeed.ToString("F2") + " m/s";
             heading.text = ent.heading.ToString("F1") + " deg";
             desiredHeading.text = ent.desiredHeading.ToString("F1") + " deg";
         }
-        */
     }
 }

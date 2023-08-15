@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SimulationMgr : MonoBehaviour
 {
+    public static SimulationMgr inst;
+
     public int scenarioID;
 
     GameMgr gameMgr;
@@ -21,6 +23,11 @@ public class SimulationMgr : MonoBehaviour
 
     float dt = 1f / 120f;
 
+    private void Awake()
+    {
+        inst = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +38,7 @@ public class SimulationMgr : MonoBehaviour
         foreach (Entity381 ent in gameMgr.entityMgr.entities)
         {
             SimulatedEntity simEnt = Instantiate<SimulatedEntity>(FindSimulatedEntityPrefab(ent.entityType));
+            simEnt.id = ent.id;
             simEnt.transform.parent = entitiesRoot.transform;
             simulatedEntities.Add(simEnt);
         }
@@ -63,7 +71,11 @@ public class SimulationMgr : MonoBehaviour
 
             simEnt.transform.position = ent.position;
             simEnt.transform.eulerAngles = new Vector3(0, ent.heading, 0);
+
             simEnt.speed = ent.speed;
+            simEnt.desiredSpeed = ent.desiredSpeed;
+            simEnt.heading = ent.heading;
+            simEnt.desiredHeading = ent.desiredHeading;
         }
     }
 

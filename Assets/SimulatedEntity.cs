@@ -38,9 +38,9 @@ public class SimulatedEntity : MonoBehaviour
         waypointLine.transform.rotation = Quaternion.identity;
         waypointLine.positionCount = ent.ai.moves.Count + 1;
         waypointLine.SetPosition(0, ent.position);
-        for(int i = 0; i < ent.ai.moves.Count; i++)
+        for(int i = 0; i < ent.ai.commands.Count; i++)
         {
-            Move m = ent.ai.moves[i];
+            Move m = (Move)ent.ai.commands[i];
             waypointLine.SetPosition(i+1, m.movePosition);
         }
     }

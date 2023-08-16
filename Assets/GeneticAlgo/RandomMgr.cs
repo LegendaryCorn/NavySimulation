@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RandomMgr : MonoBehaviour
+﻿public class RandomMgr
 {
-    // Start is called before the first frame update
-    void Start()
+    public static RandomMgr inst;
+
+    public System.Random rand;
+    public RandomMgr(int seed)
     {
-        
+        inst = this;
+        rand = new System.Random(seed);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool Flip(float prob)
     {
-        
+        return (rand.NextDouble() < prob);
+    }
+
+    public int Flip01(float prob)
+    {
+        return (rand.NextDouble() < prob ? 0 : 1);
+    }
+
+    public int RandInt(int low, int high)
+    {
+        return rand.Next(low, high);
     }
 }

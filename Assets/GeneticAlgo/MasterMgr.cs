@@ -1,22 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-[System.Serializable]
-public struct GAParameters
-{
-    public int populationSize;
-    public int chromosomeLength;
-    public int numberOfGenerations;
-    public float pCross;
-    public float pMut;
-    public int seed;
-}
-
+using UnityEngine.UI;
+using TMPro;
+using System.Threading;
 
 public class MasterMgr : MonoBehaviour
 {
+    public static MasterMgr inst;
+    private void Awake()
+    {
+        inst = this;
+        gaParameters = new GAParameters();
+    }
+
+    private Thread GAThread;
+    private int GAResult;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    
+
+
+    public GAParameters gaParameters;
+    public void OnSubmit()
+    {
+        StartJob();
+        //        GraphMgr.inst.SetAxisLimits(parameters.numberOfGenerations, 0, parameters.chromosomeLength);
+    }
+    //---------------------------------------------------------------------------------------
+
+    void StartJob()
+    {
+        GAThread = new Thread(GAStarter);
+        GAThread.Start();
+    }
+    GeneticAlgo ga;
+    public void GAStarter()
+    {
+        ga = new GeneticAlgo(gaParameters);
+        ga.Run();
+        Debug.Log("GA done: ");
+
+    }
+
+    private void OnDestroy()
+    {
+        if (GAThread != null) GAThread.Join();
+    }
+    //---------------------------------------------------------------------------------------
+
+    public string LogSemaphore = "1";
+    public void ThreadLog(string msg)
+    {
+        lock (LogSemaphore)
+        {
+            Debug.Log("--->GA: " + msg);
+
+        }
+    }
     /*
     struct GameJob : IJob
     {
@@ -34,7 +86,6 @@ public class MasterMgr : MonoBehaviour
             gameMgr.ExecuteGame();
         }
     }
-    */
 
     public static MasterMgr inst;
 
@@ -83,6 +134,7 @@ public class MasterMgr : MonoBehaviour
         }
         timeEnd = Time.realtimeSinceStartup;
         Debug.Log(timeEnd - timeStart);
-        */
+        
     }
+    */
 }

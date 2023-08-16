@@ -1,18 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-public class XOver : MonoBehaviour
+public class XOver
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void OnePoint(Individual parent1, Individual parent2, Individual child1, Individual child2, int chromosomeLength)
     {
-        
+        int x1 = RandomMgr.inst.RandInt(0, chromosomeLength);
+        for (int i = x1; i < chromosomeLength; i++)
+        {
+            child1.chromosome[i] = parent2.chromosome[i];
+            child2.chromosome[i] = parent1.chromosome[i];
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void TwoPoint(Individual parent1, Individual parent2, Individual child1, Individual child2, int chromosomeLength)
     {
-        
+        int x1 = RandomMgr.inst.RandInt(0, chromosomeLength);
+        int x2 = RandomMgr.inst.RandInt(0, chromosomeLength);
+        int low = Math.Min(x1, x2);
+        int high = Math.Max(x1, x2);
+        for (int i = low; i < high; i++)
+        {
+            child1.chromosome[i] = parent2.chromosome[i];
+            child2.chromosome[i] = parent1.chromosome[i];
+        }
+
     }
 }

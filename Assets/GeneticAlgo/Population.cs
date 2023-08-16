@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Collections.Generic;
 
 public class Population
 {
@@ -129,9 +131,19 @@ public class Population
     }
     public void Evaluate(int start, int end)
     {
+        List<Thread> threads= new List<Thread>();
+
         for (int i = start; i < end; i++)
         {
-            members[i].fitness = Evaluator.Evaluate(members[i]);
+            int x = i;
+            Thread t = new Thread(() => members[x].fitness = Evaluator.Evaluate(members[x]));
+            threads.Add(t);
+            t.Start();
+        }
+
+        foreach (Thread thread in threads)
+        {
+            thread.Join();
         }
     }
 

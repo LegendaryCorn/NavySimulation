@@ -20,6 +20,7 @@ public class SimulationMgr : MonoBehaviour
     public List<LineRenderer> simulatedBoundaries;
 
     public float simSpeed;
+    public string potentialChromosome;
     public PotentialParameters potentialParameters;
 
     float dt = 1f / 120f;
@@ -32,6 +33,17 @@ public class SimulationMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(potentialChromosome != "")
+        {
+            int[] chromosome = new int[potentialChromosome.Length];
+            for(int i = 0; i < potentialChromosome.Length; i++)
+            {
+                string c = potentialChromosome[i].ToString();
+                chromosome[i] = int.Parse(c);
+            }
+            potentialParameters = Evaluator.ParseChromosome(chromosome);
+        }
+
         gameMgr = new GameMgr(potentialParameters);
         gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
 

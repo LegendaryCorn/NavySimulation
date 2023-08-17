@@ -18,10 +18,11 @@ public class GameMgr
         fitnessMgr = new FitnessMgr(this);
     }
 
-    public void ExecuteGame()
+    public void ExecuteGame(int scenario)
     {
-        LoadScenario(0);
-        RunGame(1f / 60f, 600f);
+        LoadScenario(scenario);
+        RunGame(1f / 60f, 60f);
+        //fitnessMgr.FinalFitness();
     }
 
     public Vector3 position;

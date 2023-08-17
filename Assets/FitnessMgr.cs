@@ -112,29 +112,33 @@ public class FitnessMgr
 
             foreach(Entity381 ent2 in entities)
             {
-                // Nearby Ships
-                if (true)
-                {
+                if (ent1 == ent2) { continue; }
 
+                FitnessParameters f = fitnessParameters[ent1.id][ent2.id];
+
+                // Nearby Ships
+                if (f.range < 800 && f.relHeading > 10 && f.relHeading < 350)
+                {
+                    noNearbyShips = false;
                 }
 
                 // Ships In Front
-                if (true)
+                if (f.range < 1200 && f.bearing > 20 && f.bearing < 340 && f.relHeading > 10 && f.relHeading < 350)
                 {
-
+                    noShipsInFront = false;
                 }
 
                 // Crashes
-                if (true)
+                if (f.range < 300)
                 {
-
+                    noCrash = false;
                 }
             }
 
             float totalSub = 0;
-            if (!noNearbyShips) totalSub += 0.25f;
-            if (!noShipsInFront) totalSub += 0.5f;
-            if (!noCrash) totalSub = 1;
+            if (!noNearbyShips) totalSub += 2.5f;
+            if (!noShipsInFront) totalSub += 5f;
+            if (!noCrash) totalSub = 10000f;
 
             total -= totalSub;
         }
@@ -144,6 +148,13 @@ public class FitnessMgr
 
     public void FinalFitness()
     {
-        //totalFitness += 36000f;
+        float f = 0;
+        foreach (Entity381 ent in gameMgr.entityMgr.entities)
+        {
+            Move finalMove = (Move)ent.ai.commands[ent.ai.commands.Count - 1];
+            float dist = Vector3.Distance(ent.position, finalMove.movePosition);
+            f += 100f * 300f * Mathf.Min(1f - dist / 7000f, 0);
+        }
+        totalFitness += f;
     }
 }

@@ -15,9 +15,8 @@ public class Evaluator
             Scenario s = ScenarioMgr.inst.scenarios[i];
 
             GameMgr game = new GameMgr(parameters);
-            game.RunGame(1f / 60f, 3600f);
-            game.fitnessMgr.FinalFitness();
-            sum += game.fitnessMgr.totalFitness / (60f * 60f * s.scenarioEntities.Count);
+            game.ExecuteGame(i);
+            sum += game.fitnessMgr.totalFitness / (9f * 300f * s.scenarioEntities.Count);
         }
 
         return sum;
@@ -43,14 +42,14 @@ public class Evaluator
         p.attractionCoefficient = (8f * chromosome[4] + 4f * chromosome[5] + 2f * chromosome[6] + 1f * chromosome[7])
                                 * Mathf.Pow(10f, 4f * chromosome[8] + 2f * chromosome[9] + 1f * chromosome[10]);
 
-        p.attractiveExponent = Mathf.Pow(-1f, chromosome[11]) * 4f * chromosome[12] + 2f * chromosome[13] + 1f * chromosome[14]
-                             + 0.5f * chromosome[15] + 0.25f * chromosome[16] + 0.125f * chromosome[17];
+        p.attractiveExponent = -(8f * chromosome[11] + 4f * chromosome[12] + 2f * chromosome[13] + 1f * chromosome[14]
+                             + 0.5f * chromosome[15] + 0.25f * chromosome[16] + 0.125f * chromosome[17]);
 
         p.repulsiveCoefficient = (8f * chromosome[18] + 4f * chromosome[19] + 2f * chromosome[20] + 1f * chromosome[21])
                         * Mathf.Pow(10f, 4f * chromosome[22] + 2f * chromosome[23] + 1f * chromosome[24]);
 
-        p.repulsiveExponent = Mathf.Pow(-1f, chromosome[25]) * 4f * chromosome[26] + 2f * chromosome[27] + 1f * chromosome[28]
-                             + 0.5f * chromosome[29] + 0.25f * chromosome[30] + 0.125f * chromosome[31];
+        p.repulsiveExponent = -(8f * chromosome[25] + 4f * chromosome[26] + 2f * chromosome[27] + 1f * chromosome[28]
+                             + 0.5f * chromosome[29] + 0.25f * chromosome[30] + 0.125f * chromosome[31]);
 
         return p;
     }

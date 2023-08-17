@@ -2,7 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FitnessParameters
+public class OneShipFitnessParameters
+{
+    public float desSpeedDiff;
+    public float prevDesSpeedDiff;
+
+    public float desHeadingDiff;
+    public float prevDesHeadingDiff;
+}
+
+public class TwoShipFitnessParameters
 {
     public Vector3 relPos;
     public float range;
@@ -19,7 +28,8 @@ public class FitnessMgr
 {
     public GameMgr gameMgr;
     public float totalFitness = 0f;
-    public Dictionary<int, Dictionary<int, FitnessParameters>> fitnessParameters;
+    public Dictionary<int, OneShipFitnessParameters> oneShipFitnessParameters;
+    public Dictionary<int, Dictionary<int, TwoShipFitnessParameters>> twoShipFitnessParameters;
 
     public FitnessMgr(GameMgr mgr)
     {
@@ -30,11 +40,21 @@ public class FitnessMgr
     public void LoadParameters()
     {
         List<Entity381> entities = gameMgr.entityMgr.entities;
-        fitnessParameters = new Dictionary<int, Dictionary<int, FitnessParameters>>();
+        oneShipFitnessParameters = new Dictionary<int, OneShipFitnessParameters>();
+        twoShipFitnessParameters = new Dictionary<int, Dictionary<int, TwoShipFitnessParameters>>();
 
         foreach (Entity381 ent1 in entities)
         {
-            fitnessParameters[ent1.id] = new Dictionary<int, FitnessParameters>();
+
+            oneShipFitnessParameters[ent1.id] = new OneShipFitnessParameters
+            {
+                desSpeedDiff = 0,
+                prevDesSpeedDiff = 0,
+                desHeadingDiff = 0,
+                prevDesHeadingDiff = 0
+            };
+
+            twoShipFitnessParameters[ent1.id] = new Dictionary<int, TwoShipFitnessParameters>();
             foreach (Entity381 ent2 in entities)
             {
                 if (ent1 == ent2) { continue; }
@@ -45,7 +65,7 @@ public class FitnessMgr
                 float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
 
                 // Doing this over and over again is very computationally heavy!
-                fitnessParameters[ent1.id][ent2.id] = new FitnessParameters
+                twoShipFitnessParameters[ent1.id][ent2.id] = new TwoShipFitnessParameters
                 {
                     relPos = p,
                     range = p.magnitude,
@@ -74,6 +94,15 @@ public class FitnessMgr
 
         foreach(Entity381 ent1 in entities)
         {
+
+            OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
+
+            f1.prevDesHeadingDiff = f1.desHeadingDiff;
+            f1.prevDesSpeedDiff = f1.desSpeedDiff;
+
+            f1.desHeadingDiff = Utils.AngleDiffPosNeg(ent1.desiredHeading, ent1.heading);
+            f1.desSpeedDiff = ent1.desiredSpeed - ent1.speed;
+
             foreach(Entity381 ent2 in entities)
             {
                 if (ent1 == ent2) { continue; }
@@ -84,17 +113,17 @@ public class FitnessMgr
                 float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
 
                 // Update the values
-                FitnessParameters f = fitnessParameters[ent1.id][ent2.id];
+                TwoShipFitnessParameters f2 = twoShipFitnessParameters[ent1.id][ent2.id];
 
-                f.relPos = p;
-                f.range = p.magnitude;
-                f.bearing = b;
+                f2.relPos = p;
+                f2.range = p.magnitude;
+                f2.bearing = b;
 
-                f.relVel = v;
-                f.relHeading = Utils.Degrees360(ent2.heading - ent1.heading);
+                f2.relVel = v;
+                f2.relHeading = Utils.Degrees360(ent2.heading - ent1.heading);
 
-                f.dcpa = p.magnitude * Mathf.Sin(t);
-                f.tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
+                f2.dcpa = p.magnitude * Mathf.Sin(t);
+                f2.tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
             }
         }
     }
@@ -102,42 +131,71 @@ public class FitnessMgr
     float ParametersToFitness(float dt)
     {
         List<Entity381> entities = gameMgr.entityMgr.entities;
-        float total = entities.Count;
+        float total = 0;
 
         foreach(Entity381 ent1 in entities)
         {
+            bool noTurningPort = true;
+            bool noHeadingManeuver = true;
+            bool noSpeedManeuver = true;
+
             bool noNearbyShips = true;
             bool noShipsInFront = true;
             bool noCrash = true;
 
-            foreach(Entity381 ent2 in entities)
+            OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
+
+            // Turning Port
+            if(f1.desHeadingDiff < -0.1)
+            {
+                noTurningPort = false;
+            }
+
+            // Heading Maneuver
+            if(f1.desHeadingDiff * f1.prevDesHeadingDiff < 0)
+            {
+                noHeadingManeuver = false;
+            }
+
+            // Speed Maneuver
+            if (f1.desSpeedDiff * f1.prevDesSpeedDiff < 0)
+            {
+                noSpeedManeuver = false;
+            }
+
+
+
+            foreach (Entity381 ent2 in entities)
             {
                 if (ent1 == ent2) { continue; }
 
-                FitnessParameters f = fitnessParameters[ent1.id][ent2.id];
+                TwoShipFitnessParameters f2 = twoShipFitnessParameters[ent1.id][ent2.id];
 
                 // Nearby Ships
-                if (f.range < 800 && f.relHeading > 10 && f.relHeading < 350)
+                if (f2.range < 800 && f2.relHeading > 10 && f2.relHeading < 350)
                 {
                     noNearbyShips = false;
                 }
 
                 // Ships In Front
-                if (f.range < 1200 && f.bearing > 20 && f.bearing < 340 && f.relHeading > 10 && f.relHeading < 350)
+                if (f2.range < 1200 && f2.bearing > 20 && f2.bearing < 340 && f2.relHeading > 10 && f2.relHeading < 350)
                 {
                     noShipsInFront = false;
                 }
 
                 // Crashes
-                if (f.range < 300)
+                if (f2.range < 150)
                 {
                     noCrash = false;
                 }
             }
 
             float totalSub = 0;
-            if (!noNearbyShips) totalSub += 2.5f;
-            if (!noShipsInFront) totalSub += 5f;
+            if (!noTurningPort) totalSub += 5f;
+            if (!noHeadingManeuver) totalSub += 3f;
+            if (!noSpeedManeuver) totalSub += 3f;
+            if (!noNearbyShips) totalSub += 25f;
+            if (!noShipsInFront) totalSub += 50f;
             if (!noCrash) totalSub = 10000f;
 
             total -= totalSub;
@@ -153,7 +211,7 @@ public class FitnessMgr
         {
             Move finalMove = (Move)ent.ai.commands[ent.ai.commands.Count - 1];
             float dist = Vector3.Distance(ent.position, finalMove.movePosition);
-            f += 100f * 300f * Mathf.Min(1f - dist / 7000f, 0);
+            f += 1000f * 300f * (1f - dist / 4000f);
         }
         totalFitness += f;
     }

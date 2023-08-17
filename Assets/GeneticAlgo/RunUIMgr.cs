@@ -33,7 +33,7 @@ public class RunUIMgr : MonoBehaviour
         {
             MasterMgr.inst.gaParameters.populationSize = int.Parse(popSizeField.text);
             MasterMgr.inst.gaParameters.numberOfGenerations = int.Parse(genCountField.text);
-            MasterMgr.inst.gaParameters.chromosomeLength = int.Parse(chromoLenField.text);
+            //MasterMgr.inst.gaParameters.chromosomeLength = int.Parse(chromoLenField.text);
             MasterMgr.inst.gaParameters.pCross = float.Parse(crossProbField.text);
             MasterMgr.inst.gaParameters.pMut = float.Parse(mutProbField.text);
             MasterMgr.inst.gaParameters.seed = int.Parse(seedField.text);

@@ -52,9 +52,9 @@ public class GameMgr
         fitnessMgr.LoadParameters();
     }
 
-    public void RunGame(float dt, float t0) // t0 is in Seconds
+    public void RunGame(float dt, float tf) // tf is in Seconds
     {
-        for (float t = 0; t < t0; t += dt)
+        for (float t = 0; t < tf; t += dt)
         {
             distanceMgr.OnUpdate(dt);
             foreach(Entity381 ent in entityMgr.entities)

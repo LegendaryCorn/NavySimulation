@@ -101,6 +101,49 @@ public class FitnessMgr
 
     float ParametersToFitness(float dt)
     {
-        return dt;
+        List<Entity381> entities = gameMgr.entityMgr.entities;
+        float total = entities.Count;
+
+        foreach(Entity381 ent1 in entities)
+        {
+            bool noNearbyShips = true;
+            bool noShipsInFront = true;
+            bool noCrash = true;
+
+            foreach(Entity381 ent2 in entities)
+            {
+                // Nearby Ships
+                if (true)
+                {
+
+                }
+
+                // Ships In Front
+                if (true)
+                {
+
+                }
+
+                // Crashes
+                if (true)
+                {
+
+                }
+            }
+
+            float totalSub = 0;
+            if (!noNearbyShips) totalSub += 0.25f;
+            if (!noShipsInFront) totalSub += 0.5f;
+            if (!noCrash) totalSub = 1;
+
+            total -= totalSub;
+        }
+        
+        return total;
+    }
+
+    public void FinalFitness()
+    {
+        //totalFitness += 36000f;
     }
 }

@@ -89,7 +89,7 @@ public class Population
 
     public void Report(int gen)
     {
-        string report = gen + ": " + min + ", " + avg + ", " + max;
+        string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
         MasterMgr.inst.ThreadLog(report);
     }
 
@@ -153,5 +153,16 @@ public class Population
         {
             MasterMgr.inst.ThreadLog(members[i].ToString());
         }
+    }
+
+    public Individual GetBestMember()
+    {
+        int bestIndex = 0;
+        for (int i = 0; i < parameters.populationSize; i++)
+        {
+            bestIndex = members[i].fitness > members[bestIndex].fitness ? i : bestIndex;
+        }
+
+        return members[bestIndex];
     }
 }

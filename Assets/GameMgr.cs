@@ -22,7 +22,7 @@ public class GameMgr
     {
         LoadScenario(scenario);
         RunGame(1f / 60f, 60f);
-        //fitnessMgr.FinalFitness();
+        fitnessMgr.FinalFitness();
     }
 
     public Vector3 position;

@@ -26,6 +26,7 @@ public class GeneticAlgo
     public void Init()
     {
         MasterMgr.inst.ThreadLog("Initializing GA");
+        RunUIMgr.inst.genCount = gaParameters.numberOfGenerations;
 
         parents = new Population(gaParameters);
         parents.Init();

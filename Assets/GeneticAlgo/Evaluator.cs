@@ -7,6 +7,7 @@ public class Evaluator
 {
     public static float Evaluate(Individual individual)
     {
+        /*
         PotentialParameters parameters = ParseChromosome(individual.chromosome);
         float sum = 0;
 
@@ -20,6 +21,22 @@ public class Evaluator
         }
 
         return sum;
+        */
+
+        float total = 0;
+        //First half of chromosome should be 1's, second half should be 0's
+        for (int i = 0; i < individual.chromosome.Length; i++)
+        {
+            if(i < individual.chromosome.Length / 2f)
+            {
+                total += individual.chromosome[i];
+            }
+            else
+            {
+                total += 1 - individual.chromosome[i];
+            }
+        }
+        return total;
 
         /*
         Thread.Sleep(10);

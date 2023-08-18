@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b7f93d66c508a41b6ad85d388af393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenarioID: 4
+  scenarioID: 1
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -613,7 +613,7 @@ MonoBehaviour:
   boundariesRoot: {fileID: 1029608188}
   simulatedBoundaries: []
   simSpeed: 5
-  potentialChromosome: 00010000110010111110101100001101
+  potentialChromosome: 00010000110010111100001100101101
   potentialParameters:
     potentialDistanceThreshold: 1000
     attractionCoefficient: 20000

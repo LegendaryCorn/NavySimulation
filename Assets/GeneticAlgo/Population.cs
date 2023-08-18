@@ -91,6 +91,7 @@ public class Population
     {
         string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
         MasterMgr.inst.ThreadLog(report);
+        RunUIMgr.inst.NewGraphEntry(avg, max);
     }
 
     public void Statistics()

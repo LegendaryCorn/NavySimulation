@@ -14,17 +14,36 @@ public class RunUIMgr : MonoBehaviour
     [SerializeField] private InputField mutProbField;
     [SerializeField] private InputField seedField;
 
+    public RectTransform graphArea;
+    public LineRenderer avgLine;
+    public LineRenderer maxLine;
+
+    List<float> avgList;
+    List<float> maxList;
+    public int genCount;
+
     [SerializeField] private List<GameObject> panels;
 
     private void Awake()
     {
         inst = this;
+
+        avgList = new List<float>();
+        maxList = new List<float>();
     }
 
     private void Start()
     {
         RefreshGAParams();
         ShowPanel(0);
+    }
+
+    private void Update()
+    {
+        if (avgList.Count > 0)
+        {
+            UpdateGraph();
+        }
     }
 
     public void RefreshGAParams()
@@ -41,6 +60,39 @@ public class RunUIMgr : MonoBehaviour
         catch (System.Exception e)
         {
 
+        }
+    }
+
+    public void NewGraphEntry(float avg, float max)
+    {
+        avgList.Add(avg);
+        maxList.Add(max);
+    }
+
+    void UpdateGraph()
+    {
+        float minVal = avgList[0];
+        foreach (float val in avgList)
+            minVal = Mathf.Min(val, minVal);
+        float maxVal = maxList[0];
+        foreach (float val in maxList)
+            maxVal = Mathf.Max(val, maxVal);
+
+        float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
+        float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;
+        float left = graphArea.rect.center.x - graphArea.rect.width * 0.5f;
+        float right = graphArea.rect.center.x + graphArea.rect.width * 0.5f;
+        int maxCount = maxList.Count;
+
+        avgLine.positionCount = maxCount;
+        maxLine.positionCount = maxCount;
+
+        for(int i = 0; i < maxCount; i++)
+        {
+            Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (avgList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+            avgLine.SetPosition(i, a);
+            Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (maxList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+            maxLine.SetPosition(i, m);
         }
     }
 

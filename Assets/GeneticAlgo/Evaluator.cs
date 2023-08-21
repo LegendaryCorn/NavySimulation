@@ -23,6 +23,7 @@ public class Evaluator
         return sum;
         */
 
+        /*
         float total = 0;
         //First half of chromosome should be 1's, second half should be 0's
         for (int i = 0; i < individual.chromosome.Length; i++)
@@ -34,6 +35,30 @@ public class Evaluator
             else
             {
                 total += 1 - individual.chromosome[i];
+            }
+        }
+        return total;
+        */
+
+        // The chromosome is divided into byte length segments. The byte gets added to the total if the next byte is exactly +3 the other byte.
+        // Optimal solution is ... 249, 252, 255. The last byte isn't counted.
+        float total = 0;
+        for (int i = 0; i < individual.chromosome.Length; i += 8)
+        {
+            if (i + 15 >= individual.chromosome.Length) break;
+
+            int b1 = 0;
+            int b2 = 0;
+
+            for(int j = 0; j < 8; j++)
+            {
+                b1 += (int)Mathf.Pow(2, 7 - j) * individual.chromosome[i + j];
+                b2 += (int)Mathf.Pow(2, 7 - j) * individual.chromosome[i + j + 8];
+            }
+
+            if(b2 - b1 == 3)
+            {
+                total += b1;
             }
         }
         return total;

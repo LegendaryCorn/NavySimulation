@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.IO;
 
 public class Population
 {
@@ -87,11 +88,21 @@ public class Population
         Halve(child);
     }
 
-    public void Report(int gen)
+    public void Report(int gen, long startTime)
     {
         string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
         MasterMgr.inst.ThreadLog(report);
         RunUIMgr.inst.NewGraphEntry(avg, max);
+
+        if (!Directory.Exists("Output"))
+        {
+            Directory.CreateDirectory("Output");
+        }
+
+        using (StreamWriter w = File.AppendText("Output/results_" + parameters.seed.ToString() + "_" + startTime))
+        {
+            w.WriteLine(report);
+        }
     }
 
     public void Statistics()

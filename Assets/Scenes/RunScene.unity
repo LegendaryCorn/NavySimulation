@@ -3474,7 +3474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676dadf905fb5c4e8c20010db2ac2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chromosomeLength: 256
+  chromosomeLength: 32
   gaParameters:
     populationSize: 0
     chromosomeLength: 0

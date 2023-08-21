@@ -613,7 +613,7 @@ MonoBehaviour:
   boundariesRoot: {fileID: 1029608188}
   simulatedBoundaries: []
   simSpeed: 5
-  potentialChromosome: 00010000110010111100001100101101
+  potentialChromosome: 00011100111000011110001100001101
   potentialParameters:
     potentialDistanceThreshold: 1000
     attractionCoefficient: 20000

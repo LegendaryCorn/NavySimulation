@@ -191,12 +191,12 @@ public class FitnessMgr
             }
 
             float totalSub = 0;
-            if (!noTurningPort) totalSub += 5f;
-            if (!noHeadingManeuver) totalSub += 3f;
-            if (!noSpeedManeuver) totalSub += 3f;
-            if (!noNearbyShips) totalSub += 50f;
-            if (!noShipsInFront) totalSub += 50f;
-            if (!noCrash) totalSub += 10000f;
+            //if (!noTurningPort) totalSub += 2f;
+            //if (!noHeadingManeuver) totalSub += 1f;
+            //if (!noSpeedManeuver) totalSub += 1f;
+            //if (!noNearbyShips) totalSub += 50f;
+            //if (!noShipsInFront) totalSub += 50f;
+            if (!noCrash) totalSub += 100f;
 
             total -= totalSub;
         }
@@ -211,13 +211,13 @@ public class FitnessMgr
         {
             if (ent.ai.commands.Count == 0)
             {
-                f += 1f * 300f;
+                f += 1f;
             }
             else
             {
                 Move finalMove = (Move)ent.ai.commands[ent.ai.commands.Count - 1];
                 float dist = Vector3.Distance(ent.position, finalMove.movePosition);
-                f += 1f * 300f * (1f - dist / 3000f);
+                f += 1f * (1f - dist / 3000f);
             }
         }
         totalFitness += f;

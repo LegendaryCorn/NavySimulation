@@ -7,7 +7,7 @@ public class Evaluator
 {
     public static float Evaluate(Individual individual)
     {
-        /*
+        
         PotentialParameters parameters = ParseChromosome(individual.chromosome);
         float sum = 0;
 
@@ -21,7 +21,7 @@ public class Evaluator
         }
 
         return sum;
-        */
+        
 
         /*
         float total = 0;
@@ -42,6 +42,7 @@ public class Evaluator
 
         // The chromosome is divided into byte length segments. The byte gets added to the total if the next byte is exactly +3 the other byte.
         // Optimal solution is ... 249, 252, 255. The last byte isn't counted.
+        /*
         float total = 0;
         for (int i = 0; i < individual.chromosome.Length; i += 8)
         {
@@ -62,6 +63,7 @@ public class Evaluator
             }
         }
         return total;
+        */
 
         /*
         Thread.Sleep(10);

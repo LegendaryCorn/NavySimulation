@@ -62,4 +62,21 @@ public static class Utils {
 
         return f;
     }
+
+    public static float GrayToDecimal(int[] bin)
+    {
+        float f = 0f;
+        bool flip = false;
+
+        for (int i = 0; i < bin.Length; i++)
+        {
+            if(bin[i] == 1)
+            {
+                f += (Mathf.Pow(2, i+1) - 1) * (flip ? -1 : 1);
+                flip = !flip;
+            }
+        }
+
+        return f;
+    }
 }

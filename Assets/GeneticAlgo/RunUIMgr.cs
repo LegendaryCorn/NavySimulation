@@ -10,10 +10,10 @@ public class RunUIMgr : MonoBehaviour
 
     [SerializeField] private InputField popSizeField;
     [SerializeField] private InputField genCountField;
-    [SerializeField] private InputField chromoLenField;
     [SerializeField] private InputField crossProbField;
     [SerializeField] private InputField mutProbField;
     [SerializeField] private InputField seedField;
+    [SerializeField] private InputField testCountField;
 
     public RectTransform graphArea;
     public LineRenderer avgLine;
@@ -55,10 +55,10 @@ public class RunUIMgr : MonoBehaviour
         {
             MasterMgr.inst.gaParameters.populationSize = int.Parse(popSizeField.text);
             MasterMgr.inst.gaParameters.numberOfGenerations = int.Parse(genCountField.text);
-            //MasterMgr.inst.gaParameters.chromosomeLength = int.Parse(chromoLenField.text);
             MasterMgr.inst.gaParameters.pCross = float.Parse(crossProbField.text);
             MasterMgr.inst.gaParameters.pMut = float.Parse(mutProbField.text);
             MasterMgr.inst.gaParameters.seed = int.Parse(seedField.text);
+            MasterMgr.inst.testCount = int.Parse(testCountField.text);
         }
         catch (System.Exception e)
         {

@@ -88,7 +88,7 @@ public class Population
         Halve(child);
     }
 
-    public void Report(int gen, long startTime)
+    public void Report(int gen, long startTime, int id)
     {
         string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
         MasterMgr.inst.ThreadLog(report);
@@ -99,7 +99,7 @@ public class Population
             Directory.CreateDirectory("Output");
         }
 
-        using (StreamWriter w = File.AppendText("Output/results_" + parameters.seed.ToString() + "_" + startTime))
+        using (StreamWriter w = File.AppendText("Output/results_" + parameters.seed.ToString() + "_" + id + "_" + startTime))
         {
             w.WriteLine(report);
         }

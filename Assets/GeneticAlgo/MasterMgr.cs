@@ -12,6 +12,9 @@ public class MasterMgr : MonoBehaviour
     public List<float> chromoMin;
     public List<float> chromoMax;
 
+    public int testCount;
+    int testID = 0;
+
     private void Awake()
     {
         inst = this;
@@ -27,7 +30,7 @@ public class MasterMgr : MonoBehaviour
         }
     }
 
-    private Thread GAThread;
+    private List<Thread> GAThreads = new List<Thread>();
     private int GAResult;
 
     // Start is called before the first frame update
@@ -48,20 +51,31 @@ public class MasterMgr : MonoBehaviour
     public GAParameters gaParameters;
     public void OnSubmit()
     {
-        StartJob();
+        for (int i = 0; i < testCount; i++)
+        {
+            StartJob();
+        }
         //        GraphMgr.inst.SetAxisLimits(parameters.numberOfGenerations, 0, parameters.chromosomeLength);
     }
     //---------------------------------------------------------------------------------------
 
     void StartJob()
     {
-        GAThread = new Thread(GAStarter);
+        Thread GAThread = new Thread(GAStarter);
+        GAThreads.Add(GAThread);
         GAThread.Start();
     }
-    GeneticAlgo ga;
+
+    public string InitSemaphore = "1";
     public void GAStarter()
     {
-        ga = new GeneticAlgo(gaParameters);
+        GeneticAlgo ga;
+        lock (InitSemaphore)
+        {
+            int t = testID;
+            ga = new GeneticAlgo(gaParameters, t);
+            testID++;
+        }
         ga.Run();
         Debug.Log("GA done: ");
 
@@ -69,7 +83,13 @@ public class MasterMgr : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GAThread != null) GAThread.Join();
+        if (GAThreads.Count != 0)
+        {
+            foreach (Thread thread in GAThreads)
+            {
+                thread.Abort();
+            }
+        }
     }
     //---------------------------------------------------------------------------------------
 

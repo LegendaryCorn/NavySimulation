@@ -388,10 +388,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popSizeField: {fileID: 1095824939}
   genCountField: {fileID: 2021776288}
-  chromoLenField: {fileID: 1018263273}
   crossProbField: {fileID: 2060333039}
   mutProbField: {fileID: 441707952}
   seedField: {fileID: 1712195673}
+  testCountField: {fileID: 1018263273}
   graphArea: {fileID: 1346393001}
   avgLine: {fileID: 86341226}
   maxLine: {fileID: 2103421725}
@@ -540,12 +540,12 @@ GameObject:
   - component: {fileID: 91203354}
   - component: {fileID: 91203353}
   m_Layer: 5
-  m_Name: ChromoLenPanel
+  m_Name: TestCountPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &91203352
 RectTransform:
   m_ObjectHideFlags: 0
@@ -560,11 +560,11 @@ RectTransform:
   - {fileID: 1560881087}
   - {fileID: 1018263272}
   m_Father: {fileID: 1081996138}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
+  m_AnchoredPosition: {x: 0, y: -120}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91203353
@@ -1100,11 +1100,11 @@ RectTransform:
   - {fileID: 1587583681}
   - {fileID: 2060333038}
   m_Father: {fileID: 1081996138}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &950805592
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 1018263274}
   - component: {fileID: 1018263273}
   m_Layer: 5
-  m_Name: ChromoLenInput
+  m_Name: TestCountInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 100
+  m_Text: 30
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1319,10 +1319,10 @@ RectTransform:
   m_Children:
   - {fileID: 1680978634}
   - {fileID: 2021578558}
-  - {fileID: 91203352}
   - {fileID: 950805591}
   - {fileID: 1395561773}
   - {fileID: 1754852519}
+  - {fileID: 91203352}
   - {fileID: 2054473662}
   m_Father: {fileID: 264480923}
   m_RootOrder: 0
@@ -1773,11 +1773,11 @@ RectTransform:
   - {fileID: 605793087}
   - {fileID: 441707951}
   m_Father: {fileID: 1081996138}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395561774
@@ -2070,7 +2070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chromosome Length
+  m_Text: Number of Tests
 --- !u!222 &1560881089
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2147,7 +2147,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 30
 --- !u!222 &1562746415
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2501,7 +2501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 180}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680978635
@@ -2792,11 +2792,11 @@ RectTransform:
   - {fileID: 1980732130}
   - {fileID: 1712195672}
   m_Father: {fileID: 1081996138}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -90}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1754852520
@@ -3247,7 +3247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 90}
+  m_AnchoredPosition: {x: 0, y: 120}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2021578559
@@ -3487,6 +3487,7 @@ MonoBehaviour:
   - 5.11
   - 5.11
   - 5.11
+  testCount: 0
   gaParameters:
     populationSize: 0
     numberOfGenerations: 0
@@ -3534,7 +3535,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -160}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2054473663

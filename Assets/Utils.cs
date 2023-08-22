@@ -50,4 +50,16 @@ public static class Utils {
 
 
     }
+
+    public static float BinaryToDecimal(int[] bin)
+    {
+        float f = 0f;
+
+        for(int i = 0; i < bin.Length; i++)
+        {
+            f += Mathf.Pow(2, i) * bin[i];
+        }
+
+        return f;
+    }
 }

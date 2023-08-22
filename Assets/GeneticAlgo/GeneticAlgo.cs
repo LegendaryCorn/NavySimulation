@@ -6,11 +6,15 @@ using UnityEngine;
 public struct GAParameters
 {
     public int populationSize;
-    public int chromosomeLength;
     public int numberOfGenerations;
     public float pCross;
     public float pMut;
     public int seed;
+
+    public List<int> chromosomeLength;
+    public List<float> chromoMin;
+    public List<float> chromoMax;
+    public int chromosomeTotal;
 }
 
 public class GeneticAlgo

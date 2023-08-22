@@ -19,7 +19,7 @@ public class Population
     {
         for (int i = 0; i < members.Length; i++)
         {
-            members[i] = new Individual(parameters.chromosomeLength);
+            members[i] = new Individual(parameters.chromosomeTotal);
             members[i].Init();
         }
         Evaluate();
@@ -46,14 +46,14 @@ public class Population
     }
     public void Reproduce(Individual parent1, Individual parent2, Individual child1, Individual child2)
     {
-        for (int i = 0; i < parameters.chromosomeLength; i++)
+        for (int i = 0; i < parameters.chromosomeTotal; i++)
         {
             child1.chromosome[i] = parent1.chromosome[i];
             child2.chromosome[i] = parent2.chromosome[i];
         }
 
         if (RandomMgr.inst.Flip(parameters.pCross))
-            XOver.OnePoint(parent1, parent2, child1, child2, parameters.chromosomeLength);
+            XOver.OnePoint(parent1, parent2, child1, child2, parameters.chromosomeTotal);
 
         child1.Mutate(parameters.pMut);
         child2.Mutate(parameters.pMut);
@@ -143,19 +143,10 @@ public class Population
     }
     public void Evaluate(int start, int end)
     {
-        List<Thread> threads= new List<Thread>();
-
         for (int i = start; i < end; i++)
         {
             int x = i;
-            Thread t = new Thread(() => members[x].fitness = Evaluator.Evaluate(members[x]));
-            threads.Add(t);
-            t.Start();
-        }
-
-        foreach (Thread thread in threads)
-        {
-            thread.Join();
+            members[x].fitness = Evaluator.Evaluate(members[x], parameters);
         }
     }
 

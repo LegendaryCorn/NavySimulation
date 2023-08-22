@@ -8,13 +8,23 @@ using System.Threading;
 public class MasterMgr : MonoBehaviour
 {
     public static MasterMgr inst;
-    public int chromosomeLength = 32;
+    public List<int> chromosomeLength;
+    public List<float> chromoMin;
+    public List<float> chromoMax;
 
     private void Awake()
     {
         inst = this;
         gaParameters = new GAParameters();
         gaParameters.chromosomeLength = chromosomeLength;
+        gaParameters.chromoMin = chromoMin;
+        gaParameters.chromoMax = chromoMax;
+        gaParameters.chromosomeTotal = 0;
+
+        foreach(int len in chromosomeLength)
+        {
+            gaParameters.chromosomeTotal += len;
+        }
     }
 
     private Thread GAThread;

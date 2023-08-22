@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class RunUIMgr : MonoBehaviour
     List<float> avgList;
     List<float> maxList;
     public int genCount;
+
+    Object entryLock = new Object();
 
     [SerializeField] private List<GameObject> panels;
 
@@ -65,34 +68,40 @@ public class RunUIMgr : MonoBehaviour
 
     public void NewGraphEntry(float avg, float max)
     {
-        avgList.Add(avg);
-        maxList.Add(max);
+        lock (entryLock)
+        {
+            avgList.Add(avg);
+            maxList.Add(max);
+        }
     }
 
     void UpdateGraph()
     {
-        float minVal = avgList[0];
-        foreach (float val in avgList)
-            minVal = Mathf.Min(val, minVal);
-        float maxVal = maxList[0];
-        foreach (float val in maxList)
-            maxVal = Mathf.Max(val, maxVal);
-
-        float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
-        float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;
-        float left = graphArea.rect.center.x - graphArea.rect.width * 0.5f;
-        float right = graphArea.rect.center.x + graphArea.rect.width * 0.5f;
-        int maxCount = maxList.Count;
-
-        avgLine.positionCount = maxCount;
-        maxLine.positionCount = maxCount;
-
-        for(int i = 0; i < maxCount; i++)
+        lock (entryLock)
         {
-            Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (avgList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
-            avgLine.SetPosition(i, a);
-            Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (maxList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
-            maxLine.SetPosition(i, m);
+            float minVal = avgList[0];
+            foreach (float val in avgList)
+                minVal = Mathf.Min(val, minVal);
+            float maxVal = maxList[0];
+            foreach (float val in maxList)
+                maxVal = Mathf.Max(val, maxVal);
+
+            float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
+            float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;
+            float left = graphArea.rect.center.x - graphArea.rect.width * 0.5f;
+            float right = graphArea.rect.center.x + graphArea.rect.width * 0.5f;
+            int maxCount = maxList.Count;
+
+            avgLine.positionCount = maxCount;
+            maxLine.positionCount = maxCount;
+
+            for (int i = 0; i < maxCount; i++)
+            {
+                Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (avgList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                avgLine.SetPosition(i, a);
+                Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (maxList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                maxLine.SetPosition(i, m);
+            }
         }
     }
 

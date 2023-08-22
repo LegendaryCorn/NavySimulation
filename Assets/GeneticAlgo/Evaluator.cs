@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+
+
 public class Evaluator
 {
-    public static float Evaluate(Individual individual)
+
+    public static float Evaluate(Individual individual, GAParameters gaParameters)
     {
-        
+        float[] vals = ParseChromosome(individual.chromosome, gaParameters);
+
+        float objective_val = 0f;
+        for (int i = 0; i < vals.Length; i++)
+        {
+            objective_val += vals[i] * vals[i];
+        }
+
+        float fitness = 1 / (objective_val + 1);
+
+        /*
         PotentialParameters parameters = ParseChromosome(individual.chromosome);
         float sum = 0;
 
@@ -21,79 +34,28 @@ public class Evaluator
         }
 
         return sum;
+        */
+        return fitness;
         
-
-        /*
-        float total = 0;
-        //First half of chromosome should be 1's, second half should be 0's
-        for (int i = 0; i < individual.chromosome.Length; i++)
-        {
-            if(i < individual.chromosome.Length / 2f)
-            {
-                total += individual.chromosome[i];
-            }
-            else
-            {
-                total += 1 - individual.chromosome[i];
-            }
-        }
-        return total;
-        */
-
-        // The chromosome is divided into byte length segments. The byte gets added to the total if the next byte is exactly +3 the other byte.
-        // Optimal solution is ... 249, 252, 255. The last byte isn't counted.
-        /*
-        float total = 0;
-        for (int i = 0; i < individual.chromosome.Length; i += 8)
-        {
-            if (i + 15 >= individual.chromosome.Length) break;
-
-            int b1 = 0;
-            int b2 = 0;
-
-            for(int j = 0; j < 8; j++)
-            {
-                b1 += (int)Mathf.Pow(2, 7 - j) * individual.chromosome[i + j];
-                b2 += (int)Mathf.Pow(2, 7 - j) * individual.chromosome[i + j + 8];
-            }
-
-            if(b2 - b1 == 3)
-            {
-                total += b1;
-            }
-        }
-        return total;
-        */
-
-        /*
-        Thread.Sleep(10);
-        float sum = 0;
-        //Maximize number of 1's in the chromosome
-        for (int i = 0; i < individual.chromosome.Length; i++)
-        {
-            sum += individual.chromosome[i]; // count number of one's
-        }
-        return sum;
-        */
     }
 
-    public static PotentialParameters ParseChromosome(int[] chromosome)
+    public static float[] ParseChromosome(int[] chromosome, GAParameters parameters)
     {
-        PotentialParameters p = new PotentialParameters();
 
-        p.potentialDistanceThreshold = 2000f * chromosome[0] + 1000f * chromosome[1] + 500f * chromosome[2] + 250f * chromosome[3];
-        
-        p.attractionCoefficient = (8f * chromosome[4] + 4f * chromosome[5] + 2f * chromosome[6] + 1f * chromosome[7])
-                                * Mathf.Pow(10f, 4f * chromosome[8] + 2f * chromosome[9] + 1f * chromosome[10]);
+        float[] p = new float[parameters.chromosomeLength.Count];
 
-        p.attractiveExponent = -(8f * chromosome[11] + 4f * chromosome[12] + 2f * chromosome[13] + 1f * chromosome[14]
-                             + 0.5f * chromosome[15] + 0.25f * chromosome[16] + 0.125f * chromosome[17]);
+        int j = 0;
+        for(int i = 0; i < parameters.chromosomeLength.Count; i++)
+        {
+            int[] shortChromosome = new int[parameters.chromosomeLength[i]];
+            System.Array.Copy(chromosome, j, shortChromosome, 0, parameters.chromosomeLength[i]);
 
-        p.repulsiveCoefficient = (8f * chromosome[18] + 4f * chromosome[19] + 2f * chromosome[20] + 1f * chromosome[21])
-                        * Mathf.Pow(10f, 4f * chromosome[22] + 2f * chromosome[23] + 1f * chromosome[24]);
+            p[i] = parameters.chromoMin[i] 
+                + ((parameters.chromoMax[i] - parameters.chromoMin[i]) / (Mathf.Pow(2, parameters.chromosomeLength[i]) - 1)) 
+                * Utils.BinaryToDecimal(shortChromosome);
 
-        p.repulsiveExponent = -(8f * chromosome[25] + 4f * chromosome[26] + 2f * chromosome[27] + 1f * chromosome[28]
-                             + 0.5f * chromosome[29] + 0.25f * chromosome[30] + 0.125f * chromosome[31]);
+            j += parameters.chromosomeLength[i];
+        }
 
         return p;
     }

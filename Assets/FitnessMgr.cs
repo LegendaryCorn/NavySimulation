@@ -191,11 +191,11 @@ public class FitnessMgr
             }
 
             float totalSub = 0;
-            //if (!noTurningPort) totalSub += 2f;
-            //if (!noHeadingManeuver) totalSub += 1f;
-            //if (!noSpeedManeuver) totalSub += 1f;
-            //if (!noNearbyShips) totalSub += 50f;
-            //if (!noShipsInFront) totalSub += 50f;
+            if (!noTurningPort) totalSub += 2f;
+            if (!noHeadingManeuver) totalSub += 1f;
+            if (!noSpeedManeuver) totalSub += 1f;
+            if (!noNearbyShips) totalSub += 20f;
+            if (!noShipsInFront) totalSub += 20f;
             if (!noCrash) totalSub += 100f;
 
             total -= totalSub;

@@ -3474,14 +3474,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676dadf905fb5c4e8c20010db2ac2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chromosomeLength: 32
+  chromosomeLength: 0a0000000a0000000a0000000a0000000a000000
+  chromoMin:
+  - -5.12
+  - -5.12
+  - -5.12
+  - -5.12
+  - -5.12
+  chromoMax:
+  - 5.11
+  - 5.11
+  - 5.11
+  - 5.11
+  - 5.11
   gaParameters:
     populationSize: 0
-    chromosomeLength: 0
     numberOfGenerations: 0
     pCross: 0
     pMut: 0
     seed: 0
+    chromosomeLength: 
+    chromoMin: []
+    chromoMax: []
+    chromosomeTotal: 0
   LogSemaphore: 1
 --- !u!1 &2054473661
 GameObject:

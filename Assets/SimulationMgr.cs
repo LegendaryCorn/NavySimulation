@@ -41,7 +41,7 @@ public class SimulationMgr : MonoBehaviour
                 string c = potentialChromosome[i].ToString();
                 chromosome[i] = int.Parse(c);
             }
-            potentialParameters = Evaluator.ParseChromosome(chromosome);
+            potentialParameters = new PotentialParameters(); //Evaluator.ParseChromosome(chromosome);
         }
 
         gameMgr = new GameMgr(potentialParameters);

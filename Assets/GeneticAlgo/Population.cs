@@ -92,7 +92,7 @@ public class Population
     {
         string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
         MasterMgr.inst.ThreadLog(report);
-        RunUIMgr.inst.NewGraphEntry(avg, max, 0);
+        RunUIMgr.inst.NewGraphEntry(avg, max, id);
 
         if (!Directory.Exists("Output"))
         {

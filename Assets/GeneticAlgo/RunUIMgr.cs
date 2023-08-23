@@ -19,8 +19,10 @@ public class RunUIMgr : MonoBehaviour
     public LineRenderer avgLine;
     public LineRenderer maxLine;
 
-    List<float> avgList;
-    List<float> maxList;
+    Dictionary<int, List<float>> avgLists;
+    Dictionary<int, List<float>> maxLists;
+    List<float> averageAvg;
+    List<float> averageMax;
     public int genCount;
 
     Object entryLock = new Object();
@@ -31,8 +33,10 @@ public class RunUIMgr : MonoBehaviour
     {
         inst = this;
 
-        avgList = new List<float>();
-        maxList = new List<float>();
+        avgLists = new Dictionary<int, List<float>>();
+        maxLists = new Dictionary<int, List<float>>();
+        averageAvg = new List<float>();
+        averageMax = new List<float>();
     }
 
     private void Start()
@@ -43,7 +47,7 @@ public class RunUIMgr : MonoBehaviour
 
     private void Update()
     {
-        if (avgList.Count > 0)
+        if (averageAvg.Count > 0)
         {
             UpdateGraph();
         }
@@ -70,36 +74,85 @@ public class RunUIMgr : MonoBehaviour
     {
         lock (entryLock)
         {
-            avgList.Add(avg);
-            maxList.Add(max);
+            if (!avgLists.ContainsKey(id))
+            {
+                avgLists[id] = new List<float>();
+                maxLists[id] = new List<float>();
+            }
+
+            avgLists[id].Add(avg);
+            maxLists[id].Add(max);
+            UpdateAverages();
         }
+    }
+
+    void UpdateAverages()
+    {
+        averageAvg = new List<float>();
+        averageMax = new List<float>();
+        List<float> count = new List<float>();
+
+        for(int i = 0; i < genCount; i++)
+        {
+            count.Add(0f);
+        }
+        foreach(List<float> avgL in avgLists.Values)
+        {
+            for(int i = 0; i < avgL.Count; i++)
+            {
+                if(i >= averageAvg.Count)
+                {
+                    averageAvg.Add(0f);
+                }
+                averageAvg[i] += avgL[i];
+                count[i] += 1f;
+            }
+        }
+        foreach (List<float> maxL in maxLists.Values)
+        {
+            for (int i = 0; i < maxL.Count; i++)
+            {
+                if (i >= averageMax.Count)
+                {
+                    averageMax.Add(0f);
+                }
+                averageMax[i] += maxL[i];
+            }
+        }
+        for(int i = 0; i < averageAvg.Count; i++)
+        {
+            averageAvg[i] *= 1f / count[i];
+            averageMax[i] *= 1f / count[i];
+        }
+
+        
     }
 
     void UpdateGraph()
     {
         lock (entryLock)
         {
-            float minVal = avgList[0];
-            foreach (float val in avgList)
+            float minVal = averageAvg[0];
+            foreach (float val in averageAvg)
                 minVal = Mathf.Min(val, minVal);
-            float maxVal = maxList[0];
-            foreach (float val in maxList)
+            float maxVal = averageMax[0];
+            foreach (float val in averageMax)
                 maxVal = Mathf.Max(val, maxVal);
 
             float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
             float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;
             float left = graphArea.rect.center.x - graphArea.rect.width * 0.5f;
             float right = graphArea.rect.center.x + graphArea.rect.width * 0.5f;
-            int maxCount = maxList.Count;
+            int maxCount = averageMax.Count;
 
             avgLine.positionCount = maxCount;
             maxLine.positionCount = maxCount;
 
             for (int i = 0; i < maxCount; i++)
             {
-                Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (avgList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (averageAvg[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 avgLine.SetPosition(i, a);
-                Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (maxList[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (averageMax[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 maxLine.SetPosition(i, m);
             }
         }

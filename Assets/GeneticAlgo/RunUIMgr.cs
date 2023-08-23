@@ -66,7 +66,7 @@ public class RunUIMgr : MonoBehaviour
         }
     }
 
-    public void NewGraphEntry(float avg, float max)
+    public void NewGraphEntry(float avg, float max, int id)
     {
         lock (entryLock)
         {

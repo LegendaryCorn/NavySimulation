@@ -42,19 +42,20 @@ public class Evaluator
     public static float[] ParseChromosome(int[] chromosome, GAParameters parameters)
     {
 
-        float[] p = new float[parameters.chromosomeLength.Count];
+        float[] p = new float[parameters.chromosomeParameters.Count];
 
         int j = 0;
-        for(int i = 0; i < parameters.chromosomeLength.Count; i++)
+        for(int i = 0; i < parameters.chromosomeParameters.Count; i++)
         {
-            int[] shortChromosome = new int[parameters.chromosomeLength[i]];
-            System.Array.Copy(chromosome, j, shortChromosome, 0, parameters.chromosomeLength[i]);
+            int chromoLen = parameters.chromosomeParameters[i].chromosomeLength;
+            int[] shortChromosome = new int[chromoLen];
+            System.Array.Copy(chromosome, j, shortChromosome, 0, chromoLen);
 
-            p[i] = parameters.chromoMin[i] 
-                + ((parameters.chromoMax[i] - parameters.chromoMin[i]) / (Mathf.Pow(2, parameters.chromosomeLength[i]) - 1)) 
+            p[i] = parameters.chromosomeParameters[i].chromosomeMin 
+                + ((parameters.chromosomeParameters[i].chromosomeMax - parameters.chromosomeParameters[i].chromosomeMin) / (Mathf.Pow(2, chromoLen) - 1)) 
                 * Utils.BinaryToDecimal(shortChromosome);
 
-            j += parameters.chromosomeLength[i];
+            j += chromoLen;
         }
 
         return p;

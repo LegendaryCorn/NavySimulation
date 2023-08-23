@@ -8,9 +8,7 @@ using System.Threading;
 public class MasterMgr : MonoBehaviour
 {
     public static MasterMgr inst;
-    public List<int> chromosomeLength;
-    public List<float> chromoMin;
-    public List<float> chromoMax;
+    public List<ChromoParameters> chromosomeParameters;
 
     public int testCount;
     int testID = 0;
@@ -19,14 +17,12 @@ public class MasterMgr : MonoBehaviour
     {
         inst = this;
         gaParameters = new GAParameters();
-        gaParameters.chromosomeLength = chromosomeLength;
-        gaParameters.chromoMin = chromoMin;
-        gaParameters.chromoMax = chromoMax;
+        gaParameters.chromosomeParameters = chromosomeParameters;
         gaParameters.chromosomeTotal = 0;
 
-        foreach(int len in chromosomeLength)
+        foreach(ChromoParameters chromoP in chromosomeParameters)
         {
-            gaParameters.chromosomeTotal += len;
+            gaParameters.chromosomeTotal += chromoP.chromosomeLength;
         }
     }
 

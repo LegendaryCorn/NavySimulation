@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public struct ChromoParameters
+{
+    public int chromosomeLength;
+    public float chromosomeMin;
+    public float chromosomeMax;
+}
+
+[System.Serializable]
 public struct GAParameters
 {
     public int populationSize;
@@ -11,9 +19,7 @@ public struct GAParameters
     public float pMut;
     public int seed;
 
-    public List<int> chromosomeLength;
-    public List<float> chromoMin;
-    public List<float> chromoMax;
+    public List<ChromoParameters> chromosomeParameters;
     public int chromosomeTotal;
 }
 

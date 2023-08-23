@@ -3476,20 +3476,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chromosomeParameters:
   - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
+    chromosomeMin: -2.048
+    chromosomeMax: 2.048
   - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
+    chromosomeMin: -2.048
+    chromosomeMax: 2.048
   testCount: 0
   gaParameters:
     populationSize: 0
@@ -3499,6 +3490,7 @@ MonoBehaviour:
     seed: 0
     chromosomeParameters: []
     chromosomeTotal: 0
+    id: 0
   InitSemaphore: 1
   LogSemaphore: 1
 --- !u!1 &2054473661

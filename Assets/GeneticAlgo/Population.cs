@@ -94,6 +94,8 @@ public class Population
         MasterMgr.inst.ThreadLog(report);
         RunUIMgr.inst.NewGraphEntry(avg, max, id);
 
+        // Disbled for now
+        /*
         if (!Directory.Exists("Output"))
         {
             Directory.CreateDirectory("Output");
@@ -103,6 +105,7 @@ public class Population
         {
             w.WriteLine(report);
         }
+        */
     }
 
     public void Statistics()

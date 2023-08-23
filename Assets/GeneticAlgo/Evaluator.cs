@@ -13,10 +13,21 @@ public class Evaluator
         float[] vals = ParseChromosome(individual.chromosome, gaParameters);
 
         float objective_val = 0f;
+
+        /*
+        // De Jong 1
         for (int i = 0; i < vals.Length; i++)
         {
             objective_val += vals[i] * vals[i];
         }
+        */
+
+        // De Jong 2
+        for (int i = 0; i < vals.Length - 1; i++)
+        {
+            objective_val += 100f * Mathf.Pow(vals[i+1] - vals[i] * vals[i], 2) + Mathf.Pow(1 - vals[i], 2) ;
+        }
+
 
         float fitness = 1 / (objective_val + 1);
 

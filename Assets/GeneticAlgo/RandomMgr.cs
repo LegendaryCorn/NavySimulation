@@ -1,26 +1,34 @@
-﻿public class RandomMgr
+﻿using System.Collections.Generic;
+
+public class RandomMgr
 {
     public static RandomMgr inst;
 
-    public System.Random rand;
+    public Dictionary<int, System.Random> rand;
     public RandomMgr(int seed)
     {
         inst = this;
-        rand = new System.Random(seed);
+        rand = new Dictionary<int, System.Random>();
+        rand[-1] = new System.Random(seed);
     }
 
-    public bool Flip(float prob)
+    public void AddRandom(int seed) // -1 is the seed that MasterMgr uses to generate seeds for others.
     {
-        return (rand.NextDouble() < prob);
+        rand[seed] = new System.Random(seed);
     }
 
-    public int Flip01(float prob)
+    public bool Flip(float prob, int seed)
     {
-        return (rand.NextDouble() < prob ? 0 : 1);
+        return (rand[seed].NextDouble() < prob);
     }
 
-    public int RandInt(int low, int high)
+    public int Flip01(float prob, int seed)
     {
-        return rand.Next(low, high);
+        return (rand[seed].NextDouble() < prob ? 0 : 1);
+    }
+
+    public int RandInt(int low, int high, int seed)
+    {
+        return rand[seed].Next(low, high);
     }
 }

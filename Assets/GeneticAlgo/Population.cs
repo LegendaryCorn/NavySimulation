@@ -19,7 +19,7 @@ public class Population
     {
         for (int i = 0; i < members.Length; i++)
         {
-            members[i] = new Individual(parameters.chromosomeTotal);
+            members[i] = new Individual(parameters.chromosomeTotal, parameters.seed);
             members[i].Init();
         }
         Evaluate();
@@ -52,7 +52,7 @@ public class Population
             child2.chromosome[i] = parent2.chromosome[i];
         }
 
-        if (RandomMgr.inst.Flip(parameters.pCross))
+        if (RandomMgr.inst.Flip(parameters.pCross, parameters.seed))
             XOver.OnePoint(parent1, parent2, child1, child2, parameters.chromosomeTotal);
 
         child1.Mutate(parameters.pMut);
@@ -128,7 +128,7 @@ public class Population
     {
         int index = -1;
         float sum = 0;
-        float limit = (float)RandomMgr.inst.rand.NextDouble() * sumFitness;
+        float limit = (float)RandomMgr.inst.rand[parameters.seed].NextDouble() * sumFitness;
         do
         {
             index = index + 1;

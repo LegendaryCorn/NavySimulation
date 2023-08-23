@@ -47,6 +47,7 @@ public class MasterMgr : MonoBehaviour
     public GAParameters gaParameters;
     public void OnSubmit()
     {
+        RandomMgr r = new RandomMgr(gaParameters.seed);
         for (int i = 0; i < testCount; i++)
         {
             StartJob();
@@ -68,8 +69,11 @@ public class MasterMgr : MonoBehaviour
         GeneticAlgo ga;
         lock (InitSemaphore)
         {
-            int t = testID;
-            ga = new GeneticAlgo(gaParameters, t);
+
+            gaParameters.seed = RandomMgr.inst.RandInt(0, 1000000, -1);
+            gaParameters.id = testID;
+
+            ga = new GeneticAlgo(gaParameters);
             testID++;
         }
         ga.Run();

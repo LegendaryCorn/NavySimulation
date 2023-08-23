@@ -21,20 +21,20 @@ public struct GAParameters
 
     public List<ChromoParameters> chromosomeParameters;
     public int chromosomeTotal;
+
+    public int id;
 }
 
 public class GeneticAlgo
 {
     public GAParameters gaParameters;
     long startTime;
-    int id;
 
-    public GeneticAlgo(GAParameters gap, int id)
+    public GeneticAlgo(GAParameters gap)
     {
         gaParameters = gap;
-        RandomMgr r = new RandomMgr(gaParameters.seed);
+        RandomMgr.inst.AddRandom(gap.seed);
         startTime = System.DateTime.Now.ToFileTimeUtc();
-        this.id = id;
     }
 
     public Population parents, children;
@@ -50,7 +50,7 @@ public class GeneticAlgo
 
         parents.Evaluate();
         parents.Statistics();
-        parents.Report(0, startTime, id);
+        parents.Report(0, startTime, gaParameters.id);
         MasterMgr.inst.ThreadLog("Initialed GA");
 
     }
@@ -72,7 +72,7 @@ public class GeneticAlgo
             //InputHandler.inst.ThreadLog("Generation: " + i); 
             parents.CHCGeneration(children);
             children.Statistics();
-            children.Report(i, startTime, id);
+            children.Report(i, startTime, gaParameters.id);
 
 
             Population tmp = parents;

@@ -5,20 +5,22 @@ public class Individual : IComparable<Individual>
 {
 
     public int chromLength;
+    public int randomSeed;
     public int[] chromosome;
     public float fitness;
     public float objectiveFunction;
 
-    public Individual(int chromLength)
+    public Individual(int chromLength, int randomSeed)
     {
         chromosome = new int[chromLength];
+        this.randomSeed = randomSeed;
     }
 
     public void Init()
     {
         for (int i = 0; i < chromosome.Length; i++)
         {
-            chromosome[i] = RandomMgr.inst.Flip01(0.5f);
+            chromosome[i] = RandomMgr.inst.Flip01(0.5f, randomSeed);
         }
     }
 
@@ -26,7 +28,7 @@ public class Individual : IComparable<Individual>
     {
         for (int i = 0; i < chromosome.Length; i++)
         {
-            chromosome[i] = (RandomMgr.inst.Flip(pm) ? 1 - chromosome[i] : chromosome[i]);
+            chromosome[i] = (RandomMgr.inst.Flip(pm, randomSeed) ? 1 - chromosome[i] : chromosome[i]);
         }
     }
 

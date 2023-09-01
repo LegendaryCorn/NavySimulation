@@ -3490,11 +3490,11 @@ MonoBehaviour:
   - chromosomeLength: 10
     chromosomeMin: -5.12
     chromosomeMax: 5.11
-  - chromosomeLength: 8
-    chromosomeMin: 0
+  - chromosomeLength: 9
+    chromosomeMin: -256
     chromosomeMax: 255
-  - chromosomeLength: 8
-    chromosomeMin: 0
+  - chromosomeLength: 9
+    chromosomeMin: -256
     chromosomeMax: 255
   - chromosomeLength: 10
     chromosomeMin: 0
@@ -3502,11 +3502,11 @@ MonoBehaviour:
   - chromosomeLength: 10
     chromosomeMin: -5.12
     chromosomeMax: 5.11
-  - chromosomeLength: 8
-    chromosomeMin: 0
+  - chromosomeLength: 9
+    chromosomeMin: -256
     chromosomeMax: 255
-  - chromosomeLength: 8
-    chromosomeMin: 0
+  - chromosomeLength: 9
+    chromosomeMin: -256
     chromosomeMax: 255
   testCount: 0
   gaParameters:

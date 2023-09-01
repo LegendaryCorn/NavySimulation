@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b7f93d66c508a41b6ad85d388af393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenarioID: 1
+  scenarioID: 5
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -634,11 +634,11 @@ MonoBehaviour:
     - chromosomeLength: 10
       chromosomeMin: -5.12
       chromosomeMax: 5.11
-    - chromosomeLength: 8
-      chromosomeMin: 0
+    - chromosomeLength: 9
+      chromosomeMin: -256
       chromosomeMax: 255
-    - chromosomeLength: 8
-      chromosomeMin: 0
+    - chromosomeLength: 9
+      chromosomeMin: -256
       chromosomeMax: 255
     - chromosomeLength: 10
       chromosomeMin: 0
@@ -646,16 +646,16 @@ MonoBehaviour:
     - chromosomeLength: 10
       chromosomeMin: -5.12
       chromosomeMax: 5.11
-    - chromosomeLength: 8
-      chromosomeMin: 0
+    - chromosomeLength: 9
+      chromosomeMin: -256
       chromosomeMax: 255
-    - chromosomeLength: 8
-      chromosomeMin: 0
+    - chromosomeLength: 9
+      chromosomeMin: -256
       chromosomeMax: 255
     chromosomeTotal: 70
     id: 0
   simSpeed: 5
-  potentialChromosome: 001010101010000011000100011111111101100010000110010000001011000001111011000011110110111011001001010010
+  potentialChromosome: 1110111010100011000100111101111100110110011101001100101000011111001101001011100001001011000011111100001000
   potentialParameters:
     potentialDistanceThreshold: 400
     waypointPotential:

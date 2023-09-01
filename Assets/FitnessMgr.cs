@@ -27,9 +27,15 @@ public class TwoShipFitnessParameters
 public class FitnessMgr
 {
     public GameMgr gameMgr;
-    public float totalFitness = 0f;
     public Dictionary<int, OneShipFitnessParameters> oneShipFitnessParameters;
     public Dictionary<int, Dictionary<int, TwoShipFitnessParameters>> twoShipFitnessParameters;
+
+    // Vars
+    public float countHeadingManeuver = 0;
+    public float countSpeedManeuver = 0;
+    public float countNearbyShips = 0;
+    public float countShipInFront = 0;
+    public float countCrash = 0;
 
     public FitnessMgr(GameMgr mgr)
     {
@@ -82,10 +88,10 @@ public class FitnessMgr
         }
     }
 
-    public void OnUpdate(float dt)
+    public void OnUpdate()
     {
         UpdateParameters();
-        totalFitness += ParametersToFitness(dt);
+        UpdateFitnessInfo();
     }
 
     void UpdateParameters()
@@ -128,39 +134,25 @@ public class FitnessMgr
         }
     }
 
-    float ParametersToFitness(float dt)
+    void UpdateFitnessInfo()
     {
         List<Entity381> entities = gameMgr.entityMgr.entities;
-        float total = 0;
 
         foreach(Entity381 ent1 in entities)
         {
-            bool noTurningPort = true;
-            bool noHeadingManeuver = true;
-            bool noSpeedManeuver = true;
-
-            bool noNearbyShips = true;
-            bool noShipsInFront = true;
-            bool noCrash = true;
 
             OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
-
-            // Turning Port
-            if(f1.desHeadingDiff < -0.1)
-            {
-                noTurningPort = false;
-            }
 
             // Heading Maneuver
             if(f1.desHeadingDiff * f1.prevDesHeadingDiff < 0)
             {
-                noHeadingManeuver = false;
+                countHeadingManeuver += 1;
             }
 
             // Speed Maneuver
             if (f1.desSpeedDiff * f1.prevDesSpeedDiff < 0)
             {
-                noSpeedManeuver = false;
+                countSpeedManeuver += 1;
             }
 
 
@@ -174,52 +166,21 @@ public class FitnessMgr
                 // Nearby Ships
                 if (f2.range < 600 && f2.relHeading > 10 && f2.relHeading < 350)
                 {
-                    noNearbyShips = false;
+                    countNearbyShips += 1;
                 }
 
                 // Ships In Front
                 if (f2.range < 1200 && f2.bearing > 20 && f2.bearing < 340 && f2.relHeading > 10 && f2.relHeading < 350)
                 {
-                    noShipsInFront = false;
+                    countShipInFront += 1;
                 }
 
                 // Crashes
                 if (f2.range < 150)
                 {
-                    noCrash = false;
+                    countCrash += 1;
                 }
             }
-
-            float totalSub = 0;
-            if (!noTurningPort) totalSub += 2f;
-            if (!noHeadingManeuver) totalSub += 1f;
-            if (!noSpeedManeuver) totalSub += 1f;
-            if (!noNearbyShips) totalSub += 20f;
-            if (!noShipsInFront) totalSub += 20f;
-            if (!noCrash) totalSub += 100f;
-
-            total -= totalSub;
         }
-        
-        return total;
-    }
-
-    public void FinalFitness()
-    {
-        float f = 0;
-        foreach (Entity381 ent in gameMgr.entityMgr.entities)
-        {
-            if (ent.ai.commands.Count == 0)
-            {
-                f += 1f;
-            }
-            else
-            {
-                Move finalMove = (Move)ent.ai.commands[ent.ai.commands.Count - 1];
-                float dist = Vector3.Distance(ent.position, finalMove.movePosition);
-                f += 1f * (1f - dist / 3000f);
-            }
-        }
-        totalFitness += f;
     }
 }

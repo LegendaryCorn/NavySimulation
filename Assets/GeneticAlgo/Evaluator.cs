@@ -22,6 +22,7 @@ public class Evaluator
         }
         */
 
+        /*
         // De Jong 2
         for (int i = 0; i < vals.Length - 1; i++)
         {
@@ -30,23 +31,29 @@ public class Evaluator
 
 
         float fitness = 1 / (objective_val + 1);
-
-        /*
-        PotentialParameters parameters = ParseChromosome(individual.chromosome);
+        */
+        
         float sum = 0;
 
         for(int i = 0; i < ScenarioMgr.inst.scenarios.Count; i++)
         {
             Scenario s = ScenarioMgr.inst.scenarios[i];
 
-            GameMgr game = new GameMgr(parameters);
+            GameMgr game = new GameMgr(new PotentialParameters(vals));
             game.ExecuteGame(i);
-            sum += game.fitnessMgr.totalFitness / (9f * 300f * s.scenarioEntities.Count);
+
+            float total = 3f   * game.fitnessMgr.countHeadingManeuver
+                        + 3f   * game.fitnessMgr.countSpeedManeuver
+                        + 1f   * game.fitnessMgr.countNearbyShips
+                        + 10f  * game.fitnessMgr.countShipInFront
+                        + 100f * game.fitnessMgr.countCrash;
+
+            sum += total / (s.scenarioEntities.Count);
         }
 
-        return sum;
-        */
-        return fitness;
+        return 1 / sum;
+        
+        //return fitness;
         
     }
 

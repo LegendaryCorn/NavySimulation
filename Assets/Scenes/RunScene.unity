@@ -3476,11 +3476,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chromosomeParameters:
   - chromosomeLength: 10
-    chromosomeMin: -2.048
-    chromosomeMax: 2.048
+    chromosomeMin: 0
+    chromosomeMax: 1023
   - chromosomeLength: 10
-    chromosomeMin: -2.048
-    chromosomeMax: 2.048
+    chromosomeMin: 0
+    chromosomeMax: 10230
+  - chromosomeLength: 10
+    chromosomeMin: -5.12
+    chromosomeMax: 5.11
+  - chromosomeLength: 10
+    chromosomeMin: 0
+    chromosomeMax: 0
+  - chromosomeLength: 10
+    chromosomeMin: -5.12
+    chromosomeMax: 5.11
+  - chromosomeLength: 8
+    chromosomeMin: 0
+    chromosomeMax: 255
+  - chromosomeLength: 8
+    chromosomeMin: 0
+    chromosomeMax: 255
+  - chromosomeLength: 10
+    chromosomeMin: 0
+    chromosomeMax: 10230
+  - chromosomeLength: 10
+    chromosomeMin: -5.12
+    chromosomeMax: 5.11
+  - chromosomeLength: 8
+    chromosomeMin: 0
+    chromosomeMax: 255
+  - chromosomeLength: 8
+    chromosomeMin: 0
+    chromosomeMax: 255
   testCount: 0
   gaParameters:
     populationSize: 0

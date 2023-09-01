@@ -8,6 +8,8 @@ public struct PF
     public bool isAttractive;
     public float coefficient;
     public float exponent;
+    public float verticalOffset;
+    public float horizontalOffset;
 }
 
 [System.Serializable]
@@ -17,27 +19,24 @@ public struct PotentialParameters
     public PF waypointPotential;
     public List<PF> shipPotentials;
 
-    /*
-    public float attractionCoefficient;// = 20000;
-    public float attractiveExponent;// = -1;
-    public float repulsiveCoefficient;// = 1000;
-    public float repulsiveExponent;// = -2.0f;
-    */
-
     public PotentialParameters(float[] parameters)
     {
         potentialDistanceThreshold = parameters[0];
         waypointPotential.isAttractive = true;
         waypointPotential.coefficient = parameters[1];
         waypointPotential.exponent = parameters[2];
+        waypointPotential.verticalOffset = 0;
+        waypointPotential.horizontalOffset = 0;
 
         shipPotentials = new List<PF>();
-        for(int i = 3; i < parameters.Length; i+= 2)
+        for(int i = 3; i < parameters.Length; i+= 4)
         {
             PF p;
-            p.isAttractive = i + 2 * 1 >= parameters.Length;
+            p.isAttractive = false;//i + 4 * 1 >= parameters.Length;
             p.coefficient = parameters[i];
             p.exponent = parameters[i+1];
+            p.verticalOffset = parameters[i+2];
+            p.horizontalOffset = parameters[i+3];
             shipPotentials.Add(p);
         }
     }

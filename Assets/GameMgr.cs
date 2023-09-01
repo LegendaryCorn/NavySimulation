@@ -22,7 +22,6 @@ public class GameMgr
     {
         LoadScenario(scenario);
         RunGame(1f / 60f, 60f);
-        fitnessMgr.FinalFitness();
     }
 
     public Vector3 position;
@@ -55,6 +54,7 @@ public class GameMgr
 
     public void RunGame(float dt, float tf) // tf is in Seconds
     {
+        int counter = 0;
         for (float t = 0; t < tf; t += dt)
         {
             distanceMgr.OnUpdate(dt);
@@ -66,7 +66,9 @@ public class GameMgr
             {
                 ent.physics.OnUpdate(dt);
             }
-            fitnessMgr.OnUpdate(dt);
+            if(counter % 10 == 9)
+                fitnessMgr.OnUpdate();
+            counter += 1;
         }
     }
 }

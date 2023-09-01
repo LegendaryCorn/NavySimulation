@@ -612,14 +612,48 @@ MonoBehaviour:
     type: 3}
   boundariesRoot: {fileID: 1029608188}
   simulatedBoundaries: []
+  gaParameters:
+    populationSize: 0
+    numberOfGenerations: 0
+    pCross: 0
+    pMut: 0
+    seed: 0
+    chromosomeParameters:
+    - chromosomeLength: 10
+      chromosomeMin: 0
+      chromosomeMax: 10230
+    - chromosomeLength: 10
+      chromosomeMin: 0
+      chromosomeMax: 10230
+    - chromosomeLength: 10
+      chromosomeMin: -5.12
+      chromosomeMax: 5.11
+    - chromosomeLength: 10
+      chromosomeMin: 0
+      chromosomeMax: 10230
+    - chromosomeLength: 10
+      chromosomeMin: -5.12
+      chromosomeMax: 5.11
+    - chromosomeLength: 10
+      chromosomeMin: 0
+      chromosomeMax: 10230
+    - chromosomeLength: 10
+      chromosomeMin: -5.12
+      chromosomeMax: 5.11
+    chromosomeTotal: 70
+    id: 0
   simSpeed: 5
-  potentialChromosome: 00011100111000011110001100001101
+  potentialChromosome: 
   potentialParameters:
     potentialDistanceThreshold: 1000
-    attractionCoefficient: 20000
-    attractiveExponent: -1
-    repulsiveCoefficient: 1000
-    repulsiveExponent: -2
+    waypointPotential:
+      isAttractive: 1
+      coefficient: 100
+      exponent: -1
+    shipPotentials:
+    - isAttractive: 1
+      coefficient: 3000
+      exponent: -2
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

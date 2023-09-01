@@ -3,13 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public struct PF
+{
+    public bool isAttractive;
+    public float coefficient;
+    public float exponent;
+}
+
+[System.Serializable]
 public struct PotentialParameters
 {
     public float potentialDistanceThreshold;// = 1000;
+    public PF waypointPotential;
+    public List<PF> shipPotentials;
+
+    /*
     public float attractionCoefficient;// = 20000;
     public float attractiveExponent;// = -1;
     public float repulsiveCoefficient;// = 1000;
     public float repulsiveExponent;// = -2.0f;
+    */
+
+    public PotentialParameters(float[] parameters)
+    {
+        potentialDistanceThreshold = parameters[0];
+        waypointPotential.isAttractive = true;
+        waypointPotential.coefficient = parameters[1];
+        waypointPotential.exponent = parameters[2];
+
+        shipPotentials = new List<PF>();
+        for(int i = 3; i < parameters.Length; i+= 2)
+        {
+            PF p;
+            p.isAttractive = i + 2 * 1 >= parameters.Length;
+            p.coefficient = parameters[i];
+            p.exponent = parameters[i+1];
+            shipPotentials.Add(p);
+        }
+    }
 }
 
 public class AIMgr

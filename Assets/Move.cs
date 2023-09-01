@@ -49,13 +49,22 @@ public class Move : Command
     public DHDS ComputePotentialDHDS()
     {
         Potential p;
+        PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
         repulsivePotential = Vector3.zero; repulsivePotential.y = 0;
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities) {
             if (ent == entity) continue;
             p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);
             if (p.distance < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold) {
-                repulsivePotential += p.direction * entity.mass *
-                   entity.gameMgr.aiMgr.potentialParameters.repulsiveCoefficient * Mathf.Pow(p.diff.magnitude, entity.gameMgr.aiMgr.potentialParameters.repulsiveExponent);
+                foreach (PF pf in potParams.shipPotentials)
+                {
+                    Vector3 potentialVal = p.direction * entity.mass *
+                      pf.coefficient * Mathf.Pow(p.diff.magnitude, pf.exponent);
+
+                    if (pf.isAttractive)
+                        repulsivePotential -= potentialVal;
+                    else
+                        repulsivePotential += potentialVal;
+                }
                 //repulsivePotential += p.diff;
             }
         }
@@ -63,7 +72,7 @@ public class Move : Command
         attractivePotential = movePosition - entity.position;
         Vector3 tmp = attractivePotential.normalized;
         attractivePotential = tmp *
-            entity.gameMgr.aiMgr.potentialParameters.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, entity.gameMgr.aiMgr.potentialParameters.attractiveExponent);
+            potParams.waypointPotential.coefficient * Mathf.Pow(attractivePotential.magnitude, potParams.waypointPotential.exponent);
         potentialSum = attractivePotential - repulsivePotential;
 
         dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));

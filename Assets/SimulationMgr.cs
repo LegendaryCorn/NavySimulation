@@ -19,6 +19,7 @@ public class SimulationMgr : MonoBehaviour
     public GameObject boundariesRoot;
     public List<LineRenderer> simulatedBoundaries;
 
+    public GAParameters gaParameters;
     public float simSpeed;
     public string potentialChromosome;
     public PotentialParameters potentialParameters;
@@ -41,7 +42,8 @@ public class SimulationMgr : MonoBehaviour
                 string c = potentialChromosome[i].ToString();
                 chromosome[i] = int.Parse(c);
             }
-            potentialParameters = new PotentialParameters(); //Evaluator.ParseChromosome(chromosome);
+            float[] parsedChromosome = Evaluator.ParseChromosome(chromosome, gaParameters);
+            potentialParameters = new PotentialParameters(parsedChromosome); //Evaluator.ParseChromosome(chromosome);
         }
 
         gameMgr = new GameMgr(potentialParameters);

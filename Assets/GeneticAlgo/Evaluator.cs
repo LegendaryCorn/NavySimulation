@@ -32,6 +32,7 @@ public class Evaluator
 
         float fitness = 1 / (objective_val + 1);
         */
+
         
         float sum = 0;
 
@@ -42,6 +43,9 @@ public class Evaluator
             GameMgr game = new GameMgr(new PotentialParameters(vals));
             game.ExecuteGame(i);
 
+            sum = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+
+            /*
             float total = 3f   * game.fitnessMgr.countHeadingManeuver
                         + 3f   * game.fitnessMgr.countSpeedManeuver
                         + 1f   * game.fitnessMgr.countNearbyShips
@@ -49,11 +53,21 @@ public class Evaluator
                         + 100f * game.fitnessMgr.countCrash;
 
             sum += total / (s.scenarioEntities.Count);
+            */
         }
 
-        return 1 / sum;
-        
-        //return fitness;
+        //return 1 / sum;
+
+        float fitness = 0;
+
+        if (sum <= 500f)
+            fitness = 0.2f * (fitness - 500f) + 100f;
+        else if (sum <= 1400f)
+            fitness = -0.125f * (fitness - 500f) + 100f;
+        else
+            fitness = 0;
+
+        return fitness;
         
     }
 

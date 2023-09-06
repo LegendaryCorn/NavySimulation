@@ -35,6 +35,7 @@ public class Evaluator
 
         
         float sum = 0;
+        bool noWp = false;
 
         for(int i = 0; i < ScenarioMgr.inst.scenarios.Count; i++)
         {
@@ -44,6 +45,7 @@ public class Evaluator
             game.ExecuteGame(i);
 
             sum = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+            noWp = !game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget;
 
             /*
             float total = 3f   * game.fitnessMgr.countHeadingManeuver
@@ -58,14 +60,17 @@ public class Evaluator
 
         //return 1 / sum;
 
-        float fitness = 0;
+        float fitness = 0f;
 
         if (sum <= 500f)
             fitness = 0.2f * (sum - 500f) + 100f;
         else if (sum <= 1400f)
             fitness = -0.125f * (sum - 500f) + 100f;
-        else
-            fitness = 0;
+
+        if (noWp)
+        {
+            fitness *= 0f;
+        }
 
         return Mathf.Max(fitness, 0f);
         

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OneShipFitnessParameters
 {
+    public bool reachedTarget;
     /*
     public float desSpeedDiff;
     public float prevDesSpeedDiff;
@@ -60,6 +61,7 @@ public class FitnessMgr
 
             oneShipFitnessParameters[ent1.id] = new OneShipFitnessParameters
             {
+                reachedTarget = false
                 /*
                 desSpeedDiff = 0,
                 prevDesSpeedDiff = 0,
@@ -114,6 +116,7 @@ public class FitnessMgr
 
             OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
 
+            f1.reachedTarget = ent1.ai.commands.Count == 0;
             /*
             f1.prevDesHeadingDiff = f1.desHeadingDiff;
             f1.prevDesSpeedDiff = f1.desSpeedDiff;

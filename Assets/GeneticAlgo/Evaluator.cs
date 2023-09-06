@@ -61,13 +61,13 @@ public class Evaluator
         float fitness = 0;
 
         if (sum <= 500f)
-            fitness = 0.2f * (fitness - 500f) + 100f;
+            fitness = 0.2f * (sum - 500f) + 100f;
         else if (sum <= 1400f)
-            fitness = -0.125f * (fitness - 500f) + 100f;
+            fitness = -0.125f * (sum - 500f) + 100f;
         else
             fitness = 0;
 
-        return fitness;
+        return Mathf.Max(fitness, 0f);
         
     }
 

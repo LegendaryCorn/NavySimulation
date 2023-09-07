@@ -165,18 +165,18 @@ public class DistanceMgr
                 p1.diff = p1.target.position - p1.ownship.position;
                 p1.distance = p1.diff.magnitude;
                 p1.direction = p1.diff.normalized;
-                p1.cpaInfo.ReCompute();
-                p1.relativeVelocity = p1.cpaInfo.relativeVelocity;
-                p1.targetAngle = p1.cpaInfo.targetAngle;
-                p1.relativeBearingDegrees = p1.cpaInfo.targetRelativeBearing;
+                //p1.cpaInfo.ReCompute();
+                //p1.relativeVelocity = p1.cpaInfo.relativeVelocity;
+                //p1.targetAngle = p1.cpaInfo.targetAngle;
+                //p1.relativeBearingDegrees = p1.cpaInfo.targetRelativeBearing;
                 //p2
                 p2.diff = -p1.diff;
                 p2.distance = p1.distance;
                 p2.direction = -p1.direction;
-                p2.cpaInfo.ReCompute();
-                p2.relativeVelocity = p2.cpaInfo.relativeVelocity;
-                p2.targetAngle = p2.cpaInfo.targetAngle;
-                p2.relativeBearingDegrees = p2.cpaInfo.targetRelativeBearing;
+                //p2.cpaInfo.ReCompute();
+                //p2.relativeVelocity = p2.cpaInfo.relativeVelocity;
+                //p2.targetAngle = p2.cpaInfo.targetAngle;
+                //p2.relativeBearingDegrees = p2.cpaInfo.targetRelativeBearing;
             }
         }
     }

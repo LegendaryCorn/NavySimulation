@@ -48,6 +48,7 @@ public class MasterMgr : MonoBehaviour
     public void OnSubmit()
     {
         RandomMgr r = new RandomMgr(gaParameters.seed);
+
         for (int i = 0; i < testCount; i++)
         {
             StartJob();
@@ -66,6 +67,7 @@ public class MasterMgr : MonoBehaviour
     public string InitSemaphore = "1";
     public void GAStarter()
     {
+
         GeneticAlgo ga;
         lock (InitSemaphore)
         {

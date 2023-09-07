@@ -146,10 +146,21 @@ public class Population
     }
     public void Evaluate(int start, int end)
     {
+        List<Thread> evalThreads = new List<Thread>();
+
         for (int i = start; i < end; i++)
         {
             int x = i;
-            members[x].fitness = Evaluator.Evaluate(members[x], parameters);
+            Thread t = new Thread(() => members[x].fitness = Evaluator.Evaluate(members[x], parameters));
+            evalThreads.Add(t);
+            t.Start();
+            //members[x].fitness = Evaluator.Evaluate(members[x], parameters);
+        }
+
+        // For evaluate based parallelization
+        foreach (Thread eT in evalThreads)
+        {
+            eT.Join();
         }
     }
 

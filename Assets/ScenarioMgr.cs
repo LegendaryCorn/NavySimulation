@@ -17,13 +17,15 @@ public struct RandomPointBox
         float randomW = 0;//Random.Range(-width / 2f, width / 2f);
         float angleRad = angle * Mathf.Deg2Rad;
 
+        /*
         Vector3 new_point = new Vector3(
             center.x + randomL * Mathf.Cos(angleRad) + randomW * Mathf.Sin(angleRad),
             center.y,
             center.z - randomL * Mathf.Sin(angleRad) + randomW * Mathf.Cos(angleRad)
             );
+        */
 
-        return new_point;
+        return center;
     }
 }
 

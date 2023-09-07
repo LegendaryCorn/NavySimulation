@@ -55,14 +55,18 @@ public class Move : Command
             if (ent == entity) continue;
             p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);
             if (p.distance < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold) {
+
+                float h = entity.heading * Mathf.Deg2Rad;
+                float sinHeading = Mathf.Sin(h);
+                float cosHeading = Mathf.Cos(h);
+
                 foreach (PF pf in potParams.shipPotentials)
                 {
-                    float h = entity.heading * Mathf.Deg2Rad;
-                    Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * Mathf.Sin(h) + pf.horizontalOffset * Mathf.Cos(h), 0,
-                                                                pf.verticalOffset * Mathf.Cos(h) - pf.horizontalOffset * Mathf.Sin(h));
+                    Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
+                                                                pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
 
-                    Vector3 potentialVal = Mathf.Pow(p.diff.magnitude, pf.exponent) * potPos * entity.mass *
-                      pf.coefficient;
+                    Vector3 potentialVal = Mathf.Pow(p.diff.magnitude, pf.exponent) * entity.mass *
+                      pf.coefficient * potPos;
 
                     if (pf.isAttractive)
                         repulsivePotential -= potentialVal;

@@ -297,24 +297,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potentialParameters:
-    potentialDistanceThreshold: 750
+    potentialDistanceThreshold: 831
     waypointPotential:
       isAttractive: 1
-      coefficient: 1000
-      exponent: -1
+      coefficient: 5150
+      exponent: -5.12
       verticalOffset: 0
       horizontalOffset: 0
     shipPotentials:
     - isAttractive: 0
-      coefficient: 3750
-      exponent: -2
-      verticalOffset: 0
-      horizontalOffset: 0
+      coefficient: 10000
+      exponent: -4.11
+      verticalOffset: -193
+      horizontalOffset: 189
     - isAttractive: 1
-      coefficient: 0.3
-      exponent: -0.5
-      verticalOffset: 0
-      horizontalOffset: 450
+      coefficient: 1430
+      exponent: 0.36
+      verticalOffset: 254
+      horizontalOffset: -256
   scenarioID: 0
 --- !u!4 &1371767469 stripped
 Transform:

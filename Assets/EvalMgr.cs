@@ -16,6 +16,11 @@ public class EvalMgr : MonoBehaviour
 
     private void Start()
     {
+        float timeStart;
+        float timeEnd;
+
+        timeStart = Time.realtimeSinceStartup;
+
         gameMgr = new GameMgr(potentialParameters);
         gameMgr.ExecuteGame(scenarioID);
 
@@ -32,6 +37,9 @@ public class EvalMgr : MonoBehaviour
             fitness *= 0f;
         }
 
-        Debug.Log(sum.ToString() + " " + fitness.ToString());
+        timeEnd = Time.realtimeSinceStartup;
+
+        Debug.Log(sum.ToString() + " " + fitness.ToString() + " " + (timeEnd - timeStart).ToString());
+
     }
 }

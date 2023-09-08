@@ -24,7 +24,7 @@ public class SimulationMgr : MonoBehaviour
     public string potentialChromosome;
     public PotentialParameters potentialParameters;
 
-    float dt = 1f / 120f;
+    float dt = 1f / 60f;
 
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class SimulationMgr : MonoBehaviour
     void FixedUpdate()
     {
         // Update Sim
-        gameMgr.RunGame(dt, dt * 2f * simSpeed);
+        gameMgr.RunGame(dt, dt * simSpeed);
     }
 
     SimulatedEntity FindSimulatedEntityPrefab(EntityType e)

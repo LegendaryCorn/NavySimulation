@@ -21,7 +21,7 @@ public class GameMgr
     public void ExecuteGame(int scenario)
     {
         LoadScenario(scenario);
-        RunGame(1f / 60f, 300f);
+        RunGame(1f / 20f, 300f);
     }
 
     public Vector3 position;

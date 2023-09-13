@@ -8,6 +8,8 @@ public class RunUIMgr : MonoBehaviour
 {
     public static RunUIMgr inst;
 
+
+    [Header("Start UI Elements")]
     [SerializeField] private InputField popSizeField;
     [SerializeField] private InputField genCountField;
     [SerializeField] private InputField crossProbField;
@@ -15,14 +17,22 @@ public class RunUIMgr : MonoBehaviour
     [SerializeField] private InputField seedField;
     [SerializeField] private InputField testCountField;
 
+    [Header("Graph UI Elements")]
     public RectTransform graphArea;
     public LineRenderer avgLine;
     public LineRenderer maxLine;
+
+    public Text lowText;
+    public Text highText;
+    public Text avgText;
+    public Text maxText;
+
 
     Dictionary<int, List<float>> avgLists;
     Dictionary<int, List<float>> maxLists;
     List<float> averageAvg;
     List<float> averageMax;
+    [Header("Other")]
     public int genCount;
 
     Object entryLock = new Object();
@@ -148,13 +158,26 @@ public class RunUIMgr : MonoBehaviour
             avgLine.positionCount = maxCount;
             maxLine.positionCount = maxCount;
 
+            float avgFinal = 0;
+            float maxFinal = 0;
             for (int i = 0; i < maxCount; i++)
             {
                 Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (averageAvg[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 avgLine.SetPosition(i, a);
                 Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (averageMax[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 maxLine.SetPosition(i, m);
+
+                if(i + 1 == maxCount)
+                {
+                    avgFinal = averageAvg[i];
+                    maxFinal = averageMax[i];
+                }
             }
+
+            lowText.text = minVal.ToString("F3");
+            highText.text = maxVal.ToString("F3");
+            avgText.text = avgFinal.ToString("F3");
+            maxText.text = maxFinal.ToString("F3");
         }
     }
 

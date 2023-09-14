@@ -300,21 +300,21 @@ MonoBehaviour:
     potentialDistanceThreshold: 831
     waypointPotential:
       isAttractive: 1
-      coefficient: 5150
-      exponent: -5.12
+      coefficient: 7370
+      exponent: -1.88
       verticalOffset: 0
       horizontalOffset: 0
     shipPotentials:
     - isAttractive: 0
-      coefficient: 10000
-      exponent: -4.11
-      verticalOffset: -193
-      horizontalOffset: 189
+      coefficient: 3960
+      exponent: 1.44
+      verticalOffset: 93
+      horizontalOffset: -177
     - isAttractive: 1
-      coefficient: 1430
-      exponent: 0.36
+      coefficient: 8170
+      exponent: 2.29
       verticalOffset: 254
-      horizontalOffset: -256
+      horizontalOffset: 247
   scenarioID: 0
 --- !u!4 &1371767469 stripped
 Transform:

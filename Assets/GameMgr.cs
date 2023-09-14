@@ -66,8 +66,8 @@ public class GameMgr
             {
                 ent.physics.OnUpdate(dt);
             }
-            if(counter % 10 == 9)
-                fitnessMgr.OnUpdate();
+            //if(counter % 10 == 9)
+            fitnessMgr.OnUpdate();
             counter += 1;
         }
     }

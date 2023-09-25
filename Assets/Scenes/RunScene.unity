@@ -3791,30 +3791,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chromosomeParameters:
-  - chromosomeLength: 10
+  - chromosomeLength: 12
     chromosomeMin: 0
-    chromosomeMax: 1023
-  - chromosomeLength: 10
+    chromosomeMax: 4095
+  - chromosomeLength: 15
     chromosomeMin: 0
-    chromosomeMax: 10230
+    chromosomeMax: 32767
   - chromosomeLength: 10
     chromosomeMin: -5.12
     chromosomeMax: 5.11
-  - chromosomeLength: 10
+  - chromosomeLength: 15
     chromosomeMin: 0
-    chromosomeMax: 0
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 9
-    chromosomeMin: -256
-    chromosomeMax: 255
-  - chromosomeLength: 9
-    chromosomeMin: -256
-    chromosomeMax: 255
-  - chromosomeLength: 10
-    chromosomeMin: 0
-    chromosomeMax: 10230
+    chromosomeMax: 32767
   - chromosomeLength: 10
     chromosomeMin: -5.12
     chromosomeMax: 5.11

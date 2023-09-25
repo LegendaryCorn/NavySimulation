@@ -5,6 +5,7 @@ using UnityEngine;
 public class OneShipFitnessParameters
 {
     public bool reachedTarget;
+    public float timeToTarget;
     /*
     public float desSpeedDiff;
     public float prevDesSpeedDiff;
@@ -61,7 +62,8 @@ public class FitnessMgr
 
             oneShipFitnessParameters[ent1.id] = new OneShipFitnessParameters
             {
-                reachedTarget = false
+                reachedTarget = false,
+                timeToTarget = 0f
                 /*
                 desSpeedDiff = 0,
                 prevDesSpeedDiff = 0,
@@ -101,13 +103,13 @@ public class FitnessMgr
         }
     }
 
-    public void OnUpdate()
+    public void OnUpdate(float dt)
     {
-        UpdateParameters();
+        UpdateParameters(dt);
         UpdateFitnessInfo();
     }
 
-    void UpdateParameters()
+    void UpdateParameters(float dt)
     {
         List<Entity381> entities = gameMgr.entityMgr.entities;
 
@@ -117,6 +119,7 @@ public class FitnessMgr
             OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
 
             f1.reachedTarget = ent1.ai.commands.Count == 0;
+            if (!f1.reachedTarget) { f1.timeToTarget += dt; }
             /*
             f1.prevDesHeadingDiff = f1.desHeadingDiff;
             f1.prevDesSpeedDiff = f1.desSpeedDiff;

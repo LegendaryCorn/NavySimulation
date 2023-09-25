@@ -24,22 +24,25 @@ public class EvalMgr : MonoBehaviour
         gameMgr = new GameMgr(potentialParameters);
         gameMgr.ExecuteGame(scenarioID);
 
-        float sum = gameMgr.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+        float closestDist = gameMgr.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+        float timePoint = Mathf.Max(gameMgr.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, gameMgr.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
         float fitness = 0f;
-
-        if (sum <= 500f)
-            fitness = 0.2f * (sum - 500f) + 100f;
-        else if (sum <= 1400f)
-            fitness = -0.125f * (sum - 500f) + 100f;
 
         if(!gameMgr.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !gameMgr.fitnessMgr.oneShipFitnessParameters[1].reachedTarget)
         {
             fitness *= 0f;
         }
+        else
+        {
+            float fcd = Mathf.Max(0, 100f - 0.001f * (800f - closestDist) * (800f - closestDist));
+            float ftp = Mathf.Max(0, 100f + (90f - timePoint));
+
+            fitness = fcd + ftp;
+        }
 
         timeEnd = Time.realtimeSinceStartup;
 
-        Debug.Log(sum.ToString() + " " + fitness.ToString() + " " + (timeEnd - timeStart).ToString());
+        Debug.Log(closestDist.ToString() + " " + timePoint.ToString() + " "  + fitness.ToString() + " " + (timeEnd - timeStart).ToString());
 
     }
 }

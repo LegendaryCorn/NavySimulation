@@ -622,27 +622,15 @@ MonoBehaviour:
     - chromosomeLength: 10
       chromosomeMin: 0
       chromosomeMax: 1023
-    - chromosomeLength: 10
+    - chromosomeLength: 15
       chromosomeMin: 0
-      chromosomeMax: 10230
+      chromosomeMax: 32767
     - chromosomeLength: 10
       chromosomeMin: -5.12
       chromosomeMax: 5.11
-    - chromosomeLength: 10
+    - chromosomeLength: 15
       chromosomeMin: 0
-      chromosomeMax: 10230
-    - chromosomeLength: 10
-      chromosomeMin: -5.12
-      chromosomeMax: 5.11
-    - chromosomeLength: 9
-      chromosomeMin: -256
-      chromosomeMax: 255
-    - chromosomeLength: 9
-      chromosomeMin: -256
-      chromosomeMax: 255
-    - chromosomeLength: 10
-      chromosomeMin: 0
-      chromosomeMax: 10230
+      chromosomeMax: 32767
     - chromosomeLength: 10
       chromosomeMin: -5.12
       chromosomeMax: 5.11
@@ -655,26 +643,21 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 1001001011111111011000010110001000010100101010101010000001001000010111110000001110000111011111111111111111
+  potentialChromosome: 
   potentialParameters:
-    potentialDistanceThreshold: 750
+    potentialDistanceThreshold: 2000
     waypointPotential:
       isAttractive: 1
-      coefficient: 1000
-      exponent: -1
+      coefficient: 10000
+      exponent: -0.5
       verticalOffset: 0
       horizontalOffset: 0
     shipPotentials:
     - isAttractive: 0
-      coefficient: 3750
-      exponent: -2
+      coefficient: 10
+      exponent: -1.5
       verticalOffset: 0
-      horizontalOffset: 0
-    - isAttractive: 1
-      coefficient: 0.3
-      exponent: -0.5
-      verticalOffset: 0
-      horizontalOffset: 450
+      horizontalOffset: -50
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public struct PotentialParameters
         for(int i = 3; i < parameters.Length; i+= 4)
         {
             PF p;
-            p.isAttractive = i + 4 * 1 >= parameters.Length;
+            p.isAttractive = false;//i + 4 * 1 >= parameters.Length;
             p.coefficient = parameters[i];
             p.exponent = parameters[i+1];
             p.verticalOffset = parameters[i+2];

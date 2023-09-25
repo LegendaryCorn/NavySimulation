@@ -33,19 +33,14 @@ public class Evaluator
         float fitness = 1 / (objective_val + 1);
         */
 
-        
-        float sum = 0;
-        bool noWp = false;
+        GameMgr game = null;
 
         for(int i = 0; i < ScenarioMgr.inst.scenarios.Count; i++)
         {
             Scenario s = ScenarioMgr.inst.scenarios[i];
 
-            GameMgr game = new GameMgr(new PotentialParameters(vals));
+            game = new GameMgr(new PotentialParameters(vals));
             game.ExecuteGame(i);
-
-            sum = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
-            noWp = !game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget;
 
             /*
             float total = 3f   * game.fitnessMgr.countHeadingManeuver
@@ -60,16 +55,20 @@ public class Evaluator
 
         //return 1 / sum;
 
+        float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
         float fitness = 0f;
 
-        if (sum <= 500f)
-            fitness = 0.2f * (sum - 500f) + 100f;
-        else if (sum <= 1400f)
-            fitness = -0.125f * (sum - 500f) + 100f;
-
-        if (noWp)
+        if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget)
         {
             fitness *= 0f;
+        }
+        else
+        {
+            float fcd = Mathf.Max(0, 100f - 0.001f * (800f - closestDist) * (800f - closestDist));
+            float ftp = Mathf.Max(0, 100f + (90f - timePoint));
+
+            fitness = fcd + ftp;
         }
 
         return Mathf.Max(fitness, 0f);

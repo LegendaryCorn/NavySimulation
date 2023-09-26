@@ -30,7 +30,7 @@ public class EvalMgr : MonoBehaviour
         float maxAngle = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP, game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP);
         float fitness = 0f;
 
-        if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget)
+        if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget || closestDist < 150f)
         {
             fitness *= 0f;
         }

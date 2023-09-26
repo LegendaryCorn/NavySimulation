@@ -6,6 +6,8 @@ public class OneShipFitnessParameters
 {
     public bool reachedTarget;
     public float timeToTarget;
+    public float minDesHeadingWP;
+    public float maxDesHeadingWP;
     /*
     public float desSpeedDiff;
     public float prevDesSpeedDiff;
@@ -63,7 +65,9 @@ public class FitnessMgr
             oneShipFitnessParameters[ent1.id] = new OneShipFitnessParameters
             {
                 reachedTarget = false,
-                timeToTarget = 0f
+                timeToTarget = 0f,
+                minDesHeadingWP = 0f,
+                maxDesHeadingWP = 0f
                 /*
                 desSpeedDiff = 0,
                 prevDesSpeedDiff = 0,
@@ -119,7 +123,14 @@ public class FitnessMgr
             OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
 
             f1.reachedTarget = ent1.ai.commands.Count == 0;
-            if (!f1.reachedTarget) { f1.timeToTarget += dt; }
+            if (!f1.reachedTarget) { 
+                f1.timeToTarget += dt;
+
+                Vector3 wayDiff = ((Move)(ent1.ai.commands[0])).movePosition - ent1.position;
+                float wayAng = Utils.AngleDiffPosNeg(ent1.desiredHeading, Mathf.Atan2(wayDiff.x, wayDiff.z) * Mathf.Rad2Deg);
+                f1.minDesHeadingWP = Mathf.Min(f1.minDesHeadingWP, wayAng);
+                f1.maxDesHeadingWP = Mathf.Max(f1.maxDesHeadingWP, wayAng);
+            }
             /*
             f1.prevDesHeadingDiff = f1.desHeadingDiff;
             f1.prevDesSpeedDiff = f1.desSpeedDiff;

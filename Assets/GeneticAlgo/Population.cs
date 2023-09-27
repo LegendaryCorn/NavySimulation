@@ -88,10 +88,10 @@ public class Population
         Halve(child);
     }
 
-    public void Report(int gen, long startTime, int id)
+    public void Report(int gen, long startTime, int id, bool rep)
     {
         string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
-        MasterMgr.inst.ThreadLog(report);
+        if (rep) { MasterMgr.inst.ThreadLog(report); }
         RunUIMgr.inst.NewGraphEntry(avg, max, id);
 
         // Disbled for now

@@ -162,9 +162,9 @@ public class RunUIMgr : MonoBehaviour
             float maxFinal = 0;
             for (int i = 0; i < maxCount; i++)
             {
-                Vector3 a = new Vector3(i * 1f / genCount * (right - left) + left, (averageAvg[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                Vector3 a = new Vector3(i * 1f / (genCount-1) * (right - left) + left, (averageAvg[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 avgLine.SetPosition(i, a);
-                Vector3 m = new Vector3(i * 1f / genCount * (right - left) + left, (averageMax[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
+                Vector3 m = new Vector3(i * 1f / (genCount-1) * (right - left) + left, (averageMax[i] - minVal) / (maxVal - minVal) * (top - bottom) + bottom, 0);
                 maxLine.SetPosition(i, m);
 
                 if(i + 1 == maxCount)

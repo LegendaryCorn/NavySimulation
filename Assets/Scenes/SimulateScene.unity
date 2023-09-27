@@ -619,9 +619,9 @@ MonoBehaviour:
     pMut: 0
     seed: 0
     chromosomeParameters:
-    - chromosomeLength: 10
+    - chromosomeLength: 12
       chromosomeMin: 0
-      chromosomeMax: 1023
+      chromosomeMax: 4095
     - chromosomeLength: 15
       chromosomeMin: 0
       chromosomeMax: 32767

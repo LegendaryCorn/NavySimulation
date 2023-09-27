@@ -50,7 +50,7 @@ public class GeneticAlgo
 
         parents.Evaluate();
         parents.Statistics();
-        parents.Report(0, startTime, gaParameters.id);
+        parents.Report(0, startTime, gaParameters.id, false);
         MasterMgr.inst.ThreadLog("Initialed GA");
 
     }
@@ -72,7 +72,7 @@ public class GeneticAlgo
             //InputHandler.inst.ThreadLog("Generation: " + i); 
             parents.CHCGeneration(children);
             children.Statistics();
-            children.Report(i, startTime, gaParameters.id);
+            children.Report(i, startTime, gaParameters.id, i == gaParameters.numberOfGenerations - 1);
 
 
             Population tmp = parents;

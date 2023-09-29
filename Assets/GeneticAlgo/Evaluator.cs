@@ -49,8 +49,10 @@ public class Evaluator
                         + 10f  * game.fitnessMgr.countShipInFront
                         + 100f * game.fitnessMgr.countCrash;
 
-            sum += total / (s.scenarioEntities.Count);
+            sum += total / (s.scenarioEntities.Count);`
+
             */
+            if(i == 0) { break; }
         }
 
         //return 1 / sum;
@@ -68,11 +70,11 @@ public class Evaluator
         else
         {
             float fcd = Mathf.Max(0, 100f - 0.001f * (800f - closestDist) * (800f - closestDist));
-            float ftp = Mathf.Max(0, 100f + (90f - timePoint));
+            float ftp = Mathf.Max(0, 100f + (230f - timePoint));
             float fmi = Mathf.Clamp(0.2f * minAngle + 10f, 0f, 1f);
             float fma = Mathf.Clamp(-100f * (maxAngle - 75f) / 15f, 0f, 100f);
 
-            fitness = fcd + 0.1f * ftp + fmi * fma;
+            fitness = fcd + 1.0f * ftp + 1.0f * fmi * fma;
         }
 
         return Mathf.Max(fitness, 0f);

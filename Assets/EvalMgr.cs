@@ -37,16 +37,16 @@ public class EvalMgr : MonoBehaviour
         else
         {
             float fcd = Mathf.Max(0, 100f - 0.001f * (800f - closestDist) * (800f - closestDist));
-            float ftp = Mathf.Max(0, 100f + (90f - timePoint));
+            float ftp = Mathf.Max(0, 100f + (230f - timePoint));
             float fmi = Mathf.Clamp(0.2f * minAngle + 10f, 0f, 1f);
             float fma = Mathf.Clamp(-100f * (maxAngle - 75f) / 15f, 0f, 100f);
 
-            fitness = fcd + 0.1f * ftp + fmi * fma;
+            fitness = fcd + 1.0f * ftp + 1.0f * fmi * fma;
         }
 
         timeEnd = Time.realtimeSinceStartup;
 
-        Debug.Log(closestDist.ToString() + " " + maxAngle.ToString() + " "  + fitness.ToString() + " " + (timeEnd - timeStart).ToString());
+        Debug.Log(closestDist.ToString() + " " + maxAngle.ToString() + " "  + timePoint.ToString() + " " +  fitness.ToString() + " " + (timeEnd - timeStart).ToString());
 
     }
 }

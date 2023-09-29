@@ -474,7 +474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315160319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: -299.86, z: -800}
+  m_LocalPosition: {x: 0, y: -299.86, z: -3800}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -643,7 +643,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 00100110000110100101011011100101000010101001110110010100101010110000000111000000
+  potentialChromosome: 00000011111100001110001011100010011101000100010000001010110010000110000000000000
   potentialParameters:
     potentialDistanceThreshold: 2000
     waypointPotential:
@@ -2915,7 +2915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991371576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 300, z: -800}
+  m_LocalPosition: {x: 0, y: 300, z: -3800}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 358051249}

@@ -3807,11 +3807,11 @@ MonoBehaviour:
     chromosomeMin: -5.12
     chromosomeMax: 5.11
   - chromosomeLength: 9
-    chromosomeMin: -256
-    chromosomeMax: 255
+    chromosomeMin: -2560
+    chromosomeMax: 2550
   - chromosomeLength: 9
-    chromosomeMin: -256
-    chromosomeMax: 255
+    chromosomeMin: -2560
+    chromosomeMax: 2550
   testCount: 0
   gaParameters:
     populationSize: 0

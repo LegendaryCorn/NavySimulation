@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b7f93d66c508a41b6ad85d388af393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenarioID: 0
+  scenarioID: 1
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -635,17 +635,17 @@ MonoBehaviour:
       chromosomeMin: -5.12
       chromosomeMax: 5.11
     - chromosomeLength: 9
-      chromosomeMin: -256
-      chromosomeMax: 255
+      chromosomeMin: -2560
+      chromosomeMax: 2550
     - chromosomeLength: 9
-      chromosomeMin: -256
-      chromosomeMax: 255
+      chromosomeMin: -2560
+      chromosomeMax: 2550
     chromosomeTotal: 70
     id: 0
-  simSpeed: 2
-  potentialChromosome: 00000011111100001110001011100010011101000100010000001010110010000110000000000000
+  simSpeed: 5
+  potentialChromosome: 01001011110001101001101011001110100001100101010000100110001001101110100001010110
   potentialParameters:
-    potentialDistanceThreshold: 2000
+    potentialDistanceThreshold: 3000
     waypointPotential:
       isAttractive: 1
       coefficient: 10000
@@ -654,10 +654,10 @@ MonoBehaviour:
       horizontalOffset: 0
     shipPotentials:
     - isAttractive: 0
-      coefficient: 10
+      coefficient: 1.5
       exponent: -1.5
-      verticalOffset: 0
-      horizontalOffset: -50
+      verticalOffset: 2200
+      horizontalOffset: -2000
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

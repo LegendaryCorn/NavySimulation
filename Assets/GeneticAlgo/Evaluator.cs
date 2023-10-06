@@ -35,12 +35,12 @@ public class Evaluator
 
         GameMgr game = null;
 
-        for(int i = 0; i < ScenarioMgr.inst.scenarios.Count; i++)
+        for(int i = 0; i < 1; i++)//ScenarioMgr.inst.scenarios.Count; i++)
         {
             Scenario s = ScenarioMgr.inst.scenarios[i];
 
             game = new GameMgr(new PotentialParameters(vals));
-            game.ExecuteGame(i);
+            game.ExecuteGame(1);
 
             /*
             float total = 3f   * game.fitnessMgr.countHeadingManeuver
@@ -59,8 +59,10 @@ public class Evaluator
 
         float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
         float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-        float minAngle = Mathf.Min(game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP, game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP);
-        float maxAngle = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP, game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP);
+        float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
+        float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
+        float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
+        float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
         float fitness = 0f;
 
         if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget || closestDist < 150f)
@@ -70,11 +72,13 @@ public class Evaluator
         else
         {
             float fcd = Mathf.Max(0, 100f - 0.001f * (800f - closestDist) * (800f - closestDist));
-            float ftp = Mathf.Max(0, 100f + (230f - timePoint));
-            float fmi = Mathf.Clamp(0.2f * minAngle + 10f, 0f, 1f);
-            float fma = Mathf.Clamp(-100f * (maxAngle - 75f) / 15f, 0f, 100f);
+            float ftp = Mathf.Clamp(0.5f * (3400f - timePoint), 0, 100);
+            float fmi0 = Mathf.Clamp(0.1f * (minAngle0 + 10f), 0f, 1f);
+            float fma0 = Mathf.Clamp(-100f * (maxAngle0 - 75f) / 15f, 0f, 100f);
+            float fmi1 = Mathf.Clamp(maxAngle1 / 2f, 0f, 10f);
+            float fma1 = Mathf.Clamp(-minAngle1, 0f, 10f);
 
-            fitness = fcd + 1.0f * ftp + 1.0f * fmi * fma;
+            fitness = fcd + 1.0f * ftp + 1.0f * fmi0 * fma0 + fmi1 * fma1;
         }
 
         return Mathf.Max(fitness, 0f);

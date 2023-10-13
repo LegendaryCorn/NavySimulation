@@ -75,8 +75,8 @@ public class Evaluator
             float ftp = Mathf.Clamp(0.5f * (3400f - timePoint), 0, 100);
             float fmi0 = Mathf.Clamp(0.1f * (minAngle0 + 10f), 0f, 1f);
             float fma0 = Mathf.Clamp(-100f * (maxAngle0 - 75f) / 15f, 0f, 100f);
-            float fmi1 = Mathf.Clamp(maxAngle1 / 2f, 0f, 10f);
-            float fma1 = Mathf.Clamp(-minAngle1, 0f, 10f);
+            float fmi1 = Mathf.Clamp(10f - (maxAngle1 / 5f), 0f, 10f);
+            float fma1 = Mathf.Clamp(10f - (-minAngle1 / 5f), 0f, 10f);
 
             fitness = fcd + 1.0f * ftp + 1.0f * fmi0 * fma0 + fmi1 * fma1;
         }

@@ -14,6 +14,7 @@ public class Potential
     public float relativeBearingDegrees;
     public CPAInfo cpaInfo;
     public float targetAngle;
+    public float targetRelHeading; // Where the target is heading relative to your ship 
 
     public Potential(Entity381 own, Entity381 tgt)
     {
@@ -165,6 +166,7 @@ public class DistanceMgr
                 p1.diff = p1.target.position - p1.ownship.position;
                 p1.distance = p1.diff.magnitude;
                 p1.direction = p1.diff.normalized;
+                p1.targetRelHeading = Utils.Degrees360(Utils.AngleDiffPosNeg(ent2.heading, ent1.heading));
                 //p1.cpaInfo.ReCompute();
                 //p1.relativeVelocity = p1.cpaInfo.relativeVelocity;
                 //p1.targetAngle = p1.cpaInfo.targetAngle;
@@ -173,6 +175,7 @@ public class DistanceMgr
                 p2.diff = -p1.diff;
                 p2.distance = p1.distance;
                 p2.direction = -p1.direction;
+                p2.targetRelHeading = Utils.Degrees360(Utils.AngleDiffPosNeg(ent1.heading, ent2.heading));
                 //p2.cpaInfo.ReCompute();
                 //p2.relativeVelocity = p2.cpaInfo.relativeVelocity;
                 //p2.targetAngle = p2.cpaInfo.targetAngle;

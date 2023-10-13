@@ -10,6 +10,8 @@ public struct PF
     public float exponent;
     public float verticalOffset;
     public float horizontalOffset;
+    public float minAngle;
+    public float maxAngle;
 }
 
 [System.Serializable]
@@ -27,9 +29,11 @@ public struct PotentialParameters
         waypointPotential.exponent = parameters[2];
         waypointPotential.verticalOffset = 0;
         waypointPotential.horizontalOffset = 0;
+        waypointPotential.minAngle = 0f;
+        waypointPotential.maxAngle = 360f;
 
         shipPotentials = new List<PF>();
-        for(int i = 3; i < parameters.Length; i+= 4)
+        for(int i = 3; i < parameters.Length; i+= 6)
         {
             PF p;
             p.isAttractive = false;//i + 4 * 1 >= parameters.Length;
@@ -37,6 +41,8 @@ public struct PotentialParameters
             p.exponent = parameters[i+1];
             p.verticalOffset = parameters[i+2];
             p.horizontalOffset = parameters[i+3];
+            p.minAngle = parameters[i+4];
+            p.maxAngle = parameters[i+5];
             shipPotentials.Add(p);
         }
     }

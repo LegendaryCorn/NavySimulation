@@ -3812,6 +3812,12 @@ MonoBehaviour:
   - chromosomeLength: 9
     chromosomeMin: -2560
     chromosomeMax: 2550
+  - chromosomeLength: 9
+    chromosomeMin: 0
+    chromosomeMax: 360
+  - chromosomeLength: 9
+    chromosomeMin: 0
+    chromosomeMax: 360
   testCount: 0
   gaParameters:
     populationSize: 0

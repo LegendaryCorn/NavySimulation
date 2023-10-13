@@ -46,6 +46,8 @@ public class EvalMgr : MonoBehaviour
             float fma1 = Mathf.Clamp(10f - (-minAngle1 / 5f), 0f, 10f);
 
             fitness = fcd + 1.0f * ftp + 1.0f * fmi0 * fma0 + fmi1 * fma1;
+            if (fmi1 * fma1 == 0) { fitness = 0.1f; }
+            if (fmi0 * fma0 == 0) { fitness = 0.1f; }
         }
 
         timeEnd = Time.realtimeSinceStartup;

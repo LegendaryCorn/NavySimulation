@@ -62,16 +62,21 @@ public class Move : Command
 
                 foreach (PF pf in potParams.shipPotentials)
                 {
-                    Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
-                                                                pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
+                    bool c1 = pf.minAngle > pf.maxAngle && (p.targetRelHeading >= pf.minAngle || p.targetRelHeading <= pf.maxAngle);
+                    bool c2 = pf.minAngle < pf.maxAngle && (p.targetRelHeading >= pf.minAngle && p.targetRelHeading <= pf.maxAngle);
+                    if (c1 || c2)
+                    {
+                        Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
+                                                                    pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
 
-                    Vector3 potentialVal = Mathf.Pow(p.diff.magnitude, pf.exponent) * entity.mass *
-                      pf.coefficient * potPos;
+                        Vector3 potentialVal = Mathf.Pow(p.diff.magnitude, pf.exponent) * entity.mass *
+                          pf.coefficient * potPos;
 
-                    if (pf.isAttractive)
-                        repulsivePotential -= potentialVal;
-                    else
-                        repulsivePotential += potentialVal;
+                        if (pf.isAttractive)
+                            repulsivePotential -= potentialVal;
+                        else
+                            repulsivePotential += potentialVal;
+                    }
                 }
                 //repulsivePotential += p.diff;
             }

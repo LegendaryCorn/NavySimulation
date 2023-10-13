@@ -640,10 +640,16 @@ MonoBehaviour:
     - chromosomeLength: 9
       chromosomeMin: -2560
       chromosomeMax: 2550
+    - chromosomeLength: 9
+      chromosomeMin: 0
+      chromosomeMax: 360
+    - chromosomeLength: 9
+      chromosomeMin: 0
+      chromosomeMax: 360
     chromosomeTotal: 70
     id: 0
   simSpeed: 5
-  potentialChromosome: 11100111101101101000011110110000110010011100000100001111110110110011110110000000
+  potentialChromosome: 11001001110110011101111011100000110011101000110100010101100110110100100101000000110011110101001010
   potentialParameters:
     potentialDistanceThreshold: 3000
     waypointPotential:
@@ -652,12 +658,16 @@ MonoBehaviour:
       exponent: -0.5
       verticalOffset: 0
       horizontalOffset: 0
+      minAngle: 0
+      maxAngle: 0
     shipPotentials:
     - isAttractive: 0
       coefficient: 1.5
       exponent: -1.5
       verticalOffset: 2200
       horizontalOffset: -2000
+      minAngle: 240
+      maxAngle: 300
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,8 +1914,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345303798}
-  m_LocalRotation: {x: 0.07216257, y: 0.048179958, z: 0.0034900117, w: -0.99622244}
-  m_LocalPosition: {x: 1134.8193, y: -309.45102, z: -633.2187}
+  m_LocalRotation: {x: -0.2832277, y: 0.084425874, z: 0.025038388, w: 0.9550013}
+  m_LocalPosition: {x: -293.2898, y: -1656.8125, z: -3559.261}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1517180312}

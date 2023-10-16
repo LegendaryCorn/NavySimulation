@@ -202,27 +202,19 @@ MonoBehaviour:
     - type: 0
       spawnPoint:
         center: {x: 0, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 0, y: 0, z: 3500}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints: []
+      fitAxisHeading: 0
     - type: 0
       spawnPoint:
         center: {x: 0, y: 0, z: 3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 0, y: 0, z: -3500}
-        length: 0
-        width: 0
-        angle: 0
       heading: 180
+      fitPoints: []
+      fitAxisHeading: 0
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -237,27 +229,39 @@ MonoBehaviour:
     - type: 0
       spawnPoint:
         center: {x: 0, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 0, y: 0, z: 3500}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints:
+      - center: {x: 0, y: 0, z: -2400}
+      - center: {x: 0, y: 0, z: -1800}
+      - center: {x: 0, y: 0, z: -1200}
+      - center: {x: 0, y: 0, z: -600}
+      - center: {x: 0, y: 0, z: 0}
+      - center: {x: 0, y: 0, z: 600}
+      - center: {x: 0, y: 0, z: 1200}
+      - center: {x: 0, y: 0, z: 1800}
+      - center: {x: 0, y: 0, z: 2400}
+      - center: {x: 0, y: 0, z: 3000}
+      fitAxisHeading: 0
     - type: 0
       spawnPoint:
         center: {x: 3000, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: -3500, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
       heading: 270
+      fitPoints:
+      - center: {x: 2400, y: 0, z: 0}
+      - center: {x: 1800, y: 0, z: 0}
+      - center: {x: 1200, y: 0, z: 0}
+      - center: {x: 600, y: 0, z: 0}
+      - center: {x: 0, y: 0, z: 0}
+      - center: {x: -600, y: 0, z: 0}
+      - center: {x: -1200, y: 0, z: 0}
+      - center: {x: -1800, y: 0, z: 0}
+      - center: {x: -2400, y: 0, z: 0}
+      - center: {x: -3000, y: 0, z: 0}
+      fitAxisHeading: 270
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -272,27 +276,19 @@ MonoBehaviour:
     - type: 7
       spawnPoint:
         center: {x: 0, y: 0, z: 0}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 0, y: 0, z: 9000}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints: []
+      fitAxisHeading: 0
     - type: 5
       spawnPoint:
         center: {x: 0, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 0, y: 0, z: 9000}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints: []
+      fitAxisHeading: 0
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -307,27 +303,19 @@ MonoBehaviour:
     - type: 0
       spawnPoint:
         center: {x: 150, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 150, y: 0, z: 3500}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints: []
+      fitAxisHeading: 0
     - type: 0
       spawnPoint:
         center: {x: -150, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: -150, y: 0, z: 3500}
-        length: 0
-        width: 0
-        angle: 0
       heading: 0
+      fitPoints: []
+      fitAxisHeading: 0
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -342,27 +330,19 @@ MonoBehaviour:
     - type: 0
       spawnPoint:
         center: {x: -1500, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: 1500, y: 0, z: 3000}
-        length: 0
-        width: 0
-        angle: 0
       heading: 26.5
+      fitPoints: []
+      fitAxisHeading: 0
     - type: 0
       spawnPoint:
         center: {x: 1500, y: 0, z: -3000}
-        length: 0
-        width: 0
-        angle: 0
       wayPoints:
       - center: {x: -1500, y: 0, z: 3000}
-        length: 0
-        width: 0
-        angle: 0
       heading: 333.5
+      fitPoints: []
+      fitAxisHeading: 0
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}

@@ -4,38 +4,21 @@ using UnityEngine;
 
 
 [System.Serializable]
-public struct RandomPointBox
+public struct WayPoint
 {
     public Vector3 center;
-    public float length;
-    public float width;
-    public float angle;
-
-    public Vector3 GenerateRandomPoint()
-    {
-        float randomL = 0;//Random.Range(-length / 2f, length / 2f);
-        float randomW = 0;//Random.Range(-width / 2f, width / 2f);
-        float angleRad = angle * Mathf.Deg2Rad;
-
-        /*
-        Vector3 new_point = new Vector3(
-            center.x + randomL * Mathf.Cos(angleRad) + randomW * Mathf.Sin(angleRad),
-            center.y,
-            center.z - randomL * Mathf.Sin(angleRad) + randomW * Mathf.Cos(angleRad)
-            );
-        */
-
-        return center;
-    }
 }
 
 [System.Serializable]
 public struct ScenarioEntity
 {
     public EntityType type;
-    public RandomPointBox spawnPoint;
-    public List<RandomPointBox> wayPoints;
+    public WayPoint spawnPoint;
+    public List<WayPoint> wayPoints;
     public float heading;
+
+    public List<WayPoint> fitPoints;
+    public float fitAxisHeading;
 }
 
 [System.Serializable]

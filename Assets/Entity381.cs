@@ -52,6 +52,7 @@ public class Entity381
 
     public UnitAI ai;
     public OrientedPhysics physics;
+    public VesselFitness fitness;
 
     public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading, int id)
     {
@@ -71,5 +72,6 @@ public class Entity381
 
         ai = new UnitAI(this);
         physics = new OrientedPhysics(this);
+        fitness = new VesselFitness(this);
     }
 }

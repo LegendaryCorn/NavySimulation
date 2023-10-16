@@ -35,12 +35,13 @@ public class GameMgr
         foreach (ScenarioEntity scEnt in s.scenarioEntities)
         {
             Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
-            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint.GenerateRandomPoint(), scEnt.heading);
+            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint.center, scEnt.heading);
 
-            foreach(RandomPointBox waypoint in scEnt.wayPoints)
+            foreach(WayPoint waypoint in scEnt.wayPoints)
             {
-                ent.ai.AddCommand(new Move(ent, waypoint.GenerateRandomPoint()));
+                ent.ai.AddCommand(new Move(ent, waypoint.center));
             }
+            ent.fitness.SetAxisPoints(scEnt.fitAxisHeading, scEnt.fitPoints);
         }
 
         foreach (ScenarioBoundary scBound in s.scenarioBoundaries)
@@ -65,6 +66,10 @@ public class GameMgr
             foreach (Entity381 ent in entityMgr.entities)
             {
                 ent.physics.OnUpdate(dt);
+            }
+            foreach (Entity381 ent in entityMgr.entities)
+            {
+                ent.fitness.OnUpdate(dt);
             }
             //if(counter % 10 == 9)
             fitnessMgr.OnUpdate(dt);

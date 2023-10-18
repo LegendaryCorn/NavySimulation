@@ -63,7 +63,7 @@ public class SimulationMgr : MonoBehaviour
         }
 
         // Load Lines
-        
+        /*
         foreach (Boundary381 bound in gameMgr.entityMgr.boundaries)
         {
             LineRenderer line = Instantiate<LineRenderer>(simulatedBoundaryPrefab);
@@ -75,6 +75,7 @@ public class SimulationMgr : MonoBehaviour
                 line.SetPosition(i, point);
             }
         }
+        */
         
     }
 

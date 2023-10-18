@@ -7,6 +7,7 @@ public class SimulationMgr : MonoBehaviour
     public static SimulationMgr inst;
 
     public int scenarioID;
+    public int scenarioCount;
 
     GameMgr gameMgr;
 
@@ -49,6 +50,8 @@ public class SimulationMgr : MonoBehaviour
         gameMgr = new GameMgr(potentialParameters);
         gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
 
+        scenarioCount = ScenarioMgr.inst.scenarios.Count;
+
         // Load Scenario Entities
         foreach (Entity381 ent in gameMgr.entityMgr.entities)
         {
@@ -60,7 +63,7 @@ public class SimulationMgr : MonoBehaviour
         }
 
         // Load Lines
-        /*
+        
         foreach (Boundary381 bound in gameMgr.entityMgr.boundaries)
         {
             LineRenderer line = Instantiate<LineRenderer>(simulatedBoundaryPrefab);
@@ -72,7 +75,7 @@ public class SimulationMgr : MonoBehaviour
                 line.SetPosition(i, point);
             }
         }
-        */
+        
     }
 
     // Update is called once per frame
@@ -80,6 +83,16 @@ public class SimulationMgr : MonoBehaviour
     {
         // Update Sim
         gameMgr.RunGame(dt, dt * simSpeed);
+
+        // Change Sim if input
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            LoadNewScenario((scenarioID + 1) % scenarioCount);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            LoadNewScenario((scenarioID + scenarioCount - 1) % scenarioCount);
+        }
     }
 
     SimulatedEntity FindSimulatedEntityPrefab(EntityType e)
@@ -92,5 +105,28 @@ public class SimulationMgr : MonoBehaviour
             }
         }
         return null;
+    }
+
+    void LoadNewScenario(int id)
+    {
+        for(int i = 0; i < simulatedEntities.Count; i++)
+        {
+            Destroy(simulatedEntities[i].gameObject);
+        }
+
+        scenarioID = id;
+        gameMgr = new GameMgr(potentialParameters);
+        gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
+        simulatedEntities = new List<SimulatedEntity>();
+
+        // Load Scenario Entities
+        foreach (Entity381 ent in gameMgr.entityMgr.entities)
+        {
+            SimulatedEntity simEnt = Instantiate<SimulatedEntity>(FindSimulatedEntityPrefab(ent.entityType));
+            simEnt.id = ent.id;
+            simEnt.ent = ent;
+            simEnt.transform.parent = entitiesRoot.transform;
+            simulatedEntities.Add(simEnt);
+        }
     }
 }

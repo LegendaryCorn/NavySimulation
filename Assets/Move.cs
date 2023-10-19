@@ -48,45 +48,14 @@ public class Move : Command
 
     public DHDS ComputePotentialDHDS()
     {
-        Potential p;
-        PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
-        repulsivePotential = Vector3.zero; repulsivePotential.y = 0;
-        foreach (Entity381 ent in entity.gameMgr.entityMgr.entities) {
-            if (ent == entity) continue;
-            p = entity.gameMgr.distanceMgr.GetPotential(entity, ent);
-            if (p.distance < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold) {
+        List<Vector3> potentials = ComputePotentials(entity.position);
 
-                float h = entity.heading * Mathf.Deg2Rad;
-                float sinHeading = Mathf.Sin(h);
-                float cosHeading = Mathf.Cos(h);
+        Vector3 potentialSum = Vector3.zero;
 
-                foreach (PF pf in potParams.shipPotentials)
-                {
-                    bool c1 = pf.minAngle > pf.maxAngle && (p.targetRelHeading >= pf.minAngle || p.targetRelHeading <= pf.maxAngle);
-                    bool c2 = pf.minAngle < pf.maxAngle && (p.targetRelHeading >= pf.minAngle && p.targetRelHeading <= pf.maxAngle);
-                    if (c1 || c2)
-                    {
-                        Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
-                                                                    pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
-
-                        Vector3 potentialVal = Mathf.Pow(p.diff.magnitude, pf.exponent) * entity.mass *
-                          pf.coefficient * potPos;
-
-                        if (pf.isAttractive)
-                            repulsivePotential -= potentialVal;
-                        else
-                            repulsivePotential += potentialVal;
-                    }
-                }
-                //repulsivePotential += p.diff;
-            }
+        foreach(Vector3 pot in potentials)
+        {
+            potentialSum += pot;
         }
-        //repulsivePotential *= repulsiveCoefficient * Mathf.Pow(repulsivePotential.magnitude, repulsiveExponent);
-        attractivePotential = movePosition - entity.position;
-        Vector3 tmp = attractivePotential.normalized;
-        attractivePotential = tmp *
-            potParams.waypointPotential.coefficient * Mathf.Pow(attractivePotential.magnitude, potParams.waypointPotential.exponent);
-        potentialSum = attractivePotential - repulsivePotential;
 
         dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));
 
@@ -96,13 +65,56 @@ public class Move : Command
 
         return new DHDS(dh, ds);
     }
-    public Vector3 attractivePotential = Vector3.zero;
-    public Vector3 potentialSum = Vector3.zero;
-    public Vector3 repulsivePotential = Vector3.zero;
     public float dh;
     public float angleDiff;
     public float cosValue;
     public float ds;
+
+    public List<Vector3> ComputePotentials(Vector3 pos)
+    {
+        List<Vector3> potentials = new List<Vector3>();
+        PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
+
+        Vector3 attractiveDist = movePosition - pos;
+        Vector3 attractivePotential = attractiveDist.normalized *
+            potParams.waypointPotential.coefficient * Mathf.Pow(attractiveDist.magnitude, potParams.waypointPotential.exponent);
+        potentials.Add(attractivePotential);
+
+        foreach (Entity381 ent in entity.gameMgr.entityMgr.entities)
+        {
+            if (ent == entity) continue;
+
+            if ((ent.position - entity.position).magnitude < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold)
+            {
+
+                float h = ent.heading * Mathf.Deg2Rad;
+                float sinHeading = Mathf.Sin(h);
+                float cosHeading = Mathf.Cos(h);
+
+                foreach (PF pf in potParams.shipPotentials)
+                {
+                    //bool c1 = pf.minAngle > pf.maxAngle && (p.targetRelHeading >= pf.minAngle || p.targetRelHeading <= pf.maxAngle);
+                    //bool c2 = pf.minAngle < pf.maxAngle && (p.targetRelHeading >= pf.minAngle && p.targetRelHeading <= pf.maxAngle);
+                    //if (c1 || c2 || true)
+                    //{
+                    Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
+                                                                pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
+                    Vector3 potDiff = potPos - pos;
+
+                    Vector3 potentialVal = Mathf.Pow(potDiff.magnitude, pf.exponent) * entity.mass *
+                        pf.coefficient * potDiff.normalized;
+
+                    if (pf.isAttractive)
+                        potentials.Add(1 * potentialVal);
+                    else
+                        potentials.Add(-1 * potentialVal);
+                    //}
+                }
+            }
+        }
+
+        return potentials;
+    }
 
 
 

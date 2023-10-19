@@ -650,7 +650,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 11001001110110011101111011100000110011101000110100010101100110110100100101000000110011110101001010
+  potentialChromosome: 
   potentialParameters:
     potentialDistanceThreshold: 3000
     waypointPotential:
@@ -663,10 +663,10 @@ MonoBehaviour:
       maxAngle: 0
     shipPotentials:
     - isAttractive: 0
-      coefficient: 1.5
+      coefficient: 5000
       exponent: -1.5
-      verticalOffset: 2200
-      horizontalOffset: -2000
+      verticalOffset: 0
+      horizontalOffset: 0
       minAngle: 240
       maxAngle: 300
 --- !u!1 &534669902
@@ -2550,6 +2550,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0e161963d7b234ab7b147ebc0e8a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graph: {fileID: 4770987507766933776, guid: 117e5c1aa4314e446abed91858f0e2fd, type: 3}
+  maxMag: 50
+  size: {x: 10000, y: 10000}
+  position: {x: -5000, y: 0, z: -5000}
+  resolution: 30
 --- !u!1 &1801844801
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class GraphMgr : MonoBehaviour
     public Vector3 position;
     public int resolution;
 
+    private GameObject plane;
+
     private void Awake()
     {
         inst = this;
@@ -28,7 +30,8 @@ public class GraphMgr : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (SelectionMgr.inst.selectedEntity != null)
+            Destroy(plane);
+            if (SelectionMgr.inst.selectedEntity != null && SelectionMgr.inst.selectedEntities.Count > 0)
                 CreateGraph(SelectionMgr.inst.selectedEntity);
         }
     }
@@ -42,10 +45,9 @@ public class GraphMgr : MonoBehaviour
 
     public void CreateGraph(SimulatedEntity sEntity)
     {
-        GameObject g = Instantiate(graph, sEntity.transform);
-        g.transform.localPosition = new Vector3(position.x, 0, position.z);
-        g.GetComponent<GraphPlane>().entSpecific = true;
-        g.GetComponent<GraphPlane>().sEntity = sEntity;
+        plane = Instantiate(graph, sEntity.transform);
+        plane.transform.localPosition = new Vector3(position.x, 0, position.z);
+        plane.GetComponent<GraphPlane>().sEntity = sEntity;
     }
 
     public void SetSizeX(string x)

@@ -19,7 +19,6 @@ public class GraphPlane : MonoBehaviour
 
     public Vector2 size;
     public int resolution;
-    public bool entSpecific;
     public SimulatedEntity sEntity;
 
     void Awake()
@@ -101,159 +100,47 @@ public class GraphPlane : MonoBehaviour
             Vector3 vertex = vertices[i];
             Vector3 vertexPos = transform.TransformPoint(vertex);
             vertexPos.y = 0;
-            if (!entSpecific)
-                vertex.y = (CalculatePotential(vertexPos) / GraphMgr.inst.maxMag) * 400f;
-            else
-                vertex.y = (CalculatePotential(vertexPos, sEntity) / GraphMgr.inst.maxMag) * 400;
+            vertex.y = (CalculatePotential(vertexPos, sEntity) / GraphMgr.inst.maxMag) * 400;
             vertices[i] = vertex;
         }
     }
 
-    float CalculatePotential(Vector3 position)
+    float CalculatePotential(Vector3 position, SimulatedEntity entity)
     {
-
-        Vector3 repulsivePotential;
         float magnitude;
-        repulsivePotential = Vector3.zero;
+        Entity381 ent381 = entity.ent;
 
-        foreach (Entity381 ent in EntityMgr.inst.entities)
+        if (ent381.ai.commands.Count == 0)
+            return 0;
+
+        List<Vector3> potentials = ((Move)ent381.ai.commands[0]).ComputePotentials(position);
+        Vector3 attTotal = Vector3.zero;
+        Vector3 repTotal = Vector3.zero; 
+
+        int i = 0;
+        foreach(Vector3 pot in potentials)
         {
-            foreach (Vector3 fp in ent.fieldPos)
-            {
-                Vector3 diff = fp - position;
-                float dist = diff.magnitude;
-                Vector3 direc = diff.normalized;
-
-                if (!ent.underway)
-                {
-                    if (dist < 1000)
-                    {
-                        repulsivePotential += direc * ent.mass / 40 * ent.length / 20 *
-                           ent.repulsiveCoefficient / ent.numFields * Mathf.Pow(dist, ent.repulsiveExponent);
-                    }
-                }
-                else
-                {
-                    if (dist < 1000)
-                    {
-                        if (fp != ent.front)
-                        {
-                            repulsivePotential += direc * ent.mass / 40 * ent.length / 20 *
-                                ent.repulsiveCoefficient / ent.numFields * Mathf.Pow(dist, ent.repulsiveExponent);
-                        }
-                        else
-                        {
-                            repulsivePotential += direc * ent.mass / 40 * ent.length / 20 *
-                                ent.repulsiveCoefficient / 2 * Mathf.Pow(dist, ent.repulsiveExponent);
-                        }
-                    }
-                }
-            }
+            if (i == 0)
+                attTotal += pot;
+            else
+                repTotal += pot;
+            i++;
         }
 
-        magnitude = Utils.Clamp(repulsivePotential.magnitude, 0, GraphMgr.inst.maxMag);
-
-        return magnitude;
-    }
-
-    float CalculatePotential(Vector3 position, Entity381 entity)
-    {
-
-        Vector3 repulsivePotential;
-        Vector3 attractivePotential = Vector3.zero;
-        float magnitude;
-        float potentialMag;
-
-        Potential p;
-        repulsivePotential = Vector3.zero;
-        foreach (Entity381 ent in EntityMgr.inst.entities)
-        {
-            if (ent == entity) continue;
-            p = DistanceMgr.inst.GetPotential(entity, ent);
-            foreach (Vector3 fp in ent.fieldPos)
-            {
-                float coeff = SituationCases(p);
-
-                Vector3 diff = fp - position;
-                float dist = diff.magnitude;
-                Vector3 direc = diff.normalized;
-
-                if (!ent.underway)
-                {
-                    if (dist < 1000)
-                    {
-                        repulsivePotential += direc * ent.mass / 40 * ent.length / 20 *
-                           ent.repulsiveCoefficient / ent.numFields * Mathf.Pow(dist, ent.repulsiveExponent);
-                    }
-                }
-                else
-                {
-                    if (dist < 1000)
-                    {
-                        if (fp != ent.front)
-                        {
-                            repulsivePotential += coeff * /*(0.3f * Mathf.Cos(p.targetAngle * Mathf.Deg2Rad) + 1) **/ direc * ent.mass / 40 * ent.length / 20 *
-                                ent.repulsiveCoefficient / ent.numFields * Mathf.Pow(dist, ent.repulsiveExponent);
-                        }
-                        else
-                        {
-                            repulsivePotential += coeff * /*(0.3f * Mathf.Cos(p.targetAngle * Mathf.Deg2Rad) + 1) **/ direc * ent.mass / 40 * ent.length / 20 *
-                                ent.repulsiveCoefficient / 2 * Mathf.Pow(dist, ent.repulsiveExponent);
-                        }
-                    }
-                }
-            }
-
-        }
-
-        if (entity.transform.GetComponent<UnitAI>().commands.Count != 0)
-        {
-            attractivePotential = entity.transform.GetComponent<UnitAI>().commands[0].movePosition - position;
-            Vector3 tmp = attractivePotential.normalized;
-            attractivePotential = tmp *
-                entity.attractionCoefficient * Mathf.Pow(attractivePotential.magnitude, entity.attractiveExponent);
-        }
-
-        potentialMag = repulsivePotential.magnitude - attractivePotential.magnitude;
-
-        magnitude = Utils.Clamp(potentialMag, -GraphMgr.inst.maxMag, GraphMgr.inst.maxMag);
+        magnitude = Utils.Clamp(repTotal.magnitude - attTotal.magnitude, -GraphMgr.inst.maxMag, GraphMgr.inst.maxMag);
 
         return magnitude;
 
-    }
-
-    float SituationCases(Potential p)
-    {
-        float coeff = 1;
-
-        if (Utils.isBetween(90, 180, p.relativeBearingDegrees) && Utils.isBetween(270, 0, p.targetAngle))
-            coeff = 0;
-        if (Utils.isBetween(210, 310, p.relativeBearingDegrees) && Utils.isBetween(300, 40, p.targetAngle))
-            coeff = 0;
-        if (p.cpaInfo.time == 0)
-            coeff = 0;
-
-        return coeff;
     }
 
     Color[] ChangeColors()
     {
         Color[] colors = new Color[vertices.Count];
-        if (entSpecific)
-        {
-            for (int i = 0; i < vertices.Count; i++)
-            {
-                colors[i] = Color.Lerp(Color.green, Color.red, (vertices[i].y + 400f) / 800f);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < vertices.Count; i++)
-            {
-                colors[i] = Color.Lerp(Color.green, Color.red, vertices[i].y / 400f);
-            }
-        }
 
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            colors[i] = Color.Lerp(Color.green, Color.red, (vertices[i].y + 400f) / 800f);
+        }
 
         return colors;
     }

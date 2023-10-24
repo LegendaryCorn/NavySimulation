@@ -6,8 +6,14 @@ using UnityEngine;
 public struct PF
 {
     public bool isAttractive;
-    public float coefficient;
-    public float exponent;
+    public float baseCoefficient;
+    public float baseExponent;
+    public float bearingCoefficient;
+    public float bearingExponent;
+    public float bearingSinAngle;
+    public float headingCoefficient;
+    public float headingExponent;
+    public float headingSinAngle;
     public float verticalOffset;
     public float horizontalOffset;
     public float minAngle;
@@ -25,8 +31,14 @@ public struct PotentialParameters
     {
         potentialDistanceThreshold = parameters[0];
         waypointPotential.isAttractive = true;
-        waypointPotential.coefficient = parameters[1];
-        waypointPotential.exponent = parameters[2];
+        waypointPotential.baseCoefficient = parameters[1];
+        waypointPotential.baseExponent = parameters[2];
+        waypointPotential.bearingCoefficient = 0;
+        waypointPotential.bearingExponent = 1;
+        waypointPotential.bearingSinAngle = 0;
+        waypointPotential.headingCoefficient = 0;
+        waypointPotential.headingExponent = 1;
+        waypointPotential.headingSinAngle = 0;
         waypointPotential.verticalOffset = 0;
         waypointPotential.horizontalOffset = 0;
         waypointPotential.minAngle = 0f;
@@ -37,8 +49,14 @@ public struct PotentialParameters
         {
             PF p;
             p.isAttractive = false;//i + 4 * 1 >= parameters.Length;
-            p.coefficient = parameters[i];
-            p.exponent = parameters[i+1];
+            p.baseCoefficient = parameters[i];
+            p.baseExponent = parameters[i+1];
+            p.bearingCoefficient = 0;
+            p.bearingExponent = 1;
+            p.bearingSinAngle = 0;
+            p.headingCoefficient = 0;
+            p.headingExponent = 1;
+            p.headingSinAngle = 0;
             p.verticalOffset = parameters[i+2];
             p.horizontalOffset = parameters[i+3];
             p.minAngle = parameters[i+4];

@@ -74,11 +74,13 @@ public class Move : Command
     {
         List<Vector3> potentials = new List<Vector3>();
         PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
+        potentials.Add(Vector3.zero); // i == 0 for positive potentials
+        potentials.Add(Vector3.zero); // i == 1 for negative potentials
 
         Vector3 attractiveDist = movePosition - pos;
         Vector3 attractivePotential = attractiveDist.normalized *
-            potParams.waypointPotential.coefficient * Mathf.Pow(attractiveDist.magnitude, potParams.waypointPotential.exponent);
-        potentials.Add(attractivePotential);
+            potParams.waypointPotential.baseCoefficient * Mathf.Pow(attractiveDist.magnitude, potParams.waypointPotential.baseExponent);
+        potentials[0] += attractivePotential;
 
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities)
         {
@@ -101,14 +103,31 @@ public class Move : Command
                                                                 pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
                     Vector3 potDiff = potPos - pos;
 
-                    Vector3 potentialVal = Mathf.Pow(potDiff.magnitude, pf.exponent) * entity.mass *
-                        pf.coefficient * potDiff.normalized;
+                    float relBearing = Mathf.Atan2((ent.position - pos).z, (ent.position - pos).x) * Mathf.Rad2Deg - entity.heading;
+
+                    float relHeading = ent.heading - entity.heading;
+
+                    float bAngle = Mathf.Sin((relBearing + pf.bearingSinAngle) * Mathf.Deg2Rad);
+
+                    float hAngle = Mathf.Sin((relHeading + pf.headingSinAngle) * Mathf.Deg2Rad);
+
+                    Vector3 basePotentialVal = Mathf.Pow(potDiff.magnitude, pf.baseExponent) *
+                        pf.baseCoefficient * potDiff.normalized;
+
+                    Vector3 bearingPotentialVal = bAngle * Mathf.Pow(potDiff.magnitude, pf.bearingExponent) *
+                        pf.bearingCoefficient * -potDiff.normalized;
+
+                    Vector3 headingPotentialVal = hAngle * Mathf.Pow(potDiff.magnitude, pf.headingExponent) *
+                        pf.headingCoefficient * -potDiff.normalized;
 
                     if (pf.isAttractive)
-                        potentials.Add(1 * potentialVal);
+                        potentials[0] +=  1 * basePotentialVal;
                     else
-                        potentials.Add(-1 * potentialVal);
-                    //}
+                        potentials[1] += -1 * basePotentialVal;
+
+                    potentials[bAngle > 0 ? 1 : 0] += bearingPotentialVal;
+                    potentials[hAngle > 0 ? 1 : 0] += headingPotentialVal;
+
                 }
             }
         }

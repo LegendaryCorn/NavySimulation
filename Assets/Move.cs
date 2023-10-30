@@ -103,7 +103,7 @@ public class Move : Command
                                                                 pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
                     Vector3 potDiff = potPos - pos;
 
-                    float relBearing = Mathf.Atan2((ent.position - pos).z, (ent.position - pos).x) * Mathf.Rad2Deg - entity.heading;
+                    float relBearing = Mathf.Atan2((ent.position - entity.position).z, (ent.position - entity.position).x) * Mathf.Rad2Deg - entity.heading;
 
                     float relHeading = ent.heading - entity.heading;
 

@@ -109,8 +109,8 @@ public class FitnessMgr
 
     public void OnUpdate(float dt)
     {
-        UpdateParameters(dt);
-        UpdateFitnessInfo();
+        //UpdateParameters(dt);
+        //UpdateFitnessInfo();
     }
 
     void UpdateParameters(float dt)

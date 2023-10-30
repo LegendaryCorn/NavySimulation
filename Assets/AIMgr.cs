@@ -45,22 +45,22 @@ public struct PotentialParameters
         waypointPotential.maxAngle = 360f;
 
         shipPotentials = new List<PF>();
-        for(int i = 3; i < parameters.Length; i+= 6)
+        for(int i = 3; i < parameters.Length; i+= 10)
         {
             PF p;
-            p.isAttractive = false;//i + 4 * 1 >= parameters.Length;
+            p.isAttractive = true;//i + 4 * 1 >= parameters.Length;
             p.baseCoefficient = parameters[i];
             p.baseExponent = parameters[i+1];
-            p.bearingCoefficient = 0;
-            p.bearingExponent = 1;
-            p.bearingSinAngle = 0;
-            p.headingCoefficient = 0;
-            p.headingExponent = 1;
-            p.headingSinAngle = 0;
-            p.verticalOffset = parameters[i+2];
-            p.horizontalOffset = parameters[i+3];
-            p.minAngle = parameters[i+4];
-            p.maxAngle = parameters[i+5];
+            p.bearingCoefficient = parameters[i + 2];
+            p.bearingExponent = parameters[i + 3];
+            p.bearingSinAngle = parameters[i + 4];
+            p.headingCoefficient = parameters[i + 5];
+            p.headingExponent = parameters[i + 6];
+            p.headingSinAngle = parameters[i + 7];
+            p.verticalOffset = parameters[i+8];
+            p.horizontalOffset = parameters[i+9];
+            p.minAngle = 0f;
+            p.maxAngle = 0f;
             shipPotentials.Add(p);
         }
     }

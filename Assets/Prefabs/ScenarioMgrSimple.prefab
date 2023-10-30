@@ -234,15 +234,15 @@ MonoBehaviour:
       heading: 0
       fitPoints:
       - center: {x: 0, y: 0, z: -2400}
-      - center: {x: 0, y: 0, z: -1800}
-      - center: {x: 0, y: 0, z: -1200}
-      - center: {x: 0, y: 0, z: -600}
-      - center: {x: 0, y: 0, z: 0}
-      - center: {x: 0, y: 0, z: 600}
-      - center: {x: 0, y: 0, z: 1200}
-      - center: {x: 0, y: 0, z: 1800}
-      - center: {x: 0, y: 0, z: 2400}
-      - center: {x: 0, y: 0, z: 3000}
+      - center: {x: 150, y: 0, z: -1800}
+      - center: {x: 300, y: 0, z: -1200}
+      - center: {x: 600, y: 0, z: -600}
+      - center: {x: 750, y: 0, z: 0}
+      - center: {x: 675, y: 0, z: 600}
+      - center: {x: 450, y: 0, z: 1200}
+      - center: {x: 300, y: 0, z: 1800}
+      - center: {x: 150, y: 0, z: 2400}
+      - center: {x: 75, y: 0, z: 3000}
       fitAxisHeading: 0
     - type: 0
       spawnPoint:

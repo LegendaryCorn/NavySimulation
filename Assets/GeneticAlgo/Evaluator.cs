@@ -55,8 +55,21 @@ public class Evaluator
             if(i == 0) { break; }
         }
 
-        //return 1 / sum;
 
+        float sum = 0f;
+
+        for(int i = 0; i < game.entityMgr.entities.Count; i++)
+        {
+            Entity381 ent = game.entityMgr.entities[i];
+            for(int j = 0; j < ent.fitness.dists.Count; j++)
+            {
+                sum += ent.fitness.dists[j];
+            }
+        }
+        
+        return 1 / sum;
+
+        //////////////////////////////////////////////////////////////////////////////////////
         float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
         float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
         float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;

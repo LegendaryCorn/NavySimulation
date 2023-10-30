@@ -58,7 +58,7 @@ public class VesselFitness
             {
                 float approxY = (currPoint.y + prevPoint.y) / 2;
                 dists[currIndex] = Mathf.Abs(approxY - fitAxisPoints[currIndex].y);
-                Debug.Log(dists[currIndex].ToString() + " - Vessel " + entity.id.ToString());
+                //Debug.Log(dists[currIndex].ToString() + " - Vessel " + entity.id.ToString());
                 currIndex++;
             }
         }

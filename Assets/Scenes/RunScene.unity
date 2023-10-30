@@ -3806,18 +3806,30 @@ MonoBehaviour:
   - chromosomeLength: 10
     chromosomeMin: -5.12
     chromosomeMax: 5.11
-  - chromosomeLength: 9
-    chromosomeMin: -2560
-    chromosomeMax: 2550
-  - chromosomeLength: 9
-    chromosomeMin: -2560
-    chromosomeMax: 2550
-  - chromosomeLength: 9
+  - chromosomeLength: 15
     chromosomeMin: 0
-    chromosomeMax: 360
+    chromosomeMax: 32767
+  - chromosomeLength: 10
+    chromosomeMin: -5.12
+    chromosomeMax: 5.12
   - chromosomeLength: 9
+    chromosomeMin: -180
+    chromosomeMax: 180
+  - chromosomeLength: 15
     chromosomeMin: 0
-    chromosomeMax: 360
+    chromosomeMax: 32767
+  - chromosomeLength: 10
+    chromosomeMin: -5.12
+    chromosomeMax: 5.12
+  - chromosomeLength: 9
+    chromosomeMin: -180
+    chromosomeMax: 180
+  - chromosomeLength: 11
+    chromosomeMin: -1024
+    chromosomeMax: 1023
+  - chromosomeLength: 11
+    chromosomeMin: -1024
+    chromosomeMax: 1023
   testCount: 0
   gaParameters:
     populationSize: 0

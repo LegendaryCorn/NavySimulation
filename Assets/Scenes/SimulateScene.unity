@@ -655,7 +655,7 @@ MonoBehaviour:
     potentialDistanceThreshold: 3000
     waypointPotential:
       isAttractive: 1
-      baseCoefficient: 10000
+      baseCoefficient: 1000
       baseExponent: -1
       bearingCoefficient: 0
       bearingExponent: 0
@@ -668,16 +668,16 @@ MonoBehaviour:
       minAngle: 0
       maxAngle: 0
     shipPotentials:
-    - isAttractive: 0
-      baseCoefficient: 0
-      baseExponent: 0
-      bearingCoefficient: 100000
+    - isAttractive: 1
+      baseCoefficient: 50
+      baseExponent: -1.5
+      bearingCoefficient: 10000
       bearingExponent: -1.5
       bearingSinAngle: -90
-      headingCoefficient: 100000
+      headingCoefficient: 10000
       headingExponent: -1.5
       headingSinAngle: 0
-      verticalOffset: -500
+      verticalOffset: -750
       horizontalOffset: 0
       minAngle: 240
       maxAngle: 300
@@ -2563,10 +2563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 4770987507766933776, guid: 117e5c1aa4314e446abed91858f0e2fd, type: 3}
-  maxMag: 50
+  maxMag: 5
   size: {x: 10000, y: 10000}
   position: {x: -5000, y: 0, z: -5000}
-  resolution: 30
+  resolution: 90
 --- !u!1 &1801844801
 GameObject:
   m_ObjectHideFlags: 0

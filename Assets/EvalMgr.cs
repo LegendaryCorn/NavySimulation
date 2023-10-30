@@ -32,6 +32,8 @@ public class EvalMgr : MonoBehaviour
         float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
         float fitness = 0f;
 
+
+        /*
         if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget || closestDist < 150f)
         {
             fitness *= 0f;
@@ -49,10 +51,22 @@ public class EvalMgr : MonoBehaviour
             if (fmi1 * fma1 == 0) { fitness = 0.1f; }
             if (fmi0 * fma0 == 0) { fitness = 0.1f; }
         }
+        */
+
+        float sum = 0f;
+
+        for (int i = 0; i < game.entityMgr.entities.Count; i++)
+        {
+            Entity381 ent = game.entityMgr.entities[i];
+            for (int j = 0; j < ent.fitness.dists.Count; j++)
+            {
+                sum += ent.fitness.dists[j];
+            }
+        }
 
         timeEnd = Time.realtimeSinceStartup;
 
-        Debug.Log(closestDist.ToString() + " "  + timePoint.ToString() + " " +  fitness.ToString() + " " + (timeEnd - timeStart).ToString());
+        Debug.Log(sum.ToString() + " "  + (1f/sum).ToString() + " " + (timeEnd -timeStart).ToString());
 
     }
 }

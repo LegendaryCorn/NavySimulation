@@ -300,8 +300,8 @@ MonoBehaviour:
     potentialDistanceThreshold: 3000
     waypointPotential:
       isAttractive: 1
-      baseCoefficient: 1000
-      baseExponent: -1
+      baseCoefficient: 11273
+      baseExponent: 0.24
       bearingCoefficient: 0
       bearingExponent: 0
       bearingSinAngle: 0
@@ -314,16 +314,16 @@ MonoBehaviour:
       maxAngle: 0
     shipPotentials:
     - isAttractive: 1
-      baseCoefficient: 50
-      baseExponent: -1.5
-      bearingCoefficient: 10000
-      bearingExponent: -1.5
-      bearingSinAngle: -90
-      headingCoefficient: 10000
-      headingExponent: -1.5
-      headingSinAngle: 0
-      verticalOffset: -750
-      horizontalOffset: 0
+      baseCoefficient: 11512
+      baseExponent: 4.9
+      bearingCoefficient: 14643
+      bearingExponent: -3.81
+      bearingSinAngle: 46.14481
+      headingCoefficient: 31879
+      headingExponent: -2.42737
+      headingSinAngle: -32.05479
+      verticalOffset: 574
+      horizontalOffset: 670
       minAngle: 0
       maxAngle: 0
   scenarioID: 1

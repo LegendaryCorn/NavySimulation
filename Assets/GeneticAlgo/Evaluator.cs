@@ -57,16 +57,26 @@ public class Evaluator
 
 
         float sum = 0f;
+        bool allVisited = true;
 
-        for(int i = 0; i < game.entityMgr.entities.Count; i++)
+        for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
             Entity381 ent = game.entityMgr.entities[i];
-            for(int j = 0; j < ent.fitness.dists.Count; j++)
+            for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
                 sum += ent.fitness.dists[j];
+                if (ent.fitness.dists[j] < 0)
+                {
+                    allVisited = false;
+                }
             }
         }
-        
+        if (!allVisited)
+        {
+            sum = Mathf.Infinity;
+        }
+
+
         return 1 / sum;
 
         //////////////////////////////////////////////////////////////////////////////////////

@@ -90,8 +90,10 @@ public class Population
 
     public void Report(int gen, long startTime, int id, bool rep)
     {
-        string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + GetBestMember().ToString();
+        Individual bestMember = GetBestMember();
+        string report = gen + ": " + min + ", " + avg + ", " + max + '\n' + bestMember.ToString();
         if (rep) { MasterMgr.inst.ThreadLog(report); }
+        RunUIMgr.inst.NewListEntry(id, gen, bestMember);
         RunUIMgr.inst.NewGraphEntry(avg, max, id);
 
         // Disbled for now

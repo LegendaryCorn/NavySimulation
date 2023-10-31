@@ -635,22 +635,34 @@ MonoBehaviour:
     - chromosomeLength: 10
       chromosomeMin: -5.12
       chromosomeMax: 5.11
-    - chromosomeLength: 9
-      chromosomeMin: -2560
-      chromosomeMax: 2550
-    - chromosomeLength: 9
-      chromosomeMin: -2560
-      chromosomeMax: 2550
-    - chromosomeLength: 9
+    - chromosomeLength: 15
       chromosomeMin: 0
-      chromosomeMax: 360
+      chromosomeMax: 32767
+    - chromosomeLength: 10
+      chromosomeMin: -5.12
+      chromosomeMax: 5.11
     - chromosomeLength: 9
+      chromosomeMin: -180
+      chromosomeMax: 180
+    - chromosomeLength: 15
       chromosomeMin: 0
-      chromosomeMax: 360
+      chromosomeMax: 32767
+    - chromosomeLength: 10
+      chromosomeMin: -5.12
+      chromosomeMax: 5.12
+    - chromosomeLength: 9
+      chromosomeMin: -180
+      chromosomeMax: 180
+    - chromosomeLength: 11
+      chromosomeMin: -1024
+      chromosomeMax: 1023
+    - chromosomeLength: 11
+      chromosomeMin: -1024
+      chromosomeMax: 1023
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 
+  potentialChromosome: 10001011101000010010101010010011100100100111101101001011111000101110111111101101101011110011001000010111100011010011111000000000111000101111011010101100
   potentialParameters:
     potentialDistanceThreshold: 3000
     waypointPotential:

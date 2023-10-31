@@ -54,6 +54,7 @@ public class EvalMgr : MonoBehaviour
         */
 
         float sum = 0f;
+        bool allVisited = true;
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
@@ -61,7 +62,15 @@ public class EvalMgr : MonoBehaviour
             for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
                 sum += ent.fitness.dists[j];
+                if(ent.fitness.dists[j] < 0)
+                {
+                    allVisited = false;
+                }
             }
+        }
+        if (!allVisited)
+        {
+            sum = Mathf.Infinity;
         }
 
         timeEnd = Time.realtimeSinceStartup;

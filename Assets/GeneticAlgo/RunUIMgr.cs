@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,8 +33,10 @@ public class RunUIMgr : MonoBehaviour
     Dictionary<int, List<float>> maxLists;
     List<float> averageAvg;
     List<float> averageMax;
+    List<string> bestLog;
     [Header("Other")]
     public int genCount;
+    public string fileName;
 
     Object entryLock = new Object();
 
@@ -47,6 +50,7 @@ public class RunUIMgr : MonoBehaviour
         maxLists = new Dictionary<int, List<float>>();
         averageAvg = new List<float>();
         averageMax = new List<float>();
+        bestLog = new List<string>();
     }
 
     private void Start()
@@ -77,6 +81,32 @@ public class RunUIMgr : MonoBehaviour
         catch (System.Exception e)
         {
 
+        }
+    }
+
+    public void NewListEntry(int id, int gen, Individual best)
+    {
+        bestLog.Add(id.ToString() + "." + gen.ToString() + ": " + best.ToString());
+    }
+
+    // Should be called by a button
+    public void PrintNewList()
+    {
+        try
+        {
+            string fname = fileName + System.DateTime.UtcNow.ToFileTime() + ".txt";
+
+            using (StreamWriter sw = File.CreateText(fname))
+            {
+                foreach (string bLogLine in bestLog)
+                {
+                    sw.Write(bLogLine + "\n");
+                }
+            }
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError("Invalid file! Exception encountered: " + e);
         }
     }
 

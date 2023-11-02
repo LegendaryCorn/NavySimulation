@@ -55,8 +55,9 @@ public class Evaluator
             if(i == 0) { break; }
         }
 
-
-        float sum = 0f;
+        float fitness = 0f;
+        float sumDist = 0f;
+        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
         bool allVisited = true;
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
@@ -64,29 +65,32 @@ public class Evaluator
             Entity381 ent = game.entityMgr.entities[i];
             for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                sum += ent.fitness.dists[j];
+                sumDist += ent.fitness.dists[j];
                 if (ent.fitness.dists[j] < 0)
                 {
                     allVisited = false;
                 }
             }
         }
+
+        fitness = 2000f / (sumDist + 0.5f * (timePoint - 200) * (timePoint - 200));
+
         if (!allVisited)
         {
-            sum = Mathf.Infinity;
+            fitness = 0f;
         }
 
 
-        return 1 / sum;
+        return fitness;
 
         //////////////////////////////////////////////////////////////////////////////////////
         float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
-        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+        //float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
         float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
         float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
         float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
         float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
-        float fitness = 0f;
+        //float fitness = 0f;
 
         if (!game.fitnessMgr.oneShipFitnessParameters[0].reachedTarget || !game.fitnessMgr.oneShipFitnessParameters[1].reachedTarget || closestDist < 150f)
         {

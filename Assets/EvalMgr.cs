@@ -53,7 +53,7 @@ public class EvalMgr : MonoBehaviour
         }
         */
 
-        float sum = 0f;
+        float sumDist = 0f;
         bool allVisited = true;
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
@@ -61,21 +61,24 @@ public class EvalMgr : MonoBehaviour
             Entity381 ent = game.entityMgr.entities[i];
             for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                sum += ent.fitness.dists[j];
+                sumDist += ent.fitness.dists[j];
                 if(ent.fitness.dists[j] < 0)
                 {
                     allVisited = false;
                 }
             }
         }
+
+        fitness = 2000f / (sumDist + 0.5f * (timePoint - 200) * (timePoint - 200));
+
         if (!allVisited)
         {
-            sum = Mathf.Infinity;
+            fitness = 0f;
         }
 
         timeEnd = Time.realtimeSinceStartup;
 
-        Debug.Log(sum.ToString() + " "  + (1f/sum).ToString() + " " + (timeEnd -timeStart).ToString());
+        Debug.Log(fitness.ToString() + " "  + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd -timeStart).ToString());
 
     }
 }

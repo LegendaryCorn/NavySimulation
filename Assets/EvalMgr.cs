@@ -61,20 +61,11 @@ public class EvalMgr : MonoBehaviour
             Entity381 ent = game.entityMgr.entities[i];
             for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                sumDist += ent.fitness.dists[j];
-                if(ent.fitness.dists[j] < 0)
-                {
-                    allVisited = false;
-                }
+                sumDist += Mathf.Sqrt(ent.fitness.dists[j]);
             }
         }
 
         fitness = 2000f / (sumDist + 0.5f * (timePoint - 200) * (timePoint - 200));
-
-        if (!allVisited)
-        {
-            fitness = 0f;
-        }
 
         timeEnd = Time.realtimeSinceStartup;
 

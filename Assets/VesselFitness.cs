@@ -7,6 +7,7 @@ public class VesselFitness
     public Entity381 entity;
     private float fitAxis;
     private float cosAxis, sinAxis; // Makes calculations significantly faster by not having to calculate the cos/sin at every frame
+    private List<Vector3> worldPoints;
     private List<Vector2> fitAxisPoints;
     // X = point on axis
     // Y = Distance from axis
@@ -28,6 +29,7 @@ public class VesselFitness
         fitAxis = axis * Mathf.Deg2Rad;
         cosAxis = Mathf.Cos(fitAxis);
         sinAxis = Mathf.Sin(fitAxis);
+        worldPoints = new List<Vector3>();
         fitAxisPoints = new List<Vector2>();
         dists = new List<float>();
 
@@ -36,8 +38,9 @@ public class VesselFitness
 
         foreach (WayPoint wP in wayPoints)
         {
+            worldPoints.Add(wP.center);
             fitAxisPoints.Add(WorldPointToAxisPoint(wP.center));
-            dists.Add(-1);
+            dists.Add(Mathf.Infinity);
         }
 
         currIndex = 0;
@@ -45,6 +48,11 @@ public class VesselFitness
 
     public void OnUpdate(float dt)
     {
+        for(int i = 0; i < worldPoints.Count; i++)
+        {
+            dists[i] = Mathf.Min(dists[i], Vector3.SqrMagnitude(worldPoints[i] - entity.position));
+        }
+        /*
         currPoint = WorldPointToAxisPoint(entity.position);
 
         // If the index is equal to this, then there's no more fit points
@@ -64,6 +72,7 @@ public class VesselFitness
         }
 
         prevPoint = WorldPointToAxisPoint(entity.position);
+        */
     }
 
     public Vector2 WorldPointToAxisPoint(Vector3 worldPoint)

@@ -172,12 +172,16 @@ public class RunUIMgr : MonoBehaviour
     {
         lock (entryLock)
         {
+            /*
             float minVal = averageAvg[0];
             foreach (float val in averageAvg)
                 minVal = Mathf.Min(val, minVal);
             float maxVal = averageMax[0];
             foreach (float val in averageMax)
                 maxVal = Mathf.Max(val, maxVal);
+            */
+            float minVal = 0f;
+            float maxVal = 4f;
 
             float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
             float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;

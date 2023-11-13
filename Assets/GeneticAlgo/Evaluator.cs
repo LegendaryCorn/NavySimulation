@@ -58,6 +58,7 @@ public class Evaluator
         float fitness = 0f;
         float sumDist = 0f;
         float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+        timePoint = Mathf.Min(timePoint, 250f);
         bool allVisited = true;
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
@@ -65,21 +66,11 @@ public class Evaluator
             Entity381 ent = game.entityMgr.entities[i];
             for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                sumDist += ent.fitness.dists[j];
-                if (ent.fitness.dists[j] < 0)
-                {
-                    allVisited = false;
-                }
+                sumDist += Mathf.Sqrt(ent.fitness.dists[j]);
             }
         }
 
         fitness = 2000f / (sumDist + 0.5f * (timePoint - 200) * (timePoint - 200));
-
-        if (!allVisited)
-        {
-            fitness = 0f;
-        }
-
 
         return fitness;
 

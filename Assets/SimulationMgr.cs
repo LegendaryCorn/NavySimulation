@@ -80,7 +80,7 @@ public class SimulationMgr : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // Update Sim
         gameMgr.RunGame(dt, dt * simSpeed);

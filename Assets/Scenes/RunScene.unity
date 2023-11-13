@@ -3995,45 +3995,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chromosomeParameters:
-  - chromosomeLength: 12
+  - chromosomeLength: 4
     chromosomeMin: 0
-    chromosomeMax: 4095
-  - chromosomeLength: 15
+    chromosomeMax: 3750
+  - chromosomeLength: 6
     chromosomeMin: 0
-    chromosomeMax: 32767
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 15
+    chromosomeMax: 31500
+  - chromosomeLength: 7
+    chromosomeMin: -6.4
+    chromosomeMax: 6.3
+  - chromosomeLength: 6
     chromosomeMin: 0
-    chromosomeMax: 32767
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.11
-  - chromosomeLength: 15
+    chromosomeMax: 31500
+  - chromosomeLength: 7
+    chromosomeMin: -6.4
+    chromosomeMax: 6.3
+  - chromosomeLength: 6
     chromosomeMin: 0
-    chromosomeMax: 32767
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.12
-  - chromosomeLength: 9
-    chromosomeMin: -180
-    chromosomeMax: 180
-  - chromosomeLength: 15
+    chromosomeMax: 31500
+  - chromosomeLength: 7
+    chromosomeMin: -6.4
+    chromosomeMax: 6.3
+  - chromosomeLength: 2
     chromosomeMin: 0
-    chromosomeMax: 32767
-  - chromosomeLength: 10
-    chromosomeMin: -5.12
-    chromosomeMax: 5.12
-  - chromosomeLength: 9
-    chromosomeMin: -180
-    chromosomeMax: 180
-  - chromosomeLength: 11
-    chromosomeMin: -1024
-    chromosomeMax: 1023
-  - chromosomeLength: 11
-    chromosomeMin: -1024
-    chromosomeMax: 1023
+    chromosomeMax: 3
+  - chromosomeLength: 6
+    chromosomeMin: 0
+    chromosomeMax: 31500
+  - chromosomeLength: 7
+    chromosomeMin: -6.4
+    chromosomeMax: 6.3
+  - chromosomeLength: 2
+    chromosomeMin: 0
+    chromosomeMax: 3
+  - chromosomeLength: 8
+    chromosomeMin: -1280
+    chromosomeMax: 1270
+  - chromosomeLength: 8
+    chromosomeMin: -1280
+    chromosomeMax: 1270
   testCount: 0
   gaParameters:
     populationSize: 0

@@ -662,7 +662,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 00110101001010000101001110001110110111111010110101111001110100001000100000110001100111110000101001001110110110011111101110010111010100010100001011100000
+  potentialChromosome: 
   potentialParameters:
     potentialDistanceThreshold: 3000
     waypointPotential:
@@ -685,10 +685,10 @@ MonoBehaviour:
       baseExponent: -1.5
       bearingCoefficient: 10000
       bearingExponent: -1.5
-      bearingSinAngle: -90
+      bearingSinAngle: 90
       headingCoefficient: 10000
       headingExponent: -1.5
-      headingSinAngle: 0
+      headingSinAngle: 1000
       verticalOffset: -750
       horizontalOffset: 0
       minAngle: 240

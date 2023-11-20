@@ -74,8 +74,13 @@ public class Move : Command
     {
         List<Vector3> potentials = new List<Vector3>();
         PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
-        potentials.Add(Vector3.zero); // i == 0 for positive potentials
-        potentials.Add(Vector3.zero); // i == 1 for negative potentials
+
+        potentials.Add(Vector3.zero);
+        for (int i = 0; i < 3; i++)
+        {
+            potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials
+            potentials.Add(Vector3.zero); // i % 2 == 1 for negative potentials
+        }
 
         Vector3 attractiveDist = movePosition - pos;
         Vector3 attractivePotential = attractiveDist.normalized *
@@ -121,12 +126,12 @@ public class Move : Command
                         pf.headingCoefficient * -potDiff.normalized;
 
                     if (pf.isAttractive)
-                        potentials[0] +=  1 * basePotentialVal;
+                        potentials[2] +=  1 * basePotentialVal;
                     else
                         potentials[1] += -1 * basePotentialVal;
 
-                    potentials[bAngle > 0 ? 1 : 0] += bearingPotentialVal;
-                    potentials[hAngle > 0 ? 1 : 0] += headingPotentialVal;
+                    potentials[bAngle < 0 ? 4 : 3] += bearingPotentialVal;
+                    potentials[hAngle < 0 ? 6 : 5] += headingPotentialVal;
 
                 }
             }

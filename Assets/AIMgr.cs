@@ -29,10 +29,10 @@ public struct PotentialParameters
 
     public PotentialParameters(float[] parameters)
     {
-        potentialDistanceThreshold = parameters[0];
+        potentialDistanceThreshold = 100000000f;
         waypointPotential.isAttractive = true;
-        waypointPotential.baseCoefficient = parameters[1];
-        waypointPotential.baseExponent = parameters[2];
+        waypointPotential.baseCoefficient = parameters[0];
+        waypointPotential.baseExponent = parameters[1];
         waypointPotential.bearingCoefficient = 0;
         waypointPotential.bearingExponent = 1;
         waypointPotential.bearingSinAngle = 0;
@@ -45,7 +45,7 @@ public struct PotentialParameters
         waypointPotential.maxAngle = 360f;
 
         shipPotentials = new List<PF>();
-        for(int i = 3; i < parameters.Length; i+= 10)
+        for(int i = 2; i < parameters.Length; i+= 10)
         {
             PF p;
             p.isAttractive = true;//i + 4 * 1 >= parameters.Length;

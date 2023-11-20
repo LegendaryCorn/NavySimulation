@@ -120,7 +120,7 @@ public class GraphPlane : MonoBehaviour
         int i = 0;
         foreach(Vector3 pot in potentials)
         {
-            if (i == 0)
+            if (i % 2 == 0)
                 attTotal += pot;
             else
                 repTotal += pot;

@@ -46,6 +46,9 @@ public class FitnessMgr
     public float countShipInFront = 0;
     public float countCrash = 0;
 
+    public float timeMin;
+    public float timeMax;
+
     public FitnessMgr(GameMgr mgr)
     {
         gameMgr = mgr;

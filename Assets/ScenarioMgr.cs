@@ -32,6 +32,9 @@ public struct Scenario
 {
     public List<ScenarioEntity> scenarioEntities;
     public List<ScenarioBoundary> scenarioBoundaries;
+
+    public float fitTimeMin;
+    public float fitTimeMax;
 }
 
 public class ScenarioMgr : MonoBehaviour

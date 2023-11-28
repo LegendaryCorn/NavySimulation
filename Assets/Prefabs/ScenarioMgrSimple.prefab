@@ -205,7 +205,17 @@ MonoBehaviour:
       wayPoints:
       - center: {x: 0, y: 0, z: 3500}
       heading: 0
-      fitPoints: []
+      fitPoints:
+      - center: {x: 100, y: 0, z: -2400}
+      - center: {x: 200, y: 0, z: -1800}
+      - center: {x: 350, y: 0, z: -1200}
+      - center: {x: 450, y: 0, z: -600}
+      - center: {x: 500, y: 0, z: 0}
+      - center: {x: 400, y: 0, z: 600}
+      - center: {x: 250, y: 0, z: 1200}
+      - center: {x: 150, y: 0, z: 1800}
+      - center: {x: 100, y: 0, z: 2400}
+      - center: {x: 50, y: 0, z: 3000}
       fitAxisHeading: 0
     - type: 0
       spawnPoint:
@@ -213,7 +223,17 @@ MonoBehaviour:
       wayPoints:
       - center: {x: 0, y: 0, z: -3500}
       heading: 180
-      fitPoints: []
+      fitPoints:
+      - center: {x: -100, y: 0, z: 2400}
+      - center: {x: -200, y: 0, z: 1800}
+      - center: {x: -350, y: 0, z: 1200}
+      - center: {x: -450, y: 0, z: 600}
+      - center: {x: -500, y: 0, z: 0}
+      - center: {x: -400, y: 0, z: -600}
+      - center: {x: -250, y: 0, z: -1200}
+      - center: {x: -150, y: 0, z: -1800}
+      - center: {x: -100, y: 0, z: -2400}
+      - center: {x: -50, y: 0, z: -3000}
       fitAxisHeading: 0
     scenarioBoundaries:
     - points:
@@ -225,6 +245,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 200
+    fitTimeMax: 300
   - scenarioEntities:
     - type: 0
       spawnPoint:
@@ -272,6 +294,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 200
+    fitTimeMax: 300
   - scenarioEntities:
     - type: 7
       spawnPoint:
@@ -299,6 +323,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 0
+    fitTimeMax: 0
   - scenarioEntities:
     - type: 0
       spawnPoint:
@@ -326,6 +352,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 0
+    fitTimeMax: 0
   - scenarioEntities:
     - type: 0
       spawnPoint:
@@ -353,3 +381,5 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 0
+    fitTimeMax: 0

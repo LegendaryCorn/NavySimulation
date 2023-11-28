@@ -51,6 +51,8 @@ public class GameMgr
         }
 
         fitnessMgr.LoadParameters();
+        fitnessMgr.timeMin = s.fitTimeMin;
+        fitnessMgr.timeMax = s.fitTimeMax;
     }
 
     public void RunGame(float dt, float tf) // tf is in Seconds

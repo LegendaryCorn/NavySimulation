@@ -659,37 +659,20 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 001101001111000101001011100101101001110001000001111001110111100000000011101100
+  potentialChromosome: 
   potentialParameters:
-    potentialDistanceThreshold: 3000
-    waypointPotential:
-      isAttractive: 1
-      baseCoefficient: 1000
-      baseExponent: -1
-      bearingCoefficient: 0
-      bearingExponent: 0
-      bearingSinAngle: 0
-      headingCoefficient: 0
-      headingExponent: 0
-      headingSinAngle: 0
-      verticalOffset: 0
-      horizontalOffset: 0
-      minAngle: 0
-      maxAngle: 0
-    shipPotentials:
-    - isAttractive: 1
-      baseCoefficient: 50
-      baseExponent: -1.5
-      bearingCoefficient: 10000
-      bearingExponent: -1.5
-      bearingSinAngle: 90
-      headingCoefficient: 10000
-      headingExponent: -1.5
-      headingSinAngle: 1000
-      verticalOffset: -750
-      horizontalOffset: 0
-      minAngle: 240
-      maxAngle: 300
+    waypointCoefficient: 100
+    waypointExponent: -1
+    attractiveCoefficient: 1000
+    attractiveExponent: -1.5
+    repulsiveCoefficient: 20000
+    repulsiveExponent: -2
+    bearingAngle: 90
+    bearingCoefficient: 2000
+    bearingExponent: -1.5
+    taAngle: 0
+    taCoefficient: 0
+    taExponent: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

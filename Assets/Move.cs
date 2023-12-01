@@ -73,68 +73,67 @@ public class Move : Command
     public List<Vector3> ComputePotentials(Vector3 pos)
     {
         List<Vector3> potentials = new List<Vector3>();
-        PotentialParameters potParams = entity.gameMgr.aiMgr.potentialParameters;
+        PotentialParameters pf = entity.gameMgr.aiMgr.potentialParameters;
 
         potentials.Add(Vector3.zero);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials
-            potentials.Add(Vector3.zero); // i % 2 == 1 for negative potentials
+            potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials, i % 2 == 1 for negative potentials
         }
 
         Vector3 attractiveDist = movePosition - pos;
         Vector3 attractivePotential = attractiveDist.normalized *
-            potParams.waypointPotential.baseCoefficient * Mathf.Pow(attractiveDist.magnitude, potParams.waypointPotential.baseExponent);
+            pf.waypointCoefficient * Mathf.Pow(attractiveDist.magnitude, pf.waypointExponent);
         potentials[0] += attractivePotential;
 
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities)
         {
             if (ent == entity) continue;
+                    
+            Vector3 posDiff = ent.position - pos;
+            Vector3 posDiffCross = Vector3.Cross(posDiff, Vector3.down);
+            Vector3 relVel = ent.velocity - entity.velocity;
+            Vector3 relVelCross = Vector3.Cross(relVel, Vector3.up);
 
-            if ((ent.position - entity.position).magnitude < entity.gameMgr.aiMgr.potentialParameters.potentialDistanceThreshold)
-            {
+            Vector3 starboard = Vector3.Normalize(Vector3.Cross(entity.velocity, Vector3.down)); 
 
-                float h = ent.heading * Mathf.Deg2Rad;
-                float sinHeading = Mathf.Sin(h);
-                float cosHeading = Mathf.Cos(h);
+            float relBearing = Mathf.Atan2((ent.position - entity.position).x, (ent.position - entity.position).z) * Mathf.Rad2Deg - entity.heading;
+            float targetAngle = Mathf.Atan2((entity.position - ent.position).x, (entity.position - ent.position).z) * Mathf.Rad2Deg - ent.heading;
 
-                foreach (PF pf in potParams.shipPotentials)
-                {
-                    //bool c1 = pf.minAngle > pf.maxAngle && (p.targetRelHeading >= pf.minAngle || p.targetRelHeading <= pf.maxAngle);
-                    //bool c2 = pf.minAngle < pf.maxAngle && (p.targetRelHeading >= pf.minAngle && p.targetRelHeading <= pf.maxAngle);
-                    //if (c1 || c2 || true)
-                    //{
-                    Vector3 potPos = ent.position + new Vector3(pf.verticalOffset * sinHeading + pf.horizontalOffset * cosHeading, 0,
-                                                                pf.verticalOffset * cosHeading - pf.horizontalOffset * sinHeading);
-                    Vector3 potDiff = potPos - pos;
+            float bAngle = Mathf.Sin((relBearing + pf.bearingAngle) * Mathf.Deg2Rad);
+            float tAngle = Mathf.Sin((targetAngle + pf.taAngle) * Mathf.Deg2Rad);
 
-                    float relBearing = Mathf.Atan2((ent.position - entity.position).z, (ent.position - entity.position).x) * Mathf.Rad2Deg - entity.heading;
+            Vector3 repField = Mathf.Pow(posDiff.magnitude, pf.repulsiveExponent) * pf.repulsiveCoefficient * -posDiff.normalized;
+            Vector3 attField = Mathf.Pow(posDiff.magnitude, pf.attractiveExponent) * pf.attractiveCoefficient * posDiff.normalized;
+            Vector3 crossPosField = Mathf.Pow(0.5f * (bAngle + 1), pf.taAngle) * Mathf.Pow(posDiff.magnitude, pf.bearingExponent) * pf.bearingCoefficient * starboard;
+            //Vector3 crossVelField = Mathf.Pow(posDiffCross.magnitude, pf.bearingExponent) * pf.bearingCoefficient * posDiffCross.normalized;
 
-                    float relHeading = ent.heading - entity.heading;
 
-                    float bAngle = Mathf.Sin((relBearing + pf.bearingSinAngle) * Mathf.Deg2Rad);
+            potentials[1] = repField;
+            potentials[2] = attField;
+            potentials[3] = crossPosField;
+            // potentials[4] = crossVelField;
 
-                    float hAngle = Mathf.Sin((relHeading + pf.headingSinAngle) * Mathf.Deg2Rad);
+            /*
 
-                    Vector3 basePotentialVal = Mathf.Pow(potDiff.magnitude, pf.baseExponent) *
-                        pf.baseCoefficient * potDiff.normalized;
 
-                    Vector3 bearingPotentialVal = bAngle * Mathf.Pow(potDiff.magnitude, pf.bearingExponent) *
-                        pf.bearingCoefficient * -potDiff.normalized;
+            Vector3 basePotentialVal = bAngle * (Mathf.Pow(potDiff.magnitude, pf.baseExponent) * pf.baseCoefficient * potDiff.normalized + 
+                                                    Mathf.Pow(r.magnitude, pf.bearingExponent) * pf.bearingCoefficient * r);
 
-                    Vector3 headingPotentialVal = hAngle * Mathf.Pow(potDiff.magnitude, pf.headingExponent) *
-                        pf.headingCoefficient * -potDiff.normalized;
+            Vector3 bearingPotentialVal = Mathf.Pow(potDiff.magnitude, pf.headingExponent) *
+                pf.headingCoefficient * -(ent.position - pos);
 
-                    if (pf.isAttractive)
-                        potentials[2] +=  1 * basePotentialVal;
-                    else
-                        potentials[1] += -1 * basePotentialVal;
+            Vector3 headingPotentialVal = 0f * hAngle * Mathf.Pow(potDiff.magnitude, pf.headingExponent) *
+                pf.headingCoefficient * -dir;
 
-                    potentials[bAngle < 0 ? 4 : 3] += bearingPotentialVal;
-                    potentials[hAngle < 0 ? 6 : 5] += headingPotentialVal;
+            if (pf.isAttractive)
+                potentials[2] +=  1 * basePotentialVal;
+            else
+                potentials[1] += -1 * basePotentialVal;
 
-                }
-            }
+            potentials[bAngle < 0 ? 4 : 3] += bearingPotentialVal;
+            potentials[hAngle < 0 ? 6 : 5] += headingPotentialVal;
+            */
         }
 
         return potentials;

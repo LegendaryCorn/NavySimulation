@@ -5,64 +5,39 @@ using UnityEngine;
 [System.Serializable]
 public struct PF
 {
-    public bool isAttractive;
-    public float baseCoefficient;
-    public float baseExponent;
-    public float bearingCoefficient;
-    public float bearingExponent;
-    public float bearingSinAngle;
-    public float headingCoefficient;
-    public float headingExponent;
-    public float headingSinAngle;
-    public float verticalOffset;
-    public float horizontalOffset;
-    public float minAngle;
-    public float maxAngle;
+
 }
 
 [System.Serializable]
 public struct PotentialParameters
 {
-    public float potentialDistanceThreshold;// = 1000;
-    public PF waypointPotential;
-    public List<PF> shipPotentials;
+    public float waypointCoefficient;
+    public float waypointExponent;
+    public float attractiveCoefficient;
+    public float attractiveExponent;
+    public float repulsiveCoefficient;
+    public float repulsiveExponent;
+    public float bearingAngle;
+    public float bearingCoefficient;
+    public float bearingExponent;
+    public float taAngle;
+    public float taCoefficient;
+    public float taExponent;
 
     public PotentialParameters(float[] parameters)
     {
-        potentialDistanceThreshold = 100000000f;
-        waypointPotential.isAttractive = true;
-        waypointPotential.baseCoefficient = parameters[0];
-        waypointPotential.baseExponent = parameters[1];
-        waypointPotential.bearingCoefficient = 0;
-        waypointPotential.bearingExponent = 1;
-        waypointPotential.bearingSinAngle = 0;
-        waypointPotential.headingCoefficient = 0;
-        waypointPotential.headingExponent = 1;
-        waypointPotential.headingSinAngle = 0;
-        waypointPotential.verticalOffset = 0;
-        waypointPotential.horizontalOffset = 0;
-        waypointPotential.minAngle = 0f;
-        waypointPotential.maxAngle = 360f;
-
-        shipPotentials = new List<PF>();
-        for(int i = 2; i < parameters.Length; i+= 10)
-        {
-            PF p;
-            p.isAttractive = true;//i + 4 * 1 >= parameters.Length;
-            p.baseCoefficient = parameters[i];
-            p.baseExponent = parameters[i+1];
-            p.bearingCoefficient = parameters[i + 2];
-            p.bearingExponent = parameters[i + 3];
-            p.bearingSinAngle = parameters[i + 4];
-            p.headingCoefficient = parameters[i + 5];
-            p.headingExponent = parameters[i + 6];
-            p.headingSinAngle = parameters[i + 7];
-            p.verticalOffset = parameters[i+8];
-            p.horizontalOffset = parameters[i+9];
-            p.minAngle = 0f;
-            p.maxAngle = 0f;
-            shipPotentials.Add(p);
-        }
+        waypointCoefficient = parameters[0];
+        waypointExponent = parameters[1];
+        attractiveCoefficient = parameters[2];
+        attractiveExponent = parameters[3];
+        repulsiveCoefficient = parameters[4];
+        repulsiveExponent = parameters[5];
+        bearingAngle = parameters[6];
+        bearingCoefficient = parameters[7];
+        bearingExponent = parameters[8];
+        taAngle = parameters[9];
+        taCoefficient = parameters[10];
+        taExponent = parameters[11];
     }
 }
 

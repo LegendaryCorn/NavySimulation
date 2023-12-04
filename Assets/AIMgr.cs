@@ -36,8 +36,8 @@ public struct PotentialParameters
         bearingCoefficient = parameters[7];
         bearingExponent = parameters[8];
         taAngle = parameters[9];
-        taCoefficient = parameters[10];
-        taExponent = parameters[11];
+        taCoefficient = 0; // parameters[10];
+        taExponent = 0; // parameters[11];
     }
 }
 

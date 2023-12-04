@@ -647,19 +647,13 @@ MonoBehaviour:
     - chromosomeLength: 7
       chromosomeMin: -6.4
       chromosomeMax: 6.3
-    - chromosomeLength: 5
-      chromosomeMin: -180
-      chromosomeMax: 180
-    - chromosomeLength: 8
-      chromosomeMin: -1280
-      chromosomeMax: 1270
-    - chromosomeLength: 8
-      chromosomeMin: -1280
-      chromosomeMax: 1270
+    - chromosomeLength: 7
+      chromosomeMin: -6.4
+      chromosomeMax: 6.3
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 
+  potentialChromosome: 0100000111001100000111111010001101111101110001011111001100100000
   potentialParameters:
     waypointCoefficient: 100
     waypointExponent: -1

@@ -105,14 +105,14 @@ public class Move : Command
 
             Vector3 repField = Mathf.Pow(posDiff.magnitude, pf.repulsiveExponent) * pf.repulsiveCoefficient * -posDiff.normalized;
             Vector3 attField = Mathf.Pow(posDiff.magnitude, pf.attractiveExponent) * pf.attractiveCoefficient * posDiff.normalized;
-            Vector3 crossPosField = Mathf.Pow(0.5f * (bAngle + 1), pf.taAngle) * Mathf.Pow(posDiff.magnitude, pf.bearingExponent) * pf.bearingCoefficient * starboard;
-            //Vector3 crossVelField = Mathf.Pow(posDiffCross.magnitude, pf.bearingExponent) * pf.bearingCoefficient * posDiffCross.normalized;
+            Vector3 crossPosField = Mathf.Pow(0.5f * (bAngle + 1), pf.bearingAngleExp) * Mathf.Pow(posDiff.magnitude, pf.bearingExponent) * pf.bearingCoefficient * starboard;
+            Vector3 crossVelField = Mathf.Pow(0.5f * (tAngle + 1), pf.taAngleExp) * Mathf.Pow(posDiff.magnitude, pf.taExponent) * pf.taCoefficient * starboard;
 
 
             potentials[1] = repField;
             potentials[2] = attField;
             potentials[3] = crossPosField;
-            // potentials[4] = crossVelField;
+            potentials[4] = crossVelField;
 
             /*
 

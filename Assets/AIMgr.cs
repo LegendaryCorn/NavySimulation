@@ -18,9 +18,11 @@ public struct PotentialParameters
     public float repulsiveCoefficient;
     public float repulsiveExponent;
     public float bearingAngle;
+    public float bearingAngleExp;
     public float bearingCoefficient;
     public float bearingExponent;
     public float taAngle;
+    public float taAngleExp;
     public float taCoefficient;
     public float taExponent;
 
@@ -33,11 +35,13 @@ public struct PotentialParameters
         repulsiveCoefficient = parameters[4];
         repulsiveExponent = parameters[5];
         bearingAngle = parameters[6];
-        bearingCoefficient = parameters[7];
-        bearingExponent = parameters[8];
-        taAngle = parameters[9];
-        taCoefficient = 0; // parameters[10];
-        taExponent = 0; // parameters[11];
+        bearingAngleExp = parameters[7];
+        bearingCoefficient = parameters[8];
+        bearingExponent = parameters[9];
+        taAngle = parameters[10];
+        taAngleExp = parameters[11];
+        taCoefficient = parameters[12];
+        taExponent = parameters[13];
     }
 }
 

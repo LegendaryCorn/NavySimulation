@@ -24,7 +24,7 @@ public class VesselFitness
         entity = ent;
     }
 
-    public void SetAxisPoints(float axis, List<WayPoint> wayPoints)
+    public void SetAxisPoints(float axis, List<Vector3> wayPoints)
     {
         fitAxis = axis * Mathf.Deg2Rad;
         cosAxis = Mathf.Cos(fitAxis);
@@ -36,10 +36,10 @@ public class VesselFitness
         prevPoint = WorldPointToAxisPoint(entity.position);
         currPoint = WorldPointToAxisPoint(entity.position);
 
-        foreach (WayPoint wP in wayPoints)
+        foreach (Vector3 wP in wayPoints)
         {
-            worldPoints.Add(wP.center);
-            fitAxisPoints.Add(WorldPointToAxisPoint(wP.center));
+            worldPoints.Add(wP);
+            fitAxisPoints.Add(WorldPointToAxisPoint(wP));
             dists.Add(Mathf.Infinity);
         }
 

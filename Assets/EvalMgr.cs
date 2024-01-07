@@ -26,17 +26,12 @@ public class EvalMgr : MonoBehaviour
             game = new GameMgr(potentialParameters);
             game.ExecuteGame(sc);
 
-            float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
             float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-            float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
-            float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
-            float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
-            float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
-            float fitness = 0f;
 
-            float sumDist = 0f;
-            bool allVisited = true;
-            timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+            float mainDist = 0f;
+            int mainCount = 0;
+            float sideDist = 0f;
+            int sideCount = 0;
 
             for (int i = 0; i < game.entityMgr.entities.Count; i++)
             {
@@ -46,15 +41,28 @@ public class EvalMgr : MonoBehaviour
                 {
                     sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
                 }
-                sumDist += sumShip / ent.fitness.dists.Count;
-            }
-            sumDist *= 1.0f / game.entityMgr.entities.Count;
 
-            fitness = 2000f / (20 * sumDist + 0.5f * (timePoint - game.fitnessMgr.timeMin) * (timePoint - game.fitnessMgr.timeMin));
+                if (ent.entityType == EntityType.DDG51) // DDG51 will be the dedicated "main" ship for now
+                {
+                    mainDist += sumShip / ent.fitness.dists.Count;
+                    mainCount += 1;
+                }
+                else
+                {
+                    sideDist += sumShip / ent.fitness.dists.Count;
+                    sideCount += 1;
+                }
+            }
+
+            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(mainDist / mainCount, -0.2f);
+            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(sideDist / sideCount, -0.2f);
+            float timeFit = 1f - (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
+            timeFit = Mathf.Clamp01(timeFit);
+            float fitness = (0.4f * mainFit + 0.4f * sideFit + 0.2f * timeFit);
 
             timeEnd = Time.realtimeSinceStartup;
 
-            Debug.Log(fitness.ToString() + " " + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd - timeStart).ToString());
+            Debug.Log(fitness.ToString() + " " + mainFit.ToString() + " " + sideFit.ToString() + " " + timeFit.ToString() + " " + (timeEnd - timeStart).ToString());
         }
 
     }

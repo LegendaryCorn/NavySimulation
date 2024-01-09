@@ -109,10 +109,10 @@ public class Move : Command
             Vector3 crossVelField = Mathf.Pow(0.5f * (tAngle + 1), pf.taAngleExp) * Mathf.Pow(posDiff.magnitude, pf.taExponent) * pf.taCoefficient * starboard;
 
 
-            potentials[1] = repField;
-            potentials[2] = attField;
-            potentials[3] = crossPosField;
-            potentials[4] = crossVelField;
+            potentials[1] += repField;
+            potentials[2] += attField;
+            potentials[3] += crossPosField;
+            potentials[4] += crossVelField;
 
             /*
 

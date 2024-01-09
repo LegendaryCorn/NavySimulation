@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public struct WayPoint
-{
-    public Vector3 center;
-}
-
 [System.Serializable]
 public struct ScenarioEntity
 {
     public EntityType type;
-    public WayPoint spawnPoint;
-    public List<WayPoint> wayPoints;
+    public Vector3 spawnPoint;
+    public List<Vector3> wayPoints;
     public float heading;
 
-    public List<WayPoint> fitPoints;
+    public List<Vector3> fitPoints;
     public float fitAxisHeading;
 }
 

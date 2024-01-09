@@ -665,17 +665,17 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 2
-  potentialChromosome: 00100000011101101111111010000100011001000011111010110111001100010101110111110010100
+  potentialChromosome: 
   potentialParameters:
     waypointCoefficient: 100
     waypointExponent: -1
-    attractiveCoefficient: 1000
+    attractiveCoefficient: 0
     attractiveExponent: -1.5
-    repulsiveCoefficient: 20000
+    repulsiveCoefficient: 0
     repulsiveExponent: -2
     bearingAngle: 90
     bearingAngleExp: 0
-    bearingCoefficient: 2000
+    bearingCoefficient: 0
     bearingExponent: -1.5
     taAngle: 0
     taAngleExp: 0

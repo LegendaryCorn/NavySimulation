@@ -311,7 +311,7 @@ MonoBehaviour:
     taAngleExp: 4
     taCoefficient: 7500
     taExponent: -6.3
-  scenarioID: 0
+  scenarioID: 2
 --- !u!4 &1371767469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,

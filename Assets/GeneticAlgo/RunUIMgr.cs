@@ -181,7 +181,7 @@ public class RunUIMgr : MonoBehaviour
                 maxVal = Mathf.Max(val, maxVal);
             */
             float minVal = 0f;
-            float maxVal = 4f;
+            float maxVal = 1f;
 
             float top = graphArea.rect.center.y + graphArea.rect.height * 0.5f;
             float bottom = graphArea.rect.center.y - graphArea.rect.height * 0.5f;

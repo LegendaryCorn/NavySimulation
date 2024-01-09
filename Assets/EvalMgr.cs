@@ -54,11 +54,11 @@ public class EvalMgr : MonoBehaviour
                 }
             }
 
-            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(mainDist / mainCount, -0.2f);
-            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(sideDist / sideCount, -0.2f);
+            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(1 / (1 + mainDist / mainCount), 0.2f);
+            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(1 / (1 + sideDist / sideCount), 0.2f);
             float timeFit = 1f - (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
             timeFit = Mathf.Clamp01(timeFit);
-            float fitness = (0.4f * mainFit + 0.4f * sideFit + 0.2f * timeFit);
+            float fitness = (0.9f * mainFit + 0.05f * sideFit + 0.05f * timeFit);
 
             timeEnd = Time.realtimeSinceStartup;
 

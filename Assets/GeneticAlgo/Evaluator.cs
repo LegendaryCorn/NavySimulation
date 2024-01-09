@@ -49,12 +49,12 @@ public class Evaluator
                 }
             }
 
-            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(mainDist / mainCount, -0.05f);
-            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(sideDist / sideCount, -0.05f);
+            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(1 / (1 + mainDist / mainCount), 0.2f);
+            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(1 / (1 + sideDist / sideCount), 0.2f);
             float timeFit = 1f - (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
             timeFit = Mathf.Clamp01(timeFit);
 
-            fitness.Add(0.45f * mainFit + 0.45f * sideFit + 0.1f * timeFit);
+            fitness.Add(0.9f * mainFit + 0.05f * sideFit + 0.05f * timeFit);
         }
 
         float lowerFit = fitness[0] > fitness[1] ? fitness[1] : fitness[0];

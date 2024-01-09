@@ -25,6 +25,7 @@ public struct PotentialParameters
     public float taAngleExp;
     public float taCoefficient;
     public float taExponent;
+    public float cpaExponent;
 
     public PotentialParameters(float[] parameters)
     {
@@ -42,6 +43,7 @@ public struct PotentialParameters
         taAngleExp = parameters[11];
         taCoefficient = parameters[12];
         taExponent = parameters[13];
+        cpaExponent = parameters[14];
     }
 }
 

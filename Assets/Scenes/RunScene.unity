@@ -4037,6 +4037,9 @@ MonoBehaviour:
   - chromosomeLength: 7
     chromosomeMin: -6.4
     chromosomeMax: 6.3
+  - chromosomeLength: 5
+    chromosomeMin: 0
+    chromosomeMax: 0.96875
   testCount: 0
   gaParameters:
     populationSize: 0

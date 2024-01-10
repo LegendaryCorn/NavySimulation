@@ -15,34 +15,30 @@ public class Evaluator
         GameMgr game = null;
         float fitness = 0f;
 
-        for (int sc = 0; sc < 2; sc++)
+        game = new GameMgr(new PotentialParameters(vals));
+        game.ExecuteGame(gaParameters.scenario);
+
+        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+
+        float sumDist = 0f;
+        bool allVisited = true;
+        timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+
+        for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
-
-            game = new GameMgr(new PotentialParameters(vals));
-            game.ExecuteGame(sc);
-
-            float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-
-            float sumDist = 0f;
-            bool allVisited = true;
-            timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
-
-            for (int i = 0; i < game.entityMgr.entities.Count; i++)
+            float sumShip = 0f;
+            Entity381 ent = game.entityMgr.entities[i];
+            for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                float sumShip = 0f;
-                Entity381 ent = game.entityMgr.entities[i];
-                for (int j = 0; j < ent.fitness.dists.Count; j++)
-                {
-                    sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
-                }
-                sumDist += sumShip / ent.fitness.dists.Count;
+                sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
             }
-            sumDist *= 1.0f / game.entityMgr.entities.Count;
-
-            fitness += 2000f / (20 * sumDist + 0.5f * (timePoint - game.fitnessMgr.timeMin) * (timePoint - game.fitnessMgr.timeMin));
+            sumDist += sumShip / ent.fitness.dists.Count;
         }
-        
-        return fitness / 2;
+        sumDist *= 1.0f / game.entityMgr.entities.Count;
+
+        fitness += 2000f / (20 * sumDist + 0.5f * (timePoint - game.fitnessMgr.timeMin) * (timePoint - game.fitnessMgr.timeMin));
+
+        return fitness;
     }
 
     public static float[] ParseChromosome(int[] chromosome, GAParameters parameters)

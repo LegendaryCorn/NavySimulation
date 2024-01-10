@@ -17,6 +17,7 @@ public class RunUIMgr : MonoBehaviour
     [SerializeField] private InputField mutProbField;
     [SerializeField] private InputField seedField;
     [SerializeField] private InputField testCountField;
+    [SerializeField] private InputField scenarioIDField;
 
     [Header("Graph UI Elements")]
     public RectTransform graphArea;
@@ -77,6 +78,7 @@ public class RunUIMgr : MonoBehaviour
             MasterMgr.inst.gaParameters.pMut = float.Parse(mutProbField.text);
             MasterMgr.inst.gaParameters.seed = int.Parse(seedField.text);
             MasterMgr.inst.testCount = int.Parse(testCountField.text);
+            MasterMgr.inst.gaParameters.scenario = int.Parse(scenarioIDField.text);
         }
         catch (System.Exception e)
         {

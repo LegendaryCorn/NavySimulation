@@ -642,9 +642,9 @@ MonoBehaviour:
     - chromosomeLength: 5
       chromosomeMin: -180
       chromosomeMax: 180
-    - chromosomeLength: 4
+    - chromosomeLength: 7
       chromosomeMin: 0
-      chromosomeMax: 15
+      chromosomeMax: 15.875
     - chromosomeLength: 6
       chromosomeMin: 0
       chromosomeMax: 31500
@@ -654,9 +654,9 @@ MonoBehaviour:
     - chromosomeLength: 5
       chromosomeMin: -180
       chromosomeMax: 180
-    - chromosomeLength: 4
+    - chromosomeLength: 7
       chromosomeMin: 0
-      chromosomeMax: 15
+      chromosomeMax: 15.875
     - chromosomeLength: 6
       chromosomeMin: 0
       chromosomeMax: 31500
@@ -665,8 +665,8 @@ MonoBehaviour:
       chromosomeMax: 6.3
     chromosomeTotal: 70
     id: 0
-  simSpeed: 2
-  potentialChromosome: 00110000000011110010000100000110010001010001111111011101100011100000000011101011000
+  simSpeed: 1
+  potentialChromosome: 11111000111100111001000000000010100100001101110110011101110011100111000000100000001101010
   potentialParameters:
     waypointCoefficient: 100
     waypointExponent: -1
@@ -1853,8 +1853,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345303798}
-  m_LocalRotation: {x: -0.2832277, y: 0.084425874, z: 0.025038388, w: 0.9550013}
-  m_LocalPosition: {x: -293.2898, y: -1656.8125, z: -3559.261}
+  m_LocalRotation: {x: 0.17133984, y: 0.08297108, z: 0.0144826695, w: -0.9816052}
+  m_LocalPosition: {x: 12.261819, y: -8.192689, z: 11.534766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1517180312}

@@ -4119,7 +4119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1651402243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5430,9 +5430,9 @@ MonoBehaviour:
   - chromosomeLength: 5
     chromosomeMin: -180
     chromosomeMax: 180
-  - chromosomeLength: 4
+  - chromosomeLength: 7
     chromosomeMin: 0
-    chromosomeMax: 15
+    chromosomeMax: 15.875
   - chromosomeLength: 6
     chromosomeMin: 0
     chromosomeMax: 31500
@@ -5442,9 +5442,9 @@ MonoBehaviour:
   - chromosomeLength: 5
     chromosomeMin: -180
     chromosomeMax: 180
-  - chromosomeLength: 4
+  - chromosomeLength: 7
     chromosomeMin: 0
-    chromosomeMax: 15
+    chromosomeMax: 15.875
   - chromosomeLength: 6
     chromosomeMin: 0
     chromosomeMax: 31500

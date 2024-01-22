@@ -299,19 +299,19 @@ MonoBehaviour:
   potentialParameters:
     waypointCoefficient: 9500
     waypointExponent: -2.5
-    attractiveCoefficient: 28500
+    attractiveCoefficient: 0
     attractiveExponent: -3.4
-    repulsiveCoefficient: 10500
+    repulsiveCoefficient: 0
     repulsiveExponent: -4.4
-    bearingAngle: 98.70968
+    bearingAngle: 0
     bearingAngleExp: 15
-    bearingCoefficient: 28500
+    bearingCoefficient: 0
     bearingExponent: -2.9
-    taAngle: 5.80642
+    taAngle: 0
     taAngleExp: 4
-    taCoefficient: 7500
+    taCoefficient: 0
     taExponent: -6.3
-  scenarioID: 2
+  scenarioID: 4
 --- !u!4 &1371767469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,

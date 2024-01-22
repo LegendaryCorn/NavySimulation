@@ -36,7 +36,9 @@ public class Evaluator
         }
         sumDist *= 1.0f / game.entityMgr.entities.Count;
 
-        fitness += 2000f / (20 * sumDist + 0.5f * (timePoint - game.fitnessMgr.timeMin) * (timePoint - game.fitnessMgr.timeMin));
+        float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
+
+        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
 
         return fitness;
     }

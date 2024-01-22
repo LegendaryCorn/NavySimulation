@@ -243,8 +243,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -3000}
@@ -290,8 +290,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -6000}
@@ -337,8 +337,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 400
-    fitTimeMax: 500
+    fitTimeMin: 440
+    fitTimeMax: 540
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -3000}
@@ -384,8 +384,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -3000}
@@ -431,5 +431,5 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320

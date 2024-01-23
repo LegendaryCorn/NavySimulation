@@ -297,20 +297,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potentialParameters:
-    waypointCoefficient: 9500
-    waypointExponent: -2.5
-    attractiveCoefficient: 0
-    attractiveExponent: -3.4
-    repulsiveCoefficient: 0
-    repulsiveExponent: -4.4
-    bearingAngle: 0
-    bearingAngleExp: 15
-    bearingCoefficient: 0
-    bearingExponent: -2.9
-    taAngle: 0
+    waypointCoefficient: 10000
+    waypointExponent: -1
+    attractiveCoefficient: 15000
+    attractiveExponent: -2
+    repulsiveCoefficient: 25000
+    repulsiveExponent: -2
+    bearingAngle: 30
+    bearingAngleExp: 4
+    bearingCoefficient: 180000
+    bearingExponent: -1.5
+    taAngle: -120
     taAngleExp: 4
-    taCoefficient: 0
-    taExponent: -6.3
+    taCoefficient: 180000
+    taExponent: -2
   scenarioID: 4
 --- !u!4 &1371767469 stripped
 Transform:

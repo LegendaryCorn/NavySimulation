@@ -51,7 +51,7 @@ public class EvalMgr : MonoBehaviour
 
         float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin); 
 
-        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -2f);
+        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
 
         timeEnd = Time.realtimeSinceStartup;
 

@@ -104,6 +104,11 @@ public class RunUIMgr : MonoBehaviour
                 {
                     sw.Write(bLogLine + "\n");
                 }
+                sw.Write("---------------------------------------------------");
+                for(int i = 0; i < averageAvg.Count; i++)
+                {
+                    sw.Write("\n" + i + ": " + averageAvg[i].ToString() + "|" + averageMax[i].ToString());
+                }
             }
         }
         catch(System.Exception e)

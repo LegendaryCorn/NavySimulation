@@ -207,22 +207,22 @@ MonoBehaviour:
       chromosomeMax: 6.3
     chromosomeTotal: 0
     id: 0
-  potentialChromosome: 1001001011101011010000000100110100001010010100010001010100111100011000111010011000010101001001001110111111010
+  potentialChromosome: 
   potentialParameters:
-    waypointCoefficient: 0
-    waypointExponent: 0
-    attractiveCoefficient: 0
-    attractiveExponent: 0
-    repulsiveCoefficient: 0
-    repulsiveExponent: 0
-    bearingAngle: 0
-    bearingAngleExp: 0
-    bearingCoefficient: 0
-    bearingExponent: 0
-    taAngle: 0
-    taAngleExp: 0
-    taCoefficient: 0
-    taExponent: 0
+    waypointCoefficient: 10000
+    waypointExponent: -1
+    attractiveCoefficient: 300000
+    attractiveExponent: -2
+    repulsiveCoefficient: 300000
+    repulsiveExponent: -2
+    bearingAngle: 50
+    bearingAngleExp: 4
+    bearingCoefficient: 45000
+    bearingExponent: -1.5
+    taAngle: -90
+    taAngleExp: 2
+    taCoefficient: 160000
+    taExponent: -2
   numRuns: 100
   angMin: 10
   angMax: 110

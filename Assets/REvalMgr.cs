@@ -38,11 +38,30 @@ public class REvalMgr : MonoBehaviour
             potentialParameters = new PotentialParameters(parsedChromosome); //Evaluator.ParseChromosome(chromosome);
         }
 
+        List<float> evals = new List<float>();
+        float sum = 0;
+
         for (int i = 0; i < numRuns; i++)
         {
             GenerateScenario();
-            Debug.Log(EvalGame());
+            float e = EvalGame();
+            evals.Add(e);
+            sum += e;
         }
+
+        float avg = sum / evals.Count;
+        float sumSq = 0;
+        float min = 1f;
+        float max = 0f;
+        foreach (float eval in evals)
+        {
+            sumSq += (eval - avg) * (eval - avg);
+            min = Mathf.Min(min, eval);
+            max = Mathf.Max(max, eval);
+        }
+        float stD = Mathf.Sqrt(sumSq / evals.Count);
+
+        Debug.Log("Minimum: " + min.ToString() + "\nMaximum: " + max.ToString() + "\nAverage: " + avg.ToString() + "\nStDev: " + stD.ToString());
     }
 
     public void GenerateScenario()

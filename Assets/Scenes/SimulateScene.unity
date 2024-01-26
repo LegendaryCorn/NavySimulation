@@ -666,7 +666,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 1
-  potentialChromosome: 
+  potentialChromosome: 0111001111110011001110010000100010000111010000110100001100000111111011011100011001111010010100001010110000100
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1

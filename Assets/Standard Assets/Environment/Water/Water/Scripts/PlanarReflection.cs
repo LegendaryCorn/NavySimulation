@@ -75,6 +75,7 @@ namespace UnityStandardAssets.Water
 
         public void RenderHelpCameras(Camera currentCam)
         {
+            /*
             if (null == m_HelperCameras)
             {
                 m_HelperCameras = new Dictionary<Camera, bool>();
@@ -97,6 +98,7 @@ namespace UnityStandardAssets.Water
             RenderReflectionFor(currentCam, m_ReflectionCamera);
 
             m_HelperCameras[currentCam] = true;
+            */
         }
 
 

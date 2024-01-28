@@ -22,7 +22,7 @@ public class GraphMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -34,6 +34,8 @@ public class GraphMgr : MonoBehaviour
             if (SelectionMgr.inst.selectedEntity != null && SelectionMgr.inst.selectedEntities.Count > 0)
                 CreateGraph(SelectionMgr.inst.selectedEntity);
         }
+        if(Input.GetKeyDown(KeyCode.H))
+            DeleteAllGraphs();
     }
 
     public void DeleteAllGraphs()

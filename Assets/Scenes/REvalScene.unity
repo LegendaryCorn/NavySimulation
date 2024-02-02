@@ -207,7 +207,7 @@ MonoBehaviour:
       chromosomeMax: 6.3
     chromosomeTotal: 0
     id: 0
-  potentialChromosome: 
+  potentialChromosome: 0100100011101001000011110111110100101001110000101001000111000010110000011011001011010111001111010100111000010
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1

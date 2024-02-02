@@ -10,6 +10,8 @@ public class GameMgr
     public AIMgr aiMgr;
     public FitnessMgr fitnessMgr;
 
+    public Dictionary<Entity381, List<Vector3>> recordPos;
+
     public GameMgr(PotentialParameters p)
     {
         entityMgr = new EntityMgr(this);
@@ -31,11 +33,13 @@ public class GameMgr
     public void LoadScenario(int scenarioID)
     {
         Scenario s = ScenarioMgr.inst.scenarios[scenarioID];
+        recordPos = new Dictionary<Entity381, List<Vector3>>();
 
         foreach (ScenarioEntity scEnt in s.scenarioEntities)
         {
             Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
             Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint, scEnt.heading);
+            recordPos[ent] = new List<Vector3>();
 
             foreach(Vector3 waypoint in scEnt.wayPoints)
             {
@@ -75,6 +79,15 @@ public class GameMgr
             }
             //if(counter % 10 == 9)
             fitnessMgr.OnUpdate(dt);
+
+            foreach(Entity381 ent in entityMgr.entities)
+            {
+                if (!fitnessMgr.oneShipFitnessParameters[ent.id].reachedTarget)
+                {
+                    recordPos[ent].Add(ent.position);
+                }
+            }
+
             counter += 1;
         }
     }

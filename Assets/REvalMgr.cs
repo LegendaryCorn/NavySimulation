@@ -53,14 +53,17 @@ public class REvalMgr : MonoBehaviour
         float sumSq = 0;
         float min = 1f;
         float max = 0f;
+        string st = "";
         foreach (float eval in evals)
         {
             sumSq += (eval - avg) * (eval - avg);
             min = Mathf.Min(min, eval);
             max = Mathf.Max(max, eval);
+            st += eval.ToString() + '\n';
         }
         float stD = Mathf.Sqrt(sumSq / evals.Count);
 
+        Debug.Log(st);
         Debug.Log("Minimum: " + min.ToString() + "\nMaximum: " + max.ToString() + "\nAverage: " + avg.ToString() + "\nStDev: " + stD.ToString());
     }
 

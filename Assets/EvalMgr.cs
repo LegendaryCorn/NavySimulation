@@ -57,5 +57,24 @@ public class EvalMgr : MonoBehaviour
 
         Debug.Log(fitness.ToString() + " " + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd - timeStart).ToString());
 
+        foreach(Entity381 ent in game.entityMgr.entities)
+        {
+            // Print the path points
+            ScenarioEntity v = ScenarioMgr.inst.scenarios[scenarioID].scenarioEntities[ent.id];
+            string s1 =  v.spawnPoint.ToString() + "\n";
+            foreach(Vector3 fp in v.fitPoints)
+            {
+                s1 += fp.ToString() + "\n";
+            }
+            s1 += v.wayPoints[0].ToString();
+            Debug.Log(s1);
+            // Print the path
+            string s2 = v.spawnPoint.ToString();
+            foreach (Vector3 vec in game.recordPos[ent])
+            {
+                s2 += "\n" + vec.ToString();
+            }
+            Debug.Log(s2);
+        }
     }
 }

@@ -24,14 +24,22 @@ struct PotentialParameters
     float attractiveExponent;
     float repulsiveCoefficient;
     float repulsiveExponent;
-    float bearingAngle;
-    float bearingAngleExp;
-    float bearingCoefficient;
-    float bearingExponent;
-    float taAngle;
-    float taAngleExp;
-    float taCoefficient;
-    float taExponent;
+    float attractiveBearingAngle;
+    float attractiveBearingAngleExp;
+    float attractiveBearingCoefficient;
+    float attractiveBearingExponent;
+    float attractiveTAAngle;
+    float attractiveTAAngleExp;
+    float attractiveTACoefficient;
+    float attractiveTAExponent;
+    float repulsiveBearingAngle;
+    float repulsiveBearingAngleExp;
+    float repulsiveBearingCoefficient;
+    float repulsiveBearingExponent;
+    float repulsiveTAAngle;
+    float repulsiveTAAngleExp;
+    float repulsiveTACoefficient;
+    float repulsiveTAExponent;
 };
 
 RWStructuredBuffer<float3> positions; //buffer to hold mesh vertex positions
@@ -102,8 +110,10 @@ float CalculatePotential(float3 position, int entity)
     
     float3 repField = 0;
     float3 attField = 0;
-    float3 crossPosField = 0;
-    float3 crossVelField = 0;
+    float3 attCrossPosField = 0;
+    float3 attCrossVelField = 0;
+    float3 repCrossPosField = 0;
+    float3 repCrossVelField = 0;
     
     float3 starboard = NormalizeVector(cross(ships[entity].velocity, float3(0, -1, 0)));
     
@@ -120,13 +130,18 @@ float CalculatePotential(float3 position, int entity)
         float3 negEntPosDiff = ships[entity].position - ships[i].position;
         float targetAngle = atan2(negEntPosDiff.x, negEntPosDiff.z) * Rad2Deg - ships[i].heading;
         
-        float bAngle = sin((relBearing + pf.bearingAngle) * Deg2Rad);
-        float tAngle = sin((targetAngle + pf.taAngle) * Deg2Rad);
+        float attBAngle = sin((relBearing + pf.attractiveBearingAngle) * Deg2Rad);
+        float attTAngle = sin((targetAngle + pf.attractiveTAAngle) * Deg2Rad);
+        
+        float repBAngle = sin((relBearing + pf.repulsiveBearingAngle) * Deg2Rad);
+        float repTAngle = sin((targetAngle + pf.repulsiveTAAngle) * Deg2Rad);
         
         repField = repField + (pow(VectorMagnitude(posDiff), pf.repulsiveExponent) * pf.repulsiveCoefficient * -NormalizeVector(posDiff));
         attField = attField + (pow(VectorMagnitude(posDiff), pf.attractiveExponent) * pf.attractiveCoefficient * NormalizeVector(posDiff));
-        crossPosField = crossPosField + (pow((0.5 * (bAngle + 1)), pf.bearingAngleExp) * pow(VectorMagnitude(entPosDiff), pf.bearingExponent) * pf.bearingCoefficient * starboard);
-        crossVelField = crossVelField + (pow((0.5 * (tAngle + 1)), pf.taAngle) * pow(VectorMagnitude(entPosDiff), pf.taExponent) * pf.taCoefficient * starboard);
+        attCrossPosField = attCrossPosField + (pow((0.5 * (attBAngle + 1)), pf.attractiveBearingAngleExp) * pow(VectorMagnitude(entPosDiff), pf.attractiveBearingExponent) * pf.attractiveBearingCoefficient * starboard);
+        attCrossVelField = attCrossVelField + (pow((0.5 * (attTAngle + 1)), pf.attractiveTAAngleExp) * pow(VectorMagnitude(entPosDiff), pf.attractiveTAExponent) * pf.attractiveTACoefficient * starboard);
+        repCrossPosField = repCrossPosField + (pow((0.5 * (attBAngle + 1)), pf.repulsiveBearingAngleExp) * pow(VectorMagnitude(entPosDiff), pf.repulsiveBearingExponent) * pf.repulsiveBearingCoefficient * -starboard);
+        repCrossVelField = repCrossVelField + (pow((0.5 * (attTAngle + 1)), pf.repulsiveTAAngleExp) * pow(VectorMagnitude(entPosDiff), pf.repulsiveTAExponent) * pf.repulsiveTACoefficient * -starboard);
     }
     
     float3 starboardPosition = ships[entity].position + (300 * starboard);
@@ -137,7 +152,8 @@ float CalculatePotential(float3 position, int entity)
     magnitude = -VectorMagnitude(attractivePotential) + VectorMagnitude(repField) - VectorMagnitude(attField);
     if (starboardDistance < 100)
     {
-        magnitude = magnitude - VectorMagnitude(crossPosField) - VectorMagnitude(crossVelField);
+        magnitude = magnitude - VectorMagnitude(attCrossPosField + attCrossVelField);
+        magnitude = magnitude + VectorMagnitude(repCrossPosField + repCrossVelField);
     }
     magnitude = clamp(magnitude, -maxMag, maxMag);
     

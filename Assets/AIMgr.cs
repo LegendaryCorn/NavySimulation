@@ -17,14 +17,22 @@ public struct PotentialParameters
     public float attractiveExponent;
     public float repulsiveCoefficient;
     public float repulsiveExponent;
-    public float bearingAngle;
-    public float bearingAngleExp;
-    public float bearingCoefficient;
-    public float bearingExponent;
-    public float taAngle;
-    public float taAngleExp;
-    public float taCoefficient;
-    public float taExponent;
+    public float attractiveBearingAngle;
+    public float attractiveBearingAngleExp;
+    public float attractiveBearingCoefficient;
+    public float attractiveBearingExponent;
+    public float attractiveTAAngle;
+    public float attractiveTAAngleExp;
+    public float attractiveTACoefficient;
+    public float attractiveTAExponent;
+    public float repulsiveBearingAngle;
+    public float repulsiveBearingAngleExp;
+    public float repulsiveBearingCoefficient;
+    public float repulsiveBearingExponent;
+    public float repulsiveTAAngle;
+    public float repulsiveTAAngleExp;
+    public float repulsiveTACoefficient;
+    public float repulsiveTAExponent;
 
     public PotentialParameters(float[] parameters)
     {
@@ -34,15 +42,23 @@ public struct PotentialParameters
         attractiveExponent = parameters[3];
         repulsiveCoefficient = parameters[4];
         repulsiveExponent = parameters[5];
-        bearingAngle = parameters[6];
-        bearingAngleExp = parameters[7];
-        bearingCoefficient = parameters[8];
-        bearingExponent = parameters[9];
-        taAngle = parameters[10];
-        taAngleExp = parameters[11];
-        taCoefficient = parameters[12];
-        taExponent = parameters[13];
-    }
+        attractiveBearingAngle = parameters[6];
+        attractiveBearingAngleExp = parameters[7];
+        attractiveBearingCoefficient = parameters[8];
+        attractiveBearingExponent = parameters[9];
+        attractiveTAAngle = parameters[10];
+        attractiveTAAngleExp = parameters[11];
+        attractiveTACoefficient = parameters[12];
+        attractiveTAExponent = parameters[13];
+        repulsiveBearingAngle = parameters[14];
+        repulsiveBearingAngleExp = parameters[15];
+        repulsiveBearingCoefficient = parameters[16];
+        repulsiveBearingExponent = parameters[17];
+        repulsiveTAAngle = parameters[18];
+        repulsiveTAAngleExp = parameters[19];
+        repulsiveTACoefficient = parameters[20];
+        repulsiveTAExponent = parameters[21];
+}
 }
 
 public class AIMgr

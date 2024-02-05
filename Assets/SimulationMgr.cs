@@ -11,6 +11,10 @@ public class SimulationMgr : MonoBehaviour
 
     GameMgr gameMgr;
 
+    public GameObject camera;
+    public Vector3 camPostion;
+    public float rotation;
+
     public List<SimulatedEntity> simulatedEntityPrefabs;
     public GameObject entitiesRoot;
     public List<SimulatedEntity> simulatedEntities;
@@ -119,6 +123,9 @@ public class SimulationMgr : MonoBehaviour
         gameMgr = new GameMgr(potentialParameters);
         gameMgr.LoadScenario(scenarioID); // Based on Scenario ID
         simulatedEntities = new List<SimulatedEntity>();
+
+        camera.transform.localRotation = Quaternion.Euler(0, rotation, 0);
+        camera.transform.position = camPostion;
 
         // Load Scenario Entities
         foreach (Entity381 ent in gameMgr.entityMgr.entities)

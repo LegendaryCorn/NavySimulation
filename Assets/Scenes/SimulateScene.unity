@@ -739,6 +739,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenarioID: 1
   scenarioCount: 0
+  camera: {fileID: 358051248}
+  camPostion: {x: 0, y: 300, z: -3800}
+  rotation: 0
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -810,22 +813,30 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 1
-  potentialChromosome: 0111001111110011001110010000100010000111010000110100001100000111111011011100011001111010010100001010110000100
+  potentialChromosome: 
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1
-    attractiveCoefficient: 13000
+    attractiveCoefficient: 300000
     attractiveExponent: -2
-    repulsiveCoefficient: 25000
+    repulsiveCoefficient: 300000
     repulsiveExponent: -2
-    bearingAngle: 120
-    bearingAngleExp: 4
-    bearingCoefficient: 10000
-    bearingExponent: -1.5
-    taAngle: -90
-    taAngleExp: 2
-    taCoefficient: 60000
-    taExponent: -2
+    attractiveBearingAngle: 50
+    attractiveBearingAngleExp: 4
+    attractiveBearingCoefficient: 45000
+    attractiveBearingExponent: -1.5
+    attractiveTAAngle: -90
+    attractiveTAAngleExp: 2
+    attractiveTACoefficient: 160000
+    attractiveTAExponent: -2
+    repulsiveBearingAngle: 0
+    repulsiveBearingAngleExp: 0
+    repulsiveBearingCoefficient: 0
+    repulsiveBearingExponent: 0
+    repulsiveTAAngle: 0
+    repulsiveTAAngleExp: 0
+    repulsiveTACoefficient: 0
+    repulsiveTAExponent: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,8 +977,8 @@ MonoBehaviour:
   YawNode: {fileID: 358051248}
   PitchNode: {fileID: 1576919499}
   RollNode: {fileID: 1664575454}
-  cameraMoveSpeed: 500
-  cameraTurnRate: 10
+  cameraMoveSpeed: 150
+  cameraTurnRate: 20
   currentYawEulerAngles: {x: 0, y: 0, z: 0}
   currentPitchEulerAngles: {x: 0, y: 0, z: 0}
   isRTSMode: 1
@@ -2788,7 +2799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 4770987507766933776, guid: 117e5c1aa4314e446abed91858f0e2fd, type: 3}
-  maxMag: 50
+  maxMag: 40
   size: {x: 10000, y: 10000}
   position: {x: -5000, y: 0, z: -5000}
   resolution: 400

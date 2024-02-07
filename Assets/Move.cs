@@ -103,19 +103,6 @@ public class Move : Command
             float bAngle = Mathf.Sin((relBearing + pf.bearingAngle) * Mathf.Deg2Rad);
             float tAngle = Mathf.Sin((targetAngle + pf.taAngle) * Mathf.Deg2Rad);
 
-            float dcpaFactor = 0f;
-            if (relVel.magnitude != 0) // If it is 0, the ships will never collide
-            {
-                float dotcpa = Vector3.Dot(-posDiff, relVel) / (posDiff.magnitude * relVel.magnitude);
-                float dcpa = Mathf.Sqrt(1 - dotcpa * dotcpa) * posDiff.magnitude;
-                float tcpa = dotcpa * posDiff.magnitude / relVel.magnitude;
-
-                if (tcpa > 0f) // If it is less than 0, the vessel will never collide and it is not an issue.
-                {
-                    dcpaFactor = Mathf.Pow((1 / (dcpa + 1)), pf.cpaExponent);
-                }
-            }
-
             Vector3 repField = Mathf.Pow(posDiff.magnitude, pf.repulsiveExponent) * pf.repulsiveCoefficient * -posDiff.normalized;
             Vector3 attField = Mathf.Pow(posDiff.magnitude, pf.attractiveExponent) * pf.attractiveCoefficient * posDiff.normalized;
             Vector3 crossPosField = Mathf.Pow(0.5f * (bAngle + 1), pf.bearingAngleExp) * Mathf.Pow(posDiff.magnitude, pf.bearingExponent) * pf.bearingCoefficient * starboard;

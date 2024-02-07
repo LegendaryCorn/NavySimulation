@@ -53,7 +53,7 @@ public class Population
         }
 
         if (RandomMgr.inst.Flip(parameters.pCross, parameters.seed))
-            XOver.OnePoint(parent1, parent2, child1, child2, parameters.chromosomeTotal);
+            XOver.Uniform(parent1, parent2, child1, child2, parameters.chromosomeTotal);
 
         child1.Mutate(parameters.pMut);
         child2.Mutate(parameters.pMut);

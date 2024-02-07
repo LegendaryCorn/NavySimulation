@@ -80,6 +80,7 @@ public class GameMgr
             //if(counter % 10 == 9)
             fitnessMgr.OnUpdate(dt);
 
+            /* Disabled if it isn't being used
             foreach(Entity381 ent in entityMgr.entities)
             {
                 if (!fitnessMgr.oneShipFitnessParameters[ent.id].reachedTarget)
@@ -87,6 +88,7 @@ public class GameMgr
                     recordPos[ent].Add(ent.position);
                 }
             }
+            */
 
             counter += 1;
         }

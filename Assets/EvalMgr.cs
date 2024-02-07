@@ -16,54 +16,65 @@ public class EvalMgr : MonoBehaviour
 
     private void Start()
     {
-        for (int sc = 0; sc < 2; sc++)
+
+        float timeStart;
+        float timeEnd;
+
+        timeStart = Time.realtimeSinceStartup;
+
+        game = new GameMgr(potentialParameters);
+        game.ExecuteGame(scenarioID);
+
+        float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+        float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
+        float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
+        float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
+        float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
+        float fitness = 0f;
+
+        float sumDist = 0f;
+        bool allVisited = true;
+        timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+
+        for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
-            float timeStart;
-            float timeEnd;
-
-            timeStart = Time.realtimeSinceStartup;
-
-            game = new GameMgr(potentialParameters);
-            game.ExecuteGame(sc);
-
-            float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-
-            float mainDist = 0f;
-            int mainCount = 0;
-            float sideDist = 0f;
-            int sideCount = 0;
-
-            for (int i = 0; i < game.entityMgr.entities.Count; i++)
+            float sumShip = 0f;
+            Entity381 ent = game.entityMgr.entities[i];
+            for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                float sumShip = 0f;
-                Entity381 ent = game.entityMgr.entities[i];
-                for (int j = 0; j < ent.fitness.dists.Count; j++)
-                {
-                    sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
-                }
-
-                if (ent.entityType == EntityType.DDG51) // DDG51 will be the dedicated "main" ship for now
-                {
-                    mainDist += sumShip / ent.fitness.dists.Count;
-                    mainCount += 1;
-                }
-                else
-                {
-                    sideDist += sumShip / ent.fitness.dists.Count;
-                    sideCount += 1;
-                }
+                sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
             }
-
-            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(1 / (1 + mainDist / mainCount), 0.2f);
-            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(1 / (1 + sideDist / sideCount), 0.2f);
-            float timeFit = 1f - (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
-            timeFit = Mathf.Clamp01(timeFit);
-            float fitness = (0.9f * mainFit + 0.05f * sideFit + 0.05f * timeFit);
-
-            timeEnd = Time.realtimeSinceStartup;
-
-            Debug.Log(fitness.ToString() + " " + mainFit.ToString() + " " + sideFit.ToString() + " " + timeFit.ToString() + " " + (timeEnd - timeStart).ToString());
+            sumDist += sumShip / ent.fitness.dists.Count;
         }
+        sumDist *= 1.0f / game.entityMgr.entities.Count;
 
+        float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin); 
+
+        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
+
+        timeEnd = Time.realtimeSinceStartup;
+
+        Debug.Log(fitness.ToString() + " " + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd - timeStart).ToString());
+
+        foreach(Entity381 ent in game.entityMgr.entities)
+        {
+            // Print the path points
+            ScenarioEntity v = ScenarioMgr.inst.scenarios[scenarioID].scenarioEntities[ent.id];
+            string s1 =  v.spawnPoint.ToString() + "\n";
+            foreach(Vector3 fp in v.fitPoints)
+            {
+                s1 += fp.ToString() + "\n";
+            }
+            s1 += v.wayPoints[0].ToString();
+            Debug.Log(s1);
+            // Print the path
+            string s2 = v.spawnPoint.ToString();
+            foreach (Vector3 vec in game.recordPos[ent])
+            {
+                s2 += "\n" + vec.ToString();
+            }
+            Debug.Log(s2);
+        }
     }
 }

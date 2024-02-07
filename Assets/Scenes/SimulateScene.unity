@@ -619,72 +619,69 @@ MonoBehaviour:
     pCross: 0
     pMut: 0
     seed: 0
+    scenario: 0
     chromosomeParameters:
-    - chromosomeLength: 6
-      chromosomeMin: 0
-      chromosomeMax: 31500
+    - chromosomeLength: 10
+      chromosomeMin: -512000
+      chromosomeMax: 511000
     - chromosomeLength: 7
       chromosomeMin: -6.4
       chromosomeMax: 6.3
-    - chromosomeLength: 6
-      chromosomeMin: 0
-      chromosomeMax: 31500
+    - chromosomeLength: 10
+      chromosomeMin: -512000
+      chromosomeMax: 511000
     - chromosomeLength: 7
       chromosomeMin: -6.4
       chromosomeMax: 6.3
-    - chromosomeLength: 6
-      chromosomeMin: 0
-      chromosomeMax: 31500
-    - chromosomeLength: 7
-      chromosomeMin: -6.4
-      chromosomeMax: 6.3
-    - chromosomeLength: 5
-      chromosomeMin: -180
-      chromosomeMax: 180
-    - chromosomeLength: 4
-      chromosomeMin: 0
-      chromosomeMax: 15
-    - chromosomeLength: 6
-      chromosomeMin: 0
-      chromosomeMax: 31500
+    - chromosomeLength: 10
+      chromosomeMin: -512000
+      chromosomeMax: 511000
     - chromosomeLength: 7
       chromosomeMin: -6.4
       chromosomeMax: 6.3
     - chromosomeLength: 5
       chromosomeMin: -180
       chromosomeMax: 180
-    - chromosomeLength: 4
+    - chromosomeLength: 7
       chromosomeMin: 0
-      chromosomeMax: 15
-    - chromosomeLength: 6
-      chromosomeMin: 0
-      chromosomeMax: 31500
+      chromosomeMax: 15.875
+    - chromosomeLength: 10
+      chromosomeMin: -512000
+      chromosomeMax: 511000
+    - chromosomeLength: 7
+      chromosomeMin: -6.4
+      chromosomeMax: 6.3
     - chromosomeLength: 5
+      chromosomeMin: -180
+      chromosomeMax: 180
+    - chromosomeLength: 7
       chromosomeMin: 0
-      chromosomeMax: 0.96875
+      chromosomeMax: 15.875
+    - chromosomeLength: 10
+      chromosomeMin: -512000
+      chromosomeMax: 511000
     - chromosomeLength: 7
       chromosomeMin: -6.4
       chromosomeMax: 6.3
     chromosomeTotal: 70
     id: 0
-  simSpeed: 2
-  potentialChromosome: 1110111001010011101010110001000011011000110010011111001001000100000100101101110101011111
+  simSpeed: 1
+  potentialChromosome: 0111001111110011001110010000100010000111010000110100001100000111111011011100011001111010010100001010110000100
   potentialParameters:
-    waypointCoefficient: 100
+    waypointCoefficient: 10000
     waypointExponent: -1
-    attractiveCoefficient: 1000
-    attractiveExponent: -1.5
-    repulsiveCoefficient: 20000
+    attractiveCoefficient: 13000
+    attractiveExponent: -2
+    repulsiveCoefficient: 25000
     repulsiveExponent: -2
-    bearingAngle: 90
-    bearingAngleExp: 0
-    bearingCoefficient: 2000
+    bearingAngle: 120
+    bearingAngleExp: 4
+    bearingCoefficient: 10000
     bearingExponent: -1.5
-    taAngle: 0
-    taAngleExp: 0
-    taCoefficient: 0
-    taExponent: 0
-    cpaExponent: 0
+    taAngle: -90
+    taAngleExp: 2
+    taCoefficient: 60000
+    taExponent: -2
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,8 +1853,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345303798}
-  m_LocalRotation: {x: -0.2832277, y: 0.084425874, z: 0.025038388, w: 0.9550013}
-  m_LocalPosition: {x: -293.2898, y: -1656.8125, z: -3559.261}
+  m_LocalRotation: {x: 0.040797565, y: 0.006320344, z: 0.00025809076, w: -0.9991474}
+  m_LocalPosition: {x: 15.853932, y: -15.416739, z: -1.4064505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1517180312}

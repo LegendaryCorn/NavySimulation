@@ -1,0 +1,206 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3419165102990549494
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361140, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: entityData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: entityData.Array.data[1].turnRate
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: entityData.Array.data[1].maxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: entityData.Array.data[1].entityType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[0].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[2].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[2].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[4].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[3].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[0].fitPoints.Array.data[3].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[0].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[2].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[2].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[3].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[3].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitPoints.Array.data[4].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361141, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: scenarios.Array.data[0].scenarioEntities.Array.data[1].fitAxisHeading
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703333273385361143, guid: 2ebf079c745d90f43993a02d8b180166,
+        type: 3}
+      propertyPath: m_Name
+      value: ScenarioMgrEmpty
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2ebf079c745d90f43993a02d8b180166, type: 3}

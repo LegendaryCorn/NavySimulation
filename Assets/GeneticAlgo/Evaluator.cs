@@ -13,54 +13,34 @@ public class Evaluator
         float[] vals = ParseChromosome(individual.chromosome, gaParameters);
 
         GameMgr game = null;
-        List<float> fitness = new List<float>();
+        float fitness = 0f;
 
-        for (int sc = 0; sc < 2; sc++)
+        game = new GameMgr(new PotentialParameters(vals));
+        game.ExecuteGame(gaParameters.scenario);
+
+        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+
+        float sumDist = 0f;
+        bool allVisited = true;
+        timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+
+        for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
-
-            game = new GameMgr(new PotentialParameters(vals));
-            game.ExecuteGame(sc);
-
-            float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-
-            float mainDist = 0f;
-            int mainCount = 0;
-            float sideDist = 0f;
-            int sideCount = 0;
-
-            for (int i = 0; i < game.entityMgr.entities.Count; i++)
+            float sumShip = 0f;
+            Entity381 ent = game.entityMgr.entities[i];
+            for (int j = 0; j < ent.fitness.dists.Count; j++)
             {
-                float sumShip = 0f;
-                Entity381 ent = game.entityMgr.entities[i];
-                for (int j = 0; j < ent.fitness.dists.Count; j++)
-                {
-                    sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
-                }
-
-                if(ent.entityType == EntityType.DDG51) // DDG51 will be the dedicated "main" ship for now
-                {
-                    mainDist += sumShip / ent.fitness.dists.Count;
-                    mainCount += 1;
-                }
-                else
-                {
-                    sideDist += sumShip / ent.fitness.dists.Count;
-                    sideCount += 1;
-                }
+                sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
             }
-
-            float mainFit = mainCount == 0 ? 1f : Mathf.Pow(1 / (1 + mainDist / mainCount), 0.2f);
-            float sideFit = sideCount == 0 ? 1f : Mathf.Pow(1 / (1 + sideDist / sideCount), 0.2f);
-            float timeFit = 1f - (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
-            timeFit = Mathf.Clamp01(timeFit);
-
-            fitness.Add(0.9f * mainFit + 0.05f * sideFit + 0.05f * timeFit);
+            sumDist += sumShip / ent.fitness.dists.Count;
         }
+        sumDist *= 1.0f / game.entityMgr.entities.Count;
 
-        float lowerFit = fitness[0] > fitness[1] ? fitness[1] : fitness[0];
-        float higherFit = fitness[1] > fitness[0] ? fitness[1] : fitness[0];
+        float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
 
-        return 0.7f * lowerFit + 0.3f * higherFit;
+        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
+
+        return fitness;
     }
 
     public static float[] ParseChromosome(int[] chromosome, GAParameters parameters)

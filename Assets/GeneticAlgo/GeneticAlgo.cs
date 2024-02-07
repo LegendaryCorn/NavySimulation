@@ -18,6 +18,7 @@ public struct GAParameters
     public float pCross;
     public float pMut;
     public int seed;
+    public int scenario;
 
     public List<ChromoParameters> chromosomeParameters;
     public int chromosomeTotal;

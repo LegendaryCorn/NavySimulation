@@ -70,8 +70,8 @@ MonoBehaviour:
     heading: 0
     desiredHeading: 0
     acceleration: 5
-    turnRate: 7
-    maxSpeed: 30
+    turnRate: 2
+    maxSpeed: 15
     minSpeed: 0
     mass: 1000
     entityType: 1
@@ -233,66 +233,6 @@ MonoBehaviour:
       - {x: -100, y: 0, z: -2400}
       - {x: -50, y: 0, z: -3000}
       fitAxisHeading: 180
-    - type: 1
-      spawnPoint: {x: -1400, y: 0, z: 2400}
-      wayPoints:
-      - {x: -1400, y: 0, z: -4100}
-      heading: 180
-      fitPoints:
-      - {x: -1400, y: 0, z: 1200}
-      - {x: -1400, y: 0, z: 0}
-      - {x: -1400, y: 0, z: -1200}
-      - {x: -1400, y: 0, z: -2400}
-      - {x: -1400, y: 0, z: -3600}
-      fitAxisHeading: 180
-    - type: 1
-      spawnPoint: {x: -700, y: 0, z: -2500}
-      wayPoints:
-      - {x: -700, y: 0, z: 4000}
-      heading: 0
-      fitPoints:
-      - {x: -700, y: 0, z: -1300}
-      - {x: -700, y: 0, z: -100}
-      - {x: -700, y: 0, z: 1100}
-      - {x: -700, y: 0, z: 2300}
-      - {x: -700, y: 0, z: 3500}
-      fitAxisHeading: 0
-    - type: 1
-      spawnPoint: {x: 700, y: 0, z: -500}
-      wayPoints:
-      - {x: 700, y: 0, z: 6000}
-      heading: 0
-      fitPoints:
-      - {x: 700, y: 0, z: 700}
-      - {x: 700, y: 0, z: 1900}
-      - {x: 700, y: 0, z: 3100}
-      - {x: 700, y: 0, z: 4300}
-      - {x: 700, y: 0, z: 5500}
-      fitAxisHeading: 0
-    - type: 1
-      spawnPoint: {x: 600, y: 0, z: -4000}
-      wayPoints:
-      - {x: 600, y: 0, z: 2500}
-      heading: 0
-      fitPoints:
-      - {x: 600, y: 0, z: -2800}
-      - {x: 600, y: 0, z: -1600}
-      - {x: 600, y: 0, z: -400}
-      - {x: 600, y: 0, z: 800}
-      - {x: 600, y: 0, z: 2000}
-      fitAxisHeading: 0
-    - type: 1
-      spawnPoint: {x: 1100, y: 0, z: -1500}
-      wayPoints:
-      - {x: 1100, y: 0, z: 5000}
-      heading: 0
-      fitPoints:
-      - {x: 1100, y: 0, z: -300}
-      - {x: 1100, y: 0, z: 900}
-      - {x: 1100, y: 0, z: 2100}
-      - {x: 1100, y: 0, z: 3300}
-      - {x: 1100, y: 0, z: 4500}
-      fitAxisHeading: 0
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -303,8 +243,8 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -3000}
@@ -340,65 +280,52 @@ MonoBehaviour:
       - {x: -2400, y: 0, z: 0}
       - {x: -3000, y: 0, z: 0}
       fitAxisHeading: 270
-    - type: 1
-      spawnPoint: {x: -1500, y: 0, z: 1000}
+    scenarioBoundaries:
+    - points:
+      - {x: -2000, y: 0, z: -10000}
+      - {x: -2000, y: 0, z: 10000}
+    - points:
+      - {x: 0, y: 0, z: -10000}
+      - {x: 0, y: 0, z: 10000}
+    - points:
+      - {x: 2000, y: 0, z: -10000}
+      - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 220
+    fitTimeMax: 320
+  - scenarioEntities:
+    - type: 0
+      spawnPoint: {x: 0, y: 0, z: -6000}
       wayPoints:
-      - {x: -1500, y: 0, z: -5500}
-      heading: 180
-      fitPoints:
-      - {x: -1500, y: 0, z: -200}
-      - {x: -1500, y: 0, z: -1400}
-      - {x: -1500, y: 0, z: -2600}
-      - {x: -1500, y: 0, z: -3800}
-      - {x: -1500, y: 0, z: -5000}
-      fitAxisHeading: 180
-    - type: 1
-      spawnPoint: {x: -700, y: 0, z: -500}
-      wayPoints:
-      - {x: -700, y: 0, z: 6000}
+      - {x: 0, y: 0, z: 7000}
       heading: 0
       fitPoints:
-      - {x: -700, y: 0, z: 700}
-      - {x: -700, y: 0, z: 1900}
-      - {x: -700, y: 0, z: 3100}
-      - {x: -700, y: 0, z: 4300}
-      - {x: -700, y: 0, z: 5500}
-      fitAxisHeading: 0
-    - type: 1
-      spawnPoint: {x: -600, y: 0, z: -2000}
-      wayPoints:
-      - {x: -600, y: 0, z: 4500}
-      heading: 0
-      fitPoints:
-      - {x: -600, y: 0, z: -800}
-      - {x: -600, y: 0, z: 400}
-      - {x: -600, y: 0, z: 1600}
-      - {x: -600, y: 0, z: 2800}
-      - {x: -600, y: 0, z: 4000}
-      fitAxisHeading: 0
-    - type: 1
-      spawnPoint: {x: 800, y: 0, z: 0}
-      wayPoints:
-      - {x: 800, y: 0, z: 6500}
-      heading: 0
-      fitPoints:
+      - {x: 200, y: 0, z: -4800}
+      - {x: 400, y: 0, z: -3600}
+      - {x: 700, y: 0, z: -2400}
+      - {x: 900, y: 0, z: -1200}
+      - {x: 1000, y: 0, z: 0}
       - {x: 800, y: 0, z: 1200}
-      - {x: 800, y: 0, z: 2400}
-      - {x: 800, y: 0, z: 3600}
-      - {x: 800, y: 0, z: 4800}
-      - {x: 800, y: 0, z: 6000}
+      - {x: 500, y: 0, z: 2400}
+      - {x: 300, y: 0, z: 3600}
+      - {x: 200, y: 0, z: 4800}
+      - {x: 100, y: 0, z: 6000}
       fitAxisHeading: 0
     - type: 1
-      spawnPoint: {x: 750, y: 0, z: -4000}
+      spawnPoint: {x: 0, y: 0, z: -3000}
       wayPoints:
-      - {x: 750, y: 0, z: 2500}
+      - {x: 0, y: 0, z: 3500}
       heading: 0
       fitPoints:
-      - {x: 750, y: 0, z: -2800}
-      - {x: 750, y: 0, z: -1600}
-      - {x: 750, y: 0, z: -400}
-      - {x: 750, y: 0, z: 800}
-      - {x: 750, y: 0, z: 2000}
+      - {x: 0, y: 0, z: -2400}
+      - {x: 0, y: 0, z: -1800}
+      - {x: 0, y: 0, z: -1200}
+      - {x: 0, y: 0, z: -600}
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 600}
+      - {x: 0, y: 0, z: 1200}
+      - {x: 0, y: 0, z: 1800}
+      - {x: 0, y: 0, z: 2400}
+      - {x: 0, y: 0, z: 3000}
       fitAxisHeading: 0
     scenarioBoundaries:
     - points:
@@ -410,8 +337,55 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 440
+    fitTimeMax: 540
+  - scenarioEntities:
+    - type: 0
+      spawnPoint: {x: 0, y: 0, z: -3000}
+      wayPoints:
+      - {x: 0, y: 0, z: 3500}
+      heading: 0
+      fitPoints:
+      - {x: 0, y: 0, z: -2400}
+      - {x: 300, y: 0, z: -1800}
+      - {x: 600, y: 0, z: -1200}
+      - {x: 800, y: 0, z: -600}
+      - {x: 1000, y: 0, z: 0}
+      - {x: 900, y: 0, z: 600}
+      - {x: 600, y: 0, z: 1200}
+      - {x: 400, y: 0, z: 1800}
+      - {x: 200, y: 0, z: 2400}
+      - {x: 100, y: 0, z: 3000}
+      fitAxisHeading: 0
+    - type: 0
+      spawnPoint: {x: 1500, y: 0, z: -2598}
+      wayPoints:
+      - {x: -1750, y: 0, z: 3031}
+      heading: 330
+      fitPoints:
+      - {x: 1200, y: 0, z: -2078}
+      - {x: 900, y: 0, z: -1559}
+      - {x: 600, y: 0, z: -1039}
+      - {x: 300, y: 0, z: -520}
+      - {x: 0, y: 0, z: 0}
+      - {x: -300, y: 0, z: 520}
+      - {x: -600, y: 0, z: 1039}
+      - {x: -900, y: 0, z: 1559}
+      - {x: -1200, y: 0, z: 2078}
+      - {x: -1500, y: 0, z: 2598}
+      fitAxisHeading: 330
+    scenarioBoundaries:
+    - points:
+      - {x: -2000, y: 0, z: -10000}
+      - {x: -2000, y: 0, z: 10000}
+    - points:
+      - {x: 0, y: 0, z: -10000}
+      - {x: 0, y: 0, z: 10000}
+    - points:
+      - {x: 2000, y: 0, z: -10000}
+      - {x: 2000, y: 0, z: 10000}
+    fitTimeMin: 220
+    fitTimeMax: 320
   - scenarioEntities:
     - type: 0
       spawnPoint: {x: 0, y: 0, z: -3000}
@@ -431,22 +405,22 @@ MonoBehaviour:
       - {x: 75, y: 0, z: 3000}
       fitAxisHeading: 0
     - type: 0
-      spawnPoint: {x: 3000, y: 0, z: 0}
+      spawnPoint: {x: 1500, y: 0, z: 2598}
       wayPoints:
-      - {x: -3500, y: 0, z: 0}
-      heading: 270
+      - {x: -1750, y: 0, z: -3031}
+      heading: 210
       fitPoints:
-      - {x: 2400, y: 0, z: 0}
-      - {x: 1800, y: 0, z: 0}
-      - {x: 1200, y: 0, z: 0}
-      - {x: 600, y: 0, z: 0}
+      - {x: 1200, y: 0, z: 2078}
+      - {x: 900, y: 0, z: 1559}
+      - {x: 600, y: 0, z: 1039}
+      - {x: 300, y: 0, z: 520}
       - {x: 0, y: 0, z: 0}
-      - {x: -600, y: 0, z: 0}
-      - {x: -1200, y: 0, z: 0}
-      - {x: -1800, y: 0, z: 0}
-      - {x: -2400, y: 0, z: 0}
-      - {x: -3000, y: 0, z: 0}
-      fitAxisHeading: 270
+      - {x: -300, y: 0, z: -520}
+      - {x: -600, y: 0, z: -1039}
+      - {x: -900, y: 0, z: -1559}
+      - {x: -1200, y: 0, z: -2078}
+      - {x: -1500, y: 0, z: -2598}
+      fitAxisHeading: 210
     scenarioBoundaries:
     - points:
       - {x: -2000, y: 0, z: -10000}
@@ -457,5 +431,5 @@ MonoBehaviour:
     - points:
       - {x: 2000, y: 0, z: -10000}
       - {x: 2000, y: 0, z: 10000}
-    fitTimeMin: 200
-    fitTimeMax: 300
+    fitTimeMin: 220
+    fitTimeMax: 320

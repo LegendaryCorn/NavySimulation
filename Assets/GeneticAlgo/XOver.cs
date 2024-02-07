@@ -26,4 +26,16 @@ public class XOver
         }
 
     }
+
+    public static void Uniform(Individual parent1, Individual parent2, Individual child1, Individual child2, int chromosomeLength)
+    {
+        for(int i = 0; i < chromosomeLength; i++)
+        {
+            if(RandomMgr.inst.Flip(0.5f, parent1.randomSeed))
+            {
+                child1.chromosome[i] = parent2.chromosome[i];
+                child2.chromosome[i] = parent1.chromosome[i];
+            }
+        }
+    }
 }

@@ -48,12 +48,6 @@ public class GameMgr
             ent.fitness.SetAxisPoints(scEnt.fitAxisHeading, scEnt.fitPoints);
         }
 
-        foreach (ScenarioBoundary scBound in s.scenarioBoundaries)
-        {
-            Boundary381 bound = new Boundary381(this, scBound.points);
-            entityMgr.boundaries.Add(bound);
-        }
-
         fitnessMgr.LoadParameters();
         fitnessMgr.timeMin = s.fitTimeMin;
         fitnessMgr.timeMax = s.fitTimeMax;

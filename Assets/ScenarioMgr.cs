@@ -14,21 +14,35 @@ public struct ScenarioEntity
     public float fitAxisHeading;
 }
 
-[System.Serializable]
-public struct ScenarioBoundary
-{
-    public List<Vector3> points;
-}
 
 [System.Serializable]
 public struct Scenario
 {
     public List<ScenarioEntity> scenarioEntities;
-    public List<ScenarioBoundary> scenarioBoundaries;
 
     public float fitTimeMin;
     public float fitTimeMax;
 }
+
+// To be used by TargetShipGenerator
+public enum EScenarioType
+{
+    HeadOn = 0,
+    Overtaking,
+    Crossing,
+    Crossing90,
+}
+
+
+[System.Serializable]
+public class ScenarioTypeData
+{
+    public EScenarioType scenarioType;
+    public float minAngle;
+    public float maxAngle;
+    public float minDist, maxDist;
+}
+//
 
 public class ScenarioMgr : MonoBehaviour
 {
@@ -39,8 +53,9 @@ public class ScenarioMgr : MonoBehaviour
         inst = this;
     }
 
-    public List<Entity381> entityData;
-    public List<Scenario> scenarios;
+    public List<Entity381> entityData; // Needs to be set
+    public List<ScenarioTypeData> scenarioTypeData;
+    public List<Scenario> scenarios; // Doesn't need to be set
 
     public Entity381 GetEntityData(EntityType e)
     {
@@ -52,5 +67,36 @@ public class ScenarioMgr : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void GenerateScenarios(EScenarioType scenarioType, int trafficCount)
+    {
+        Scenario s = new Scenario();
+        s.scenarioEntities = new List<ScenarioEntity>();
+
+        // Generate ownship
+        ScenarioEntity ownShip = new ScenarioEntity();
+        ownShip.spawnPoint = new Vector3(0, 0, -4000);
+        ownShip.wayPoints = new List<Vector3>();
+        ownShip.wayPoints.Add(new Vector3(0, 0, 4000));
+        ownShip.fitPoints = new List<Vector3>();
+        ownShip.type = EntityType.DDG51;
+        s.scenarioEntities.Add(ownShip);
+
+        
+        // Generate target ship
+        ScenarioTypeData sd = scenarioTypeData.Find(x => x.scenarioType == scenarioType);
+        ScenarioEntity targetShip = TargetShipGenerator.TargetShip(ownShip, sd);
+        s.scenarioEntities.Add(targetShip);
+        /*
+        // Generate traffic ships
+        for(int i = 0; i < trafficCount; i++)
+        {
+            ScenarioEntity trafficShip = new ScenarioEntity();
+            s.scenarioEntities.Add(trafficShip);
+        }
+        */
+
+        scenarios.Add(s);
     }
 }

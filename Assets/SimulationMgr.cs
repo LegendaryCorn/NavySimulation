@@ -7,6 +7,7 @@ public class SimulationMgr : MonoBehaviour
     public static SimulationMgr inst;
 
     public int scenarioID;
+    public EScenarioType scenarioType;
     public int scenarioCount;
 
     GameMgr gameMgr;
@@ -35,6 +36,8 @@ public class SimulationMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ScenarioMgr.inst.GenerateScenarios(scenarioType, 10);
+
         if(potentialChromosome != "")
         {
             int[] chromosome = new int[potentialChromosome.Length];

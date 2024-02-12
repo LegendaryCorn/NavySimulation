@@ -16,6 +16,14 @@ public enum EntityType
     TugBoat
 }
 
+public enum EntityRole
+{
+    None = 0,
+    Own,
+    Target,
+    Traffic
+}
+
 
 [System.Serializable]
 public class Entity381
@@ -44,6 +52,7 @@ public class Entity381
 
     public EntityType entityType;
     public int id;
+    public EntityRole role;
 
     public GameObject cameraRig;
     public GameObject selectionCircle;
@@ -54,7 +63,7 @@ public class Entity381
     public OrientedPhysics physics;
     public VesselFitness fitness;
 
-    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading, int id)
+    public Entity381(GameMgr mgr, Entity381 entData, Vector3 position, float heading, int id, EntityRole eRole)
     {
         gameMgr = mgr;
         this.position = position;
@@ -69,6 +78,7 @@ public class Entity381
 
         this.entityType = entData.entityType;
         this.id = id;
+        this.role = eRole;
 
         ai = new UnitAI(this);
         physics = new OrientedPhysics(this);

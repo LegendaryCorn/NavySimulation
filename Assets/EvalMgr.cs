@@ -60,7 +60,7 @@ public class EvalMgr : MonoBehaviour
         foreach(Entity381 ent in game.entityMgr.entities)
         {
             // Print the path points
-            ScenarioEntity v = ScenarioMgr.inst.scenarios[scenarioID].scenarioEntities[ent.id];
+            ScenarioEntity v = ScenarioMgr.inst.scenarios[scenarioID].ownShipEntity;
             string s1 =  v.spawnPoint.ToString() + "\n";
             foreach(Vector3 fp in v.fitPoints)
             {

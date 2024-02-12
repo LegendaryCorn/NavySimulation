@@ -76,15 +76,21 @@ public class Move : Command
         PotentialParameters pf = entity.gameMgr.aiMgr.potentialParameters;
 
         potentials.Add(Vector3.zero);
-        for (int i = 0; i < 5; i++)
-        {
-            potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials, i % 2 == 1 for negative potentials
-        }
 
         Vector3 attractiveDist = movePosition - pos;
         Vector3 attractivePotential = attractiveDist.normalized *
             pf.waypointCoefficient * Mathf.Pow(attractiveDist.magnitude, pf.waypointExponent);
         potentials[0] += attractivePotential;
+
+        if(entity.role == EntityRole.Traffic || entity.role == EntityRole.None)
+        {
+            return potentials;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials, i % 2 == 1 for negative potentials
+        }
 
         foreach (Entity381 ent in entity.gameMgr.entityMgr.entities)
         {

@@ -595,7 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenarioID: 0
   scenarioType: 1
-  scenarioCount: 0
+  scenarioCount: 10
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -667,7 +667,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 1
-  potentialChromosome: 
+  potentialChromosome: 0111001111110011001110010000100010000111010000110100001100000111111011011100011001111010010100001010110000100
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1
@@ -955,111 +955,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarios.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[1].scenarioType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[2].scenarioType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[3].scenarioType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[0].minAngle
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[0].maxAngle
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[1].minAngle
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[1].maxAngle
-      value: 185
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[2].minAngle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[2].maxAngle
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[3].minAngle
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[3].maxAngle
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[0].minDist
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[0].maxDist
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[1].minDist
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[1].maxDist
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[2].minDist
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[2].maxDist
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[3].minDist
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
-        type: 3}
-      propertyPath: scenarioTypeData.Array.data[3].maxDist
-      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 8703333273385361143, guid: ac8fd156818965c4787953737796dce7,
         type: 3}

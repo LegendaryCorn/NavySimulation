@@ -69,6 +69,7 @@ public class REvalMgr : MonoBehaviour
 
     public void GenerateScenario()
     {
+        /*
         // Generate the random variables
         float ang = Mathf.Deg2Rad * Random.Range(angMin, angMax);
         float dist = Random.Range(distMin, distMax);
@@ -107,6 +108,7 @@ public class REvalMgr : MonoBehaviour
 
         ScenarioMgr.inst.scenarios[0].scenarioEntities[0] = v1;
         ScenarioMgr.inst.scenarios[0].scenarioEntities[1] = v2;
+        */
     }
 
     public float EvalGame()

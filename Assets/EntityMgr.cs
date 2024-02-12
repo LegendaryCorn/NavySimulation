@@ -18,11 +18,11 @@ public class EntityMgr
 
     public GameMgr gameMgr;
 
-    public Entity381 CreateEntity(Entity381 entityData, Vector3 position, float heading)
+    public Entity381 CreateEntity(Entity381 entityData, Vector3 position, float heading, EntityRole eRole)
     {
         Entity381 entity = null;
         //GameObject entityPrefab = MasterMgr.inst.entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == et));
-        entity = new Entity381(gameMgr, entityData, position, heading, entityId);
+        entity = new Entity381(gameMgr, entityData, position, heading, entityId, eRole);
         entityId++;
         entities.Add(entity);
         return entity;

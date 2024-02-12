@@ -35,10 +35,22 @@ public class GameMgr
         Scenario s = ScenarioMgr.inst.scenarios[scenarioID];
         recordPos = new Dictionary<Entity381, List<Vector3>>();
 
-        foreach (ScenarioEntity scEnt in s.scenarioEntities)
+        List<ScenarioEntity> entities = new List<ScenarioEntity>();
+        entities.Add(s.ownShipEntity);
+        entities.Add(s.targetShipEntity);
+        foreach (ScenarioEntity trEnt in s.trafficEntities)
         {
+            entities.Add(trEnt);
+        }
+
+        for(int i = 0; i < entities.Count; i++)
+        {
+            ScenarioEntity scEnt = entities[i];
+            EntityRole role = i == 0 ? EntityRole.Own : EntityRole.Traffic;
+            role = i == 1 ? EntityRole.Target : role;
+            Debug.Log(role);
             Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
-            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint, scEnt.heading);
+            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint, scEnt.heading, role);
             recordPos[ent] = new List<Vector3>();
 
             foreach(Vector3 waypoint in scEnt.wayPoints)

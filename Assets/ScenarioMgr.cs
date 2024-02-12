@@ -88,14 +88,13 @@ public class ScenarioMgr : MonoBehaviour
         ScenarioTypeData sd = scenarioTypeData.Find(x => x.scenarioType == scenarioType);
         ScenarioEntity targetShip = TargetShipGenerator.TargetShip(ownShip, sd);
         s.scenarioEntities.Add(targetShip);
-        /*
+
         // Generate traffic ships
-        for(int i = 0; i < trafficCount; i++)
+        List<ScenarioEntity> traffic = TrafficShipGenerator.TrafficShips(trafficCount, ownShip, targetShip);
+        foreach(ScenarioEntity trafficShip in traffic)
         {
-            ScenarioEntity trafficShip = new ScenarioEntity();
             s.scenarioEntities.Add(trafficShip);
         }
-        */
 
         scenarios.Add(s);
     }

@@ -36,7 +36,7 @@ public class SimulationMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScenarioMgr.inst.GenerateScenarios(scenarioType, 10);
+        ScenarioMgr.inst.GenerateScenarios(scenarioType, 30);
 
         if(potentialChromosome != "")
         {
@@ -64,22 +64,6 @@ public class SimulationMgr : MonoBehaviour
             simEnt.transform.parent = entitiesRoot.transform;
             simulatedEntities.Add(simEnt);
         }
-
-        // Load Lines
-        /*
-        foreach (Boundary381 bound in gameMgr.entityMgr.boundaries)
-        {
-            LineRenderer line = Instantiate<LineRenderer>(simulatedBoundaryPrefab);
-            line.transform.parent = boundariesRoot.transform;
-            line.positionCount = bound.points.Count;
-            for (int i = 0; i < bound.points.Count; i++)
-            {
-                Vector3 point = bound.points[i];
-                line.SetPosition(i, point);
-            }
-        }
-        */
-        
     }
 
     // Update is called once per frame

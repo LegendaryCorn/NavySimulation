@@ -26,13 +26,8 @@ public class Evaluator
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
-            float sumShip = 0f;
             Entity381 ent = game.entityMgr.entities[i];
-            for (int j = 0; j < ent.fitness.dists.Count; j++)
-            {
-                sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
-            }
-            sumDist += sumShip / ent.fitness.dists.Count;
+            sumDist += ent.fitness.dist;
         }
         sumDist *= 1.0f / game.entityMgr.entities.Count;
 

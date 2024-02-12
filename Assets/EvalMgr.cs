@@ -7,7 +7,7 @@ public class EvalMgr : MonoBehaviour
     public static EvalMgr inst;
     GameMgr game;
     public PotentialParameters potentialParameters;
-    public int scenarioID;
+    public int scenarioCount;
 
     private void Awake()
     {
@@ -22,8 +22,14 @@ public class EvalMgr : MonoBehaviour
 
         timeStart = Time.realtimeSinceStartup;
 
+        // Generate scenarios
+        foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
+        {
+            ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
+        }
+
         game = new GameMgr(potentialParameters);
-        game.ExecuteGame(scenarioID);
+        game.ExecuteGame(0);
 
         float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
         float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
@@ -39,13 +45,8 @@ public class EvalMgr : MonoBehaviour
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
-            float sumShip = 0f;
             Entity381 ent = game.entityMgr.entities[i];
-            for (int j = 0; j < ent.fitness.dists.Count; j++)
-            {
-                sumShip += Mathf.Sqrt(ent.fitness.dists[j]);
-            }
-            sumDist += sumShip / ent.fitness.dists.Count;
+            sumDist += ent.fitness.dist;
         }
         sumDist *= 1.0f / game.entityMgr.entities.Count;
 
@@ -57,10 +58,11 @@ public class EvalMgr : MonoBehaviour
 
         Debug.Log(fitness.ToString() + " " + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd - timeStart).ToString());
 
+        /*
         foreach(Entity381 ent in game.entityMgr.entities)
         {
             // Print the path points
-            ScenarioEntity v = ScenarioMgr.inst.scenarios[scenarioID].ownShipEntity;
+            ScenarioEntity v = ScenarioMgr.inst.scenarios[0].ownShipEntity;
             string s1 =  v.spawnPoint.ToString() + "\n";
             foreach(Vector3 fp in v.fitPoints)
             {
@@ -76,5 +78,6 @@ public class EvalMgr : MonoBehaviour
             }
             Debug.Log(s2);
         }
+        */
     }
 }

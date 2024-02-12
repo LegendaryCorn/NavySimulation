@@ -11,6 +11,7 @@ public class MasterMgr : MonoBehaviour
     public List<ChromoParameters> chromosomeParameters;
 
     public int testCount;
+    public int scenarioCount;
     int testID = 0;
 
     private void Awake()
@@ -32,7 +33,10 @@ public class MasterMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        foreach(ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
+        {
+            ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
+        }
     }
 
     // Update is called once per frame

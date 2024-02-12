@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenarioID: 0
-  scenarioType: 1
+  scenarioType: 3
   scenarioCount: 10
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}

@@ -117,28 +117,28 @@ public class REvalMgr : MonoBehaviour
         game = new GameMgr(potentialParameters);
         game.ExecuteGame(0);
 
-        float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
-        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-        float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
-        float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
-        float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
-        float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
+        //float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+        //float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+        //float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
+        //float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
+        //float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
+        //float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
         float fitness = 0f;
 
         float sumDist = 0f;
         bool allVisited = true;
-        timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+        //timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
 
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
             Entity381 ent = game.entityMgr.entities[i];
-            sumDist += ent.fitness.dist;
+            sumDist += ent.fitness.fitPDist;
         }
         sumDist *= 1.0f / game.entityMgr.entities.Count;
 
-        float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
+        //float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
 
-        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
+        //fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
 
         return fitness;
     }

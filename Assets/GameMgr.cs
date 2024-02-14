@@ -8,7 +8,7 @@ public class GameMgr
     public EntityMgr entityMgr;
     public DistanceMgr distanceMgr;
     public AIMgr aiMgr;
-    public FitnessMgr fitnessMgr;
+    //public FitnessMgr fitnessMgr;
 
     public Dictionary<Entity381, List<Vector3>> recordPos;
 
@@ -17,7 +17,7 @@ public class GameMgr
         entityMgr = new EntityMgr(this);
         distanceMgr = new DistanceMgr(this);
         aiMgr = new AIMgr(this, p);
-        fitnessMgr = new FitnessMgr(this);
+        //fitnessMgr = new FitnessMgr(this);
     }
 
     public void ExecuteGame(int scenario)
@@ -48,7 +48,6 @@ public class GameMgr
             ScenarioEntity scEnt = entities[i];
             EntityRole role = i == 0 ? EntityRole.Own : EntityRole.Traffic;
             role = i == 1 ? EntityRole.Target : role;
-            Debug.Log(role);
             Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
             Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint, scEnt.heading, role);
             recordPos[ent] = new List<Vector3>();
@@ -57,12 +56,16 @@ public class GameMgr
             {
                 ent.ai.AddCommand(new Move(ent, waypoint));
             }
-            ent.fitness.SetAxisPoints(scEnt.fitAxisHeading, scEnt.fitPoints);
         }
 
-        fitnessMgr.LoadParameters();
-        fitnessMgr.timeMin = s.fitTimeMin;
-        fitnessMgr.timeMax = s.fitTimeMax;
+        for(int i = 0; i < 2; i++) // Load the fitness points
+        {
+            entityMgr.entities[i].fitness.SetFitPoints(s.scenarioType, i == 0, entityMgr.entities[1 - i]);
+        }
+
+        //fitnessMgr.LoadParameters();
+        //fitnessMgr.timeMin = s.fitTimeMin;
+        //fitnessMgr.timeMax = s.fitTimeMax;
     }
 
     public void RunGame(float dt, float tf) // tf is in Seconds
@@ -84,7 +87,7 @@ public class GameMgr
                 ent.fitness.OnUpdate(dt);
             }
             //if(counter % 10 == 9)
-            fitnessMgr.OnUpdate(dt);
+            //fitnessMgr.OnUpdate(dt);
 
             /* Disabled if it isn't being used
             foreach(Entity381 ent in entityMgr.entities)

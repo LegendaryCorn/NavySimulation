@@ -36,9 +36,12 @@ public class SimulationMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScenarioMgr.inst.GenerateScenarios(scenarioType, scenarioCount);
+        foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
+        {
+            ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
+        }
 
-        if(potentialChromosome != "")
+        if (potentialChromosome != "")
         {
             int[] chromosome = new int[potentialChromosome.Length];
             for(int i = 0; i < potentialChromosome.Length; i++)

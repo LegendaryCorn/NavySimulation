@@ -20,64 +20,50 @@ public class EvalMgr : MonoBehaviour
         float timeStart;
         float timeEnd;
 
-        timeStart = Time.realtimeSinceStartup;
+        
 
         // Generate scenarios
         foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
         {
             ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
         }
+        for (int x = 0; x < ScenarioMgr.inst.scenarioTypeData.Count * scenarioCount; x++) {
+            timeStart = Time.realtimeSinceStartup;
 
-        game = new GameMgr(potentialParameters);
-        game.ExecuteGame(0);
+            game = new GameMgr(potentialParameters);
+            game.ExecuteGame(x);
 
-        float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
-        float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-        float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
-        float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
-        float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
-        float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
-        float fitness = 0f;
+            //float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
+            //float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
+            //float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
+            //float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
+            //float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
+            //float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
+            float fitness = 0f;
 
-        float sumDist = 0f;
-        bool allVisited = true;
-        timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
+            float cpaFit = 0f;
+            float fpFit = 0f;
+            //bool allVisited = true;
+            //timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
 
-        for (int i = 0; i < game.entityMgr.entities.Count; i++)
-        {
-            Entity381 ent = game.entityMgr.entities[i];
-            sumDist += ent.fitness.dist;
-        }
-        sumDist *= 1.0f / game.entityMgr.entities.Count;
-
-        float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin); 
-
-        fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
-
-        timeEnd = Time.realtimeSinceStartup;
-
-        Debug.Log(fitness.ToString() + " " + sumDist.ToString() + " " + timePoint.ToString() + " " + (timeEnd - timeStart).ToString());
-
-        /*
-        foreach(Entity381 ent in game.entityMgr.entities)
-        {
-            // Print the path points
-            ScenarioEntity v = ScenarioMgr.inst.scenarios[0].ownShipEntity;
-            string s1 =  v.spawnPoint.ToString() + "\n";
-            foreach(Vector3 fp in v.fitPoints)
+            float sumDist = 0;
+            for (int i = 0; i < 2; i++)
             {
-                s1 += fp.ToString() + "\n";
+                Entity381 ent = game.entityMgr.entities[i];
+                sumDist += ent.fitness.fitPDist;
             }
-            s1 += v.wayPoints[0].ToString();
-            Debug.Log(s1);
-            // Print the path
-            string s2 = v.spawnPoint.ToString();
-            foreach (Vector3 vec in game.recordPos[ent])
-            {
-                s2 += "\n" + vec.ToString();
-            }
-            Debug.Log(s2);
+
+            sumDist *= 1.0f / game.entityMgr.entities.Count;
+            cpaFit = 1 / (Mathf.Abs(Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist) - 500f) + 1); // Remember that cpaDist and fitPDist are squared distances
+            fpFit = 1.0f / (sumDist + 1);
+
+            //float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin); 
+
+            fitness += 0.5f * cpaFit + 0.5f * fpFit;
+
+            timeEnd = Time.realtimeSinceStartup;
+
+            Debug.Log(fitness.ToString() + " " + cpaFit.ToString() + " " + fpFit.ToString() + " " + (timeEnd - timeStart).ToString());
         }
-        */
     }
 }

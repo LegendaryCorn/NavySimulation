@@ -20,6 +20,7 @@ public class MasterMgr : MonoBehaviour
         gaParameters = new GAParameters();
         gaParameters.chromosomeParameters = chromosomeParameters;
         gaParameters.chromosomeTotal = 0;
+        gaParameters.scenarioCount = scenarioCount;
 
         foreach(ChromoParameters chromoP in chromosomeParameters)
         {

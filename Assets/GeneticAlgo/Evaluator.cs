@@ -15,6 +15,7 @@ public class Evaluator
         GameMgr game = null;
         float fitness = 0f;
 
+        /*
         game = new GameMgr(new PotentialParameters(vals));
         game.ExecuteGame(gaParameters.scenario);
 
@@ -27,15 +28,37 @@ public class Evaluator
         for (int i = 0; i < game.entityMgr.entities.Count; i++)
         {
             Entity381 ent = game.entityMgr.entities[i];
-            sumDist += ent.fitness.dist;
+            sumDist += ent.fitness.fitPDist;
         }
         sumDist *= 1.0f / game.entityMgr.entities.Count;
 
         float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin);
 
         fitness += Mathf.Pow(0.01f * sumDist + 25f * timeVal * timeVal + 1f, -0.5f);
+        */
+        for (int x = 0; x < ScenarioMgr.inst.scenarioTypeData.Count * gaParameters.scenarioCount; x++)
+        {
+            game = new GameMgr(new PotentialParameters(vals));
+            game.ExecuteGame(x);
 
-        return fitness;
+            float cpaFit = 0f;
+            float fpFit = 0f;
+
+            float sumDist = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                Entity381 ent = game.entityMgr.entities[i];
+                sumDist += ent.fitness.fitPDist;
+            }
+
+            sumDist *= 1.0f / game.entityMgr.entities.Count;
+            cpaFit = 1 / (Mathf.Abs(Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist) - 500f) + 1); // Remember that cpaDist and fitPDist are squared distances
+            fpFit = 1.0f / (sumDist + 1);
+
+            fitness += 0.5f * cpaFit + 0.5f * fpFit;
+        }
+
+        return fitness / (ScenarioMgr.inst.scenarioTypeData.Count * gaParameters.scenarioCount);
     }
 
     public static float[] ParseChromosome(int[] chromosome, GAParameters parameters)

@@ -595,7 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenarioID: 0
   scenarioType: 3
-  scenarioCount: 10
+  scenarioCount: 3
   simulatedEntityPrefabs:
   - {fileID: 114005276786250034, guid: 4eadb14a1eece2a44a7ae893943f3d9f, type: 3}
   - {fileID: 114092541866809394, guid: 195ecb91b20a27e4c837b4a6d3c601f4, type: 3}
@@ -621,6 +621,7 @@ MonoBehaviour:
     pMut: 0
     seed: 0
     scenario: 0
+    scenarioCount: 0
     chromosomeParameters:
     - chromosomeLength: 10
       chromosomeMin: -512000
@@ -667,7 +668,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 1
-  potentialChromosome: 0111001111110011001110010000100010000111010000110100001100000111111011011100011001111010010100001010110000100
+  potentialChromosome: 0101001001101001100100001001100101000110100011011000100101110000101101110010011000011001001010101000011000010
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1

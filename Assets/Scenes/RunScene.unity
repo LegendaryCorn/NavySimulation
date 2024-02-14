@@ -5452,7 +5452,7 @@ MonoBehaviour:
     chromosomeMin: -6.4
     chromosomeMax: 6.3
   testCount: 0
-  scenarioCount: 4
+  scenarioCount: 3
   gaParameters:
     populationSize: 0
     numberOfGenerations: 0
@@ -5460,6 +5460,7 @@ MonoBehaviour:
     pMut: 0
     seed: 0
     scenario: 0
+    scenarioCount: 3
     chromosomeParameters: []
     chromosomeTotal: 0
     id: 0

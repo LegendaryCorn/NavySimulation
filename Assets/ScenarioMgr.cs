@@ -18,6 +18,7 @@ public struct ScenarioEntity
 [System.Serializable]
 public struct Scenario
 {
+    public EScenarioType scenarioType;
     public ScenarioEntity ownShipEntity;
     public ScenarioEntity targetShipEntity;
     public List<ScenarioEntity> trafficEntities;
@@ -103,6 +104,7 @@ public class ScenarioMgr : MonoBehaviour
             List<ScenarioEntity> traffic = TrafficShipGenerator.TrafficShips(trafficCount, ownShip, targetShip);
             s.trafficEntities = traffic;
 
+            s.scenarioType = scenarioType;
             scenarios.Add(s);
         }
     }

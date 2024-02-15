@@ -2797,6 +2797,7 @@ MonoBehaviour:
   calcAttField: 1
   calcCrossPosField: 1
   calcCrossVelField: 1
+  directionalRepresentation: 0
 --- !u!1 &1801844801
 GameObject:
   m_ObjectHideFlags: 0

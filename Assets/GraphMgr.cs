@@ -18,6 +18,7 @@ public class GraphMgr : MonoBehaviour
     public bool calcAttField;
     public bool calcCrossPosField;
     public bool calcCrossVelField;
+    public bool directionalRepresentation;
 
     private GameObject plane;
 
@@ -35,6 +36,7 @@ public class GraphMgr : MonoBehaviour
         calcAttField = true;
         calcCrossPosField = true;
         calcCrossVelField = true;
+        directionalRepresentation = false;
 }
 
     // Update is called once per frame

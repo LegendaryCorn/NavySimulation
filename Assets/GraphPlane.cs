@@ -137,6 +137,7 @@ public class GraphPlane : MonoBehaviour
         potentialShader.SetBool("calcAttField", GraphMgr.inst.calcAttField);
         potentialShader.SetBool("calcCrossPosField", GraphMgr.inst.calcCrossPosField);
         potentialShader.SetBool("calcCrossVelField", GraphMgr.inst.calcCrossVelField);
+        potentialShader.SetBool("directional", GraphMgr.inst.directionalRepresentation);
         potentialShader.SetBuffer(0, "ships", shipsBuffer);
         potentialShader.SetBuffer(0, "positions", vertexBuffer);
         potentialShader.SetBuffer(0, "potential", potentialBuffer);

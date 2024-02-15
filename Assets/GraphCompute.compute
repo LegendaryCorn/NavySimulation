@@ -23,6 +23,8 @@ bool calcAttField;
 bool calcCrossPosField;
 bool calcCrossVelField;
 
+bool directional;
+
 struct PotentialParameters
 {
     float waypointCoefficient;
@@ -49,8 +51,14 @@ StructuredBuffer<PotentialParameters> potential; //buffer to hold potential para
 float3 NormalizeVector(float3 vec)
 {
     float mag = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-    float3 newVec = float3(vec.x / mag, vec.y / mag, vec.z / mag);
-    return newVec;
+    if (mag != 0)
+    {
+        float3 newVec = float3(vec.x / mag, vec.y / mag, vec.z / mag);
+        return newVec;
+    }
+    else
+        return float3(0, 0, 0);
+    
 }
 
 //Same as the Vector3.magnitude method in unity
@@ -161,12 +169,79 @@ float CalculatePotential(float3 position, int entity)
     return magnitude;
 }
 
+float CalcPotVector(float3 position, int entity)
+{
+    float3 potentialTotal = float3(0, 0, 0);
+    float magnitude = 0;
+    
+    PotentialParameters pf = potential[0];
+    
+    float3 attractiveDist = ships[entity].movePosition - position;
+    float3 attractivePotential = NormalizeVector(attractiveDist) *
+        pf.waypointCoefficient * pow(VectorMagnitude(attractiveDist), pf.waypointExponent);
+    
+    float3 repField = 0;
+    float3 attField = 0;
+    float3 crossPosField = 0;
+    float3 crossVelField = 0;
+    
+    float3 starboard = NormalizeVector(cross(ships[entity].velocity, float3(0, -1, 0)));
+    
+    for (int i = 0; i < numShips; i++)
+    {
+        if (i == entity)
+            continue;
+        
+        float3 posDiff = ships[i].position - position;
+        float3 relVel = ships[i].velocity - ships[entity].velocity;
+        
+        float3 entPosDiff = ships[i].position - ships[entity].position;
+        float relBearing = atan2(entPosDiff.x, entPosDiff.z) * Rad2Deg - ships[entity].heading;
+        float3 negEntPosDiff = ships[entity].position - ships[i].position;
+        float targetAngle = atan2(negEntPosDiff.x, negEntPosDiff.z) * Rad2Deg - ships[i].heading;
+        
+        float bAngle = sin((relBearing + pf.bearingAngle) * Deg2Rad);
+        float tAngle = sin((targetAngle + pf.taAngle) * Deg2Rad);
+        
+        repField = repField + (pow(VectorMagnitude(posDiff), pf.repulsiveExponent) * pf.repulsiveCoefficient * -NormalizeVector(posDiff));
+        attField = attField + (pow(VectorMagnitude(posDiff), pf.attractiveExponent) * pf.attractiveCoefficient * NormalizeVector(posDiff));
+        crossPosField = crossPosField + (pow((0.5 * (bAngle + 1)), pf.bearingAngleExp) * pow(VectorMagnitude(entPosDiff), pf.bearingExponent) * pf.bearingCoefficient * starboard);
+        crossVelField = crossVelField + (pow((0.5 * (tAngle + 1)), pf.taAngle) * pow(VectorMagnitude(entPosDiff), pf.taExponent) * pf.taCoefficient * starboard);
+    }
+    
+    if(calcWaypoint)
+        potentialTotal = potentialTotal + attractivePotential;
+    if(calcRepField)
+        potentialTotal = potentialTotal + repField;
+    if(calcAttField)
+        potentialTotal = potentialTotal + attField;
+    if(calcCrossPosField)
+        potentialTotal = potentialTotal + crossPosField;
+    if(calcCrossVelField)
+        potentialTotal = potentialTotal + crossVelField;
+    
+    float3 fieldCenter = ships[entity].position + (NormalizeVector(potentialTotal) * 300);
+    
+    float fieldDistance = VectorMagnitude(fieldCenter - position);
+    
+    if (fieldDistance < 100)
+    {
+        magnitude = -VectorMagnitude(potentialTotal);
+    }
+    
+    return magnitude;
+}
+
 
 [numthreads(64, 1, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     float3 pos = positions[id.x];
     pos.y = 0;
-    float mag = (CalculatePotential(pos, entity) / maxMag) * 400;
+    float mag;
+    if(!directional)
+        mag = (CalculatePotential(pos, entity) / maxMag) * 400;
+    else
+        mag = (CalcPotVector(pos, entity) / maxMag) * 400;
     positions[id.x] = float3(pos.x, mag, pos.z);
 }

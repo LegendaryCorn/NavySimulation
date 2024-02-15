@@ -26,7 +26,7 @@ public class SimulationMgr : MonoBehaviour
     public string potentialChromosome;
     public PotentialParameters potentialParameters;
 
-    float dt = 1f / 20f;
+    float dt = 1f / 10f;
 
     private void Awake()
     {

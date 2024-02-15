@@ -23,7 +23,7 @@ public class GameMgr
     public void ExecuteGame(int scenario)
     {
         LoadScenario(scenario);
-        RunGame(1f / 20f, 4000f);
+        RunGame(1f / 10f, 800f);
     }
 
     public Vector3 position;

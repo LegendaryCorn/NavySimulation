@@ -2792,6 +2792,11 @@ MonoBehaviour:
   size: {x: 10000, y: 10000}
   position: {x: -5000, y: 0, z: -5000}
   resolution: 400
+  calcWaypoint: 1
+  calcRepField: 1
+  calcAttField: 1
+  calcCrossPosField: 1
+  calcCrossVelField: 1
 --- !u!1 &1801844801
 GameObject:
   m_ObjectHideFlags: 0

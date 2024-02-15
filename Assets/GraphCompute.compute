@@ -16,6 +16,13 @@ int entity; //index of the entity the graph is made for in EntityMgr.inst.entiti
 int entCommands; //number of commands in the main ent
 float maxMag; //maximum magnitude of potentials to be represented on the graph
 
+//parameters to toggle fields
+bool calcWaypoint;
+bool calcRepField;
+bool calcAttField;
+bool calcCrossPosField;
+bool calcCrossVelField;
+
 struct PotentialParameters
 {
     float waypointCoefficient;
@@ -134,10 +141,19 @@ float CalculatePotential(float3 position, int entity)
     float starboardDistance = 0;
     starboardDistance = VectorMagnitude(starboardPosition - position);
     
-    magnitude = -VectorMagnitude(attractivePotential) + VectorMagnitude(repField) - VectorMagnitude(attField);
+    if(calcWaypoint)
+        magnitude = magnitude - VectorMagnitude(attractivePotential);
+    if(calcRepField)
+        magnitude = magnitude + VectorMagnitude(repField);
+    if(calcAttField)
+        magnitude = magnitude - VectorMagnitude(attField);
+    
     if (starboardDistance < 100)
     {
-        magnitude = magnitude - VectorMagnitude(crossPosField) - VectorMagnitude(crossVelField);
+        if(calcCrossPosField)
+            magnitude = magnitude - VectorMagnitude(crossPosField);
+        if(calcCrossVelField)
+            magnitude = magnitude - VectorMagnitude(crossVelField);
     }
     magnitude = clamp(magnitude, -maxMag, maxMag);
     

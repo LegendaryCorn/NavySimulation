@@ -132,6 +132,11 @@ public class GraphPlane : MonoBehaviour
         potentialShader.SetInt("entity", entity.gameMgr.entityMgr.entities.IndexOf(entity));
         potentialShader.SetInt("entCommands", entity.ai.commands.Count);
         potentialShader.SetFloat("maxMag", GraphMgr.inst.maxMag);
+        potentialShader.SetBool("calcWaypoint", GraphMgr.inst.calcWaypoint);
+        potentialShader.SetBool("calcRepField", GraphMgr.inst.calcRepField);
+        potentialShader.SetBool("calcAttField", GraphMgr.inst.calcAttField);
+        potentialShader.SetBool("calcCrossPosField", GraphMgr.inst.calcCrossPosField);
+        potentialShader.SetBool("calcCrossVelField", GraphMgr.inst.calcCrossVelField);
         potentialShader.SetBuffer(0, "ships", shipsBuffer);
         potentialShader.SetBuffer(0, "positions", vertexBuffer);
         potentialShader.SetBuffer(0, "potential", potentialBuffer);

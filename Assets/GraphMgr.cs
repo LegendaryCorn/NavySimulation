@@ -12,6 +12,13 @@ public class GraphMgr : MonoBehaviour
     public Vector3 position;
     public int resolution;
 
+    //parameters to toggle which fields to show
+    public bool calcWaypoint;
+    public bool calcRepField;
+    public bool calcAttField;
+    public bool calcCrossPosField;
+    public bool calcCrossVelField;
+
     private GameObject plane;
 
     private void Awake()
@@ -23,7 +30,12 @@ public class GraphMgr : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-    }
+        calcWaypoint = true;
+        calcRepField = true;
+        calcAttField = true;
+        calcCrossPosField = true;
+        calcCrossVelField = true;
+}
 
     // Update is called once per frame
     void Update()

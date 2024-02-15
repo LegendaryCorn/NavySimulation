@@ -76,7 +76,7 @@ public class Move : Command
         PotentialParameters pf = entity.gameMgr.aiMgr.potentialParameters;
 
         potentials.Add(Vector3.zero);
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 5; i++)
         {
             potentials.Add(Vector3.zero); // i % 2 == 0 for positive potentials, i % 2 == 1 for negative potentials
         }
@@ -100,26 +100,19 @@ public class Move : Command
             float relBearing = Mathf.Atan2((ent.position - entity.position).x, (ent.position - entity.position).z) * Mathf.Rad2Deg - entity.heading;
             float targetAngle = Mathf.Atan2((entity.position - ent.position).x, (entity.position - ent.position).z) * Mathf.Rad2Deg - ent.heading;
 
-            float attBAngle = Mathf.Sin((relBearing + pf.attractiveBearingAngle) * Mathf.Deg2Rad);
-            float attTAngle = Mathf.Sin((targetAngle + pf.attractiveTAAngle) * Mathf.Deg2Rad);
-
-            float repBAngle = Mathf.Sin((relBearing + pf.repulsiveBearingAngle) * Mathf.Deg2Rad);
-            float repTAngle = Mathf.Sin((targetAngle + pf.repulsiveTAAngle) * Mathf.Deg2Rad);
+            float bAngle = Mathf.Sin((relBearing + pf.bearingAngle) * Mathf.Deg2Rad);
+            float tAngle = Mathf.Sin((targetAngle + pf.taAngle) * Mathf.Deg2Rad);
 
             Vector3 repField = Mathf.Pow(posDiff.magnitude, pf.repulsiveExponent) * pf.repulsiveCoefficient * -posDiff.normalized;
             Vector3 attField = Mathf.Pow(posDiff.magnitude, pf.attractiveExponent) * pf.attractiveCoefficient * posDiff.normalized;
-            Vector3 attCrossPosField = Mathf.Pow(0.5f * (attBAngle + 1), pf.attractiveBearingAngleExp) * Mathf.Pow(posDiff.magnitude, pf.attractiveBearingExponent) * pf.attractiveBearingCoefficient * starboard;
-            Vector3 attCrossVelField = Mathf.Pow(0.5f * (attTAngle + 1), pf.attractiveTAAngleExp) * Mathf.Pow(posDiff.magnitude, pf.attractiveTAExponent) * pf.attractiveTACoefficient * starboard;
-            Vector3 repCrossPosField = Mathf.Pow(0.5f * (repBAngle + 1), pf.repulsiveBearingAngleExp) * Mathf.Pow(posDiff.magnitude, pf.repulsiveBearingExponent) * pf.repulsiveBearingCoefficient * -starboard;
-            Vector3 repCrossVelField = Mathf.Pow(0.5f * (repTAngle + 1), pf.repulsiveTAAngleExp) * Mathf.Pow(posDiff.magnitude, pf.repulsiveTAExponent) * pf.repulsiveTACoefficient * -starboard;
+            Vector3 crossPosField = Mathf.Pow(0.5f * (bAngle + 1), pf.bearingAngleExp) * Mathf.Pow(posDiff.magnitude, pf.bearingExponent) * pf.bearingCoefficient * starboard;
+            Vector3 crossVelField = Mathf.Pow(0.5f * (tAngle + 1), pf.taAngleExp) * Mathf.Pow(posDiff.magnitude, pf.taExponent) * pf.taCoefficient * starboard;
 
 
             potentials[1] += repField;
             potentials[2] += attField;
-            potentials[3] += attCrossPosField;
-            potentials[4] += attCrossVelField;
-            potentials[5] += repCrossPosField;
-            potentials[6] += repCrossVelField;
+            potentials[3] += crossPosField;
+            potentials[4] += crossVelField;
 
             /*
 

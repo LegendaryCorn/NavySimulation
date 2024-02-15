@@ -121,13 +121,11 @@ public class GraphPlane : MonoBehaviour
         vertexBuffer.SetData(worldVert);
 
         //sends potential parameters to compute shader via compute buffer
-        
         List<PotentialParameters> potParms = new List<PotentialParameters>();
         PotentialParameters pf = entity.gameMgr.aiMgr.potentialParameters;
         potParms.Add(pf);
-        ComputeBuffer potentialBuffer = new ComputeBuffer(1, sizeof(float) * 22);
+        ComputeBuffer potentialBuffer = new ComputeBuffer(1, sizeof(float) * 14);
         potentialBuffer.SetData(potParms);
-        
 
         //sets variables in the compute shader
         potentialShader.SetInt("numShips", entity.gameMgr.entityMgr.entities.Count);

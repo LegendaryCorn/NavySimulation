@@ -11,6 +11,7 @@ public class GraphMgr : MonoBehaviour
     public Vector2 size;
     public Vector3 position;
     public int resolution;
+    public bool nonFollowing;
 
     //parameters to toggle which fields to show
     public bool calcWaypoint;
@@ -30,7 +31,7 @@ public class GraphMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
         calcWaypoint = true;
         calcRepField = true;
         calcAttField = true;
@@ -50,6 +51,8 @@ public class GraphMgr : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.H))
             DeleteAllGraphs();
+
+        resolution = Mathf.Clamp(resolution, 1, 1000);
     }
 
     public void DeleteAllGraphs()
@@ -61,7 +64,10 @@ public class GraphMgr : MonoBehaviour
 
     public void CreateGraph(SimulatedEntity sEntity)
     {
-        plane = Instantiate(graph, sEntity.transform);
+        if (!nonFollowing)
+            plane = Instantiate(graph, sEntity.transform);
+        else
+            plane = Instantiate(graph);
         plane.transform.localPosition = new Vector3(position.x, 0, position.z);
         plane.GetComponent<GraphPlane>().sEntity = sEntity;
     }

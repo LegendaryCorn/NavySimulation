@@ -2791,7 +2791,8 @@ MonoBehaviour:
   maxMag: 50
   size: {x: 10000, y: 10000}
   position: {x: -5000, y: 0, z: -5000}
-  resolution: 400
+  resolution: 100
+  nonFollowing: 0
   calcWaypoint: 1
   calcRepField: 1
   calcAttField: 1

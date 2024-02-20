@@ -50,6 +50,20 @@ public class GameMgr
             entityMgr.boundaries.Add(bound);
         }
 
+        List<ScenarioEntity> trEnts = TrafficShipGenerator.TrafficShips(13, s.scenarioEntities[0], s.scenarioEntities[1]);
+
+        foreach (ScenarioEntity scEnt in trEnts)
+        {
+            Entity381 eD = ScenarioMgr.inst.GetEntityData(scEnt.type);
+            Entity381 ent = entityMgr.CreateEntity(eD, scEnt.spawnPoint, scEnt.heading);
+
+            foreach (Vector3 waypoint in scEnt.wayPoints)
+            {
+                ent.ai.AddCommand(new Move(ent, waypoint));
+            }
+            ent.fitness.SetAxisPoints(scEnt.fitAxisHeading, scEnt.fitPoints);
+        }
+
         fitnessMgr.LoadParameters();
         fitnessMgr.timeMin = s.fitTimeMin;
         fitnessMgr.timeMax = s.fitTimeMax;

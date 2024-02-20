@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIMgr : MonoBehaviour
 {
     public static UIMgr inst;
+    public Text frameRate;
     private void Awake()
     {
         inst = this;
@@ -33,5 +34,7 @@ public class UIMgr : MonoBehaviour
             heading.text = ent.heading.ToString("F1") + " deg";
             desiredHeading.text = ent.desiredHeading.ToString("F1") + " deg";
         }
+
+        frameRate.text = "Frame Rate: " + (1 / Time.deltaTime);
     }
 }

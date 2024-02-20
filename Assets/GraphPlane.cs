@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
-using static UnityEditor.PlayerSettings;
 
 //struct to hold individual ship data
 public struct ShipData
@@ -34,6 +33,7 @@ public class GraphPlane : MonoBehaviour
     Mutex mutex = new Mutex();
     Vector3[] worldVertices;
     bool read = true;
+    bool firstUpdate = true;
 
     void Awake()
     {
@@ -74,6 +74,7 @@ public class GraphPlane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (independent)
             sEntity = SelectionMgr.inst.selectedEntity;
         if (sEntity != null)
@@ -81,8 +82,16 @@ public class GraphPlane : MonoBehaviour
 
         UpdateMesh();
         /*
+        if (firstUpdate)
+        {
+            worldVertices = vertices.ToArray();
+            transform.TransformPoints(worldVertices); //transforms local mesh coordinates to world cordinates
+            firstUpdate = false;
+        }
         if (read)
         {
+            transform.InverseTransformPoints(worldVertices); //transforms world coordinates back to local coordinates
+            vertices = new List<Vector3>(worldVertices);
             worldVertices = vertices.ToArray();
             transform.TransformPoints(worldVertices); //transforms local mesh coordinates to world cordinates
         }
@@ -90,11 +99,6 @@ public class GraphPlane : MonoBehaviour
         {
             read = false;
             StartJob();
-        }
-        if (read)
-        {
-            transform.InverseTransformPoints(worldVertices); //transforms world coordinates back to local coordinates
-            vertices = new List<Vector3>(worldVertices);
         }
         UpdateMesh();
         */
@@ -309,6 +313,7 @@ public class GraphPlane : MonoBehaviour
             {
                 read = true;
                 mutex.ReleaseMutex(); 
+                Debug.Log("Job done");
             }
         }
         

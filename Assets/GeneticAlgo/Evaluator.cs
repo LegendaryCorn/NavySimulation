@@ -55,7 +55,7 @@ public class Evaluator
             cpaFit = 1 / (Mathf.Abs(Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist) - 500f) + 1); // Remember that cpaDist and fitPDist are squared distances
             fpFit = 1.0f / (sumDist + 1);
 
-            fitness += 0.5f * cpaFit + 0.5f * fpFit;
+            fitness += 0.7f * cpaFit + 0.3f * fpFit;
         }
 
         return fitness / (ScenarioMgr.inst.scenarioTypeData.Count * gaParameters.scenarioCount);

@@ -668,7 +668,7 @@ MonoBehaviour:
     chromosomeTotal: 70
     id: 0
   simSpeed: 1
-  potentialChromosome: 0101001001101001100100001001100101000110100011011000100101110000101101110010011000011001001010101000011000010
+  potentialChromosome: 
   potentialParameters:
     waypointCoefficient: 10000
     waypointExponent: -1
@@ -1208,6 +1208,52 @@ MonoBehaviour:
   desiredSpeed: {fileID: 1161099155}
   heading: {fileID: 610687837}
   desiredHeading: {fileID: 234834779}
+--- !u!1 &803715456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803715457}
+  - component: {fileID: 803715458}
+  m_Layer: 0
+  m_Name: VOVisMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803715457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803715456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1708907977}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &803715458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803715456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e41602918541074e84ba737424fe96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velMult: 20
+  entRad: 200
+  trafficEnable: 1
 --- !u!4 &977375179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8941482605437012094, guid: 5d3b351739a98e34da31ae8acedeb828,
@@ -2514,6 +2560,7 @@ Transform:
   - {fileID: 769913042}
   - {fileID: 1776110061}
   - {fileID: 604798438}
+  - {fileID: 803715457}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

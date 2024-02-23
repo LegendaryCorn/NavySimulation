@@ -30,6 +30,22 @@ public static class Utils {
         return diff;
     }
 
+    public static bool AngleBetween(float a, float low, float high)
+    {
+        float a360 = Degrees360(a);
+        float low360 = Degrees360(low);
+        float high360 = Degrees360(high);
+
+        if (high360 > low360)
+        {
+            return (a360 > low360) && (a360 < high360);
+        }
+        else
+        {
+            return (a360 > low360) || (a360 < high360);
+        }
+    }
+
     public static float Degrees360(float angleDegrees)
     {
         while (angleDegrees >= 360)

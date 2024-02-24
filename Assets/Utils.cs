@@ -61,10 +61,14 @@ public static class Utils {
         return Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
     }
 
-    public static void CPA(Entity381 e1, Entity381 e2)
+    public static float tCPA(Entity381 e1, Entity381 e2)
     {
+        Vector3 p = e2.position - e1.position;
+        Vector3 v = e2.velocity - e1.velocity;
+        float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
 
-
+        float tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
+        return tcpa;
     }
 
     public static float BinaryToDecimal(int[] bin)

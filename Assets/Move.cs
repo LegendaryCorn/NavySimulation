@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class VelocityObstacle
+{
+    public Entity381 oEnt; // The other entity
+    public float leftAng;
+    public float rightAng;
+}
+
+[System.Serializable]
 public class Move : Command
 {
     public Vector3 movePosition;
@@ -25,7 +33,7 @@ public class Move : Command
     {
         DHDS dhds;
         if (entity.gameMgr.aiMgr.isPotentialFieldsMovement)
-            dhds = ComputePotentialDHDS();
+            dhds = ComputeVODHDS();
         else
             dhds = ComputeDHDS();
 
@@ -46,30 +54,120 @@ public class Move : Command
 
     }
 
-    public DHDS ComputePotentialDHDS()
+    Entity381 prioEntity = null;
+
+    public DHDS ComputeVODHDS()
     {
-        List<Vector3> potentials = ComputePotentials(entity.position);
+        diff = movePosition - entity.position;
+        dhRadians = Mathf.Atan2(diff.x, diff.z);
+        dhDegrees = Utils.Degrees360(Mathf.Rad2Deg * dhRadians);
 
-        Vector3 potentialSum = Vector3.zero;
+        List<VelocityObstacle> obs = ComputeVOs();
+        List<Entity381> riskEntities = WithinObstacles(entity.velocity, obs);
 
-        foreach(Vector3 pot in potentials)
+        float tcpaPrio = prioEntity != null ? Utils.tCPA(entity, prioEntity) : 0f;
+        if(tcpaPrio > tcpaLim || tcpaPrio < 0f)
         {
-            potentialSum += pot;
+            prioEntity = null;
         }
 
-        dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));
+        foreach(Entity381 ent in riskEntities)
+        {
+            float entTcpa = Utils.tCPA(entity, ent);
+            if (entTcpa < tcpaLim && entTcpa >= 0f)
+            {
+                if (prioEntity == null || entTcpa < tcpaPrio)
+                {
+                    prioEntity = ent;
+                    tcpaPrio = entTcpa;
+                }
+            }
+        }
 
-        angleDiff = Utils.Degrees360(Utils.AngleDiffPosNeg(dh, entity.heading));
-        cosValue = (Mathf.Cos(angleDiff * Mathf.Deg2Rad) + 1) / 2.0f; // makes it between 0 and 1
-        ds = entity.maxSpeed * cosValue;
-
-        return new DHDS(dh, ds);
+        if (prioEntity != null)
+        {
+            Debug.Log(entity.id.ToString() + " " + prioEntity.id.ToString());
+            return ReplanDHDS(obs);
+        }
+        else
+        {
+            return new DHDS(dhDegrees, entity.maxSpeed);
+        }
     }
     public float dh;
     public float angleDiff;
     public float cosValue;
     public float ds;
+    public float entRad = 200f;
+    public float tcpaLim = 500f;
 
+    public List<VelocityObstacle> ComputeVOs()
+    {
+        List<VelocityObstacle> obs = new List<VelocityObstacle>();
+
+        foreach (Entity381 otherEntity in entity.gameMgr.entityMgr.entities)
+        {
+            if (entity == otherEntity) continue;
+
+            Vector3 diffDist = otherEntity.position - entity.position;
+            float dir = Mathf.Atan2(diffDist.x, diffDist.z);
+            float ang = Mathf.Asin(2 * entRad / diffDist.magnitude);
+
+            VelocityObstacle vo = new VelocityObstacle();
+            vo.oEnt = otherEntity;
+            vo.leftAng = dir - ang;
+            vo.rightAng = dir + ang;
+
+            obs.Add(vo);
+        }
+
+        return obs;
+    }
+
+    // Returns the list of entities that the ship will collide with
+    public List<Entity381> WithinObstacles(Vector3 vel, List<VelocityObstacle> obs)
+    {
+        List<Entity381> ents = new List<Entity381>();
+
+        foreach(VelocityObstacle ob in obs)
+        {
+            // Determine if the current velocity is inside a triangle
+            float dist = Vector3.Distance(entity.position, ob.oEnt.position);
+            Vector3 relVel = vel - ob.oEnt.velocity;
+            float relAng = Mathf.Atan2(relVel.x, relVel.z);
+
+            if (dist < 2 * entRad || Utils.AngleBetween(relAng * Mathf.Rad2Deg, ob.leftAng * Mathf.Rad2Deg, ob.rightAng * Mathf.Rad2Deg))
+            {
+                ents.Add(ob.oEnt);
+            }
+        }
+
+        return ents;
+    }
+
+    public DHDS ReplanDHDS(List<VelocityObstacle> obs)
+    {
+        float best_i = 0f;
+        float best_j = 1f;
+
+        for(float i = 0; i < 360; i += 10) // Lower angles are better
+        {
+            for(float j = 1; j > 0; j -= 1f) // Higher speeds are better
+            {
+                float radAng = i * Mathf.Deg2Rad;
+                Vector3 newVel = entity.maxSpeed * j * new Vector3(Mathf.Sin(radAng), 0, Mathf.Cos(radAng));
+                List<Entity381> obsEnts = WithinObstacles(newVel, obs);
+
+                if (obsEnts.Count == 0)
+                {
+                    return new DHDS(i, entity.maxSpeed * j);
+                }
+            }
+        }
+        return new DHDS(best_i, entity.maxSpeed * best_j);
+    }
+
+    // Will leave this up for the visualization
     public List<Vector3> ComputePotentials(Vector3 pos)
     {
         List<Vector3> potentials = new List<Vector3>();

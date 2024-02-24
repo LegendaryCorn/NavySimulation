@@ -26,6 +26,9 @@ public class GraphPlane : MonoBehaviour
     public Vector2 size;
     public int resolution;
     public SimulatedEntity sEntity; //entity that the graph is calculating for
+
+    public bool copy;
+    
     bool independent;
 
     //CPU threading parameters
@@ -81,6 +84,21 @@ public class GraphPlane : MonoBehaviour
             UpdateHeights(sEntity.ent);
 
         UpdateMesh();
+
+        if (copy)
+        {
+            string val = "";
+            for(int i = 0; i<vertices.Count; i++)
+            {
+                
+                if(i % (resolution + 1) == 0)
+                    val += "\n";
+
+                val += "" + i + ": " + vertices[i].y + ", ";
+            }
+            Debug.Log(val);
+            copy = false;
+        }
         /*
         if (firstUpdate)
         {

@@ -50,6 +50,7 @@ public class GameMgr
             entityMgr.boundaries.Add(bound);
         }
 
+        /*
         List<ScenarioEntity> trEnts = TrafficShipGenerator.TrafficShips(13, s.scenarioEntities[0], s.scenarioEntities[1]);
 
         foreach (ScenarioEntity scEnt in trEnts)
@@ -63,6 +64,7 @@ public class GameMgr
             }
             ent.fitness.SetAxisPoints(scEnt.fitAxisHeading, scEnt.fitPoints);
         }
+        */
 
         fitnessMgr.LoadParameters();
         fitnessMgr.timeMin = s.fitTimeMin;

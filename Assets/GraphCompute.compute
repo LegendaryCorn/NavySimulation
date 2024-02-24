@@ -163,7 +163,7 @@ float CalculatePotential(float3 position, int entity)
         if(calcCrossVelField)
             magnitude = magnitude - VectorMagnitude(crossVelField);
     }
-    magnitude = clamp(magnitude, -maxMag, maxMag);
+    //magnitude = clamp(magnitude, -maxMag, maxMag);
     
     
     return magnitude;

@@ -2869,14 +2869,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graph: {fileID: 4770987507766933776, guid: 117e5c1aa4314e446abed91858f0e2fd, type: 3}
   maxMag: 10
-  size: {x: 10000, y: 10000}
-  position: {x: -5000, y: 0, z: -5000}
-  resolution: 200
-  nonFollowing: 1
+  size: {x: 500, y: 500}
+  position: {x: 100, y: 0, z: 1250}
+  resolution: 9
+  nonFollowing: 0
   calcWaypoint: 1
   calcRepField: 1
   calcAttField: 1
-  calcCrossPosField: 1
+  calcCrossPosField: 0
   calcCrossVelField: 1
   directionalRepresentation: 0
 --- !u!1 &1801844801

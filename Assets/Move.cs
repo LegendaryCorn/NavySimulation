@@ -8,6 +8,7 @@ public class VelocityObstacle
     public Entity381 oEnt; // The other entity
     public float leftAng;
     public float rightAng;
+    public bool giveWay = true;
 }
 
 [System.Serializable]
@@ -63,7 +64,7 @@ public class Move : Command
         dhDegrees = Utils.Degrees360(Mathf.Rad2Deg * dhRadians);
 
         List<VelocityObstacle> obs = ComputeVOs();
-        List<Entity381> riskEntities = WithinObstacles(entity.velocity, obs);
+        List<Entity381> riskEntities = WithinObstacles(entity.velocity, obs, true);
 
         float tcpaPrio = prioEntity != null ? Utils.tCPA(entity, prioEntity) : 0f;
         if(tcpaPrio > tcpaLim || tcpaPrio < 0f)
@@ -87,7 +88,7 @@ public class Move : Command
         if (prioEntity != null)
         {
             Debug.Log(entity.id.ToString() + " " + prioEntity.id.ToString());
-            return ReplanDHDS(obs);
+            return ReplanDHDS(obs, prioEntity);
         }
         else
         {
@@ -100,6 +101,7 @@ public class Move : Command
     public float ds;
     public float entRad = 200f;
     public float tcpaLim = 500f;
+    public float dcpaLim = 500f;
 
     public List<VelocityObstacle> ComputeVOs()
     {
@@ -112,11 +114,13 @@ public class Move : Command
             Vector3 diffDist = otherEntity.position - entity.position;
             float dir = Mathf.Atan2(diffDist.x, diffDist.z);
             float ang = Mathf.Asin(2 * entRad / diffDist.magnitude);
+            float relBearing = Mathf.Atan2(otherEntity.position.x - entity.position.x, otherEntity.position.z - entity.position.z) * Mathf.Rad2Deg;
 
             VelocityObstacle vo = new VelocityObstacle();
             vo.oEnt = otherEntity;
             vo.leftAng = dir - ang;
             vo.rightAng = dir + ang;
+            vo.giveWay = !Utils.AngleBetween(relBearing, 112.5f, 350f);
 
             obs.Add(vo);
         }
@@ -125,7 +129,7 @@ public class Move : Command
     }
 
     // Returns the list of entities that the ship will collide with
-    public List<Entity381> WithinObstacles(Vector3 vel, List<VelocityObstacle> obs)
+    public List<Entity381> WithinObstacles(Vector3 vel, List<VelocityObstacle> obs, bool forceGiveWay)
     {
         List<Entity381> ents = new List<Entity381>();
 
@@ -138,33 +142,47 @@ public class Move : Command
 
             if (dist < 2 * entRad || Utils.AngleBetween(relAng * Mathf.Rad2Deg, ob.leftAng * Mathf.Rad2Deg, ob.rightAng * Mathf.Rad2Deg))
             {
-                ents.Add(ob.oEnt);
+                if (!forceGiveWay || ob.giveWay)
+                {
+                    ents.Add(ob.oEnt);
+                }
             }
         }
 
         return ents;
     }
 
-    public DHDS ReplanDHDS(List<VelocityObstacle> obs)
+    public DHDS ReplanDHDS(List<VelocityObstacle> obs, Entity381 prioEnt)
     {
-        float best_i = 0f;
-        float best_j = 1f;
+        float best_ang = entity.heading;
+        float best_j = 0f;
+        float best_dcpa = Mathf.Infinity;
 
-        for(float i = 0; i < 360; i += 10) // Lower angles are better
+        for(float i = 0; i < 120; i += 5) // Lower angles are better
         {
-            for(float j = 1; j > 0; j -= 1f) // Higher speeds are better
+            for(float j = 1; j > 0; j -= 0.25f) // Higher speeds are better
             {
-                float radAng = i * Mathf.Deg2Rad;
+                float radAng = Utils.Degrees360(entity.heading + i) * Mathf.Deg2Rad;
                 Vector3 newVel = entity.maxSpeed * j * new Vector3(Mathf.Sin(radAng), 0, Mathf.Cos(radAng));
-                List<Entity381> obsEnts = WithinObstacles(newVel, obs);
+                List<Entity381> obsEnts = WithinObstacles(newVel, obs, true);
 
-                if (obsEnts.Count == 0)
+                if (obsEnts.Count == 0 && j >= best_j)
                 {
-                    return new DHDS(i, entity.maxSpeed * j);
+                    Vector3 p = prioEnt.position - entity.position;
+                    Vector3 v = prioEnt.velocity - newVel;
+                    float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
+                    float dcpa = p.magnitude * Mathf.Sin(t);
+
+                    if(dcpa < best_dcpa && dcpa > dcpaLim)
+                    {
+                        best_ang = radAng * Mathf.Rad2Deg;
+                        best_j = j;
+                        best_dcpa = dcpa;
+                    }
                 }
             }
         }
-        return new DHDS(best_i, entity.maxSpeed * best_j);
+        return new DHDS(best_ang, entity.maxSpeed * best_j);
     }
 
     // Will leave this up for the visualization

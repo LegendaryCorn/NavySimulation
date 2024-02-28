@@ -87,7 +87,6 @@ public class Move : Command
 
         if (prioEntity != null)
         {
-            Debug.Log(entity.id.ToString() + " " + prioEntity.id.ToString());
             return ReplanDHDS(obs, prioEntity);
         }
         else
@@ -114,7 +113,7 @@ public class Move : Command
             Vector3 diffDist = otherEntity.position - entity.position;
             float dir = Mathf.Atan2(diffDist.x, diffDist.z);
             float ang = Mathf.Asin(2 * entRad / diffDist.magnitude);
-            float relBearing = Mathf.Atan2(otherEntity.position.x - entity.position.x, otherEntity.position.z - entity.position.z) * Mathf.Rad2Deg;
+            float relBearing = dir * Mathf.Rad2Deg - entity.heading;
 
             VelocityObstacle vo = new VelocityObstacle();
             vo.oEnt = otherEntity;
@@ -157,6 +156,7 @@ public class Move : Command
         float best_ang = entity.heading;
         float best_j = 0f;
         float best_dcpa = Mathf.Infinity;
+        float best_tcpa = 0f;
 
         for(float i = 0; i < 120; i += 5) // Lower angles are better
         {
@@ -172,16 +172,19 @@ public class Move : Command
                     Vector3 v = prioEnt.velocity - newVel;
                     float t = Mathf.Acos(Vector3.Dot(-p, v) / (p.magnitude * v.magnitude));
                     float dcpa = p.magnitude * Mathf.Sin(t);
+                    float tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
 
-                    if(dcpa < best_dcpa && dcpa > dcpaLim)
+                    if (dcpa < best_dcpa && dcpa > dcpaLim && tcpa > 0)
                     {
                         best_ang = radAng * Mathf.Rad2Deg;
                         best_j = j;
                         best_dcpa = dcpa;
+                        best_tcpa = tcpa;
                     }
                 }
             }
         }
+
         return new DHDS(best_ang, entity.maxSpeed * best_j);
     }
 

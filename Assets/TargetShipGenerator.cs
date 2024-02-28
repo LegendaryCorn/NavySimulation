@@ -55,7 +55,7 @@ public class TargetShipGenerator
         float targetHeading = Mathf.Atan2(spawnDiff.x, spawnDiff.z);
 
         // Waypoint
-        Vector3 targetWayP = crossP + spawnDiff;
+        Vector3 targetWayP = crossP + 2 * spawnDiff;
 
         // Finish
         tShip.spawnPoint = spawnP;

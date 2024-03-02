@@ -8,7 +8,7 @@ public class GameMgr
     public EntityMgr entityMgr;
     public DistanceMgr distanceMgr;
     public AIMgr aiMgr;
-    //public FitnessMgr fitnessMgr;
+    public FitnessMgr fitnessMgr;
 
     public Dictionary<Entity381, List<Vector3>> recordPos;
 
@@ -17,7 +17,7 @@ public class GameMgr
         entityMgr = new EntityMgr(this);
         distanceMgr = new DistanceMgr(this);
         aiMgr = new AIMgr(this, p);
-        //fitnessMgr = new FitnessMgr(this);
+        fitnessMgr = new FitnessMgr(this);
     }
 
     public void ExecuteGame(int scenario)
@@ -63,7 +63,7 @@ public class GameMgr
             entityMgr.entities[i].fitness.SetFitPoints(s.scenarioType, i == 0, entityMgr.entities[1 - i]);
         }
 
-        //fitnessMgr.LoadParameters();
+        fitnessMgr.LoadParameters();
         //fitnessMgr.timeMin = s.fitTimeMin;
         //fitnessMgr.timeMax = s.fitTimeMax;
     }
@@ -87,7 +87,7 @@ public class GameMgr
                 ent.fitness.OnUpdate(dt);
             }
             //if(counter % 10 == 9)
-            //fitnessMgr.OnUpdate(dt);
+            fitnessMgr.OnUpdate(dt);
 
             /* Disabled if it isn't being used
             foreach(Entity381 ent in entityMgr.entities)

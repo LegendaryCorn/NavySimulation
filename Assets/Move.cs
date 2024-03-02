@@ -29,18 +29,23 @@ public class Move : Command
         //potentialLine = LineMgr.inst.CreatePotentialLine(entity.position);
         //line.gameObject.SetActive(true);
     }
-
+    int aiTick = 0;
+    int aiReset = 10;
     public override void Tick()
     {
         DHDS dhds;
-        if (entity.gameMgr.aiMgr.isPotentialFieldsMovement)
-            dhds = ComputeVODHDS();
-        else
-            dhds = ComputeDHDS();
-
-        entity.desiredHeading = dhds.dh;
-        entity.desiredSpeed = dhds.ds;
-        //line.SetPosition(1, movePosition);
+        if (aiTick == 0)
+        {
+            if (entity.gameMgr.aiMgr.isPotentialFieldsMovement)
+                dhds = ComputeVODHDS();
+            else
+                dhds = ComputeDHDS();
+            entity.desiredHeading = dhds.dh;
+            entity.desiredSpeed = dhds.ds;
+            aiTick = aiReset;
+            //line.SetPosition(1, movePosition);
+        }
+        aiTick--;
     }
 
     public Vector3 diff = Vector3.positiveInfinity;
@@ -67,7 +72,7 @@ public class Move : Command
         List<Entity381> riskEntities = WithinObstacles(entity.velocity, obs, true);
 
         float tcpaPrio = prioEntity != null ? Utils.tCPA(entity, prioEntity) : 0f;
-        if(tcpaPrio > tcpaLim || tcpaPrio < 0f)
+        if(tcpaPrio < 0f)
         {
             prioEntity = null;
         }
@@ -99,7 +104,7 @@ public class Move : Command
     public float cosValue;
     public float ds;
     public float entRad = 200f;
-    public float tcpaLim = 500f;
+    public float tcpaLim = 200f;
     public float dcpaLim = 500f;
 
     public List<VelocityObstacle> ComputeVOs()
@@ -119,7 +124,7 @@ public class Move : Command
             vo.oEnt = otherEntity;
             vo.leftAng = dir - ang;
             vo.rightAng = dir + ang;
-            vo.giveWay = !Utils.AngleBetween(relBearing, 112.5f, 350f);
+            vo.giveWay = !Utils.AngleBetween(relBearing, 112.5f, 340f);
 
             obs.Add(vo);
         }

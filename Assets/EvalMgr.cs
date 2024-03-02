@@ -33,37 +33,31 @@ public class EvalMgr : MonoBehaviour
             game = new GameMgr(potentialParameters);
             game.ExecuteGame(x);
 
-            //float closestDist = game.fitnessMgr.twoShipFitnessParameters[0][1].closestDist;
-            //float timePoint = Mathf.Max(game.fitnessMgr.oneShipFitnessParameters[0].timeToTarget, game.fitnessMgr.oneShipFitnessParameters[1].timeToTarget);
-            //float minAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].minDesHeadingWP;
-            //float maxAngle0 = game.fitnessMgr.oneShipFitnessParameters[0].maxDesHeadingWP;
-            //float minAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].minDesHeadingWP;
-            //float maxAngle1 = game.fitnessMgr.oneShipFitnessParameters[1].maxDesHeadingWP;
-            float fitness = 0f;
-
-            float cpaFit = 0f;
-            float fpFit = 0f;
-            //bool allVisited = true;
-            //timePoint = Mathf.Clamp(timePoint, game.fitnessMgr.timeMin, game.fitnessMgr.timeMax);
-
-            float sumDist = 0;
-            for (int i = 0; i < 2; i++)
+            float minCPA = Mathf.Infinity;
+            int min1 = 0;
+            int min2 = 0;
+            foreach (int ship1 in game.fitnessMgr.twoShipFitnessParameters.Keys)
             {
-                Entity381 ent = game.entityMgr.entities[i];
-                sumDist += ent.fitness.fitPDist;
+                Dictionary<int, TwoShipFitnessParameters> shipDict1 = game.fitnessMgr.twoShipFitnessParameters[ship1];
+                foreach (int ship2 in shipDict1.Keys)
+                {
+                    TwoShipFitnessParameters shipDict2 = shipDict1[ship2];
+                    if (shipDict2.closestDist < minCPA)
+                    {
+                        minCPA = shipDict2.closestDist;
+                        min1 = ship1;
+                        min2 = ship2;
+                    }
+                }
             }
-
-            sumDist *= 1.0f / game.entityMgr.entities.Count;
-            cpaFit = 1 / (Mathf.Abs(Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist) - 500f) + 1); // Remember that cpaDist and fitPDist are squared distances
-            fpFit = 1.0f / (sumDist + 1);
-
-            //float timeVal = (timePoint - game.fitnessMgr.timeMin) / (game.fitnessMgr.timeMax - game.fitnessMgr.timeMin); 
-
-            fitness += 0.5f * cpaFit + 0.5f * fpFit;
 
             timeEnd = Time.realtimeSinceStartup;
 
-            Debug.Log(fitness.ToString() + " " + cpaFit.ToString() + " " + fpFit.ToString() + " " + (timeEnd - timeStart).ToString());
+            Debug.Log(
+                "Scenario " + x.ToString() + "\n" +
+                "All Ships Closest: " + minCPA.ToString() + " (" + min1.ToString() + ',' + min2.ToString() + ")" + "\n" +
+                "Ownship/Targetship Closest: " + Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist).ToString() + "\n" +
+                "Evaluation Time: " + (timeEnd - timeStart).ToString());
         }
     }
 }

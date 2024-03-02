@@ -141,7 +141,7 @@ public class FitnessMgr
             f1.desHeadingDiff = Utils.AngleDiffPosNeg(ent1.desiredHeading, ent1.heading);
             f1.desSpeedDiff = ent1.desiredSpeed - ent1.speed;
             */
-            /*
+
             foreach(Entity381 ent2 in entities)
             {
                 if (ent1 == ent2) { continue; }
@@ -157,18 +157,17 @@ public class FitnessMgr
                 f2.closestDist = Mathf.Min(f2.closestDist, p.magnitude);
 
                 
-                f2.relPos = p;
-                f2.range = p.magnitude;
-                f2.bearing = b;
+                //f2.relPos = p;
+                //f2.range = p.magnitude;
+                //f2.bearing = b;
 
-                f2.relVel = v;
-                f2.relHeading = Utils.Degrees360(ent2.heading - ent1.heading);
+                //f2.relVel = v;
+                //f2.relHeading = Utils.Degrees360(ent2.heading - ent1.heading);
 
-                f2.dcpa = p.magnitude * Mathf.Sin(t);
-                f2.tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
+                //f2.dcpa = p.magnitude * Mathf.Sin(t);
+                //f2.tcpa = p.magnitude * Mathf.Cos(t) / v.magnitude;
                 
             }
-            */
         }
     }
 

@@ -89,7 +89,7 @@ public class ScenarioMgr : MonoBehaviour
             ScenarioEntity ownShip = new ScenarioEntity();
             ownShip.spawnPoint = new Vector3(0, 0, -4000);
             ownShip.wayPoints = new List<Vector3>();
-            ownShip.wayPoints.Add(new Vector3(0, 0, 8000));
+            ownShip.wayPoints.Add(new Vector3(0, 0, 16000));
             ownShip.fitPoints = new List<Vector3>();
             ownShip.type = EntityType.DDG51;
             s.ownShipEntity = ownShip;

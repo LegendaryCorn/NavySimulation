@@ -15,6 +15,8 @@ int numShips; //total number of ships
 int entity; //index of the entity the graph is made for in EntityMgr.inst.entities
 int entCommands; //number of commands in the main ent
 float maxMag; //maximum magnitude of potentials to be represented on the graph
+int resolution;
+int gaussLength;
 
 //parameters to toggle fields
 bool calcWaypoint;
@@ -44,8 +46,10 @@ struct PotentialParameters
 };
 
 RWStructuredBuffer<float3> positions; //buffer to hold mesh vertex positions
+StructuredBuffer<float3> readPositions;
 StructuredBuffer<ShipData> ships; //buffer to hold indvidual ship data
 StructuredBuffer<PotentialParameters> potential; //buffer to hold potential parameters
+StructuredBuffer<float> gauss; //buffer to hold potential parameters
 
 //Same as the Vector3.normalize method in unity
 float3 NormalizeVector(float3 vec)
@@ -163,8 +167,8 @@ float CalculatePotential(float3 position, int entity)
         if(calcCrossVelField)
             magnitude = magnitude - VectorMagnitude(crossVelField);
     }
-    //magnitude = clamp(magnitude, -maxMag, maxMag);
     
+    magnitude = clamp(magnitude, -maxMag, maxMag);
     
     return magnitude;
 }
@@ -234,6 +238,25 @@ float CalcPotVector(float3 position, int entity)
     return magnitude;
 }
 
+float applyGaussian(int index)
+{
+    int x = index % (resolution + 1);
+    int y = index / (resolution + 1);
+    
+    float newValue = 0;
+    
+    for (int i = -gaussLength / 2; i <= gaussLength / 2; i++)
+    {
+        for (int j = -gaussLength / 2; j <= gaussLength / 2; j++)
+        {
+            int newX = clamp(x + i, 0, resolution);
+            int newY = clamp(y + j, 0, resolution);
+            newValue += readPositions[y * (resolution - 1) + x].y * gauss[(i + gaussLength / 2) * gaussLength + j + gaussLength / 2];
+        }
+    }
+    
+    return newValue;
+}
 
 [numthreads(64, 1, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
@@ -241,8 +264,16 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float3 pos = positions[id.x];
     pos.y = 0;
     float mag;
-    if(!directional)
-        mag = (CalculatePotential(pos, entity) / maxMag) * 400;
+    if (!directional)
+    {
+        float temp = CalculatePotential(pos, entity);
+        mag = (temp / maxMag) * 400;
+        
+        //int index = id.x;
+        //mag = applyGaussian(index);
+        
+        //mag = (CalculatePotential(pos, entity) / maxMag) * 400;
+    }    
     else
         mag = (CalcPotVector(pos, entity) / maxMag) * 400;
     positions[id.x] = float3(pos.x, mag, pos.z);

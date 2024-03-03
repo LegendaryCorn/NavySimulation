@@ -31,12 +31,16 @@ public class GraphPlane : MonoBehaviour
     
     bool independent;
 
+    /*
     //CPU threading parameters
     private Thread graphThread;
     Mutex mutex = new Mutex();
     Vector3[] worldVertices;
     bool read = true;
     bool firstUpdate = true;
+
+    float[] filter;
+    */
 
     void Awake()
     {
@@ -59,6 +63,7 @@ public class GraphPlane : MonoBehaviour
         allShipData = new List<ShipData>();
 
         independent = GraphMgr.inst.nonFollowing;
+        
     }
 
     // Start is called before the first frame update
@@ -71,6 +76,8 @@ public class GraphPlane : MonoBehaviour
             if(SelectionMgr.inst.selectedEntity != null)
                 sEntity = SelectionMgr.inst.selectedEntity;
         }
+
+        //filter = CreateGaussianKernel(1.7f);
             
     }
 
@@ -182,6 +189,9 @@ public class GraphPlane : MonoBehaviour
         transform.TransformPoints(worldVert); //transforms local mesh coordinates to world cordinates
         vertexBuffer.SetData(worldVert);
 
+        //ComputeBuffer readVertexBuffer = new ComputeBuffer(vertices.Count, sizeof(float) * 3);
+        //readVertexBuffer.SetData(worldVert);
+
         //sends potential parameters to compute shader via compute buffer
         List<PotentialParameters> potParms = new List<PotentialParameters>();
         PotentialParameters pf = entity.gameMgr.aiMgr.potentialParameters;
@@ -189,10 +199,17 @@ public class GraphPlane : MonoBehaviour
         ComputeBuffer potentialBuffer = new ComputeBuffer(1, sizeof(float) * 14);
         potentialBuffer.SetData(potParms);
 
+        /*//Gaussian Filter
+        ComputeBuffer gaussianBuffer = new ComputeBuffer(filter.Length, sizeof(float));
+        gaussianBuffer.SetData(filter);
+        */
+
         //sets variables in the compute shader
         potentialShader.SetInt("numShips", entity.gameMgr.entityMgr.entities.Count);
         potentialShader.SetInt("entity", entity.gameMgr.entityMgr.entities.IndexOf(entity));
         potentialShader.SetInt("entCommands", entity.ai.commands.Count);
+        //potentialShader.SetInt("resolution", resolution);
+        //potentialShader.SetInt("gaussLength", filter.Length);
         potentialShader.SetFloat("maxMag", GraphMgr.inst.maxMag);
         potentialShader.SetBool("calcWaypoint", GraphMgr.inst.calcWaypoint);
         potentialShader.SetBool("calcRepField", GraphMgr.inst.calcRepField);
@@ -202,7 +219,9 @@ public class GraphPlane : MonoBehaviour
         potentialShader.SetBool("directional", GraphMgr.inst.directionalRepresentation);
         potentialShader.SetBuffer(0, "ships", shipsBuffer);
         potentialShader.SetBuffer(0, "positions", vertexBuffer);
+        //potentialShader.SetBuffer(0, "readPositions", readVertexBuffer);
         potentialShader.SetBuffer(0, "potential", potentialBuffer);
+       // potentialShader.SetBuffer(0, "gauss", gaussianBuffer);
 
         //starts calculations in buffer
         potentialShader.Dispatch(0, (vertices.Count / 64) + 1, 1, 1);
@@ -216,6 +235,8 @@ public class GraphPlane : MonoBehaviour
         shipsBuffer.Dispose();
         vertexBuffer.Dispose();
         potentialBuffer.Dispose();
+        //gaussianBuffer.Dispose();
+        //readVertexBuffer.Dispose();
 
         /*for (int i = 0; i < vertices.Count; i++)
         {
@@ -270,7 +291,7 @@ public class GraphPlane : MonoBehaviour
         }
     }
 
-
+    /*
     void CPUUpdateHeights()
     {
         if (mutex.WaitOne(1000))
@@ -336,11 +357,43 @@ public class GraphPlane : MonoBehaviour
         }
         
     }
+
+    float[] CreateGaussianKernel(float sigma)
+    {
+        int kernelSize = (int)(6 * sigma) + 1;
+        float[] kernel = new float[kernelSize * kernelSize];
+        float sum = 0;
+        int halfKernelSize = kernelSize / 2;
+
+        for (int x = -halfKernelSize; x <= halfKernelSize; x++)
+        {
+            for (int y = -halfKernelSize; y <= halfKernelSize; y++)
+            {
+                kernel[(x + halfKernelSize) + (kernelSize * (y + halfKernelSize))] = GaussianFunction(x, y, sigma);
+                sum += kernel[(x + halfKernelSize) + (kernelSize * (y + halfKernelSize))];
+            }
+        }
+
+        for(int i=0; i<kernel.Length; i++)
+        {
+            kernel[i] /= sum;
+        }
+
+        return kernel;
+    }
+
+    private static float GaussianFunction(int x, int y, float sigma)
+    {
+        float coefficient = 1 / (2 * Mathf.PI * sigma * sigma);
+        return coefficient * Mathf.Exp(-(x * x + y * y) / (2 * sigma * sigma));
+    }
+
+
     void StartJob()
     {
         graphThread = new Thread(CPUUpdateHeights);
         graphThread.Start();
     }
-
+    */
 
 }

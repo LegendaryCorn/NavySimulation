@@ -30,7 +30,7 @@ public class Move : Command
         //line.gameObject.SetActive(true);
     }
     int aiTick = 0;
-    int aiReset = 10;
+    int aiReset = 5;
     public override void Tick()
     {
         DHDS dhds;
@@ -103,8 +103,8 @@ public class Move : Command
     public float angleDiff;
     public float cosValue;
     public float ds;
-    public float entRad = 200f;
-    public float tcpaLim = 200f;
+    public float entRad = 250f;
+    public float tcpaLim = 300f;
     public float dcpaLim = 500f;
 
     public List<VelocityObstacle> ComputeVOs()
@@ -118,18 +118,35 @@ public class Move : Command
             Vector3 diffDist = otherEntity.position - entity.position;
             float dir = Mathf.Atan2(diffDist.x, diffDist.z);
             float ang = Mathf.Asin(2 * entRad / diffDist.magnitude);
-            float relBearing = dir * Mathf.Rad2Deg - entity.heading;
-
+            
             VelocityObstacle vo = new VelocityObstacle();
             vo.oEnt = otherEntity;
             vo.leftAng = dir - ang;
             vo.rightAng = dir + ang;
-            vo.giveWay = !Utils.AngleBetween(relBearing, 112.5f, 340f);
+            vo.giveWay = GiveWay(entity, otherEntity);
 
             obs.Add(vo);
         }
 
         return obs;
+    }
+    
+    // Returns true if ent1 is give way, and false if ent2 is give way.
+    // Guarantees that at least one entity is trying to avoid the other.
+    public bool GiveWay(Entity381 ent1, Entity381 ent2)
+    {
+        Vector3 diffDist = ent2.position - ent1.position;
+        float dir1 = Mathf.Atan2(diffDist.x, diffDist.z);
+        float relBearing1 = dir1 * Mathf.Rad2Deg - ent1.heading;
+
+        float dir2 = Mathf.Atan2(-diffDist.x, -diffDist.z);
+        float relBearing2 = dir2 * Mathf.Rad2Deg - ent2.heading;
+
+        if(!Utils.AngleBetween(relBearing1, 112.5f, 350f))
+        {
+            return true;
+        }
+        return Utils.Degrees360(relBearing1 - 112.5f) > Utils.Degrees360(relBearing2 - 112.5f);
     }
 
     // Returns the list of entities that the ship will collide with

@@ -19,7 +19,8 @@ public class OneShipFitnessParameters
 
 public class TwoShipFitnessParameters
 {
-    public float closestDist;
+    public float closestDistSkw;
+    public float closestDistPar;
     /*
     public Vector3 relPos;
     public float range;
@@ -92,7 +93,8 @@ public class FitnessMgr
                 // Doing this over and over again is very computationally heavy!
                 twoShipFitnessParameters[ent1.id][ent2.id] = new TwoShipFitnessParameters
                 {
-                    closestDist = p.magnitude
+                    closestDistSkw = Mathf.Infinity,
+                    closestDistPar = Mathf.Infinity
                     /*
                     relPos = p,
                     range = p.magnitude,
@@ -154,7 +156,15 @@ public class FitnessMgr
                 // Update the values
                 TwoShipFitnessParameters f2 = twoShipFitnessParameters[ent1.id][ent2.id];
 
-                f2.closestDist = Mathf.Min(f2.closestDist, p.magnitude);
+                if(Mathf.Abs(Utils.AngleDiffPosNeg(ent1.heading, ent2.heading)) < 10f)
+                {
+                    f2.closestDistPar = Mathf.Min(f2.closestDistPar, p.magnitude);
+                }
+                else
+                {
+                    f2.closestDistSkw = Mathf.Min(f2.closestDistSkw, p.magnitude);
+                }
+                
 
                 
                 //f2.relPos = p;

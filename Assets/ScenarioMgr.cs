@@ -54,6 +54,7 @@ public class ScenarioMgr : MonoBehaviour
     private void Awake()
     {
         inst = this;
+        Random.InitState(seed);
     }
 
     [Header("Scenario Data")]
@@ -79,8 +80,6 @@ public class ScenarioMgr : MonoBehaviour
 
     public void GenerateScenarios(EScenarioType scenarioType, int scenarioCount)
     {
-        Random.InitState(seed);
-
         for (int i = 0; i < scenarioCount; i++)
         {
             Scenario s = new Scenario();
@@ -89,7 +88,7 @@ public class ScenarioMgr : MonoBehaviour
             ScenarioEntity ownShip = new ScenarioEntity();
             ownShip.spawnPoint = new Vector3(0, 0, -4000);
             ownShip.wayPoints = new List<Vector3>();
-            ownShip.wayPoints.Add(new Vector3(0, 0, 16000));
+            ownShip.wayPoints.Add(new Vector3(0, 0, 100000));
             ownShip.fitPoints = new List<Vector3>();
             ownShip.type = EntityType.DDG51;
             s.ownShipEntity = ownShip;

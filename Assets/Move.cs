@@ -30,7 +30,7 @@ public class Move : Command
         //line.gameObject.SetActive(true);
     }
     int aiTick = 0;
-    int aiReset = 5;
+    int aiReset = 100;
     public override void Tick()
     {
         DHDS dhds;
@@ -103,9 +103,9 @@ public class Move : Command
     public float angleDiff;
     public float cosValue;
     public float ds;
-    public float entRad = 250f;
-    public float tcpaLim = 300f;
-    public float dcpaLim = 500f;
+    public float entRad = 275f;
+    public float tcpaLim = 200f;
+    public float dcpaLim = 550f;
 
     public List<VelocityObstacle> ComputeVOs()
     {

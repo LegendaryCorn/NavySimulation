@@ -13,7 +13,7 @@ public class TrafficShipGenerator
 
         float laneRange = 8000f; // How close or far away from ownship that the vessels can spawn vertically
         float randAngDeg = 10f; // The directions the ships can face
-        float shipDist = 500f; // Don't spawn on top of other vessels
+        float shipDist = 1000f; // Don't spawn on top of other vessels
 
         List<ScenarioEntity> scEntities = new List<ScenarioEntity>();
 
@@ -61,7 +61,7 @@ public class TrafficShipGenerator
             // Decide waypoints (20000 units away)
             float trHeading = ownShip.heading + Random.Range(-randAngDeg, randAngDeg);
             trHeading += trBackwards ? 180f : 0f;
-            Vector3 wp = spawn + 20000f * new Vector3(Mathf.Sin(trHeading * Mathf.Deg2Rad), 0, Mathf.Cos(trHeading * Mathf.Deg2Rad));
+            Vector3 wp = spawn + 40000f * new Vector3(Mathf.Sin(trHeading * Mathf.Deg2Rad), 0, Mathf.Cos(trHeading * Mathf.Deg2Rad));
 
             // Store
             ScenarioEntity trShip = new ScenarioEntity();

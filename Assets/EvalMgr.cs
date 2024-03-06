@@ -33,20 +33,29 @@ public class EvalMgr : MonoBehaviour
             game = new GameMgr(potentialParameters);
             game.ExecuteGame(x);
 
-            float minCPA = Mathf.Infinity;
-            int min1 = 0;
-            int min2 = 0;
+            float pMinCPA = Mathf.Infinity;
+            int pMin1 = 0;
+            int pMin2 = 0;
+            float sMinCPA = Mathf.Infinity;
+            int sMin1 = 0;
+            int sMin2 = 0;
             foreach (int ship1 in game.fitnessMgr.twoShipFitnessParameters.Keys)
             {
                 Dictionary<int, TwoShipFitnessParameters> shipDict1 = game.fitnessMgr.twoShipFitnessParameters[ship1];
                 foreach (int ship2 in shipDict1.Keys)
                 {
                     TwoShipFitnessParameters shipDict2 = shipDict1[ship2];
-                    if (shipDict2.closestDist < minCPA)
+                    if (shipDict2.closestDistPar < pMinCPA)
                     {
-                        minCPA = shipDict2.closestDist;
-                        min1 = ship1;
-                        min2 = ship2;
+                        pMinCPA = shipDict2.closestDistPar;
+                        pMin1 = ship1;
+                        pMin2 = ship2;
+                    }
+                    if (shipDict2.closestDistSkw < sMinCPA)
+                    {
+                        sMinCPA = shipDict2.closestDistSkw;
+                        sMin1 = ship1;
+                        sMin2 = ship2;
                     }
                 }
             }
@@ -55,7 +64,8 @@ public class EvalMgr : MonoBehaviour
 
             Debug.Log(
                 "Scenario " + x.ToString() + "\n" +
-                "All Ships Closest: " + minCPA.ToString() + " (" + min1.ToString() + ',' + min2.ToString() + ")" + "\n" +
+                "All Ships Closest (Skewed): " + sMinCPA.ToString() + " (" + sMin1.ToString() + ',' + sMin2.ToString() + ")" + "\n" +
+                "All Ships Closest (Parallel): " + pMinCPA.ToString() + " (" + pMin1.ToString() + ',' + pMin2.ToString() + ")" + "\n" +
                 "Ownship/Targetship Closest: " + Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist).ToString() + "\n" +
                 "Evaluation Time: " + (timeEnd - timeStart).ToString());
         }

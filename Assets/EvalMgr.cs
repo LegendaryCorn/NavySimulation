@@ -1,6 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+
+public class EvalPrint
+{
+    public int scenarioID;
+    public float ownTargetCPA;
+    public float sMinCPA;
+    public float sShip1, sShip2;
+    public float pMinCPA;
+    public float pShip1, pShip2;
+    public float evalTime;
+}
 
 public class EvalMgr : MonoBehaviour
 {
@@ -19,8 +31,7 @@ public class EvalMgr : MonoBehaviour
 
         float timeStart;
         float timeEnd;
-
-        
+        List<EvalPrint> evPrints = new List<EvalPrint>();
 
         // Generate scenarios
         foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
@@ -68,6 +79,48 @@ public class EvalMgr : MonoBehaviour
                 "All Ships Closest (Parallel): " + pMinCPA.ToString() + " (" + pMin1.ToString() + ',' + pMin2.ToString() + ")" + "\n" +
                 "Ownship/Targetship Closest: " + Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist).ToString() + "\n" +
                 "Evaluation Time: " + (timeEnd - timeStart).ToString());
+
+            EvalPrint eP = new EvalPrint();
+            eP.scenarioID = x;
+            eP.ownTargetCPA = Mathf.Sqrt(game.entityMgr.entities[0].fitness.cpaDist);
+            eP.sMinCPA = sMinCPA;
+            eP.sShip1 = sMin1;
+            eP.sShip2 = sMin2;
+            eP.pMinCPA = pMinCPA;
+            eP.pShip1 = pMin1;
+            eP.pShip2 = pMin2;
+            eP.evalTime = timeEnd - timeStart;
+            evPrints.Add(eP);
         }
+
+        // Print
+        try
+        {
+            string fname = "Output/VOResults/results_" + scenarioCount.ToString() + "_" + ScenarioMgr.inst.trafficCount.ToString() + "_" + System.DateTime.UtcNow.ToFileTime() + ".csv";
+
+            using (StreamWriter sw = File.CreateText(fname))
+            {
+                sw.Write("Scenario ID,Own/Target Ship CPA,Closest Distance (Skewed),Ship 1,Ship 2,Closest Distance (Parallel),Ship 1,Ship 2,Evaluation Time\n");
+                foreach (EvalPrint evalPrint in evPrints)
+                {
+                    sw.Write(EvalCSVLine(evalPrint));
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Invalid file! Exception encountered: " + e);
+        }
+    }
+
+    public static string EvalCSVLine(EvalPrint eP)
+    {
+        string s = "";
+        s += eP.scenarioID.ToString() + ",";
+        s += eP.ownTargetCPA.ToString() + ",";
+        s += eP.sMinCPA.ToString() + "," + eP.sShip1.ToString() + "," + eP.sShip2.ToString() + ",";
+        s += eP.pMinCPA.ToString() + "," + eP.pShip1.ToString() + "," + eP.pShip2.ToString() + ",";
+        s += eP.evalTime + "\n";
+        return s;
     }
 }

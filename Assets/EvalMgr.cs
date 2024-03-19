@@ -20,6 +20,7 @@ public class EvalMgr : MonoBehaviour
     GameMgr game;
     public PotentialParameters potentialParameters;
     public int scenarioCount;
+    public int scenarioToRecord;
 
     private void Awake()
     {
@@ -42,6 +43,10 @@ public class EvalMgr : MonoBehaviour
             timeStart = Time.realtimeSinceStartup;
 
             game = new GameMgr(potentialParameters);
+            if(x == scenarioToRecord)
+            {
+                game.fitnessMgr.recordLocations = true;
+            }
             game.ExecuteGame(x);
 
             float pMinCPA = Mathf.Infinity;
@@ -91,6 +96,12 @@ public class EvalMgr : MonoBehaviour
             eP.pShip2 = pMin2;
             eP.evalTime = timeEnd - timeStart;
             evPrints.Add(eP);
+
+            // Print paths
+            if (x == scenarioToRecord)
+            {
+                CSVPositions(x);
+            }
         }
 
         // Print
@@ -122,5 +133,40 @@ public class EvalMgr : MonoBehaviour
         s += eP.pMinCPA.ToString() + "," + eP.pShip1.ToString() + "," + eP.pShip2.ToString() + ",";
         s += eP.evalTime + "\n";
         return s;
+    }
+
+    public void CSVPositions(int x)
+    {
+        int timeSteps = game.fitnessMgr.oneShipFitnessParameters[0].positions.Count;
+        // Print
+        try
+        {
+            string fname = "Output/VOResults/positions_" + x.ToString() + "_" + ScenarioMgr.inst.trafficCount.ToString() + "_" + System.DateTime.UtcNow.ToFileTime() + ".csv";
+
+            using (StreamWriter sw = File.CreateText(fname))
+            {
+                string header = "Time Step";
+                foreach (Entity381 ship in game.entityMgr.entities)
+                {
+                    header += ",Ship " + ship.id.ToString() + " X Pos";
+                    header += ",Ship " + ship.id.ToString() + " Z Pos";
+                }
+                sw.Write(header + "\n");
+                for (int i = 0; i < timeSteps; i++)
+                {
+                    string s = i.ToString();
+                    foreach(Entity381 ship in game.entityMgr.entities)
+                    {
+                        s += "," + game.fitnessMgr.oneShipFitnessParameters[ship.id].positions[i].x.ToString();
+                        s += "," + game.fitnessMgr.oneShipFitnessParameters[ship.id].positions[i].z.ToString();
+                    }
+                    sw.Write(s + "\n");
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Invalid file! Exception encountered: " + e);
+        }
     }
 }

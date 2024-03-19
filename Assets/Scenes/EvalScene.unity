@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
         type: 3}
       propertyPath: trafficCount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8703333273385361143, guid: ac8fd156818965c4787953737796dce7,
         type: 3}
@@ -323,6 +323,7 @@ MonoBehaviour:
     taCoefficient: 299000
     taExponent: -3.1
   scenarioCount: 25
+  scenarioToRecord: -1
 --- !u!1 &1409412909
 GameObject:
   m_ObjectHideFlags: 0

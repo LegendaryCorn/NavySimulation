@@ -8,6 +8,8 @@ public class OneShipFitnessParameters
     public float timeToTarget;
     public float minDesHeadingWP;
     public float maxDesHeadingWP;
+
+    public List<Vector3> positions;
     /*
     public float desSpeedDiff;
     public float prevDesSpeedDiff;
@@ -47,6 +49,8 @@ public class FitnessMgr
     public float countShipInFront = 0;
     public float countCrash = 0;
 
+    public bool recordLocations = false;
+
     public float timeMin;
     public float timeMax;
 
@@ -71,7 +75,9 @@ public class FitnessMgr
                 reachedTarget = false,
                 timeToTarget = 0f,
                 minDesHeadingWP = 0f,
-                maxDesHeadingWP = 0f
+                maxDesHeadingWP = 0f,
+
+                positions = new List<Vector3>(),
                 /*
                 desSpeedDiff = 0,
                 prevDesSpeedDiff = 0,
@@ -126,6 +132,11 @@ public class FitnessMgr
         {
 
             OneShipFitnessParameters f1 = oneShipFitnessParameters[ent1.id];
+
+            if (recordLocations)
+            {
+                f1.positions.Add(ent1.position);
+            }
 
             f1.reachedTarget = ent1.ai.commands.Count == 0;
             if (!f1.reachedTarget) { 

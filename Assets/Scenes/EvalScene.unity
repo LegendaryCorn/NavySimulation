@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 8703333273385361141, guid: ac8fd156818965c4787953737796dce7,
         type: 3}
       propertyPath: trafficCount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8703333273385361143, guid: ac8fd156818965c4787953737796dce7,
         type: 3}
@@ -308,23 +308,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potentialParameters:
-    waypointCoefficient: 399000
-    waypointExponent: -1.6
-    attractiveCoefficient: 211000
-    attractiveExponent: -3.1
-    repulsiveCoefficient: -326000
-    repulsiveExponent: -6
-    bearingAngle: 63.87
-    bearingAngleExp: 4.75
-    bearingCoefficient: 127000
-    bearingExponent: -1.8
-    taAngle: 40.65
-    taAngleExp: 11.5
-    taCoefficient: -358000
-    taExponent: -2.2
-  scenarioCount: 25
+    waypointCoefficient: 274000
+    waypointExponent: -2.7
+    attractiveCoefficient: 376000
+    attractiveExponent: -4.1
+    repulsiveCoefficient: -283000
+    repulsiveExponent: -4.4
+    bearingAngle: 17.42
+    bearingAngleExp: 8.375
+    bearingCoefficient: 262000
+    bearingExponent: -2.6
+    taAngle: -52.26
+    taAngleExp: 12.875
+    taCoefficient: 299000
+    taExponent: -3.1
+  scenarioType: 2
+  scenarioCount: 50
   scenarioToRecord: -1
   usePotentials: 1
+  monoType: 1
 --- !u!1 &1409412909
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,9 +19,11 @@ public class EvalMgr : MonoBehaviour
     public static EvalMgr inst;
     GameMgr game;
     public PotentialParameters potentialParameters;
+    public EScenarioType scenarioType;
     public int scenarioCount;
     public int scenarioToRecord;
     public bool usePotentials;
+    public bool monoType;
 
     private void Awake()
     {
@@ -35,12 +37,26 @@ public class EvalMgr : MonoBehaviour
         float timeEnd;
         List<EvalPrint> evPrints = new List<EvalPrint>();
 
+        int scCount = 0;
         // Generate scenarios
-        foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
+        if (monoType)
         {
-            ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
+            ScenarioMgr.inst.GenerateScenarios(scenarioType, scenarioCount);
+            ScenarioMgr.inst.trafficCount *= 2;
+            ScenarioMgr.inst.GenerateScenarios(scenarioType, scenarioCount);
+            scCount = scenarioCount * 2;
         }
-        for (int x = 0; x < ScenarioMgr.inst.scenarioTypeData.Count * scenarioCount; x++) {
+        else
+        {
+            foreach (ScenarioTypeData scData in ScenarioMgr.inst.scenarioTypeData)
+            {
+                ScenarioMgr.inst.GenerateScenarios(scData.scenarioType, scenarioCount);
+                scCount += scenarioCount;
+            }
+        }
+
+
+        for (int x = 0; x < scCount; x++) {
             timeStart = Time.realtimeSinceStartup;
 
             game = new GameMgr(potentialParameters);

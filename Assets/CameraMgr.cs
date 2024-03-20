@@ -20,6 +20,9 @@ public class CameraMgr : MonoBehaviour
     public GameObject YawNode;   // Child of RTSCameraRig
     public GameObject PitchNode; // Child of YawNode
     public GameObject RollNode;  // Child of PitchNode
+
+    public GameObject followObject;
+    public Vector3 offset;
     //Camera is child of RollNode
 
     public float cameraMoveSpeed = 500;
@@ -29,6 +32,11 @@ public class CameraMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(followEntity && followObject != null)
+        {
+            YawNode.transform.position = followObject.transform.position + offset;
+        }
+
         if (Input.GetKey(KeyCode.W))
             YawNode.transform.Translate(Vector3.forward * Time.deltaTime * cameraMoveSpeed);
         if (Input.GetKey(KeyCode.S))
@@ -42,28 +50,33 @@ public class CameraMgr : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
             YawNode.transform.Translate(Vector3.down * Time.deltaTime * cameraMoveSpeed);
 
-        currentYawEulerAngles = YawNode.transform.localEulerAngles;
+        currentYawEulerAngles = YawNode.transform.eulerAngles;
         if (Input.GetKey(KeyCode.Q))
             currentYawEulerAngles.y -= cameraTurnRate * Time.deltaTime;
         if (Input.GetKey(KeyCode.E))
             currentYawEulerAngles.y += cameraTurnRate * Time.deltaTime;
-        YawNode.transform.localEulerAngles = currentYawEulerAngles;
+        YawNode.transform.eulerAngles = currentYawEulerAngles;
 
-        currentPitchEulerAngles = PitchNode.transform.localEulerAngles;
+        currentPitchEulerAngles = PitchNode.transform.eulerAngles;
         if (Input.GetKey(KeyCode.Z))
             currentPitchEulerAngles.x -= cameraTurnRate * Time.deltaTime;
         if (Input.GetKey(KeyCode.X))
             currentPitchEulerAngles.x += cameraTurnRate * Time.deltaTime;
-        PitchNode.transform.localEulerAngles = currentPitchEulerAngles;
+        PitchNode.transform.eulerAngles = currentPitchEulerAngles;
 
         
         if (Input.GetKeyDown(KeyCode.C)) {
             followEntity = !followEntity;
             if (followEntity && SelectionMgr.inst.selectedEntity != null) {
-                YawNode.transform.SetParent(SelectionMgr.inst.selectedEntity.gameObject.transform);
+                followObject = SelectionMgr.inst.selectedEntity.gameObject;
             } else {
-                YawNode.transform.SetParent(RTSCameraRig.transform);
+                followEntity = false;
             }
+        }
+
+        if (followEntity && followObject != null)
+        {
+            offset = YawNode.transform.position - followObject.transform.position;
         }
     }
 }

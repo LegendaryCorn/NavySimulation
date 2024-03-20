@@ -70,10 +70,14 @@ public class SimulationMgr : MonoBehaviour
     }
 
     // Update is called once per frame
+    bool run = true;
     void Update()
     {
         // Update Sim
-        gameMgr.RunGame(dt, dt * simSpeed);
+        if (run)
+        {
+            gameMgr.RunGame(dt, dt * simSpeed);
+        }
 
         // Change Sim if input
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -83,6 +87,10 @@ public class SimulationMgr : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             LoadNewScenario((scenarioID + scenarioCount - 1) % scenarioCount);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            run = !run;
         }
     }
 

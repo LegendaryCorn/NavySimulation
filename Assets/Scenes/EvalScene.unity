@@ -322,11 +322,11 @@ MonoBehaviour:
     taAngleExp: 12.875
     taCoefficient: 299000
     taExponent: -3.1
-  scenarioType: 2
-  scenarioCount: 50
+  scenarioType: 0
+  scenarioCount: 25
   scenarioToRecord: -1
-  usePotentials: 1
-  monoType: 1
+  usePotentials: 0
+  monoType: 0
 --- !u!1 &1409412909
 GameObject:
   m_ObjectHideFlags: 0

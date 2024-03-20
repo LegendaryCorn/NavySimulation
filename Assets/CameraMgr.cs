@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMgr : MonoBehaviour
 {
     public static CameraMgr inst;
+    public bool followEntity = false;
     private void Awake()
     {
         inst = this;
@@ -54,26 +55,15 @@ public class CameraMgr : MonoBehaviour
         if (Input.GetKey(KeyCode.X))
             currentPitchEulerAngles.x += cameraTurnRate * Time.deltaTime;
         PitchNode.transform.localEulerAngles = currentPitchEulerAngles;
-        /*
-        if (Input.GetKeyUp(KeyCode.C)) {
-            if (isRTSMode) {
-                YawNode.transform.SetParent(SelectionMgr.inst.selectedEntity.cameraRig.transform);
-                YawNode.transform.localPosition = Vector3.zero;
-                YawNode.transform.localEulerAngles = Vector3.zero;
+
+        
+        if (Input.GetKeyDown(KeyCode.C)) {
+            followEntity = !followEntity;
+            if (followEntity && SelectionMgr.inst.selectedEntity != null) {
+                YawNode.transform.SetParent(SelectionMgr.inst.selectedEntity.gameObject.transform);
             } else {
                 YawNode.transform.SetParent(RTSCameraRig.transform);
-                YawNode.transform.localPosition = Vector3.zero;
-                YawNode.transform.localEulerAngles = Vector3.zero;
             }
-            isRTSMode = !isRTSMode;
         }
-        */
-
-
-
-
-
-
     }
-    public bool isRTSMode = true;
 }

@@ -37,9 +37,9 @@ public class Move : Command
         if (aiTick == 0)
         {
             if (entity.gameMgr.aiMgr.isPotentialFieldsMovement)
-                dhds = ComputeVODHDS();
+                dhds = ComputePotentialDHDS();
             else
-                dhds = ComputeDHDS();
+                dhds = ComputeVODHDS();
             entity.desiredHeading = dhds.dh;
             entity.desiredSpeed = dhds.ds;
             aiTick = aiReset;
@@ -58,6 +58,22 @@ public class Move : Command
         dhDegrees = Utils.Degrees360(Mathf.Rad2Deg * dhRadians);
         return new DHDS(dhDegrees, entity.maxSpeed);
 
+    }
+
+    public DHDS ComputePotentialDHDS()
+    {
+        List<Vector3> potentials = ComputePotentials(entity.position);
+        Vector3 potentialSum = Vector3.zero;
+        foreach (Vector3 pot in potentials)
+        {
+            potentialSum += pot;
+        }
+        dh = Utils.Degrees360(Mathf.Rad2Deg * Mathf.Atan2(potentialSum.x, potentialSum.z));
+
+        angleDiff = Utils.Degrees360(Utils.AngleDiffPosNeg(dh, entity.heading));
+        cosValue = (Mathf.Cos(angleDiff * Mathf.Deg2Rad) + 1) / 2.0f; // makes it between 0 and 1
+        ds = entity.maxSpeed * cosValue;
+        return new DHDS(dh, ds);
     }
 
     Entity381 prioEntity = null;

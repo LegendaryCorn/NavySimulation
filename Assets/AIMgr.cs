@@ -56,7 +56,7 @@ public class AIMgr
         potentialParameters = parameters;
     }
 
-    public bool isPotentialFieldsMovement = true;
+    public bool isPotentialFieldsMovement = false;
 
     public PotentialParameters potentialParameters;
 

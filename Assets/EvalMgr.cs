@@ -21,6 +21,7 @@ public class EvalMgr : MonoBehaviour
     public PotentialParameters potentialParameters;
     public int scenarioCount;
     public int scenarioToRecord;
+    public bool usePotentials;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class EvalMgr : MonoBehaviour
             timeStart = Time.realtimeSinceStartup;
 
             game = new GameMgr(potentialParameters);
+            game.aiMgr.isPotentialFieldsMovement = usePotentials;
             if(x == scenarioToRecord)
             {
                 game.fitnessMgr.recordLocations = true;

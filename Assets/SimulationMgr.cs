@@ -71,14 +71,24 @@ public class SimulationMgr : MonoBehaviour
 
     // Update is called once per frame
     bool run = true;
-    void Update()
+    float timer = 0f;
+    void FixedUpdate()
     {
         // Update Sim
         if (run)
         {
-            gameMgr.RunGame(dt, dt * simSpeed);
+            timer += Time.deltaTime;
+            simSpeed = Mathf.Max(0.01f, simSpeed);
+            while (timer > dt / simSpeed)
+            {
+                gameMgr.RunGame(dt, dt);
+                timer -= dt / simSpeed;
+            }
         }
+    }
 
+    private void Update()
+    {
         // Change Sim if input
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {

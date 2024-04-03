@@ -21,6 +21,8 @@ public class UIMgr : MonoBehaviour
     public Text desiredSpeed;
     public Text heading;
     public Text desiredHeading;
+    public Text scenarioID;
+    public Text scenarioType;
 
     // Update is called once per frame
     void Update()
@@ -33,5 +35,7 @@ public class UIMgr : MonoBehaviour
             heading.text = ent.heading.ToString("F1") + " deg";
             desiredHeading.text = ent.desiredHeading.ToString("F1") + " deg";
         }
+        scenarioID.text = SimulationMgr.inst.scenarioID.ToString();
+        scenarioType.text = ScenarioMgr.inst.scenarios[SimulationMgr.inst.scenarioID].scenarioType.ToString();
     }
 }

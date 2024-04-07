@@ -69,13 +69,18 @@ public class CameraMgr : MonoBehaviour
             followEntity = !followEntity;
             if (followEntity && SelectionMgr.inst.selectedEntity != null) {
                 followObject = SelectionMgr.inst.selectedEntity.gameObject;
-            } else {
-                followEntity = false;
             }
         }
 
         if (followEntity && followObject != null)
         {
+            offset = YawNode.transform.position - followObject.transform.position;
+        }
+        if(followEntity && followObject == null)
+        {
+            followObject = SimulationMgr.inst.simulatedEntities[0].gameObject;
+            YawNode.transform.localPosition = new Vector3(0, 0, 2500) + followObject.transform.position;
+            PitchNode.transform.eulerAngles = new Vector3(0, 0, 0);
             offset = YawNode.transform.position - followObject.transform.position;
         }
     }
